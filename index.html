@@ -41,9 +41,9 @@ body { background: var(--bg); color: var(--text); direction: rtl; min-height: 10
 
 /* Auth Section */
 .auth-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
-.auth-card { background: var(--card-bg); width: 100%; max-width: 400px; border-radius: var(--radius); padding: 25px; box-shadow: var(--shadow); text-align: center; border: 1px solid var(--border); }
-.auth-tabs { display: flex; background: var(--bg); border-radius: 10px; padding: 4px; margin-bottom: 20px; }
-.auth-tab { flex: 1; padding: 8px; border: none; background: transparent; color: var(--text-muted); font-weight: 600; cursor: pointer; border-radius: 8px; }
+.auth-card { background: var(--card-bg); width: 100%; max-width: 420px; border-radius: var(--radius); padding: 25px; box-shadow: var(--shadow); text-align: center; border: 1px solid var(--border); }
+.auth-tabs { display: flex; background: var(--bg); border-radius: 10px; padding: 4px; margin-bottom: 20px; gap: 2px; }
+.auth-tab { flex: 1; padding: 8px 4px; border: none; background: transparent; color: var(--text-muted); font-weight: 600; cursor: pointer; border-radius: 8px; font-size: 12px; }
 .auth-tab.active { background: var(--card-bg); color: var(--primary); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 .form-group { text-align: right; margin-bottom: 15px; }
 .form-group label { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600; color: var(--text-muted); }
@@ -52,7 +52,7 @@ body { background: var(--bg); color: var(--text); direction: rtl; min-height: 10
 
 /* Navigation Bar */
 .navbar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--card-bg); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 8px 0; z-index: 90; }
-.nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: var(--text-muted); font-size: 11px; font-weight: 600; cursor: pointer; background: none; border: none; width: 20%; }
+.nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: var(--text-muted); font-size: 11px; font-weight: 600; cursor: pointer; background: none; border: none; flex: 1; }
 .nav-item.active { color: var(--primary); }
 .nav-item span { font-size: 18px; }
 
@@ -108,17 +108,18 @@ body { background: var(--bg); color: var(--text); direction: rtl; min-height: 10
   </div>
 </header>
 
-<!-- Auth Modal (تسجيل الدخول / إنشاء حساب) -->
+<!-- Auth Modal (تلميذ / ولي أمور / أستاذ) -->
 <div class="auth-overlay" id="authModal">
   <div class="auth-card">
     <h2 style="margin-bottom: 15px; font-size: 20px;">مرحباً بك في المنصة 👋</h2>
     <div class="auth-tabs">
-      <button class="auth-tab active" onclick="switchAuthTab('login')">دخول التلميذ</button>
-      <button class="auth-tab" onclick="switchAuthTab('teacher')">دخول الأستاذ</button>
+      <button class="auth-tab active" onclick="switchAuthTab('student')">التلميذ 👦</button>
+      <button class="auth-tab" onclick="switchAuthTab('parent')">الولي 👨‍👩‍👦</button>
+      <button class="auth-tab" onclick="switchAuthTab('teacher')">الأستاذ 👨‍🏫</button>
     </div>
 
     <!-- Student Form -->
-    <form id="studentForm" onsubmit="handleAuth(event, 'student')">
+    <form id="studentForm" class="auth-form" onsubmit="handleAuth(event, 'student')">
       <div class="form-group">
         <label>اسم التلميذ(ة)</label>
         <input type="text" id="studentName" class="form-input" placeholder="أدخل اسمك الكامل" required>
@@ -127,11 +128,24 @@ body { background: var(--bg); color: var(--text); direction: rtl; min-height: 10
         <label>الفوج / القسم</label>
         <input type="text" id="studentClass" class="form-input" placeholder="مثال: 3 ابتدائي 1" required>
       </div>
-      <button type="submit" class="btn-primary">دخول للمنصة 🚀</button>
+      <button type="submit" class="btn-primary">دخول التلميذ 🚀</button>
+    </form>
+
+    <!-- Parent Form (فضاء الولي) -->
+    <form id="parentForm" class="auth-form" onsubmit="handleAuth(event, 'parent')" style="display:none;">
+      <div class="form-group">
+        <label>اسم ولي الأمر</label>
+        <input type="text" id="parentName" class="form-input" placeholder="أدخل اسم ولي الأمر" required>
+      </div>
+      <div class="form-group">
+        <label>اسم الابن/الابنة</label>
+        <input type="text" id="childName" class="form-input" placeholder="اسم التلميذ" required>
+      </div>
+      <button type="submit" class="btn-primary">دخول فضاء الولي 🏠</button>
     </form>
 
     <!-- Teacher Form -->
-    <form id="teacherForm" onsubmit="handleAuth(event, 'teacher')" style="display:none;">
+    <form id="teacherForm" class="auth-form" onsubmit="handleAuth(event, 'teacher')" style="display:none;">
       <div class="form-group">
         <label>رمز مرور الأستاذ</label>
         <input type="password" id="teacherPass" class="form-input" placeholder="أدخل رمز المرور" required>
@@ -147,6 +161,7 @@ body { background: var(--bg); color: var(--text); direction: rtl; min-height: 10
   <button class="nav-item" onclick="showScreen('subjects')"><span>📚</span>المواد</button>
   <button class="nav-item" onclick="showScreen('quiz')"><span>🎮</span>المسابقات</button>
   <button class="nav-item" onclick="showScreen('ai')"><span>🤖</span>المعلم الذكي</button>
+  <button class="nav-item" id="navParent" onclick="showScreen('parentPanel')" style="display:none;"><span>📊</span>متابعة الولي</button>
   <button class="nav-item" id="navTeacher" onclick="showScreen('teacherPanel')" style="display:none;"><span>👁️</span>المراقبة</button>
 </nav>
 
@@ -158,8 +173,8 @@ body { background: var(--bg); color: var(--text); direction: rtl; min-height: 10
     <div class="user-info">
       <div class="avatar" id="userAvatar">ت</div>
       <div>
-        <div style="font-weight: 700;" id="userNameDisplay">التلميذ</div>
-        <div style="font-size: 12px; color: var(--text-muted);" id="userRoleDisplay">السنة الثالثة ابتدائي</div>
+        <div style="font-weight: 700;" id="userNameDisplay">المستخدم</div>
+        <div style="font-size: 12px; color: var(--text-muted);" id="userRoleDisplay">الصفة</div>
       </div>
     </div>
     <span style="font-size: 12px; background: rgba(79,70,229,0.1); color: var(--primary); padding: 4px 10px; border-radius: 20px; font-weight:600;">2026/2027</span>
@@ -196,7 +211,7 @@ body { background: var(--bg); color: var(--text); direction: rtl; min-height: 10
     </div>
   </section>
 
-  <!-- Subjects Screen (جميع المواد المكتملة) -->
+  <!-- Subjects Screen -->
   <section id="screen-subjects" class="screen">
     <h3 id="currentSubjectTitle" style="margin-bottom: 15px;">البطاقات التفاعلية 🎴</h3>
     <div class="flashcard-container">
@@ -238,6 +253,19 @@ body { background: var(--bg); color: var(--text); direction: rtl; min-height: 10
     </div>
   </section>
 
+  <!-- Parent Panel (فضاء الولي) -->
+  <section id="screen-parentPanel" class="screen">
+    <h3 style="margin-bottom: 15px;">فضاء متابعة ولي الأمر 📊</h3>
+    <div class="quiz-card">
+      <h4 style="margin-bottom: 10px;">تقرير تقدم التلميذ(ة)</h4>
+      <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+        • <b>المشاركات في المسابقات:</b> 3 مسابقات مكتملة 🏆<br>
+        • <b>مستوى الاستيعاب:</b> ممتاز (90%) 👍<br>
+        • <b>تفاعلات المعلم الذكي:</b> تم طرح 5 أسئلة في الرياضيات واللغة العربية.
+      </p>
+    </div>
+  </section>
+
   <!-- Teacher Panel (لوحة مراقبة الأستاذ) -->
   <section id="screen-teacherPanel" class="screen">
     <h3 style="margin-bottom: 15px;">لوحة مراقبة الأستاذ سعيد 👁️</h3>
@@ -263,16 +291,17 @@ if(localStorage.getItem('theme') === 'dark') {
   document.body.classList.add('dark-mode');
 }
 
-// Auth Logic
+// Auth Logic (تلميذ - ولي - أستاذ)
 function switchAuthTab(type) {
   document.querySelectorAll('.auth-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.auth-form').forEach(f => f.style.display = 'none');
+  
+  event.target.classList.add('active');
   if(type === 'student') {
-    event.target.classList.add('active');
     document.getElementById('studentForm').style.display = 'block';
-    document.getElementById('teacherForm').style.display = 'none';
-  } else {
-    event.target.classList.add('active');
-    document.getElementById('studentForm').style.display = 'none';
+  } else if(type === 'parent') {
+    document.getElementById('parentForm').style.display = 'block';
+  } else if(type === 'teacher') {
     document.getElementById('teacherForm').style.display = 'block';
   }
 }
@@ -283,9 +312,13 @@ function handleAuth(e, type) {
     const name = document.getElementById('studentName').value;
     const cls = document.getElementById('studentClass').value;
     localStorage.setItem('user', JSON.stringify({ name, cls, role: 'student' }));
-  } else {
+  } else if(type === 'parent') {
+    const pName = document.getElementById('parentName').value;
+    const cName = document.getElementById('childName').value;
+    localStorage.setItem('user', JSON.stringify({ name: pName, cls: 'ولي التلميذ: ' + cName, role: 'parent' }));
+  } else if(type === 'teacher') {
     const pass = document.getElementById('teacherPass').value;
-    if(pass === '1234' || pass === 'admin') { // رمز افتراضي
+    if(pass === '1234' || pass === 'admin') {
       localStorage.setItem('user', JSON.stringify({ name: 'الأستاذ سعيد', cls: 'المشرف', role: 'teacher' }));
     } else {
       alert('رمز المرور غير صحيح');
@@ -305,11 +338,8 @@ function checkAuth() {
     document.getElementById('userRoleDisplay').textContent = user.cls;
     document.getElementById('userAvatar').textContent = user.name.charAt(0);
     
-    if(user.role === 'teacher') {
-      document.getElementById('navTeacher').style.display = 'flex';
-    } else {
-      document.getElementById('navTeacher').style.display = 'none';
-    }
+    document.getElementById('navTeacher').style.display = (user.role === 'teacher') ? 'flex' : 'none';
+    document.getElementById('navParent').style.display = (user.role === 'parent') ? 'flex' : 'none';
   } else {
     document.getElementById('authModal').style.display = 'flex';
     document.getElementById('logoutBtn').style.display = 'none';
@@ -328,7 +358,9 @@ function showScreen(screenId) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   
   document.getElementById('screen-' + screenId).classList.add('active');
-  event.currentTarget.classList.add('active');
+  if(event && event.currentTarget) {
+    event.currentTarget.classList.add('active');
+  }
 }
 
 function openSubject(name, icon) {
@@ -361,7 +393,7 @@ async function sendAiMessage() {
   chatList.scrollTop = chatList.scrollHeight;
 
   setTimeout(() => {
-    document.getElementById(loadId).textContent = "أحسنت يا بطل! سؤال ممتازة في المادة، الأستاذ سعيد يشجعك على الاستمرار 🌟";
+    document.getElementById(loadId).textContent = "أحسنت يا بطل! سؤال ممتاز في المادة، الأستاذ سعيد يشجعك على الاستمرار 🌟";
   }, 1000);
 }
 
