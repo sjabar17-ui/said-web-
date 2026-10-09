@@ -73,7 +73,7 @@ textarea.inp{resize:vertical;min-height:90px}
 .gmsg.no{display:block;background:#FEE2E2;color:#DC2626}
 .urow{display:flex;justify-content:space-between;align-items:center;border:2px solid var(--border);border-radius:14px;padding:12px 16px;margin-bottom:10px;font-size:14px;color:var(--ink);font-weight:700;background:#fff;flex-wrap:wrap;gap:8px}
 .ub{background:var(--blue);color:#fff;border:none;border-radius:10px;padding:8px 14px;font-size:12px;cursor:pointer;margin-inline-start:6px;font-weight:800}
-.ub.g{background:var(--green)}.ub.r{background:#EF4444}.ub.y{background:#F59E0B}.ub.p{background:var(--pink)}
+.ub.g{background:var(--green)}.ub.r{background:#EF4444}.ub.y{background:#F59E0B}.ub.p{background:#EC4899}
 .qq{font-size:17px;font-weight:800;margin:14px 0 12px}
 .opts{display:flex;flex-direction:column;gap:10px}
 .opt{display:flex;align-items:center;gap:12px;width:100%;text-align:right;padding:14px 18px;border:2px solid var(--border);border-radius:14px;background:#fff;font-size:15px;cursor:pointer;color:var(--ink);font-weight:600}
@@ -91,6 +91,10 @@ textarea.inp{resize:vertical;min-height:90px}
 .bub.t{background:#D1FAE5;color:#065F46}
 .bub .who{font-size:11px;font-weight:800;opacity:.7;display:block;margin-bottom:4px}
 .bub .time{font-size:10px;opacity:.6;margin-inline-start:6px}
+.mon-table{width:100%;border-collapse:collapse;font-size:12.5px;background:#fff;border-radius:14px;overflow:hidden}
+.mon-table th{background:var(--blue);color:#fff;padding:10px;font-weight:800;font-size:12px;text-align:right}
+.mon-table td{padding:8px;border-bottom:1px solid var(--border);text-align:right}
+.mon-table td input{width:100%;padding:6px 8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;font-family:inherit}
 .sound-btn{position:fixed;bottom:20px;right:20px;z-index:900;width:56px;height:56px;border-radius:50%;background:var(--blue);color:#fff;border:none;font-size:24px;cursor:pointer;box-shadow:0 6px 20px rgba(59,130,246,.5);display:flex;align-items:center;justify-content:center}
 .sound-btn.on{background:var(--green)}
 .wa-btn{position:fixed;bottom:20px;left:20px;z-index:900;width:58px;height:58px;border-radius:50%;background:#25D366;color:#fff;border:none;font-size:26px;cursor:pointer;box-shadow:0 6px 20px rgba(37,211,102,.5);display:flex;align-items:center;justify-content:center}
@@ -211,7 +215,7 @@ textarea.inp{resize:vertical;min-height:90px}
   <div class="gate-card">
     <div class="gate-logo">🎓</div>
     <h1>الأستاذ سعيد</h1>
-    <p class="gsub">منصة السنة الثالثة ابتدائي (مع المساعد الذكي)</p>
+    <p class="gsub">منصة السنة الثالثة ابتدائي</p>
     <div class="gtabs">
       <button class="gtab on" id="gtabStudent" onclick="switchGateTab('s')">👦 تلميذ</button>
       <button class="gtab" id="gtabParent" onclick="switchGateTab('p')">👨‍👩‍👦 ولي</button>
@@ -263,12 +267,13 @@ textarea.inp{resize:vertical;min-height:90px}
         <button class="menu-btn blue" onclick="goTo('aiTutor')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-robot"/></svg></span>المساعد الذكي 🤖</button>
         <button class="menu-btn green" onclick="goTo('schedule')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-calendar"/></svg></span>جدول الحصص</button>
         <button class="menu-btn blue" onclick="goTo('birthdays')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-cake"/></svg></span>أعياد الميلاد</button>
-        <button class="menu-btn green" onclick="goTo('honor')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-medal"/></svg></span>لوحة الشرف</button>
-        <button class="menu-btn blue" onclick="goTo('events')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-calendar"/></svg></span>المناسبات</button>
-        <button class="menu-btn green" onclick="goTo('goals')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-target"/></svg></span>أهدافي</button>
-        <button class="menu-btn blue" onclick="goTo('charts')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-chart"/></svg></span>تطوري</button>
-        <button class="menu-btn green" onclick="goTo('rewards')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-gift"/></svg></span>مكافآتي</button>
-        <button class="menu-btn blue" onclick="goTo('voiceNotes')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-note"/></svg></span>ملاحظات الأستاذ</button>
+        <button class="menu-btn green" onclick="goTo('album')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-photo"/></svg></span>ألبوم القسم</button>
+        <button class="menu-btn blue" onclick="goTo('honor')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-medal"/></svg></span>لوحة الشرف</button>
+        <button class="menu-btn green" onclick="goTo('events')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-calendar"/></svg></span>المناسبات</button>
+        <button class="menu-btn blue" onclick="goTo('goals')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-target"/></svg></span>أهدافي</button>
+        <button class="menu-btn green" onclick="goTo('charts')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-chart"/></svg></span>تطوري</button>
+        <button class="menu-btn blue" onclick="goTo('rewards')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-gift"/></svg></span>مكافآتي</button>
+        <button class="menu-btn green" onclick="goTo('voiceNotes')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-note"/></svg></span>ملاحظات الأستاذ</button>
         <button class="menu-btn gradient-blue full" onclick="goTo('chat')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-chat"/></svg></span>المحادثة مع الأستاذ</button>
         <button class="menu-btn gradient-green full" onclick="sendReport()"><span class="circle-icon"><svg class="svg-icon"><use href="#i-send"/></svg></span>أرسل تقريري</button>
       </div>
@@ -279,7 +284,7 @@ textarea.inp{resize:vertical;min-height:90px}
       <div class="welcome">
         <div class="avatar-def">👨‍🏫</div>
         <h2>مرحباً أستاذ سعيد</h2>
-        <p>لوحة التحكم والرقابة الكاملة</p>
+        <p>لوحة التحكم الكاملة والرقابة الذكية</p>
       </div>
       <div class="grid-menu">
         <button class="menu-btn gradient-blue" onclick="goTo('monitor')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-chart"/></svg></span>المراقبة</button>
@@ -311,7 +316,7 @@ textarea.inp{resize:vertical;min-height:90px}
       <div class="welcome">
         <div id="parentAvatar"></div>
         <h2 id="parentChildName">مرحباً ولي الأمر</h2>
-        <p>متابعة سلوك ونتائج ابنكم ومساعده الذكي</p>
+        <p>متابعة سلوك ونتائج ابنكم</p>
         <button class="btn green" onclick="changeParentPhoto()" style="margin-top:12px;width:auto;padding:8px 20px;font-size:13px">📷 تغيير صورتي</button>
       </div>
       <div class="grid-menu">
@@ -325,31 +330,31 @@ textarea.inp{resize:vertical;min-height:90px}
       <div id="parentContent"></div>
     </div>
 
-    <!-- ===== شاشة المساعد الذكي للتلميذ (تحت رقابة الأستاذ) ===== -->
+    <!-- ===== شاشة المساعد الذكي للتلميذ (تحت إشراف الأستاذ) ===== -->
     <div class="screen" id="screen-aiTutor">
       <div class="card" style="background:#EFF6FF;border:2px solid var(--blue)">
         <h3>🤖 المساعد الذكي التعليمي</h3>
-        <p>اسأل عما تشاء في الدروس (رياضيات، لغة عربية...) وسيساعدك المساعد الذكي تحت إشراف الأستاذ سعيد!</p>
+        <p>اطرح أسئلتك حول الدروس (رياضيات، لغة عربية...) وسيقدم لك المساعد توجيهات تحت إشراف الأستاذ سعيد!</p>
       </div>
       <div id="aiChatMessages" style="max-height:45vh;overflow-y:auto;padding:10px 0"></div>
       <div class="card" style="position:sticky;bottom:0;margin-bottom:0">
         <div style="display:flex;gap:8px">
-          <input class="inp" id="aiInput" placeholder="اكتب سؤالك هنا..." style="margin-bottom:0;flex:1">
+          <input class="inp" id="aiInput" placeholder="اكتب سؤالك التعليمي..." style="margin-bottom:0;flex:1">
           <button class="btn" onclick="sendAiMessage()" style="width:auto;padding:14px 18px;margin-top:0">📤</button>
         </div>
       </div>
     </div>
 
-    <!-- ===== شاشة رقابة الأستاذ على الذكاء الاصطناعي ===== -->
+    <!-- ===== شاشة رقابة الأستاذ للذكاء الاصطناعي ===== -->
     <div class="screen" id="screen-aiControl">
       <div class="card">
         <h3>🤖 رقابة أسئلة ومحادثات المساعد الذكي</h3>
-        <p>هنا يراجع الأستاذ الأسئلة التي طرحها التلاميذ على المساعد الذكي وإجاباته للتأكد من ملاءمتها المدرسية:</p>
+        <p>مراجعة أسئلة التلاميذ وإجابات المساعد الذكي لضمان جودتها وملاءمتها للمنحى التعليمي:</p>
       </div>
       <div id="aiLogsList"><div class="loading">جارٍ التحميل...</div></div>
     </div>
 
-    <!-- ===== باقي الشاشات المشتركة والأستاذ ===== -->
+    <!-- ===== الشاشات الأخرى المشتركة والأستاذ ===== -->
     <div class="screen" id="screen-lessons">
       <div class="card"><h3>📚 الدروس</h3><p>اختر المادة:</p></div>
       <div class="grid-menu" id="studentSubjectsGrid"></div>
@@ -469,7 +474,7 @@ textarea.inp{resize:vertical;min-height:90px}
       <div id="voiceNotesList"><div class="loading">جارٍ التحميل...</div></div>
     </div>
 
-    <!-- شاشات إدارة الأستاذ -->
+    <!-- شاشات الأستاذ الأساسية -->
     <div class="screen" id="screen-monitor">
       <div class="card">
         <h3>📊 لوحة مراقبة التلاميذ</h3>
@@ -744,11 +749,11 @@ textarea.inp{resize:vertical;min-height:90px}
 
     <div class="screen" id="screen-settings">
       <div class="card"><h3>⚙️ الإعدادات</h3><p><b>📱 واتساب:</b> 213556220521</p></div>
-      <div class="card"><h3>ℹ️ عن التطبيق</h3><p>منصة الأستاذ سعيد — السنة الثالثة</p><p>الإصدار 5.1 (مع المساعد الذكي المراقب)</p></div>
+      <div class="card"><h3>ℹ️ عن التطبيق</h3><p>منصة الأستاذ سعيد — السنة الثالثة</p><p>الإصدار 5.2 (النسخة المستقرة مع المساعد الذكي والمراقب)</p></div>
     </div>
 
   </div>
-</div> 
+</div>
 
 <script>
 var TEACHER_WA = "213556220521";
@@ -865,7 +870,6 @@ document.getElementById("logoutBtn").onclick = function(){
   auth.signOut().then(function(){ location.reload(); });
 };
 
-// شاشة الدخول
 var gate = document.getElementById("gate"), gbody = document.getElementById("gbody"), gm = document.getElementById("gm");
 function setM(cls, txt){ gm.className = "gmsg " + cls; gm.textContent = txt; }
 window.switchGateTab = function(v){
@@ -943,7 +947,6 @@ function teacherView(){
   document.getElementById("gt").onclick = function(){ auth.signInWithEmailAndPassword(TEACHER_EMAIL, document.getElementById("gp").value).catch(function(){ setM("no","❌ خطأ"); }); };
 }
 
-var GATE_NOTE = null;
 function startApp(){
   gate.style.display = "flex";
   document.getElementById("app").style.display = "none";
@@ -958,7 +961,7 @@ function startApp(){
   });
 }
 
-// ===== المساعد الذكي تحت رقابة الأستاذ =====
+// ===== وظائف المساعد الذكي والمراقبة =====
 function loadAiChat(){
   var reg = getReg();
   if(reg.type !== "student") return;
@@ -990,16 +993,14 @@ function sendAiMessage(){
   input.value = "";
   var num = reg.num;
 
-  // رد ذكي محاكي وموجه لمنهج السنة الثالثة ابتدائي
-  var a = "عذراً، أجبني الأستاذ سعيد بأن أركز معك على الدروس الأساسية في القسم. سؤالك رائع وسنناقشه مع الأستاذ في الحصة القادمة!";
+  var a = "أهلاً بك يا بطل! سؤالك رائع، تذكر أن تراجع درسك جيداً وسيجيبك الأستاذ سعيد عنه في القسم قريباً.";
   if(q.includes("رياضيات") || q.includes("جمع") || q.includes("ضرب") || q.includes("+") || q.includes("×")) {
-    a = "في الرياضيات للسنة الثالثة، تذكر دائماً ترتيب الوحدات عشرات ومئات، واستخدم جدول الضرب بانتظام!";
-  } else if(q.includes("عربية") || q.includes("إعراب") || q.includes("فعل") || q.includes("اسم")) {
-    a = "في اللغة العربية، الكلمات إما اسم أو فعل أو حرف، وانتبه دائماً للحركات في آخر الكلمة!";
+    a = "في الرياضيات، ركز دائماً على الحساب العقلي واستخدام جدول الضرب بتركيز يا بطل!";
+  } else if(q.includes("عربية") || q.includes("قراءة") || q.includes("فعل")) {
+    a = "اللغة العربية مفتاح العلوم، اقرأ النص بتأني واستخرج الكلمات الدالة بتركيز.";
   }
 
   fdb.ref('ai_chats/'+num).push({q:q, a:a, time:Date.now()});
-  // تسجيل المحادثة في لوحة رقابة الأستاذ
   fdb.ref('ai_logs').push({student:num, name:(STUDENT_NAMES[num]||num), q:q, a:a, time:Date.now()});
 }
 
@@ -1029,7 +1030,7 @@ function deleteAiLog(key){
   fdb.ref('ai_logs/'+key).remove().then(function(){ loadAiLogsForTeacher(); });
 }
 
-// بقية الدوال الأساسية
+// الدوال الأساسية الأخرى لاستقرار المنصة
 function fillSubjectSelects(){
   ["nl_subject","nh_subject","eval_subject"].forEach(function(id){
     var sel = document.getElementById(id); if(!sel) return;
@@ -1130,7 +1131,7 @@ function viewTeacherLessons(){}
 function editLesson(){}
 function deleteLesson(){}
 
-// التشغيل
+// التشغيل الأساسي
 initSound();
 startApp();
 setTimeout(function(){
