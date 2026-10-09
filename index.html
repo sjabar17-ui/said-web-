@@ -2,403 +2,2915 @@
 <html dir="rtl" lang="ar">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>منصة الأستاذ سعيد - السنة الثالثة ابتدائي</title>
-<meta name="theme-color" content="#4F46E5">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>الأستاذ سعيد - السنة 3</title>
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="الأستاذ سعيد">
+<meta name="theme-color" content="#3B82F6">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='120' fill='%233B82F6'/%3E%3Crect x='256' y='120' width='230' height='90' rx='10' fill='%2310B981' transform='rotate(45 256 120)'/%3E%3Crect x='86' y='200' width='340' height='50' fill='%231E293B'/%3E%3Crect x='96' y='240' width='320' height='200' rx='20' fill='%23F59E0B'/%3E%3Crect x='116' y='260' width='280' height='160' rx='12' fill='%23FEF3C7'/%3E%3Cline x1='156' y1='300' x2='356' y2='300' stroke='%23F59E0B' stroke-width='14' stroke-linecap='round'/%3E%3Cline x1='156' y1='340' x2='316' y2='340' stroke='%23F59E0B' stroke-width='14' stroke-linecap='round'/%3E%3Cline x1='156' y1='380' x2='276' y2='380' stroke='%23F59E0B' stroke-width='14' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <style>
-:root {
-  --primary: #4F46E5;
-  --primary-hover: #4338CA;
-  --bg: #F8FAFC;
-  --card-bg: #FFFFFF;
-  --text: #0F172A;
-  --text-muted: #64748B;
-  --border: #E2E8F0;
-  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
-  --radius: 16px;
-}
-
-body.dark-mode {
-  --bg: #0F172A;
-  --card-bg: #1E293B;
-  --text: #F8FAFC;
-  --text-muted: #94A3B8;
-  --border: #334155;
-  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; transition: background-color 0.3s, color 0.3s; }
-body { background: var(--bg); color: var(--text); direction: rtl; min-height: 100vh; padding-bottom: 70px; }
-
-/* Header */
-.header { background: var(--card-bg); border-bottom: 1px solid var(--border); padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); }
-.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: var(--primary); }
-.header-actions { display: flex; gap: 10px; align-items: center; }
-.btn-icon { background: var(--bg); border: 1px solid var(--border); color: var(--text); width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; }
-
-/* Auth Section */
-.auth-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
-.auth-card { background: var(--card-bg); width: 100%; max-width: 420px; border-radius: var(--radius); padding: 25px; box-shadow: var(--shadow); text-align: center; border: 1px solid var(--border); }
-.auth-tabs { display: flex; background: var(--bg); border-radius: 10px; padding: 4px; margin-bottom: 20px; gap: 2px; }
-.auth-tab { flex: 1; padding: 8px 4px; border: none; background: transparent; color: var(--text-muted); font-weight: 600; cursor: pointer; border-radius: 8px; font-size: 12px; }
-.auth-tab.active { background: var(--card-bg); color: var(--primary); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-.form-group { text-align: right; margin-bottom: 15px; }
-.form-group label { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600; color: var(--text-muted); }
-.form-input { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 14px; outline: none; }
-.btn-primary { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 10px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); }
-
-/* Navigation Bar */
-.navbar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--card-bg); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 8px 0; z-index: 90; }
-.nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: var(--text-muted); font-size: 11px; font-weight: 600; cursor: pointer; background: none; border: none; flex: 1; }
-.nav-item.active { color: var(--primary); }
-.nav-item span { font-size: 18px; }
-
-/* Main Container */
-.container { max-width: 800px; margin: 0 auto; padding: 20px; }
-.screen { display: none; }
-.screen.active { display: block; }
-
-/* User Info Bar */
-.user-bar { background: var(--card-bg); border-radius: var(--radius); padding: 15px 20px; border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; box-shadow: var(--shadow); }
-.user-info { display: flex; align-items: center; gap: 12px; }
-.avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; }
-
-/* Subjects Grid */
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-bottom: 25px; }
-.subject-card { background: var(--card-bg); border-radius: var(--radius); padding: 20px 15px; text-align: center; border: 1px solid var(--border); cursor: pointer; box-shadow: var(--shadow); }
-.subject-card:hover { transform: translateY(-3px); border-color: var(--primary); }
-.subject-icon { font-size: 32px; margin-bottom: 8px; }
-.subject-title { font-weight: 700; font-size: 14px; }
-
-/* Flashcards */
-.flashcard-container { perspective: 1000px; margin: 20px 0; }
-.flashcard { background: var(--card-bg); border-radius: var(--radius); padding: 30px; text-align: center; border: 1px solid var(--border); box-shadow: var(--shadow); min-height: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transform-style: preserve-3d; transition: transform 0.6s; position: relative; }
-.flashcard.flipped { transform: rotateY(180deg); }
-.card-front, .card-back { backface-visibility: hidden; width: 100%; }
-.card-back { position: absolute; transform: rotateY(180deg); padding: 20px; }
-
-/* Chat Box */
-.chat-box { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); height: 350px; display: flex; flex-direction: column; box-shadow: var(--shadow); }
-.chat-list { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-.chat-bubble { max-width: 80%; padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.5; }
-.chat-bubble.ai { background: var(--bg); border: 1px solid var(--border); align-self: flex-start; }
-.chat-bubble.user { background: var(--primary); color: white; align-self: flex-end; }
-.chat-input-area { padding: 10px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
-
-/* Quiz */
-.quiz-card { background: var(--card-bg); border-radius: var(--radius); padding: 20px; border: 1px solid var(--border); box-shadow: var(--shadow); }
-.opt-btn { width: 100%; padding: 12px; margin-top: 8px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); text-align: right; cursor: pointer; font-weight: 600; }
-.opt-btn:hover { border-color: var(--primary); background: var(--card-bg); }
+:root{--blue:#3B82F6;--blue2:#2563EB;--green:#10B981;--green2:#059669;--red:#EF4444;--yellow:#F59E0B;--purple:#8B5CF6;--pink:#EC4899;--pink2:#DB2777;--bg:linear-gradient(160deg,#EFF6FF 0%,#ECFDF5 100%);--card:#fff;--ink:#1E293B;--sub:#64748B;--border:#DBEAFE;--radius:20px;--shadow:0 4px 16px rgba(59,130,246,.12)}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,'Noto Sans Arabic',sans-serif;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);direction:rtl;min-height:100vh;display:flex;flex-direction:column}
+#app{flex:1;display:flex;flex-direction:column;max-width:500px;width:100%;margin:0 auto;position:relative}
+.topbar{background:linear-gradient(135deg,var(--blue),var(--green));color:#fff;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 16px rgba(59,130,246,.3);position:sticky;top:0;z-index:100;border-radius:0 0 24px 24px}
+.topbar h1{font-size:18px;font-weight:800;display:flex;align-items:center;gap:8px}
+.topbar .actions{display:flex;gap:8px}
+.topbar button{background:rgba(255,255,255,.2);border:none;color:#fff;border-radius:12px;width:40px;height:40px;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.content{flex:1;padding:20px;overflow-y:auto}
+.welcome{background:linear-gradient(135deg,#DBEAFE,#D1FAE5);border-radius:24px;padding:22px;text-align:center;margin-bottom:20px;box-shadow:var(--shadow)}
+.welcome .avatar{width:90px;height:90px;border-radius:50%;border:4px solid #fff;object-fit:cover;margin:0 auto 12px;display:block;background:#fff}
+.welcome .avatar-def{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--green));color:#fff;display:flex;align-items:center;justify-content:center;font-size:48px;margin:0 auto 12px;font-weight:800}
+.welcome h2{font-size:20px;color:var(--blue2);font-weight:800;margin-bottom:4px}
+.welcome p{color:var(--sub);font-size:13px;font-weight:600}
+.grid-menu{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.menu-btn{background:transparent;border:none;padding:10px 4px;text-align:center;cursor:pointer;transition:all .25s;display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--ink);font-weight:800;font-size:13px;position:relative}
+.menu-btn:active{transform:scale(.92)}
+.menu-btn .circle-icon{width:88px;height:88px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(0,0,0,.12);transition:transform .25s}
+.menu-btn.blue .circle-icon{background:#DBEAFE}
+.menu-btn.green .circle-icon{background:#D1FAE5}
+.menu-btn.pink .circle-icon{background:#FCE7F3}
+.menu-btn.gradient-blue .circle-icon{background:#3B82F6}
+.menu-btn.gradient-green .circle-icon{background:#10B981}
+.menu-btn.gradient-pink .circle-icon{background:#EC4899}
+.menu-btn.full{grid-column:1/-1}
+.svg-icon{width:72px;height:72px;display:block}
+.screen{display:none}
+.screen.active{display:block;animation:fadeIn .3s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.card{background:var(--card);border-radius:var(--radius);padding:18px;margin-bottom:14px;box-shadow:var(--shadow)}
+.card h3{color:var(--blue2);font-size:16px;font-weight:800;margin-bottom:10px}
+.card p{color:var(--sub);font-size:14px;line-height:1.8}
+.card label{font-size:13px;font-weight:700;color:var(--sub);display:block;margin-bottom:6px;margin-top:10px}
+.btn{background:var(--blue);color:#fff;border:none;border-radius:14px;padding:14px 24px;font-size:15px;font-weight:800;cursor:pointer;transition:all .25s;width:100%;margin-top:8px}
+.btn:active{transform:scale(.97)}
+.btn.green{background:var(--green)}
+.btn.red{background:var(--red)}
+.btn.pink{background:var(--pink)}
+.btn.ghost{background:#F1F5F9;color:var(--ink)}
+.btn.sm{padding:10px 14px;font-size:13px;width:auto;border-radius:10px;margin-top:0}
+.inp{width:100%;padding:14px 16px;border:2px solid var(--border);border-radius:14px;font-size:15px;font-family:inherit;margin-bottom:10px;background:#fff;color:var(--ink);font-weight:600}
+.inp:focus{outline:none;border-color:var(--blue)}
+textarea.inp{resize:vertical;min-height:90px}
+#gate{position:fixed;inset:0;background:var(--bg);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px;overflow:auto}
+.gate-card{background:#fff;border-radius:24px;max-width:420px;width:100%;padding:30px 24px;box-shadow:0 12px 40px rgba(59,130,246,.25);margin:auto}
+.gate-logo{width:80px;height:80px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:44px;margin:0 auto 16px;color:#fff}
+.gate-card h1{font-size:24px;font-weight:800;text-align:center;color:var(--blue2);margin-bottom:4px}
+.gate-card .gsub{text-align:center;color:var(--sub);font-size:13px;margin-bottom:20px;font-weight:600}
+.gtabs{display:flex;gap:4px;margin-bottom:18px;background:#F1F5F9;padding:5px;border-radius:16px}
+.gtab{flex:1;padding:10px 4px;border:none;background:transparent;font-weight:800;font-size:12px;color:var(--sub);cursor:pointer;border-radius:12px;transition:all .25s}
+.gtab.on{background:var(--blue);color:#fff}
+.gate-card .gbtn{width:100%;padding:14px;border:none;border-radius:14px;background:var(--blue);color:#fff;font-weight:800;font-size:16px;cursor:pointer;margin-top:8px}
+.gate-card .gin{width:100%;padding:14px;border:2px solid var(--border);border-radius:14px;font-size:16px;font-family:inherit;margin-bottom:12px;background:#fff;text-align:center;font-weight:700;color:var(--ink)}
+.gate-card .gin:focus{outline:none;border-color:var(--blue)}
+.gmsg{font-size:14px;margin-top:12px;padding:14px;border-radius:12px;display:none;line-height:1.8;font-weight:600;text-align:center}
+.gmsg.ok{display:block;background:#D1FAE5;color:#059669}
+.gmsg.wait{display:block;background:#FEF3C7;color:#D97706}
+.gmsg.no{display:block;background:#FEE2E2;color:#DC2626}
+.urow{display:flex;justify-content:space-between;align-items:center;border:2px solid var(--border);border-radius:14px;padding:12px 16px;margin-bottom:10px;font-size:14px;color:var(--ink);font-weight:700;background:#fff;flex-wrap:wrap;gap:8px}
+.ub{background:var(--blue);color:#fff;border:none;border-radius:10px;padding:8px 14px;font-size:12px;cursor:pointer;margin-inline-start:6px;font-weight:800}
+.ub.g{background:var(--green)}.ub.r{background:#EF4444}.ub.y{background:#F59E0B}.ub.p{background:var(--pink)}
+.qq{font-size:17px;font-weight:800;margin:14px 0 12px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;width:100%;text-align:right;padding:14px 18px;border:2px solid var(--border);border-radius:14px;background:#fff;font-size:15px;cursor:pointer;color:var(--ink);font-weight:600}
+.opt.ok{border-color:var(--green);background:#D1FAE5}
+.opt.no{border-color:#EF4444;background:#FEE2E2}
+.fb{min-height:24px;margin-top:12px;font-size:15px;font-weight:800;text-align:center}
+.fb.ok{color:var(--green2)}.fb.no{color:#DC2626}
+.score{font-size:48px;font-weight:800;color:var(--blue2);text-align:center}
+.statrow{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.stat{background:#fff;border-radius:16px;padding:16px;flex:1;min-width:100px;box-shadow:var(--shadow);text-align:center}
+.stat b{display:block;font-size:26px;font-weight:800;color:var(--blue2)}
+.stat span{font-size:11px;color:var(--sub);font-weight:700}
+.bub{max-width:85%;border-radius:18px;padding:12px 16px;margin-bottom:10px;font-size:14px;line-height:1.8;font-weight:500}
+.bub.s{margin-inline-start:auto;background:#DBEAFE;color:#1E40AF}
+.bub.t{background:#D1FAE5;color:#065F46}
+.bub .who{font-size:11px;font-weight:800;opacity:.7;display:block;margin-bottom:4px}
+.bub .time{font-size:10px;opacity:.6;margin-inline-start:6px}
+.mon-table{width:100%;border-collapse:collapse;font-size:12.5px;background:#fff;border-radius:14px;overflow:hidden}
+.mon-table th{background:var(--blue);color:#fff;padding:10px;font-weight:800;font-size:12px;text-align:right}
+.mon-table td{padding:8px;border-bottom:1px solid var(--border);text-align:right}
+.mon-table td input{width:100%;padding:6px 8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;font-family:inherit}
+.sound-btn{position:fixed;bottom:20px;right:20px;z-index:900;width:56px;height:56px;border-radius:50%;background:var(--blue);color:#fff;border:none;font-size:24px;cursor:pointer;box-shadow:0 6px 20px rgba(59,130,246,.5);display:flex;align-items:center;justify-content:center}
+.sound-btn.on{background:var(--green)}
+.wa-btn{position:fixed;bottom:20px;left:20px;z-index:900;width:58px;height:58px;border-radius:50%;background:#25D366;color:#fff;border:none;font-size:26px;cursor:pointer;box-shadow:0 6px 20px rgba(37,211,102,.5);display:flex;align-items:center;justify-content:center}
+.mon-btn{position:fixed;bottom:20px;right:88px;z-index:900;background:var(--blue);color:#fff;border:none;border-radius:14px;padding:14px 18px;font-size:12px;font-weight:800;cursor:pointer;box-shadow:0 6px 20px rgba(59,130,246,.5)}
+.loading{text-align:center;padding:40px 20px;color:var(--sub);font-weight:700}
+.loading::before{content:"⏳";font-size:32px;display:block;margin-bottom:12px}
+.video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;margin-top:10px}
+.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.lesson-img{width:100%;border-radius:12px;margin-top:10px}
+.note-item{background:#FEF3C7;border-radius:14px;padding:14px 16px;margin-bottom:12px;border-right:4px solid #F59E0B}
+.note-item .date{font-size:11px;color:#92400E;font-weight:800;margin-bottom:6px}
+.note-item .text{color:#78350F;font-size:14px;line-height:1.7;font-weight:600}
+.eval-item{background:#fff;border:2px solid var(--border);border-radius:14px;padding:12px 16px;margin-bottom:10px}
+.eval-item .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:8px;flex-wrap:wrap}
+.eval-item .subject{font-weight:800;color:var(--blue2);font-size:13px}
+.eval-item .score-badge{background:var(--blue);color:#fff;padding:4px 12px;border-radius:999px;font-weight:800;font-size:13px}
+.eval-item .note{color:var(--sub);font-size:13px;margin-top:6px;font-style:italic}
+.eval-item .date{color:#94a3b8;font-size:11px;margin-top:6px}
+.attend-item{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border:2px solid var(--border);border-radius:12px;margin-bottom:8px;background:#fff;gap:8px;flex-wrap:wrap}
+.attend-item .name{font-weight:800;color:var(--ink);font-size:13px}
+.attend-item .actions{display:flex;gap:6px}
+.attend-btn{padding:6px 14px;border-radius:10px;border:2px solid var(--border);background:#fff;font-weight:800;font-size:12px;cursor:pointer}
+.attend-btn.present{background:var(--green);color:#fff;border-color:var(--green)}
+.attend-btn.absent{background:var(--red);color:#fff;border-color:var(--red)}
+.behavior-item{padding:12px 16px;border-radius:14px;margin-bottom:10px;font-size:13px;line-height:1.7}
+.behavior-item.positive{background:#D1FAE5;border-right:4px solid var(--green)}
+.behavior-item.negative{background:#FEE2E2;border-right:4px solid var(--red)}
+.behavior-item .who{font-weight:800;color:var(--ink);margin-bottom:4px}
+.behavior-item .text{color:#1E293B}
+.behavior-item .date{color:#64748B;font-size:11px;margin-top:4px}
+.recorder-circle{width:120px;height:120px;border-radius:50%;background:var(--red);color:#fff;border:none;font-size:48px;cursor:pointer;margin:20px auto;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(239,68,68,.5);transition:all .3s}
+.recorder-circle.recording{animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.recording-item{background:#fff;border:2px solid var(--border);border-radius:14px;padding:12px 16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.recording-item .info{flex:1;min-width:100px}
+.recording-item .title{font-weight:800;color:var(--blue2);font-size:13px}
+.recording-item .date{color:var(--sub);font-size:11px;margin-top:2px}
+.badge-card{background:#FEF3C7;border:2px solid #F59E0B;border-radius:16px;padding:16px;text-align:center;box-shadow:var(--shadow)}
+.badge-card .emoji{font-size:42px;margin-bottom:8px}
+.badge-card .name{font-weight:800;color:#92400E;font-size:14px}
+.badge-card .desc{color:#78350F;font-size:11px;margin-top:4px}
+.badge-card.locked{opacity:.4;background:#F1F5F9;border-color:#CBD5E1}
+.badge-card.locked .name{color:#64748B}
+.schedule-day{background:#fff;border:2px solid var(--border);border-radius:14px;padding:14px;margin-bottom:12px}
+.schedule-day .day-name{font-weight:800;color:var(--blue2);font-size:15px;margin-bottom:10px}
+.schedule-item{display:flex;justify-content:space-between;padding:8px 12px;border-radius:10px;background:#F1F5F9;margin-bottom:6px;font-size:13px;font-weight:700;align-items:center;gap:8px;flex-wrap:wrap}
+.schedule-item .subject{color:var(--ink);flex:1}
+.schedule-item .time{color:var(--sub);font-size:12px;display:flex;align-items:center;gap:6px}
+.album-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.album-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+.album-card img{width:100%;height:120px;object-fit:cover;display:block}
+.album-card .title{padding:8px 10px;font-size:12px;font-weight:700;color:var(--ink);text-align:center}
+.event-item{background:#fff;border:2px solid var(--border);border-radius:14px;padding:12px 16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.event-item .title{font-weight:800;color:var(--ink);font-size:14px}
+.event-item .date{font-size:12px;color:var(--sub);font-weight:700}
+.event-item.holiday{border-right:4px solid var(--green)}
+.event-item.exam{border-right:4px solid var(--red)}
+.event-item.activity{border-right:4px solid var(--pink)}
+.goal-item{background:#fff;border:2px solid var(--border);border-radius:14px;padding:14px;margin-bottom:10px}
+.goal-item .title{font-weight:800;color:var(--blue2);font-size:14px;margin-bottom:8px}
+.goal-bar{background:#F1F5F9;border-radius:999px;height:14px;overflow:hidden;margin-bottom:6px}
+.goal-bar .fill{height:100%;background:var(--green);border-radius:999px;transition:width .5s}
+.goal-item .progress{font-size:12px;color:var(--sub);font-weight:700;text-align:center}
+.reward-card{background:#FEF3C7;border:2px solid #F59E0B;border-radius:16px;padding:16px;text-align:center;box-shadow:var(--shadow);margin-bottom:12px}
+.reward-card .emoji{font-size:42px;margin-bottom:8px}
+.reward-card .name{font-weight:800;color:#92400E;font-size:14px}
+.reward-card .price{color:#78350F;font-size:13px;font-weight:800;margin-top:4px}
+.honor-card{background:#FEF3C7;border:2px solid #F59E0B;border-radius:16px;padding:16px;margin-bottom:12px;display:flex;align-items:center;gap:14px}
+.honor-card .rank{font-size:32px;font-weight:800;color:#92400E;min-width:50px;text-align:center}
+.honor-card .info{flex:1}
+.honor-card .name{font-weight:800;color:#78350F;font-size:15px}
+.honor-card .score{font-size:12px;color:#92400E;font-weight:700;margin-top:4px}
+.honor-card.rank1{background:#FCD34D}
+.honor-card.rank2{background:#E5E7EB}
+.honor-card.rank3{background:#FED7AA}
+@media(max-width:400px){.svg-icon{width:56px;height:56px}.menu-btn .circle-icon{width:72px;height:72px}.menu-btn{font-size:12px}}
 </style>
-</head>
-<body>
+</head><body>
 
-<!-- Header -->
-<header class="header">
-  <div class="brand">
-    <span>🎓</span>
-    <span>الأستاذ سعيد</span>
-  </div>
-  <div class="header-actions">
-    <button class="btn-icon" onclick="toggleTheme()" title="تغيير المظهر">🌙</button>
-    <button class="btn-icon" id="logoutBtn" onclick="logout()" title="تسجيل الخروج" style="display:none;">🚪</button>
-  </div>
-</header>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyDrWcrE1nOSaEPA4qQPN_SJxDGEylJTI6o",
+    authDomain: "said-school.firebaseapp.com",
+    databaseURL: "https://said-school-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "said-school",
+    storageBucket: "said-school.firebasestorage.app",
+    messagingSenderId: "1093882982581",
+    appId: "1:1093882982581:web:d8624a3824b41433230efc"
+  };
+  firebase.initializeApp(firebaseConfig);
+  var fdb = firebase.database();
+  var auth = firebase.auth();
+</script>
 
-<!-- Auth Modal (تلميذ / ولي أمور / أستاذ) -->
-<div class="auth-overlay" id="authModal">
-  <div class="auth-card">
-    <h2 style="margin-bottom: 15px; font-size: 20px;">مرحباً بك في المنصة 👋</h2>
-    <div class="auth-tabs">
-      <button class="auth-tab active" onclick="switchAuthTab('student')">التلميذ 👦</button>
-      <button class="auth-tab" onclick="switchAuthTab('parent')">الولي 👨‍👩‍👦</button>
-      <button class="auth-tab" onclick="switchAuthTab('teacher')">الأستاذ 👨‍🏫</button>
+<!-- مكتبة الأيقونات 3D من Microsoft Fluent -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+<symbol id="i-book" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Books/3D/books_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-pencil" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Pencil/3D/pencil_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-openbook" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Open%20book/3D/open_book_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-notebook" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Notebook%20with%20decorative%20cover/3D/notebook_with_decorative_cover_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-chart" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Bar%20chart/3D/bar_chart_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-camera" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Camera%20with%20flash/3D/camera_with_flash_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-file" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Page%20facing%20up/3D/page_facing_up_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-mic" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Studio%20microphone/3D/studio_microphone_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-trophy" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Trophy/3D/trophy_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-library" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Books/3D/books_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-calendar" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Spiral%20calendar/3D/spiral_calendar_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-cake" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Birthday%20cake/3D/birthday_cake_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-photo" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Framed%20picture/3D/framed_picture_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-medal" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Sports%20medal/3D/sports_medal_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-target" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Direct%20hit/3D/direct_hit_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-gift" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Wrapped%20gift/3D/wrapped_gift_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-note" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Memo/3D/memo_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-chat" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Speech%20balloon/3D/speech_balloon_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-send" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Outbox%20tray/3D/outbox_tray_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-people" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Busts%20in%20silhouette/3D/busts_in_silhouette_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-books" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Books/3D/books_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-plus" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Plus/3D/plus_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-notepad" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Spiral%20notepad/3D/spiral_notepad_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-folder" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/File%20folder/3D/file_folder_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-star" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Star/3D/star_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-thumb" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Thumbs%20up/3D/thumbs_up_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-headphones" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Headphone/3D/headphone_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-megaphone" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Loudspeaker/3D/loudspeaker_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-files" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Clipboard/3D/clipboard_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+<symbol id="i-settings" viewBox="0 0 64 64"><image href="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Gear/3D/gear_3d.png" x="0" y="0" width="64" height="64"/></symbol>
+</svg>
+
+<!-- شاشة الدخول -->
+<div id="gate">
+  <div class="gate-card">
+    <div class="gate-logo">🎓</div>
+    <h1>الأستاذ سعيد</h1>
+    <p class="gsub">منصة السنة الثالثة ابتدائي</p>
+    <div class="gtabs">
+      <button class="gtab on" id="gtabStudent" onclick="switchGateTab('s')">👦 تلميذ</button>
+      <button class="gtab" id="gtabParent" onclick="switchGateTab('p')">👨‍👩‍👦 ولي</button>
+      <button class="gtab" id="gtabTeacher" onclick="switchGateTab('t')">👨‍🏫 الأستاذ</button>
     </div>
-
-    <!-- Student Form -->
-    <form id="studentForm" class="auth-form" onsubmit="handleAuth(event, 'student')">
-      <div class="form-group">
-        <label>اسم التلميذ(ة)</label>
-        <input type="text" id="studentName" class="form-input" placeholder="أدخل اسمك الكامل" required>
-      </div>
-      <div class="form-group">
-        <label>الفوج / القسم</label>
-        <input type="text" id="studentClass" class="form-input" placeholder="مثال: 3 ابتدائي 1" required>
-      </div>
-      <button type="submit" class="btn-primary">دخول التلميذ 🚀</button>
-    </form>
-
-    <!-- Parent Form (فضاء الولي) -->
-    <form id="parentForm" class="auth-form" onsubmit="handleAuth(event, 'parent')" style="display:none;">
-      <div class="form-group">
-        <label>اسم ولي الأمر</label>
-        <input type="text" id="parentName" class="form-input" placeholder="أدخل اسم ولي الأمر" required>
-      </div>
-      <div class="form-group">
-        <label>اسم الابن/الابنة</label>
-        <input type="text" id="childName" class="form-input" placeholder="اسم التلميذ" required>
-      </div>
-      <button type="submit" class="btn-primary">دخول فضاء الولي 🏠</button>
-    </form>
-
-    <!-- Teacher Form -->
-    <form id="teacherForm" class="auth-form" onsubmit="handleAuth(event, 'teacher')" style="display:none;">
-      <div class="form-group">
-        <label>رمز مرور الأستاذ</label>
-        <input type="password" id="teacherPass" class="form-input" placeholder="أدخل رمز المرور" required>
-      </div>
-      <button type="submit" class="btn-primary">دخول لوحة التحكم 🔐</button>
-    </form>
+    <div id="gbody"></div>
+    <div class="gmsg" id="gm"></div>
   </div>
 </div>
 
-<!-- Navigation Bar -->
-<nav class="navbar">
-  <button class="nav-item active" onclick="showScreen('dashboard')"><span>🏠</span>الرئيسية</button>
-  <button class="nav-item" onclick="showScreen('subjects')"><span>📚</span>المواد</button>
-  <button class="nav-item" onclick="showScreen('quiz')"><span>🎮</span>المسابقات</button>
-  <button class="nav-item" onclick="showScreen('ai')"><span>🤖</span>المعلم الذكي</button>
-  <button class="nav-item" id="navParent" onclick="showScreen('parentPanel')" style="display:none;"><span>📊</span>متابعة الولي</button>
-  <button class="nav-item" id="navTeacher" onclick="showScreen('teacherPanel')" style="display:none;"><span>👁️</span>المراقبة</button>
-</nav>
-
-<!-- Main App Area -->
-<main class="container">
-
-  <!-- User Bar -->
-  <div class="user-bar" id="userBar" style="display:none;">
-    <div class="user-info">
-      <div class="avatar" id="userAvatar">ت</div>
-      <div>
-        <div style="font-weight: 700;" id="userNameDisplay">المستخدم</div>
-        <div style="font-size: 12px; color: var(--text-muted);" id="userRoleDisplay">الصفة</div>
-      </div>
+<!-- التطبيق الرئيسي -->
+<div id="app" style="display:none">
+  <div class="topbar">
+    <h1 id="topTitle">🎓 منصة الأستاذ سعيد</h1>
+    <div class="actions">
+      <button id="homeBtn" title="الرئيسية">🏠</button>
+      <button id="logoutBtn" title="خروج">🚪</button>
     </div>
-    <span style="font-size: 12px; background: rgba(79,70,229,0.1); color: var(--primary); padding: 4px 10px; border-radius: 20px; font-weight:600;">2026/2027</span>
   </div>
+  <div class="content" id="content">
 
-  <!-- Dashboard Screen -->
-  <section id="screen-dashboard" class="screen active">
-    <h3 style="margin-bottom: 15px;">اختر المادة للدراسة 📖</h3>
-    <div class="grid">
-      <div class="subject-card" onclick="openSubject('اللغة العربية', '📖')">
-        <div class="subject-icon">📖</div>
-        <div class="subject-title">اللغة العربية</div>
-      </div>
-      <div class="subject-card" onclick="openSubject('الرياضيات', '📐')">
-        <div class="subject-icon">📐</div>
-        <div class="subject-title">الرياضيات</div>
-      </div>
-      <div class="subject-card" onclick="openSubject('التربية الإسلامية', '🕌')">
-        <div class="subject-icon">🕌</div>
-        <div class="subject-title">التربية الإسلامية</div>
-      </div>
-      <div class="subject-card" onclick="openSubject('العلوم العلمية', '🔬')">
-        <div class="subject-icon">🔬</div>
-        <div class="subject-title">العلوم والتكنولوجيا</div>
-      </div>
-      <div class="subject-card" onclick="openSubject('التاريخ والجغرافيا', '🌍')">
-        <div class="subject-icon">🌍</div>
-        <div class="subject-title">التاريخ والجغرافيا</div>
-      </div>
-      <div class="subject-card" onclick="openSubject('اللغة الفرنسية', '🇫🇷')">
-        <div class="subject-icon">🇫🇷</div>
-        <div class="subject-title">اللغة الفرنسية</div>
+    <!-- شريط إعلان الأستاذ -->
+    <div id="announcementBanner" style="display:none;background:#FEF3C7;border:2px solid #F59E0B;border-radius:16px;padding:14px 18px;margin-bottom:16px;align-items:center;gap:12px">
+      <span style="font-size:26px">📢</span>
+      <div style="flex:1">
+        <div style="font-size:11px;font-weight:800;color:#92400E;margin-bottom:4px">إعلان الأستاذ</div>
+        <div id="announcementText" style="font-size:14px;font-weight:700;color:#78350F;line-height:1.7"></div>
       </div>
     </div>
-  </section>
 
-  <!-- Subjects Screen -->
-  <section id="screen-subjects" class="screen">
-    <h3 id="currentSubjectTitle" style="margin-bottom: 15px;">البطاقات التفاعلية 🎴</h3>
-    <div class="flashcard-container">
-      <div class="flashcard" onclick="this.classList.toggle('flipped')">
-        <div class="card-front">
-          <p style="font-size: 12px; color: var(--primary); font-weight:700; margin-bottom: 5px;">انقر لقلب البطاقة 👆</p>
-          <h4 id="cardQuestion">ما هو الفاعل في الجملة الاسمية؟</h4>
+    <!-- ===== شاشة التلميذ ===== -->
+    <div class="screen active" id="screen-student-home">
+      <div class="welcome">
+        <div id="studentAvatar"></div>
+        <h2 id="studentName">مرحباً 👋</h2>
+        <p>🎓 السنة الثالثة ابتدائي</p>
+      </div>
+      <div class="grid-menu">
+        <button class="menu-btn blue" onclick="goTo('lessons')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-book"/></svg></span>دروسي</button>
+        <button class="menu-btn green" onclick="goTo('quizzes')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-pencil"/></svg></span>تقويماتي</button>
+        <button class="menu-btn blue" onclick="goTo('texts')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-openbook"/></svg></span>النصوص</button>
+        <button class="menu-btn green" onclick="goTo('studentNotebook')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-notebook"/></svg></span>كراس القسم</button>
+        <button class="menu-btn blue" onclick="goTo('progress')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-chart"/></svg></span>تقدمي</button>
+        <button class="menu-btn green" onclick="changePhoto()"><span class="circle-icon"><svg class="svg-icon"><use href="#i-camera"/></svg></span>صورتي</button>
+        <button class="menu-btn blue" onclick="goTo('myFile')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-file"/></svg></span>ملفي</button>
+        <button class="menu-btn green" onclick="goTo('recorder')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-mic"/></svg></span>تسجيل صوتي</button>
+        <button class="menu-btn blue" onclick="goTo('badges')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-trophy"/></svg></span>شاراتي</button>
+        <button class="menu-btn green" onclick="goTo('library')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-library"/></svg></span>مكتبة القسم</button>
+        <button class="menu-btn blue" onclick="goTo('schedule')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-calendar"/></svg></span>جدول الحصص</button>
+        <button class="menu-btn green" onclick="goTo('birthdays')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-cake"/></svg></span>أعياد الميلاد</button>
+        <button class="menu-btn blue" onclick="goTo('album')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-photo"/></svg></span>ألبوم القسم</button>
+        <button class="menu-btn green" onclick="goTo('honor')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-medal"/></svg></span>لوحة الشرف</button>
+        <button class="menu-btn blue" onclick="goTo('events')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-calendar"/></svg></span>المناسبات</button>
+        <button class="menu-btn green" onclick="goTo('goals')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-target"/></svg></span>أهدافي</button>
+        <button class="menu-btn blue" onclick="goTo('charts')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-chart"/></svg></span>تطوري</button>
+        <button class="menu-btn green" onclick="goTo('rewards')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-gift"/></svg></span>مكافآتي</button>
+        <button class="menu-btn blue" onclick="goTo('voiceNotes')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-note"/></svg></span>ملاحظات الأستاذ</button>
+        <button class="menu-btn gradient-blue full" onclick="goTo('chat')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-chat"/></svg></span>المحادثة مع الأستاذ</button>
+        <button class="menu-btn gradient-green full" onclick="sendReport()"><span class="circle-icon"><svg class="svg-icon"><use href="#i-send"/></svg></span>أرسل تقريري</button>
+      </div>
+    </div>
+
+    <!-- ===== شاشة الأستاذ ===== -->
+    <div class="screen" id="screen-teacher-home">
+      <div class="welcome">
+        <div class="avatar-def">👨‍🏫</div>
+        <h2>مرحباً أستاذ سعيد</h2>
+        <p>لوحة التحكم الكاملة</p>
+      </div>
+      <div class="grid-menu">
+        <button class="menu-btn gradient-blue" onclick="goTo('monitor')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-chart"/></svg></span>المراقبة</button>
+        <button class="menu-btn gradient-green" onclick="goTo('students')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-people"/></svg></span>التلاميذ</button>
+        <button class="menu-btn gradient-blue" onclick="goTo('manageSubjects')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-books"/></svg></span>المواد</button>
+        <button class="menu-btn gradient-green" onclick="goTo('newLesson')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-plus"/></svg></span>إضافة درس</button>
+        <button class="menu-btn gradient-blue" onclick="goTo('viewLessons')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-openbook"/></svg></span>الدروس</button>
+        <button class="menu-btn gradient-green" onclick="goTo('newHomework')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-notepad"/></svg></span>إضافة واجب</button>
+        <button class="menu-btn gradient-blue" onclick="goTo('notebook')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-notebook"/></svg></span>كراس القسم</button>
+        <button class="menu-btn gradient-green" onclick="goTo('studentsList')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-chat"/></svg></span>الرسائل</button>
+        <button class="menu-btn gradient-blue" onclick="goTo('files')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-folder"/></svg></span>ملفاتي</button>
+        <button class="menu-btn gradient-green" onclick="goTo('evaluate')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-star"/></svg></span>تقييم</button>
+        <button class="menu-btn gradient-blue" onclick="goTo('attendance')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-calendar"/></svg></span>غيابات</button>
+        <button class="menu-btn gradient-green" onclick="goTo('behavior')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-thumb"/></svg></span>سلوك</button>
+        <button class="menu-btn gradient-blue" onclick="goTo('listenRecordings')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-headphones"/></svg></span>تسجيلات</button>
+        <button class="menu-btn gradient-green" onclick="goTo('schedule')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-calendar"/></svg></span>جدول الحصص</button>
+        <button class="menu-btn gradient-blue" onclick="goTo('album')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-photo"/></svg></span>ألبوم القسم</button>
+        <button class="menu-btn gradient-green" onclick="goTo('events')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-calendar"/></svg></span>المناسبات</button>
+        <button class="menu-btn gradient-blue" onclick="goTo('honor')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-medal"/></svg></span>لوحة الشرف</button>
+        <button class="menu-btn gradient-green" onclick="goTo('recordNote')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-mic"/></svg></span>ملاحظة صوتية</button>
+        <button class="menu-btn gradient-pink" onclick="goTo('announcement')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-megaphone"/></svg></span>إعلان القسم</button>
+        <button class="menu-btn gradient-pink" onclick="goTo('viewPersonalInfo')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-files"/></svg></span>ملفات التلاميذ</button>
+        <button class="menu-btn gradient-blue full" onclick="goTo('settings')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-settings"/></svg></span>الإعدادات</button>
+      </div>
+    </div>
+
+    <!-- ===== شاشة الولي ===== -->
+    <div class="screen" id="screen-parent-home">
+      <div class="welcome">
+        <div id="parentAvatar"></div>
+        <h2 id="parentChildName">مرحباً ولي الأمر</h2>
+        <p>متابعة سلوك ونتائج ابنكم</p>
+        <button class="btn green" onclick="changeParentPhoto()" style="margin-top:12px;width:auto;padding:8px 20px;font-size:13px">📷 تغيير صورتي</button>
+      </div>
+      <div class="grid-menu">
+        <button class="menu-btn blue" onclick="goTo('personalInfo')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-file"/></svg></span>معلومات ابني</button>
+        <button class="menu-btn green" onclick="goTo('chat')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-chat"/></svg></span>التواصل مع الأستاذ</button>
+        <button class="menu-btn blue" onclick="goTo('schedule')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-calendar"/></svg></span>جدول الحصص</button>
+        <button class="menu-btn green" onclick="goTo('birthdays')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-cake"/></svg></span>أعياد الميلاد</button>
+        <button class="menu-btn blue" onclick="goTo('events')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-calendar"/></svg></span>المناسبات</button>
+        <button class="menu-btn green" onclick="goTo('honor')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-medal"/></svg></span>لوحة الشرف</button>
+      </div>
+      <div id="parentContent"></div>
+    </div>
+
+    <!-- ===== شاشات مشتركة ===== -->
+    <div class="screen" id="screen-lessons">
+      <div class="card"><h3>📚 الدروس</h3><p>اختر المادة:</p></div>
+      <div class="grid-menu" id="studentSubjectsGrid"></div>
+      <div id="lessonsList"></div>
+    </div>
+
+    <div class="screen" id="screen-quizzes">
+      <div class="card"><h3>✏️ تقويماتي</h3></div>
+      <div id="quizArea"></div>
+    </div>
+
+    <div class="screen" id="screen-texts">
+      <div class="card"><h3>📖 نص «الأم»</h3><p style="background:#EFF6FF;padding:14px;border-radius:12px;line-height:2">يقول الله تعالى: ﴿وَقُل رَّبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا﴾. نظرةُ الأمِّ لطفلها نظرةٌ مليئةٌ بالحبِّ والحنان.</p></div>
+      <div class="card"><h3>🌳 نص «ربى والغيم»</h3><p style="background:#ECFDF5;padding:14px;border-radius:12px;line-height:2">في فصل الربيع قصدتِ العائلةُ الغابةَ للتنزّه.</p></div>
+      <div class="card"><h3>🐦 نص «العصفور والرسّام»</h3><p style="background:#EFF6FF;padding:14px;border-radius:12px;line-height:2">أخرجَ الأقلامَ الملوّنةَ وبدأَ يرسمُ العصفورَ.</p></div>
+    </div>
+
+    <div class="screen" id="screen-progress">
+      <div class="card"><h3>📊 تقدمي</h3></div>
+      <div class="statrow">
+        <div class="stat"><b id="st-total">0</b><span>⭐ نجمة</span></div>
+        <div class="stat"><b id="st-att">0</b><span>🎯 محاولة</span></div>
+        <div class="stat"><b id="st-best">0/3</b><span>🏆 اختبارات</span></div>
+      </div>
+      <button class="btn ghost" id="resetProg">🔄 مسح السجل</button>
+    </div>
+
+    <div class="screen" id="screen-studentNotebook">
+      <div class="card"><h3>📔 كراس القسم</h3></div>
+      <div id="studentNotebookList"><div class="loading">جارٍ التحميل...</div></div>
+    </div>
+
+    <div class="screen" id="screen-myFile">
+      <div class="card"><h3>📋 ملفي</h3></div>
+      <div id="myFileContent"><div class="loading">جارٍ التحميل...</div></div>
+    </div>
+
+    <div class="screen" id="screen-recorder">
+      <div class="card"><h3>🎤 تسجيل التعبير الشفوي</h3></div>
+      <div class="card" style="text-align:center">
+        <div id="recStatus" style="font-size:16px;font-weight:800;margin-bottom:16px;color:#64748B">⏸️ جاهز</div>
+        <div id="recTimer" style="font-size:42px;font-weight:800;color:#3B82F6;margin-bottom:20px">00:00</div>
+        <button class="recorder-circle" id="recStartBtn" onclick="startRecording()">🎤</button>
+        <button class="btn green" id="recStopBtn" onclick="stopRecording()" style="display:none">⏹️ إيقاف وإرسال</button>
+        <button class="btn ghost" id="recCancelBtn" onclick="cancelRecording()" style="display:none">❌ إلغاء</button>
+      </div>
+      <div id="recordingsList"></div>
+    </div>
+
+    <div class="screen" id="screen-badges">
+      <div class="card"><h3>🏆 شاراتي</h3></div>
+      <div id="badgesContent"></div>
+    </div>
+
+    <div class="screen" id="screen-library">
+      <div class="card"><h3>📚 مكتبة القسم</h3></div>
+      <div id="libraryList"><div class="loading">جارٍ التحميل...</div></div>
+    </div>
+
+    <div class="screen" id="screen-birthdays">
+      <div class="card"><h3>🎂 أعياد الميلاد</h3></div>
+      <div id="birthdaysContent"><div class="loading">جارٍ التحميل...</div></div>
+    </div>
+
+    <div class="screen" id="screen-album">
+      <div class="card"><h3>📸 ألبوم القسم</h3></div>
+      <div class="card">
+        <input class="inp" id="album_title" placeholder="عنوان الصورة">
+        <input class="inp" id="album_url" placeholder="رابط الصورة">
+        <button class="btn green" onclick="saveAlbumPhoto()">📷 إضافة</button>
+      </div>
+      <div id="albumGrid"></div>
+    </div>
+
+    <div class="screen" id="screen-honor">
+      <div class="card"><h3>🏅 لوحة الشرف</h3></div>
+      <div id="honorContent"><div class="loading">جارٍ التحميل...</div></div>
+    </div>
+
+    <div class="screen" id="screen-events">
+      <div class="card"><h3>📅 تقويم المناسبات</h3></div>
+      <div class="card">
+        <input class="inp" id="event_title" placeholder="عنوان المناسبة">
+        <input class="inp" id="event_date" type="date">
+        <select class="inp" id="event_type">
+          <option value="holiday">🎉 عطلة</option>
+          <option value="exam">📝 امتحان</option>
+          <option value="activity">🎨 نشاط</option>
+          <option value="other">📌 أخرى</option>
+        </select>
+        <button class="btn green" onclick="saveEvent()">💾</button>
+      </div>
+      <div id="eventsList"></div>
+    </div>
+
+    <div class="screen" id="screen-goals">
+      <div class="card"><h3>🎯 أهدافي الأسبوعية</h3></div>
+      <div id="goalsContent"><div class="loading">جارٍ التحميل...</div></div>
+    </div>
+
+    <div class="screen" id="screen-charts">
+      <div class="card"><h3>📊 تطوري</h3></div>
+      <div id="chartsContent"><div class="loading">جارٍ التحميل...</div></div>
+    </div>
+
+    <div class="screen" id="screen-rewards">
+      <div class="card"><h3>🎁 متجر المكافآت</h3>
+        <p style="text-align:center;font-size:20px;font-weight:800;color:#EC4899;margin-top:10px">
+          ⭐ نجومك: <span id="myStars">0</span>
+        </p>
+      </div>
+      <div id="rewardsGrid"></div>
+    </div>
+
+    <div class="screen" id="screen-voiceNotes">
+      <div class="card"><h3>📝 ملاحظات الأستاذ الصوتية</h3></div>
+      <div id="voiceNotesList"><div class="loading">جارٍ التحميل...</div></div>
+    </div>
+
+    <!-- ===== شاشات الأستاذ ===== -->
+    <div class="screen" id="screen-monitor">
+      <div class="card">
+        <h3>📊 لوحة مراقبة التلاميذ</h3>
+        <button class="btn green" onclick="askAllReports()">📢 اطلب التقرير من الجميع</button>
+        <button class="btn pink" style="margin-top:8px" onclick="addNewStudent()">➕ تسجيل تلميذ جديد</button>
+        <button class="btn" style="margin-top:8px" onclick="document.getElementById('rosterFile').click()">📥 استيراد قائمة الصف (ملف خاص)</button>
+        <input type="file" id="rosterFile" accept=".json,application/json" style="display:none" onchange="importRosterFile(this)">
+        <p id="rosterStatus" style="white-space:pre-line;margin-top:8px"></p>
+      </div>
+      <div class="card">
+        <div style="overflow-x:auto"><table class="mon-table" id="monTable"></table></div>
+        <button class="btn" id="saveNotesBtn" style="margin-top:12px">💾 حفظ الملاحظات</button>
+      </div>
+    </div>
+
+    <div class="screen" id="screen-students">
+      <div class="card"><h3>👥 التلاميذ</h3></div>
+      <div id="studentsList"><div class="loading">جارٍ التحميل...</div></div>
+    </div>
+
+    <div class="screen" id="screen-manageSubjects">
+      <div class="card"><h3>📚 إدارة المواد</h3></div>
+      <div class="card">
+        <input class="inp" id="sub_name" placeholder="اسم المادة">
+        <input class="inp" id="sub_icon" placeholder="رمز (مثلاً: 🕌)" maxlength="2">
+        <button class="btn green" onclick="saveSubject()">💾 إضافة</button>
+      </div>
+      <div id="subjectsList"></div>
+    </div>
+
+    <div class="screen" id="screen-newLesson">
+      <div class="card">
+        <h3 id="lessonFormTitle">➕ إضافة درس</h3>
+        <input class="inp" id="nl_title" placeholder="عنوان الدرس">
+        <label>📅 تاريخ الدرس:</label>
+        <input class="inp" id="nl_date" type="date">
+        <label>المادة:</label>
+        <select class="inp" id="nl_subject"></select>
+        <label>القسم (للعربية):</label>
+        <select class="inp" id="nl_section">
+          <option value="">— لا يوجد —</option>
+          <option value="reading">📖 مطالعة</option>
+          <option value="listening">👂 فهم المنطوق</option>
+          <option value="oral">🗣️ تعبير شفوي</option>
+          <option value="written">✍️ تعبير كتابي</option>
+          <option value="grammar">📚 قواعد</option>
+          <option value="dictation">📝 إملاء</option>
+        </select>
+        <textarea class="inp" id="nl_content" placeholder="المحتوى"></textarea>
+        <label>🔗 رابط فيديو (اختياري):</label>
+        <input class="inp" id="nl_video" placeholder="https://youtube.com/...">
+        <label>📄 رابط PDF (اختياري):</label>
+        <input class="inp" id="nl_pdf" placeholder="https://drive.google.com/...">
+        <label>🖼️ رابط صورة (اختياري):</label>
+        <input class="inp" id="nl_img" placeholder="https://...jpg">
+        <input type="hidden" id="nl_editKey" value="">
+        <button class="btn green" onclick="saveLesson()">💾 حفظ</button>
+        <button class="btn ghost" onclick="cancelLessonEdit()" id="nl_cancelBtn" style="display:none">❌ إلغاء</button>
+      </div>
+    </div>
+
+    <div class="screen" id="screen-viewLessons">
+      <div class="card"><h3>📚 الدروس المضافة</h3></div>
+      <div class="grid-menu" id="teacherSubjectsGrid"></div>
+      <div id="teacherLessonsList"></div>
+    </div>
+
+    <div class="screen" id="screen-newHomework">
+      <div class="card">
+        <h3>📝 إضافة واجب</h3>
+        <input class="inp" id="nh_title" placeholder="عنوان الواجب">
+        <label>المادة:</label>
+        <select class="inp" id="nh_subject"></select>
+        <label>النوع:</label>
+        <select class="inp" id="nh_type">
+          <option value="daily">📅 يومي</option>
+          <option value="weekly">📆 أسبوعي</option>
+          <option value="integration">🔗 إدماج</option>
+        </select>
+        <label>📅 تاريخ نشر الواجب:</label>
+        <input class="inp" id="nh_date" type="date">
+        <label>📅 تاريخ التسليم (اختياري):</label>
+        <input class="inp" id="nh_due" type="date">
+        <textarea class="inp" id="nh_content" placeholder="نص الواجب"></textarea>
+        <label>✅ الإجابة النموذجية (اختياري):</label>
+        <textarea class="inp" id="nh_answer" placeholder="الحل..."></textarea>
+        <button class="btn green" onclick="saveHomework()">💾 حفظ</button>
+      </div>
+    </div>
+
+    <div class="screen" id="screen-notebook">
+      <div class="card"><h3>📔 كراس القسم</h3></div>
+      <div class="card">
+        <textarea class="inp" id="note_text" placeholder="اكتب ملاحظة..." rows="3"></textarea>
+        <input class="inp" id="note_date" type="date">
+        <button class="btn green" onclick="saveNote()">💾 نشر</button>
+      </div>
+      <div id="notebookList"></div>
+    </div>
+
+    <div class="screen" id="screen-studentsList">
+      <div class="card"><h3>💬 محادثات التلاميذ</h3></div>
+      <div id="chatStudentsList"><div class="loading">جارٍ التحميل...</div></div>
+    </div>
+
+    <div class="screen" id="screen-files">
+      <div class="card"><h3>📁 ملفاتي</h3></div>
+      <div class="card">
+        <input class="inp" id="file_title" placeholder="عنوان الملف">
+        <input class="inp" id="file_url" placeholder="رابط الملف">
+        <select class="inp" id="file_cat">
+          <option value="guides">📘 دلائل</option>
+          <option value="programs">📋 مناهج</option>
+          <option value="notes">📝 مذكرات</option>
+          <option value="public">🌐 ملف عام</option>
+          <option value="other">📎 أخرى</option>
+        </select>
+        <button class="btn green" onclick="saveFile()">💾</button>
+      </div>
+      <div id="filesList"></div>
+    </div>
+
+    <div class="screen" id="screen-evaluate">
+      <div class="card"><h3>⭐ تقييم التلاميذ</h3></div>
+      <div class="card">
+        <label>التلميذ:</label>
+        <select class="inp" id="eval_student"></select>
+        <label>المادة:</label>
+        <select class="inp" id="eval_subject"></select>
+        <label>النقطة (من 10):</label>
+        <input class="inp" id="eval_score" type="number" min="0" max="10" step="0.5">
+        <label>ملاحظة:</label>
+        <textarea class="inp" id="eval_note"></textarea>
+        <button class="btn green" onclick="saveEvaluation()">💾 حفظ</button>
+      </div>
+      <div id="evaluationsList"></div>
+    </div>
+
+    <div class="screen" id="screen-attendance">
+      <div class="card">
+        <h3>📅 الغيابات</h3>
+        <input class="inp" id="attend_date" type="date">
+        <button class="btn green" onclick="markAllPresent()">✅ الجميع حاضرون</button>
+      </div>
+      <div id="attendanceList"></div>
+    </div>
+
+    <div class="screen" id="screen-behavior">
+      <div class="card"><h3>👍 سلوك</h3></div>
+      <div class="card">
+        <label>التلميذ:</label>
+        <select class="inp" id="beh_student"></select>
+        <label>النوع:</label>
+        <select class="inp" id="beh_type">
+          <option value="positive">✅ إيجابي</option>
+          <option value="negative">⚠️ يحتاج تصحيح</option>
+        </select>
+        <label>ملاحظة:</label>
+        <input class="inp" id="beh_note">
+        <button class="btn green" onclick="saveBehavior()">💾</button>
+      </div>
+      <div id="behaviorList"></div>
+    </div>
+
+    <div class="screen" id="screen-listenRecordings">
+      <div class="card"><h3>🎧 تسجيلات التلاميذ</h3></div>
+      <div class="card">
+        <label>التلميذ:</label>
+        <select class="inp" id="listen_student"></select>
+      </div>
+      <div id="listenList"></div>
+    </div>
+
+    <div class="screen" id="screen-recordNote">
+      <div class="card"><h3>📝 تسجيل ملاحظة صوتية</h3></div>
+      <div class="card">
+        <label>التلميذ:</label>
+        <select class="inp" id="note_student"></select>
+        <label>عنوان الملاحظة:</label>
+        <input class="inp" id="note_title" placeholder="مثلاً: تحسين القراءة">
+        <div style="text-align:center;margin-top:16px">
+          <div id="noteRecStatus" style="font-weight:700;margin-bottom:10px;color:#64748B">⏸️ جاهز</div>
+          <button class="recorder-circle" id="noteRecStart" onclick="startNoteRecording()">🎤</button>
+          <button class="btn green" id="noteRecStop" onclick="stopNoteRecording()" style="display:none">⏹️ إيقاف وحفظ</button>
         </div>
-        <div class="card-back">
-          <p id="cardAnswer">الفاعل هو اسم مرفوع يدل على من قام بالفعل.</p>
+      </div>
+      <div id="teacherNotesList"></div>
+    </div>
+
+    <div class="screen" id="screen-announcement">
+      <div class="card"><h3>📢 إعلان القسم</h3><p>اكتب إعلاناً يظهر لكل من يفتح التطبيق:</p></div>
+      <div class="card">
+        <textarea class="inp" id="announcement_input" placeholder="مثلاً: غداً امتحان رياضيات" rows="4"></textarea>
+        <button class="btn green" onclick="saveAnnouncement()">📢 نشر الإعلان</button>
+        <button class="btn red" onclick="deleteAnnouncement()">🗑 حذف الإعلان</button>
+      </div>
+    </div>
+
+    <div class="screen" id="screen-viewPersonalInfo">
+      <div class="card"><h3>📋 ملفات التلاميذ</h3></div>
+      <div class="card">
+        <label>اختر التلميذ:</label>
+        <select class="inp" id="info_student" onchange="viewStudentInfo(this.value)"></select>
+      </div>
+      <div id="infoDisplay"></div>
+    </div>
+
+    <div class="screen" id="screen-schedule">
+      <div class="card"><h3>📅 جدول الحصص</h3></div>
+      <div class="card" id="scheduleEditor" style="display:none">
+        <h3>➕ إضافة حصة</h3>
+        <label>اليوم:</label>
+        <select class="inp" id="sch_day">
+          <option value="sunday">الأحد</option>
+          <option value="monday">الاثنين</option>
+          <option value="tuesday">الثلاثاء</option>
+          <option value="wednesday">الأربعاء</option>
+          <option value="thursday">الخميس</option>
+        </select>
+        <label>الوقت:</label>
+        <select class="inp" id="sch_time">
+          <option value="08:00-09:30">🌅 08:00 - 09:30</option>
+          <option value="09:45-11:15">🌅 09:45 - 11:15</option>
+          <option value="13:00-15:00">🌆 13:00 - 15:00</option>
+        </select>
+        <label>المادة:</label>
+        <input class="inp" id="sch_subject" placeholder="مثلاً: 🕌 تربية إسلامية + 🔢 رياضيات">
+        <button class="btn green" onclick="saveScheduleItem()">💾 إضافة</button>
+      </div>
+      <div id="scheduleContent"></div>
+    </div>
+
+    <div id="editScheduleModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:10000;align-items:center;justify-content:center;padding:20px">
+      <div style="background:#fff;border-radius:20px;max-width:440px;width:100%;padding:24px;margin:auto;box-shadow:0 20px 60px rgba(0,0,0,.4)">
+        <h3 style="color:#3B82F6;font-weight:800;font-size:18px;margin-bottom:16px">✏️ تعديل الحصة</h3>
+        <label style="font-size:13px;font-weight:700;color:#64748B;display:block;margin-bottom:6px">اليوم:</label>
+        <input class="inp" id="edit_sch_day" readonly>
+        <label style="font-size:13px;font-weight:700;color:#64748B;display:block;margin-bottom:6px">الوقت:</label>
+        <input class="inp" id="edit_sch_time">
+        <label style="font-size:13px;font-weight:700;color:#64748B;display:block;margin-bottom:6px">المادة:</label>
+        <input class="inp" id="edit_sch_subject">
+        <button class="btn green" onclick="saveEditScheduleItem()">💾 حفظ التعديل</button>
+        <button class="btn red" onclick="deleteEditScheduleItem()">🗑 حذف الحصة</button>
+        <button class="btn ghost" onclick="closeEditScheduleModal()">❌ إلغاء</button>
+      </div>
+    </div>
+
+    <div class="screen" id="screen-personalInfo">
+      <div class="card"><h3>📋 المعلومات الشخصية</h3></div>
+      <div class="card">
+        <label>📅 تاريخ الميلاد:</label>
+        <input class="inp" id="pi_birth" type="date">
+        <label>🏠 العنوان:</label>
+        <input class="inp" id="pi_address">
+        <label>👨 اسم الأب:</label>
+        <input class="inp" id="pi_father">
+        <label>👩 اسم الأم:</label>
+        <input class="inp" id="pi_mother">
+        <label>📱 هاتف الولي:</label>
+        <input class="inp" id="pi_phone" type="tel">
+        <label>🩸 فصيلة الدم:</label>
+        <select class="inp" id="pi_blood">
+          <option value="">—</option>
+          <option>A+</option><option>A-</option>
+          <option>B+</option><option>B-</option>
+          <option>AB+</option><option>AB-</option>
+          <option>O+</option><option>O-</option>
+        </select>
+        <label>⚠️ حساسية/أمراض:</label>
+        <textarea class="inp" id="pi_medical"></textarea>
+        <label>📝 ملاحظات:</label>
+        <textarea class="inp" id="pi_notes"></textarea>
+        <button class="btn green" onclick="savePersonalInfo()">💾 حفظ</button>
+      </div>
+    </div>
+
+    <div class="screen" id="screen-chat">
+      <div class="card" style="background:#DBEAFE;padding:12px 16px">
+        <h3 id="chatHeader" style="margin:0;font-size:15px">💬 المحادثة</h3>
+        <button class="btn" id="chatWaBtn" onclick="openChatWhatsApp()" style="display:none;margin-top:10px;background:#25D366;font-size:13px">📱 واتساب ولي التلميذ</button>
+      </div>
+      <div id="chatMessages" style="max-height:50vh;overflow-y:auto;padding:10px 0"></div>
+      <div class="card" style="position:sticky;bottom:0;margin-bottom:0">
+        <div style="display:flex;gap:8px">
+          <input class="inp" id="chatInput" placeholder="اكتب..." style="margin-bottom:0;flex:1">
+          <button class="btn" onclick="sendChatMsg()" style="width:auto;padding:14px 18px;margin-top:0">📤</button>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Quiz Screen -->
-  <section id="screen-quiz" class="screen">
-    <h3 style="margin-bottom: 15px;">معمل التحديات والمسابقات 🎮</h3>
-    <div class="quiz-card">
-      <p style="font-size: 12px; color: var(--text-muted);">سؤال 1 من 3</p>
-      <h4 style="margin: 10px 0 15px 0;" id="quizQ">حاصل ضرب 5 × 4 يساوي:</h4>
-      <button class="opt-btn" onclick="checkAnswer(true)">20</button>
-      <button class="opt-btn" onclick="checkAnswer(false)">15</button>
-      <button class="opt-btn" onclick="checkAnswer(false)">25</button>
+    <div class="screen" id="screen-settings">
+      <div class="card"><h3>⚙️ الإعدادات</h3><p><b>📱 واتساب:</b> 213556220521</p></div>
+      <div class="card"><h3>ℹ️ عن التطبيق</h3><p>منصة الأستاذ سعيد — السنة الثالثة</p><p>الإصدار 5.0</p></div>
     </div>
-  </section>
 
-  <!-- AI Tutor Screen -->
-  <section id="screen-ai" class="screen">
-    <h3 style="margin-bottom: 15px;">المعلم الذكي للأستاذ سعيد 🤖</h3>
-    <div class="chat-box">
-      <div class="chat-list" id="chatList">
-        <div class="chat-bubble ai">مرحباً بك يا بطل! أنا المعلم الذكي للأستاذ سعيد. اسألني أي سؤال في دروسك وسأجيبك فوراً! 🌟</div>
-      </div>
-      <div class="chat-input-area">
-        <input type="text" id="aiQuery" class="form-input" placeholder="اكتب سؤالك هنا...">
-        <button class="btn-primary" style="width: auto; padding: 0 18px;" onclick="sendAiMessage()">إرسال</button>
-      </div>
-    </div>
-  </section>
+  </div>
+</div> <script>
+// ===== 1. الإعدادات =====
+var TEACHER_WA = "213556220521";
+var EMAIL_DOMAIN = "@said-school.app";
+var TEACHER_EMAIL = "t" + EMAIL_DOMAIN;
+var STUDENT_LIST = {};
+var PARENT_LIST = {};
+var STUDENT_NAMES = {};
 
-  <!-- Parent Panel (فضاء الولي) -->
-  <section id="screen-parentPanel" class="screen">
-    <h3 style="margin-bottom: 15px;">فضاء متابعة ولي الأمر 📊</h3>
-    <div class="quiz-card">
-      <h4 style="margin-bottom: 10px;">تقرير تقدم التلميذ(ة)</h4>
-      <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
-        • <b>المشاركات في المسابقات:</b> 3 مسابقات مكتملة 🏆<br>
-        • <b>مستوى الاستيعاب:</b> ممتاز (90%) 👍<br>
-        • <b>تفاعلات المعلم الذكي:</b> تم طرح 5 أسئلة في الرياضيات واللغة العربية.
-      </p>
-    </div>
-  </section>
+var DEFAULT_SUBJECTS = [
+  {id:"ar", name:"اللغة العربية", icon:"📖"},
+  {id:"math", name:"الرياضيات", icon:"🔢"},
+  {id:"islamic", name:"التربية الإسلامية", icon:"🕌"},
+  {id:"history", name:"التاريخ والجغرافيا", icon:"🌍"},
+  {id:"science", name:"التربية العلمية", icon:"🔬"},
+  {id:"art", name:"التربية الفنية", icon:"🎨"},
+  {id:"music", name:"التربية الموسيقية", icon:"🎵"},
+  {id:"sport", name:"التربية البدنية", icon:"🏃"},
+  {id:"memorize", name:"المحفوظات", icon:"📜"}
+];
+var SUBJECTS = [];
+var CURRENT_CHAT = null;
+var CURRENT_USER_TYPE = "anon";
+var CURRENT_USER_NUM = null;
+var GATE_VIEW = "s";
 
-  <!-- Teacher Panel (لوحة مراقبة الأستاذ) -->
-  <section id="screen-teacherPanel" class="screen">
-    <h3 style="margin-bottom: 15px;">لوحة مراقبة الأستاذ سعيد 👁️</h3>
-    <div class="quiz-card">
-      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 10px;">سجل محادثات التلاميذ مع المعلم الذكي:</p>
-      <div id="teacherLog" style="font-size: 13px; line-height: 1.6;">
-        <p>• <b>أحمد (3 ابتدائي 1):</b> سأل عن "أركان الإسلام" - تم الإجابة بنجاح ✅</p>
-      </div>
-    </div>
-  </section>
+var REWARDS = [
+  {id:"r1", name:"قلم ملون", stars:10, icon:"✏️"},
+  {id:"r2", name:"دفتر صغير", stars:20, icon:"📓"},
+  {id:"r3", name:"شهادة شرف", stars:50, icon:"🏆"},
+  {id:"r4", name:"كتاب قصة", stars:100, icon:"📚"}
+];
 
-</main>
+window.__U = "anon";
 
-<script>
-// Theme Toggle
-function toggleTheme() {
-  document.body.classList.toggle('dark-mode');
-  const isDark = document.body.classList.contains('dark-mode');
-  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+// ===== 2. أدوات مساعدة =====
+function getReg(){try{return JSON.parse(localStorage.getItem("said_s3_users"))||{current:null,type:null,num:null};}catch(e){return{current:null,type:null,num:null};}}
+function setReg(r){try{localStorage.setItem("said_s3_users",JSON.stringify(r));}catch(e){}}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function fmtDate(t){var d=new Date(t);return d.toLocaleDateString('ar-DZ');}
+function fmtTime(t){var d=new Date(t);return d.getHours()+":"+("0"+d.getMinutes()).slice(-2);}
+function todayStr(){return new Date().toISOString().split('T')[0];}
+
+// ===== 3. الصوت =====
+var soundEnabled = false;
+function initSound(){
+  var btn = document.createElement("button");
+  btn.className = "sound-btn";
+  btn.textContent = "🔇";
+  btn.onclick = function(e){
+    e.stopPropagation();
+    soundEnabled = !soundEnabled;
+    btn.textContent = soundEnabled ? "🔊" : "🔇";
+    if(soundEnabled){ btn.classList.add("on"); playClick(); }
+    else{ btn.classList.remove("on"); }
+  };
+  document.body.appendChild(btn);
 }
-
-if(localStorage.getItem('theme') === 'dark') {
-  document.body.classList.add('dark-mode');
+function playClick(){
+  if(!soundEnabled) return;
+  try{ var a = new Audio('https://actions.google.com/sounds/v1/ui/button_click.ogg'); a.volume=0.4; a.play().catch(function(){}); }catch(e){}
 }
+document.addEventListener("click", function(e){
+  if(e.target.tagName==="BUTTON" || e.target.classList.contains("menu-btn") || e.target.classList.contains("btn")) playClick();
+});
 
-// Auth Logic (تلميذ - ولي - أستاذ)
-function switchAuthTab(type) {
-  document.querySelectorAll('.auth-tab').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.auth-form').forEach(f => f.style.display = 'none');
-  
-  event.target.classList.add('active');
-  if(type === 'student') {
-    document.getElementById('studentForm').style.display = 'block';
-  } else if(type === 'parent') {
-    document.getElementById('parentForm').style.display = 'block';
-  } else if(type === 'teacher') {
-    document.getElementById('teacherForm').style.display = 'block';
-  }
-}
-
-function handleAuth(e, type) {
-  e.preventDefault();
-  if(type === 'student') {
-    const name = document.getElementById('studentName').value;
-    const cls = document.getElementById('studentClass').value;
-    localStorage.setItem('user', JSON.stringify({ name, cls, role: 'student' }));
-  } else if(type === 'parent') {
-    const pName = document.getElementById('parentName').value;
-    const cName = document.getElementById('childName').value;
-    localStorage.setItem('user', JSON.stringify({ name: pName, cls: 'ولي التلميذ: ' + cName, role: 'parent' }));
-  } else if(type === 'teacher') {
-    const pass = document.getElementById('teacherPass').value;
-    if(pass === '1234' || pass === 'admin') {
-      localStorage.setItem('user', JSON.stringify({ name: 'الأستاذ سعيد', cls: 'المشرف', role: 'teacher' }));
+// ===== 4. تحميل المواد =====
+function loadSubjects(callback){
+  fdb.ref('subjects').once('value').then(function(snap){
+    var data = snap.val();
+    if(!data){
+      var obj = {};
+      DEFAULT_SUBJECTS.forEach(function(s){ obj[s.id] = s; });
+      (CURRENT_USER_TYPE === "teacher" ? fdb.ref('subjects').set(obj) : Promise.resolve()).then(function(){
+        SUBJECTS = DEFAULT_SUBJECTS.slice();
+        if(callback) callback();
+      });
     } else {
-      alert('رمز المرور غير صحيح');
+      SUBJECTS = [];
+      for(var k in data){ SUBJECTS.push(data[k]); }
+      if(callback) callback();
+    }
+  }).catch(function(err){
+    SUBJECTS = DEFAULT_SUBJECTS.slice();
+    if(callback) callback();
+  });
+}
+
+// ===== 5. التنقل =====
+function goTo(screen){
+  document.querySelectorAll(".screen").forEach(function(s){ s.classList.remove("active"); });
+  var target = document.getElementById("screen-"+screen);
+  if(target) target.classList.add("active");
+  document.getElementById("content").scrollTop = 0;
+
+  if(screen==="students") loadStudentsList();
+  if(screen==="monitor") renderMonitorTable();
+  if(screen==="manageSubjects") renderSubjectsList();
+  if(screen==="files") loadFiles();
+  if(screen==="library") loadPublicFiles();
+  if(screen==="notebook") loadNotebook();
+  if(screen==="studentNotebook") loadStudentNotebook();
+  if(screen==="studentsList") loadChatStudents();
+  if(screen==="chat") loadChat();
+  if(screen==="myFile") loadMyFile();
+  if(screen==="evaluate") initEvaluateScreen();
+  if(screen==="attendance") initAttendanceScreen();
+  if(screen==="behavior") initBehaviorScreen();
+  if(screen==="listenRecordings") initListenScreen();
+  if(screen==="schedule") loadSchedule();
+  if(screen==="badges") loadBadges();
+  if(screen==="birthdays") loadBirthdays();
+  if(screen==="album") loadAlbum();
+  if(screen==="honor") loadHonor();
+  if(screen==="events") loadEvents();
+  if(screen==="goals") loadGoals();
+  if(screen==="charts") loadCharts();
+  if(screen==="rewards") loadRewards();
+  if(screen==="voiceNotes") loadVoiceNotes();
+  if(screen==="recordNote") initRecordNote();
+  if(screen==="personalInfo") loadPersonalInfo();
+  if(screen==="announcement") loadAnnouncement();
+  if(screen==="viewPersonalInfo") fillStudentSelects();
+}
+function goHome(){
+  var reg = getReg();
+  if(!reg.current) return;
+  if(reg.type === "teacher") goTo("teacher-home");
+  else if(reg.type === "parent") goTo("parent-home");
+  else goTo("student-home");
+}
+document.getElementById("homeBtn").onclick = goHome;
+document.getElementById("logoutBtn").onclick = function(){
+  if(!confirm("هل تريد تسجيل الخروج؟")) return;
+  var r = getReg(); r.current = null; r.type = null; r.num = null; setReg(r);
+  auth.signOut().then(function(){
+    window.location.href = window.location.href.split('?')[0] + '?v=' + Date.now();
+  });
+};
+
+// ===== 6. شاشة الدخول =====
+var gate = document.getElementById("gate");
+var gbody = document.getElementById("gbody");
+var gm = document.getElementById("gm");
+function setM(cls, txt){ gm.className = "gmsg " + cls; gm.textContent = txt; }
+
+window.switchGateTab = function(v){
+  GATE_VIEW = v;
+  document.querySelectorAll(".gtab").forEach(function(x){ x.classList.remove("on"); });
+  if(v === "s"){ document.getElementById("gtabStudent").classList.add("on"); studentView(); }
+  else if(v === "p"){ document.getElementById("gtabParent").classList.add("on"); parentView(); }
+  else { document.getElementById("gtabTeacher").classList.add("on"); teacherView(); }
+};
+
+function loadRoster(cb){
+  var reg = getReg();
+  function done(){ if(cb) cb(); }
+  if(reg.type === "teacher"){
+    fdb.ref('roster').once('value').then(function(snap){
+      var r = snap.val() || {};
+      STUDENT_LIST = {}; PARENT_LIST = {}; STUDENT_NAMES = {};
+      for(var k in r){ STUDENT_LIST[k] = true; PARENT_LIST[k] = true; if(r[k] && r[k].name) STUDENT_NAMES[k] = r[k].name; }
+      done();
+    }).catch(done);
+  } else if(reg.num){
+    fdb.ref('roster/'+reg.num).once('value').then(function(snap){
+      var r = snap.val();
+      STUDENT_LIST[reg.num] = true;
+      if(r && r.name) STUDENT_NAMES[reg.num] = r.name;
+      done();
+    }).catch(done);
+  } else done();
+}
+
+function enterApp(reg){
+  setReg(reg);
+  window.__U = reg.current;
+  CURRENT_USER_TYPE = reg.type;
+  CURRENT_USER_NUM = reg.num;
+  gate.style.display = "none";
+  document.getElementById("app").style.display = "flex";
+
+  loadRoster(function(){
+  loadSubjects(function(){
+    loadAnnouncement();
+    if(reg.type === "teacher"){
+      document.getElementById("topTitle").textContent = "👨‍🏫 لوحة الأستاذ";
+      goTo("teacher-home");
+      initTeacherTools();
+      seedSchedule();
+      migrateAttendanceMirror();
+      publishBoards();
+    } else if(reg.type === "parent"){
+      document.getElementById("topTitle").textContent = "👨‍👩‍👦 ولي أمر رقم " + reg.num;
+      document.getElementById("parentChildName").textContent = "متابعة ابنك (رقم " + reg.num + ")";
+      loadParentAvatar(reg.num);
+      goTo("parent-home");
+      loadParentPanel(reg.num);
+    } else {
+      document.getElementById("topTitle").textContent = "👦 تلميذ رقم " + reg.num;
+      document.getElementById("studentName").textContent = "مرحباً " + (STUDENT_NAMES[reg.num] || "تلميذ رقم " + reg.num) + " 👋";
+      loadStudentAvatar(reg.num);
+      goTo("student-home");
+      initStudentTools();
+    }
+  });
+  });
+}
+
+// ----- الدخول عبر Firebase Authentication -----
+var GATE_NOTE = null;
+function authMsg(e){
+  var c = (e && e.code) || "";
+  if(c === "auth/too-many-requests") return "⚠️ محاولات كثيرة، انتظر قليلًا ثم أعد المحاولة";
+  if(c === "auth/network-request-failed") return "⚠️ لا يوجد اتصال بالإنترنت";
+  return "❌ الرقم أو الرمز غير صحيح";
+}
+function loginWith(prefix, n, c){
+  setM("wait","⏳ جارٍ التحقق...");
+  auth.signInWithEmailAndPassword(prefix + n + EMAIL_DOMAIN, c).catch(function(e){ setM("no", authMsg(e)); });
+}
+function regFromUser(u){
+  var e = ((u && u.email) || "").toLowerCase(), m;
+  if(e === TEACHER_EMAIL) return {current:"__teacher__", type:"teacher", num:null};
+  if((m = e.match(/^s(\d+)@said-school\.app$/))) return {current:"تلميذ رقم "+m[1], type:"student", num:m[1]};
+  if((m = e.match(/^p(\d+)@said-school\.app$/))) return {current:"ولي رقم "+m[1], type:"parent", num:m[1]};
+  return null;
+}
+function showGate(){
+  gate.style.display = "flex";
+  document.getElementById("app").style.display = "none";
+  if(GATE_VIEW === "p") parentView(); else if(GATE_VIEW === "t") teacherView(); else studentView();
+  if(GATE_NOTE){ setM(GATE_NOTE[0], GATE_NOTE[1]); GATE_NOTE = null; } else { setM("",""); }
+}
+
+function studentView(){
+  gbody.innerHTML = '<input class="gin" id="gn" type="number" placeholder="🔢 رقمك" inputmode="numeric"><input class="gin" id="gc" type="password" placeholder="🔒 الرمز السري" autocomplete="off" autocapitalize="none"><button class="gbtn" id="gs">🚀 دخول</button>';
+  document.getElementById("gs").onclick = function(){
+    var n = document.getElementById("gn").value.trim();
+    var c = document.getElementById("gc").value.trim().toLowerCase();
+    if(!/^[0-9]+$/.test(n)){ setM("no","❌ اكتب رقمك"); return; }
+    if(!c){ setM("no","❌ اكتب الرمز السري"); return; }
+    loginWith("s", String(parseInt(n,10)), c);
+  };
+}
+
+function parentView(){
+  gbody.innerHTML = '<input class="gin" id="gn" type="number" placeholder="🔢 رقم ابنك" inputmode="numeric"><input class="gin" id="gc" type="password" placeholder="🔒 رمز الولي" autocomplete="off" autocapitalize="none"><button class="gbtn" id="gs">🚀 دخول</button>';
+  document.getElementById("gs").onclick = function(){
+    var n = document.getElementById("gn").value.trim();
+    var c = document.getElementById("gc").value.trim().toLowerCase();
+    if(!/^[0-9]+$/.test(n)){ setM("no","❌ اكتب رقم ابنك"); return; }
+    if(!c){ setM("no","❌ اكتب رمز الولي"); return; }
+    loginWith("p", String(parseInt(n,10)), c);
+  };
+}
+
+function teacherView(){
+  gbody.innerHTML = '<input class="gin" id="gp" type="password" placeholder="🔐 كلمة سر الأستاذ" autocomplete="off"><button class="gbtn" id="gt">👨‍🏫 دخول</button>';
+  document.getElementById("gt").onclick = function(){
+    var pw = document.getElementById("gp").value;
+    if(!pw){ setM("no","❌ اكتب كلمة السر"); return; }
+    setM("wait","⏳ جارٍ التحقق...");
+    auth.signInWithEmailAndPassword(TEACHER_EMAIL, pw).catch(function(e){ setM("no", authMsg(e)); });
+  };
+}
+
+// ===== 7. تشغيل التطبيق =====
+function startApp(){
+  gate.style.display = "flex";
+  document.getElementById("app").style.display = "none";
+  studentView();
+  setM("wait","⏳ جارٍ التحميل...");
+  auth.onAuthStateChanged(function(user){
+    if(!user){
+      window.__ENTERED = null;
+      var r = getReg(); r.current = null; r.type = null; r.num = null; setReg(r);
+      showGate();
       return;
     }
-  }
-  checkAuth();
+    var reg = regFromUser(user);
+    if(!reg){ auth.signOut(); return; }
+    if(window.__ENTERED === user.uid) return;
+    if(reg.type === "student"){
+      fdb.ref('requests/'+reg.num).once('value').then(function(snap){
+        var req = snap.val();
+        if(req && req.status === "accepted"){ window.__ENTERED = user.uid; enterApp(reg); }
+        else if(req && req.status === "pending"){ GATE_NOTE = ["wait","⏳ طلبك قيد الدراسةة"]; auth.signOut(); }
+        else if(req && req.status === "rejected"){ GATE_NOTE = ["no","❌ لم يُقبل طلبك"]; auth.signOut(); }
+        else {
+          fdb.ref('requests/'+reg.num).set({num:reg.num, status:"pending", time:Date.now()}).then(function(){
+            GATE_NOTE = ["ok","✅ أُرسل طلبك! انتظر الموافقة"]; auth.signOut();
+          }).catch(function(){ GATE_NOTE = ["no","⚠️ تعذّر إرسال الطلب"]; auth.signOut(); });
+        }
+      }).catch(function(err){ GATE_NOTE = ["no","⚠️ " + err.message]; auth.signOut(); });
+    } else { window.__ENTERED = user.uid; enterApp(reg); }
+  });
 }
 
-function checkAuth() {
-  const user = JSON.parse(localStorage.getItem('user'));
-  if(user) {
-    document.getElementById('authModal').style.display = 'none';
-    document.getElementById('logoutBtn').style.display = 'flex';
-    document.getElementById('userBar').style.display = 'flex';
-    document.getElementById('userNameDisplay').textContent = user.name;
-    document.getElementById('userRoleDisplay').textContent = user.cls;
-    document.getElementById('userAvatar').textContent = user.name.charAt(0);
-    
-    document.getElementById('navTeacher').style.display = (user.role === 'teacher') ? 'flex' : 'none';
-    document.getElementById('navParent').style.display = (user.role === 'parent') ? 'flex' : 'none';
+// ===== 8. أدوات التلميذ =====
+function loadStudentAvatar(num){
+  var pic = localStorage.getItem("student_pic_"+num);
+  var av = document.getElementById("studentAvatar");
+  if(!av) return;
+  if(pic){ av.innerHTML = '<img src="'+pic+'" class="avatar" alt="صورتي">'; }
+  else { av.innerHTML = '<div class="avatar-def">👦</div>'; }
+}
+function changePhoto(){
+  var reg = getReg();
+  if(reg.type !== "student") return;
+  var num = reg.num;
+  var input = document.createElement("input");
+  input.type = "file"; input.accept = "image/*";
+  input.onchange = function(e){
+    var file = e.target.files[0]; if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(ev){
+      try{
+        localStorage.setItem("student_pic_"+num, ev.target.result);
+        alert("✅ تم حفظ صورتك!");
+        loadStudentAvatar(num);
+      }catch(err){ alert("⚠️ الصورة كبيرة"); }
+    };
+    reader.readAsDataURL(file);
+  };
+  input.click();
+}
+function sendReport(){
+  var reg = getReg();
+  if(reg.type !== "student") return;
+  var num = reg.num;
+  var qd = {best:[-1,-1,-1], att:0};
+  try{ var s = localStorage.getItem(window.__U+"@s3_dz_2026"); if(s){ var p=JSON.parse(s); if(p&&p.best) qd=p; } }catch(e){}
+  var msg = "📊 *تقرير التلميذ رقم " + num + "*\n" + (STUDENT_NAMES[num] || "") + "\n\n";
+  msg += "📝 *التقويمات:*\n";
+  var names = ["رياضيات ١","رياضيات ٢","لغة عربية"];
+  for(var i=0;i<3;i++){ msg += "• "+names[i]+": "+(qd.best[i]<0?"لم يُنجز":qd.best[i]+"/4")+"\n"; }
+  msg += "\n⭐ *المحاولات:* " + qd.att;
+  msg += "\n📅 " + new Date().toLocaleDateString('ar-DZ');
+  window.open("https://wa.me/" + TEACHER_WA + "?text=" + encodeURIComponent(msg), "_blank");
+}
+function initStudentTools(){
+  var waBtn = document.createElement("button");
+  waBtn.className = "wa-btn";
+  waBtn.innerHTML = "📤";
+  waBtn.title = "أرسل تقريري";
+  waBtn.onclick = sendReport;
+  document.body.appendChild(waBtn);
+}
+
+// ===== 9. أدوات الأستاذ =====
+function initTeacherTools(){
+  var monBtn = document.createElement("button");
+  monBtn.className = "mon-btn";
+  monBtn.innerHTML = "📊 المراقبة";
+  monBtn.onclick = function(){ goTo("monitor"); };
+  document.body.appendChild(monBtn);
+}
+
+// ===== 10. عرض المواد =====
+function renderSubjectsGrid(containerId, clickFunc){
+  var grid = document.getElementById(containerId);
+  if(!grid) return;
+  var h = "";
+  SUBJECTS.forEach(function(s){
+    h += '<button class="menu-btn blue" onclick="'+clickFunc+'(\''+s.id+'\')"><span class="circle-icon" style="font-size:40px">'+s.icon+'</span>'+esc(s.name)+'</button>';
+  });
+  grid.innerHTML = h;
+}
+
+// ===== 11. إدارة المواد =====
+function renderSubjectsList(){
+  var area = document.getElementById("subjectsList");
+  if(!area) return;
+  var h = '<div class="card"><h3>📋 المواد الحالية</h3>';
+  SUBJECTS.forEach(function(s){
+    h += '<div class="urow"><span>'+s.icon+' '+esc(s.name)+'</span><button class="ub r" onclick="deleteSubject(\''+s.id+'\')">🗑 حذف</button></div>';
+  });
+  h += '</div>';
+  area.innerHTML = h;
+}
+function saveSubject(){
+  var name = document.getElementById("sub_name").value.trim();
+  var icon = document.getElementById("sub_icon").value.trim() || "📚";
+  if(!name){ alert("⚠️ اكتب اسم المادة"); return; }
+  var id = "sub_" + Date.now();
+  fdb.ref('subjects/'+id).set({id:id, name:name, icon:icon}).then(function(){
+    alert("✅ تم إضافة المادة!");
+    document.getElementById("sub_name").value = "";
+    document.getElementById("sub_icon").value = "";
+    loadSubjects(function(){ renderSubjectsList(); fillSubjectSelects(); });
+  });
+}
+function deleteSubject(id){
+  if(!confirm("حذف هذه المادة؟")) return;
+  fdb.ref('subjects/'+id).remove().then(function(){
+    loadSubjects(function(){ renderSubjectsList(); });
+  });
+}
+
+// ===== 12. تعبئة القوائم =====
+function fillSubjectSelects(){
+  var ids = ["nl_subject","nh_subject","eval_subject"];
+  ids.forEach(function(id){
+    var sel = document.getElementById(id);
+    if(!sel) return;
+    sel.innerHTML = "";
+    SUBJECTS.forEach(function(s){
+      var opt = document.createElement("option");
+      opt.value = s.id;
+      opt.textContent = s.icon + " " + s.name;
+      sel.appendChild(opt);
+    });
+  });
+}
+function fillStudentSelects(){
+  var ids = ["eval_student","beh_student","listen_student","info_student","note_student"];
+  ids.forEach(function(id){
+    var sel = document.getElementById(id);
+    if(!sel) return;
+    sel.innerHTML = "";
+    for(var n in STUDENT_LIST){
+      var opt = document.createElement("option");
+      opt.value = n;
+      var name = STUDENT_NAMES[n] ? " - " + STUDENT_NAMES[n] : "";
+      opt.textContent = "تلميذ رقم " + n + name;
+      sel.appendChild(opt);
+    }
+  });
+}
+
+// ===== 13. إدارة التلاميذ =====
+function loadStudentsList(){
+  var list = document.getElementById("studentsList");
+  if(!list) return;
+  fdb.ref('requests').on('value', function(snap){
+    var data = snap.val() || {};
+    var pend=[], acc=[], rej=[];
+    for(var num in data){
+      var item = data[num];
+      if(item.status==="pending") pend.push(num);
+      else if(item.status==="accepted") acc.push(num);
+      else if(item.status==="rejected") rej.push(num);
+    }
+    var h = "";
+    h += '<div class="card"><h3>📥 طلبات معلقة ('+pend.length+')</h3>';
+    if(!pend.length) h += '<p>لا طلبات جديدة.</p>';
+    pend.forEach(function(n){
+      var name = STUDENT_NAMES[n] ? " ("+STUDENT_NAMES[n]+")" : "";
+      h += '<div class="urow"><span>👦 رقم '+n+name+'</span><span><button class="ub g" onclick="approveReq(\''+n+'\')">✓ قبول</button><button class="ub r" onclick="rejectReq(\''+n+'\')">✗ رفض</button></span></div>';
+    });
+    h += '</div>';
+    h += '<div class="card"><h3>✅ مقبولون ('+acc.length+')</h3>';
+    if(!acc.length) h += '<p>لا أحد بعد.</p>';
+    acc.forEach(function(n){
+      var name = STUDENT_NAMES[n] ? " ("+STUDENT_NAMES[n]+")" : "";
+      h += '<div class="urow"><span>👦 رقم '+n+name+'</span><button class="ub r" onclick="removeReq(\''+n+'\')">🗑</button></div>';
+    });
+    h += '</div>';
+    if(rej.length){
+      h += '<div class="card"><h3>❌ مرفوضون ('+rej.length+')</h3>';
+      rej.forEach(function(n){
+        h += '<div class="urow" style="opacity:.6"><span>👦 رقم '+n+'</span><button class="ub" onclick="removeReq(\''+n+'\')">إزالة</button></div>';
+      });
+      h += '</div>';
+    }
+    list.innerHTML = h;
+  });
+}
+function approveReq(n){ fdb.ref('requests/'+n).update({status:"accepted"}); }
+function rejectReq(n){ fdb.ref('requests/'+n).update({status:"rejected"}); }
+function removeReq(n){ fdb.ref('requests/'+n).remove(); }
+
+// ===== 14. لوحة المراقبة =====
+function renderMonitorTable(){
+  var t = document.getElementById("monTable");
+  if(!t) return;
+  var h = '<tr><th>الرقم</th><th>آخر تقرير</th><th>ملاحظات</th></tr>';
+  for(var i=1;i<=22;i++){
+    var notes = localStorage.getItem("teacher_notes_"+i) || "";
+    var last = localStorage.getItem("teacher_last_"+i) || "";
+    var status = last ? "✅ "+last : "⏳";
+    var color = last ? "#10B981" : "#F59E0B";
+    var name = STUDENT_NAMES[i] ? " - "+STUDENT_NAMES[i].substring(0,12) : "";
+    h += '<tr><td style="font-weight:800;color:#3B82F6;font-size:11px">#'+i+name+'</td><td style="color:'+color+';font-weight:700;font-size:11px">'+status+'</td><td><input type="text" data-sn="'+i+'" value="'+notes+'" placeholder="..."></td></tr>';
+  }
+  t.innerHTML = h;
+  document.getElementById("saveNotesBtn").onclick = function(){
+    t.querySelectorAll("[data-sn]").forEach(function(inp){
+      localStorage.setItem("teacher_notes_"+inp.dataset.sn, inp.value);
+      if(inp.value.trim() !== ""){
+        localStorage.setItem("teacher_last_"+inp.dataset.sn, new Date().toLocaleDateString('ar-DZ'));
+      }
+    });
+    alert("✅ تم الحفظ");
+    renderMonitorTable();
+  };
+}
+function askAllReports(){
+  var msg = "🔔 *رسالة من الأستاذ سعيد*\n\nافتحوا التطبيق واضغطوا على زر 📤 لإرسال تقرير تقدمكم.\n\nشكراً 🌹";
+  window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank");
+}
+
+// ===== 15. إنشاء حسابات التلاميذ والأولياء (الأستاذ فقط) =====
+var SEC_AUTH = null;
+function getSecAuth(){
+  if(!SEC_AUTH){
+    var a;
+    try{ a = firebase.app('sec'); }catch(e){ a = firebase.initializeApp(firebaseConfig, 'sec'); }
+    SEC_AUTH = a.auth();
+  }
+  return SEC_AUTH;
+}
+function genCode(len){
+  var ch = "abcdefghjkmnpqrstuvwxyz23456789";
+  var a = new Uint32Array(len); crypto.getRandomValues(a);
+  var out = ""; for(var i=0;i<len;i++) out += ch[a[i] % ch.length];
+  return out;
+}
+function createAcct(prefix, num, code){
+  var sa = getSecAuth();
+  return sa.createUserWithEmailAndPassword(prefix + num + EMAIL_DOMAIN, code).then(function(){
+    return sa.signOut().then(function(){ return "created"; });
+  }).catch(function(e){
+    if(e.code === "auth/email-already-in-use") return "exists";
+    throw e;
+  });
+}
+function acctErr(e){
+  if(e.code === "auth/admin-restricted-operation" || e.code === "auth/operation-not-allowed")
+    return "فعّل مؤقتًا «السماح بإنشاء الحسابات» في Firebase (Authentication ← Settings ← User actions)";
+  return e.message || String(e);
+}
+
+function addNewStudent(){
+  if(CURRENT_USER_TYPE !== "teacher") return;
+  var maxNum = 0;
+  for(var k in STUDENT_LIST){ var n = parseInt(k); if(!isNaN(n) && n > maxNum) maxNum = n; }
+  var numInput = prompt("🤖 الرقم المقترح: " + (maxNum+1) + "\n\nرقم التلميذ:", maxNum+1);
+  if(!numInput || !/^[0-9]+$/.test(String(numInput).trim())) return;
+  numInput = String(parseInt(numInput, 10));
+  if(STUDENT_LIST[numInput]){ alert("⚠️ هذا الرقم مسجّل مسبقًا"); return; }
+  var nameInput = prompt("📝 اسم التلميذ:", "") || "";
+  var sc = genCode(6), pc = genCode(6);
+  createAcct("s", numInput, sc).then(function(r1){
+    if(r1 === "exists") throw {message:"حساب هذا الرقم موجود مسبقًا في Firebase"};
+    return createAcct("p", numInput, pc);
+  }).then(function(){
+    return fdb.ref('roster/'+numInput).set({name:nameInput});
+  }).then(function(){
+    STUDENT_LIST[numInput] = true; PARENT_LIST[numInput] = true;
+    if(nameInput) STUDENT_NAMES[numInput] = nameInput;
+    alert("✅ تم التسجيل!\n\n🔢 رقم: "+numInput+(nameInput?"\n📝 "+nameInput:"")+"\n🔒 رمز التلميذ: "+sc+"\n👨‍👩‍👦 رمز الولي: "+pc+"\n\n📌 احتفظ بالرمزين الآن، لن يظهرا مرة أخرى.");
+  }).catch(function(e){ alert("⚠️ " + acctErr(e)); });
+}
+
+function importRosterFile(input){
+  if(CURRENT_USER_TYPE !== "teacher") return;
+  var f = input.files && input.files[0];
+  var st = document.getElementById("rosterStatus");
+  if(!f) return;
+  var rd = new FileReader();
+  rd.onload = function(){
+    var data; try{ data = JSON.parse(rd.result); }catch(e){ st.textContent = "⚠️ الملف غير صالح"; return; }
+    var list = data.students || [];
+    if(!list.length){ st.textContent = "⚠️ لا توجد بيانات في الملف"; return; }
+    var i = 0, made = 0, had = 0;
+    function next(){
+      if(i >= list.length){
+        st.textContent = "✅ انتهى: " + made + " حساب جديد، " + had + " موجود مسبقًا.\nالآن احذف الملف من هاتفك وعطّل إنشاء الحسابات في Firebase.";
+        input.value = "";
+        loadRoster(function(){ fillStudentSelects(); });
+        return;
+      }
+      var it = list[i++]; var n = String(it.num);
+      st.textContent = "⏳ " + i + " / " + list.length;
+      createAcct("s", n, it.s).then(function(a){ if(a === "created") made++; else had++; return createAcct("p", n, it.p); })
+      .then(function(b){ if(b === "created") made++; else had++; return fdb.ref('roster/'+n).set({name: it.name || ""}); })
+      .then(next)
+      .catch(function(e){ st.textContent = "⚠️ توقّف عند الرقم " + n + ": " + acctErr(e); });
+    }
+    next();
+  };
+  rd.readAsText(f);
+}
+
+function publishBoards(){
+  Promise.all([fdb.ref('evaluations').once('value'), fdb.ref('behavior').once('value'), fdb.ref('student_info').once('value')]).then(function(r){
+    var evals = r[0].val() || {}, beh = r[1].val() || {}, info = r[2].val() || {};
+    var scores = {};
+    for(var num in evals){
+      var sum = 0, cnt = 0;
+      for(var k in evals[num]){ sum += evals[num][k].score; cnt++; }
+      if(cnt > 0) scores[num] = (scores[num] || 0) + (sum/cnt) * 2;
+    }
+    for(var num2 in beh){
+      for(var k2 in beh[num2]){ if(beh[num2][k2].type === "positive") scores[num2] = (scores[num2] || 0) + 2; }
+    }
+    var arr = [];
+    for(var n in scores) arr.push({num:n, name:STUDENT_NAMES[n] || "", score:Math.round(scores[n])});
+    arr.sort(function(a,b){ return b.score - a.score; });
+    var bd = {};
+    function pad(x){ return ("0"+x).slice(-2); }
+    for(var i in info){
+      if(info[i] && info[i].birth){
+        var d = new Date(info[i].birth);
+        if(!isNaN(d.getTime())) bd[i] = {name:STUDENT_NAMES[i] || "", birth:"2000-" + pad(d.getMonth()+1) + "-" + pad(d.getDate())};
+      }
+    }
+    return fdb.ref('board').set({honor:arr.slice(0,10), birthdays:bd, updated:Date.now()});
+  }).catch(function(){});
+}
+
+function migrateAttendanceMirror(){
+  fdb.ref('meta/attMirror').once('value').then(function(snap){
+    if(snap.val()) return;
+    return fdb.ref('attendance').once('value').then(function(s2){
+      var all = s2.val() || {}, up = {}, any = false;
+      for(var date in all){ for(var num in all[date]){ up['attendance_s/'+num+'/'+date] = all[date][num]; any = true; } }
+      var p = any ? fdb.ref().update(up) : Promise.resolve();
+      return p.then(function(){ return fdb.ref('meta/attMirror').set(Date.now()); });
+    });
+  }).catch(function(){});
+}
+function attFromMirror(num, m){
+  var att = {};
+  for(var d in (m || {})){ att[d] = {}; att[d][num] = m[d]; }
+  return att;
+}
+
+// ===== 16. الدروس =====
+function sectionName(key){
+  var m = {reading:"📖 مطالعة", listening:"👂 فهم المنطوق", oral:"🗣️ تعبير شفوي", written:"✍️ تعبير كتابي", grammar:"📚 قواعد", dictation:"📝 إملاء"};
+  return m[key] || "";
+}
+
+function showSubject(subjId){
+  var area = document.getElementById("lessonsList");
+  if(!area) return;
+  var reg = getReg();
+  var isStudent = (reg.type === "student");
+  var today = todayStr();
+
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+
+  fdb.ref('lessons/'+subjId).once('value').then(function(snapLessons){
+    var lessons = snapLessons.val() || {};
+    fdb.ref('homework/'+subjId).once('value').then(function(snapHW){
+      var homework = snapHW.val() || {};
+      renderSubjectContent(lessons, homework, isStudent, today);
+    });
+  });
+}
+
+function renderSubjectContent(lessons, homework, isStudent, today){
+  var area = document.getElementById("lessonsList");
+  var h = "";
+
+  h += '<h3 style="color:#3B82F6;font-weight:800;margin:16px 0 10px;font-size:16px">📖 الدروس</h3>';
+  var lessonCount = 0;
+  for(var k in lessons){
+    var d = lessons[k];
+    lessonCount++;
+    var locked = isStudent && d.date && d.date > today;
+
+    if(locked){
+      h += '<div class="card" style="opacity:.65;background:#F1F5F9;border-color:#CBD5E1">';
+      h += '<h3>🔒 '+esc(d.title)+'</h3>';
+      h += '<p style="color:#8B5CF6;font-size:13px;font-weight:700;margin-top:8px">📅 سيتوفر بتاريخ: '+d.date+'</p>';
+      h += '<p style="color:#64748B;font-size:12px;margin-top:4px">⏳ لم يحن وقت هذا الدرس بعد</p>';
+      h += '</div>';
+    } else {
+      h += '<div class="card"><h3>📖 '+esc(d.title)+'</h3>';
+      if(d.date) h += '<p style="color:#8B5CF6;font-size:12px;font-weight:700;margin-top:4px">📅 '+d.date+'</p>';
+      if(d.section) h += '<p style="color:#3B82F6;font-size:12px;font-weight:700">'+sectionName(d.section)+'</p>';
+      h += '<p style="background:#EFF6FF;padding:12px;border-radius:10px;line-height:2;color:#1E293B;margin-top:8px">'+esc(d.content)+'</p>';
+      if(d.video){
+        var vid = d.video.replace("watch?v=", "embed/").replace("youtu.be/", "www.youtube.com/embed/");
+        vid = vid.split("&")[0];
+        h += '<div class="video-wrap"><iframe src="'+vid+'" allowfullscreen></iframe></div>';
+      }
+      if(d.img) h += '<img src="'+d.img+'" class="lesson-img" onerror="this.style.display=\'none\'">';
+      if(d.pdf) h += '<a href="'+d.pdf+'" target="_blank" class="btn green" style="display:block;text-align:center;margin-top:10px;text-decoration:none">📄 فتح PDF</a>';
+      h += '</div>';
+    }
+  }
+  if(lessonCount === 0) h += '<div class="card"><p>لا دروس بعد.</p></div>';
+
+  h += '<h3 style="color:#10B981;font-weight:800;margin:16px 0 10px;font-size:16px">📝 الواجبات</h3>';
+  var hwCount = 0;
+  for(var k2 in homework){
+    var hw = homework[k2];
+    hwCount++;
+    var hwDate = hw.date || "";
+    var locked2 = isStudent && hwDate && hwDate > today;
+
+    if(locked2){
+      h += '<div class="card" style="opacity:.65;background:#F1F5F9;border-color:#CBD5E1">';
+      h += '<h3>🔒 '+esc(hw.title)+'</h3>';
+      h += '<p style="color:#8B5CF6;font-size:13px;font-weight:700;margin-top:8px">📅 سيتوفر بتاريخ: '+hwDate+'</p>';
+      h += '<p style="color:#64748B;font-size:12px;margin-top:4px">⏳ لم يحن وقت هذا الواجب بعد</p>';
+      h += '</div>';
+    } else {
+      h += '<div class="card"><h3>📝 '+esc(hw.title)+'</h3>';
+      if(hwDate) h += '<p style="color:#8B5CF6;font-size:12px;font-weight:700;margin-top:4px">📅 '+hwDate+'</p>';
+      var typeNames = {daily:"📅 يومي", weekly:"📆 أسبوعي", integration:"🔗 إدماج"};
+      if(hw.type) h += '<p style="color:#3B82F6;font-size:12px;font-weight:700">'+(typeNames[hw.type]||"")+'</p>';
+      h += '<p style="background:#ECFDF5;padding:12px;border-radius:10px;line-height:2;color:#1E293B;margin-top:8px">'+esc(hw.content)+'</p>';
+      if(!isStudent && hw.answer){
+        h += '<p style="background:#FEF3C7;padding:12px;border-radius:10px;margin-top:8px;color:#78350F;font-size:13px"><b>✅ الإجابة النموذجية:</b><br>'+esc(hw.answer)+'</p>';
+      }
+      h += '</div>';
+    }
+  }
+  if(hwCount === 0) h += '<div class="card"><p>لا واجبات بعد.</p></div>';
+
+  area.innerHTML = h;
+}
+
+function viewTeacherLessons(subjId){
+  var area = document.getElementById("teacherLessonsList");
+  if(!area) return;
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+  fdb.ref('lessons/'+subjId).once('value').then(function(snap){
+    var data = snap.val() || {};
+    var h = "";
+    var count = 0;
+    for(var k in data){
+      count++;
+      var d = data[k];
+      h += '<div class="card"><h3>📖 '+esc(d.title)+'</h3>';
+      if(d.date) h += '<p style="color:#8B5CF6;font-size:12px;font-weight:700;margin-top:4px">📅 '+d.date+'</p>';
+      if(d.section) h += '<p style="color:#3B82F6;font-size:12px;font-weight:700">'+sectionName(d.section)+'</p>';
+      h += '<p style="background:#EFF6FF;padding:12px;border-radius:10px;line-height:2;color:#1E293B;margin-top:8px">'+esc(d.content)+'</p>';
+      h += '<div style="display:flex;gap:8px;margin-top:10px">';
+      h += '<button class="btn sm" style="background:#3B82F6;flex:1" onclick="editLesson(\''+subjId+'\',\''+k+'\')">✏️ تعديل</button>';
+      h += '<button class="btn sm" style="background:#EF4444;flex:1" onclick="deleteLesson(\''+subjId+'\',\''+k+'\')">🗑 حذف</button>';
+      h += '</div></div>';
+    }
+    if(count===0) h = '<div class="card"><p>لا دروس بعد.</p></div>';
+    area.innerHTML = h;
+  });
+}
+function deleteLesson(subj, key){
+  if(!confirm("حذف؟")) return;
+  fdb.ref('lessons/'+subj+'/'+key).remove().then(function(){ viewTeacherLessons(subj); });
+}
+function editLesson(subj, key){
+  fdb.ref('lessons/'+subj+'/'+key).once('value').then(function(snap){
+    var d = snap.val() || {};
+    document.getElementById("nl_title").value = d.title || "";
+    document.getElementById("nl_date").value = d.date || "";
+    document.getElementById("nl_subject").value = subj;
+    document.getElementById("nl_section").value = d.section || "";
+    document.getElementById("nl_content").value = d.content || "";
+    document.getElementById("nl_video").value = d.video || "";
+    document.getElementById("nl_pdf").value = d.pdf || "";
+    document.getElementById("nl_img").value = d.img || "";
+    document.getElementById("nl_editKey").value = key;
+    document.getElementById("lessonFormTitle").textContent = "✏️ تعديل";
+    document.getElementById("nl_cancelBtn").style.display = "block";
+    goTo("newLesson");
+  });
+}
+function saveLesson(){
+  var title = document.getElementById("nl_title").value.trim();
+  var lessonDate = document.getElementById("nl_date").value;
+  var subj = document.getElementById("nl_subject").value;
+  var section = document.getElementById("nl_section").value;
+  var content = document.getElementById("nl_content").value.trim();
+  var video = document.getElementById("nl_video").value.trim();
+  var pdf = document.getElementById("nl_pdf").value.trim();
+  var img = document.getElementById("nl_img").value.trim();
+  var editKey = document.getElementById("nl_editKey").value;
+  if(!title || !content){ alert("⚠️ املأ العنوان والمحتوى"); return; }
+  var data = {title:title, date:lessonDate, content:content, section:section, video:video, pdf:pdf, img:img, time:Date.now()};
+  if(editKey){
+    fdb.ref('lessons/'+subj+'/'+editKey).update(data).then(function(){
+      alert("✅ تم التحديث!"); resetLessonForm(); goTo("teacher-home");
+    });
   } else {
-    document.getElementById('authModal').style.display = 'flex';
-    document.getElementById('logoutBtn').style.display = 'none';
-    document.getElementById('userBar').style.display = 'none';
+    fdb.ref('lessons/'+subj).push(data).then(function(){
+      alert("✅ تم الحفظ!"); resetLessonForm(); goTo("teacher-home");
+    });
   }
 }
+function resetLessonForm(){
+  ["nl_title","nl_date","nl_section","nl_content","nl_video","nl_pdf","nl_img","nl_editKey"].forEach(function(id){
+    var el = document.getElementById(id); if(el) el.value = "";
+  });
+  document.getElementById("lessonFormTitle").textContent = "➕ إضافة درس";
+  document.getElementById("nl_cancelBtn").style.display = "none";
+}
+function cancelLessonEdit(){ resetLessonForm(); goTo("teacher-home"); }
 
-function logout() {
-  localStorage.removeItem('user');
-  checkAuth();
+// ===== 17. الواجبات =====
+function saveHomework(){
+  var title = document.getElementById("nh_title").value.trim();
+  var subj = document.getElementById("nh_subject").value;
+  var type = document.getElementById("nh_type").value;
+  var content = document.getElementById("nh_content").value.trim();
+  var date = document.getElementById("nh_date").value;
+  var due = document.getElementById("nh_due").value;
+  var answer = document.getElementById("nh_answer").value.trim();
+  if(!title || !content){ alert("⚠️ املأ العنوان والمحتوى"); return; }
+  fdb.ref('homework/'+subj).push({title:title, content:content, type:type, date:date, due:due, answer:answer, time:Date.now()}).then(function(){
+    alert("✅ تم الحفظ!");
+    document.getElementById("nh_title").value = "";
+    document.getElementById("nh_content").value = "";
+    document.getElementById("nh_answer").value = "";
+    goTo("teacher-home");
+  });
 }
 
-// Navigation
-function showScreen(screenId) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  
-  document.getElementById('screen-' + screenId).classList.add('active');
-  if(event && event.currentTarget) {
-    event.currentTarget.classList.add('active');
+// ===== 18. كراس القسم =====
+function saveNote(){
+  var text = document.getElementById("note_text").value.trim();
+  var date = document.getElementById("note_date").value;
+  if(!text){ alert("⚠️ اكتب الملاحظة"); return; }
+  fdb.ref('notebook').push({text:text, date:date || todayStr(), time:Date.now()}).then(function(){
+    alert("✅ تم النشر!");
+    document.getElementById("note_text").value = "";
+    loadNotebook();
+  });
+}
+function loadNotebook(){
+  var area = document.getElementById("notebookList");
+  if(!area) return;
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+  fdb.ref('notebook').once('value').then(function(snap){
+    var data = snap.val() || {};
+    var arr = [];
+    for(var k in data){ arr.push({key:k, data:data[k]}); }
+    arr.sort(function(a,b){ return b.data.time - a.data.time; });
+    var h = "";
+    arr.forEach(function(item){
+      h += '<div class="note-item"><div class="date">📅 '+fmtDate(item.data.time)+'</div><div class="text">'+esc(item.data.text)+'</div><button class="ub r" style="margin-top:8px" onclick="deleteNote(\''+item.key+'\')">🗑</button></div>';
+    });
+    if(!h) h = '<div class="card"><p>لا ملاحظات بعد.</p></div>';
+    area.innerHTML = h;
+  });
+}
+function deleteNote(key){
+  if(!confirm("حذف؟")) return;
+  fdb.ref('notebook/'+key).remove().then(function(){ loadNotebook(); });
+}
+function loadStudentNotebook(){
+  var area = document.getElementById("studentNotebookList");
+  if(!area) return;
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+  fdb.ref('notebook').once('value').then(function(snap){
+    var data = snap.val() || {};
+    var arr = [];
+    for(var k in data){ arr.push(data[k]); }
+    arr.sort(function(a,b){ return b.time - a.time; });
+    var h = "";
+    arr.forEach(function(item){
+      h += '<div class="note-item"><div class="date">📅 '+fmtDate(item.time)+'</div><div class="text">'+esc(item.text)+'</div></div>';
+    });
+    if(!h) h = '<div class="card"><p>لا ملاحظات بعد.</p></div>';
+    area.innerHTML = h;
+  });
+}
+
+// ===== 19. الملفات =====
+function saveFile(){
+  var title = document.getElementById("file_title").value.trim();
+  var url = document.getElementById("file_url").value.trim();
+  var cat = document.getElementById("file_cat").value;
+  if(!title || !url){ alert("⚠️ املأ"); return; }
+  fdb.ref('files/'+cat).push({title:title, url:url, time:Date.now()}).then(function(){
+    alert("✅ تم!");
+    document.getElementById("file_title").value = "";
+    document.getElementById("file_url").value = "";
+    loadFiles();
+  });
+}
+function loadFiles(){
+  var area = document.getElementById("filesList");
+  if(!area) return;
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+  var cats = {guides:"📘 دلائل", programs:"📋 مناهج", notes:"📝 مذكرات", public:"🌐 عام", other:"📎 أخرى"};
+  var promises = [];
+  Object.keys(cats).forEach(function(cat){
+    promises.push(fdb.ref('files/'+cat).once('value').then(function(snap){
+      var data = snap.val() || {};
+      var items = "";
+      for(var k in data){
+        var f = data[k];
+        items += '<div class="urow"><span>📄 '+esc(f.title)+'</span><span><a href="'+f.url+'" target="_blank" class="ub g" style="text-decoration:none">فتح</a><button class="ub r" onclick="deleteFile(\''+cat+'\',\''+k+'\')">🗑</button></span></div>';
+      }
+      if(items) return '<div class="card"><h3>'+cats[cat]+'</h3>'+items+'</div>';
+      return '';
+    }));
+  });
+  Promise.all(promises).then(function(results){
+    var all = results.join("");
+    area.innerHTML = all || '<div class="card"><p>لا ملفات بعد.</p></div>';
+  });
+}
+function deleteFile(cat, key){
+  if(!confirm("حذف؟")) return;
+  fdb.ref('files/'+cat+'/'+key).remove().then(function(){ loadFiles(); });
+}
+function loadPublicFiles(){
+  var area = document.getElementById("libraryList");
+  if(!area) return;
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+  fdb.ref('files/public').once('value').then(function(snap){
+    var data = snap.val() || {};
+    var h = "";
+    var count = 0;
+    for(var k in data){
+      count++;
+      var f = data[k];
+      h += '<div class="card"><h3>📄 '+esc(f.title)+'</h3><a href="'+f.url+'" target="_blank" class="btn green" style="display:block;text-align:center;text-decoration:none;margin-top:10px">📂 فتح</a></div>';
+    }
+    if(count===0) h = '<div class="card"><p>لا ملفات مشتركة بعد.</p></div>';
+    area.innerHTML = h;
+  });
+}
+
+// ===== 20. المحادثة =====
+function loadChatStudents(){
+  var area = document.getElementById("chatStudentsList");
+  if(!area) return;
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+  fdb.ref('chats').once('value').then(function(snap){
+    var data = snap.val() || {};
+    var arr = [];
+    for(var num in data){
+      var msgs = data[num];
+      var lastMsg = "", lastTime = 0;
+      for(var k in msgs){
+        if(msgs[k].time > lastTime){ lastTime = msgs[k].time; lastMsg = msgs[k].text || "🎤 تسجيل"; }
+      }
+      arr.push({num:num, lastMsg:lastMsg, lastTime:lastTime});
+    }
+    arr.sort(function(a,b){ return b.lastTime - a.lastTime; });
+    var h = "";
+    if(!arr.length) h = '<div class="card"><p>لا محادثات بعد.</p></div>';
+    arr.forEach(function(item){
+      var name = STUDENT_NAMES[item.num] ? " - "+STUDENT_NAMES[item.num] : "";
+      h += '<div class="card" style="cursor:pointer" onclick="openChat(\''+item.num+'\')"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><div><b>👦 رقم '+item.num+name+'</b><p style="font-size:12px;color:#64748B;margin-top:4px">'+esc(item.lastMsg.substring(0,40))+'</p></div><span style="color:#3B82F6;font-weight:800">›</span></div></div>';
+    });
+    area.innerHTML = h;
+  });
+}
+function openChat(num){
+  CURRENT_CHAT = num;
+  document.getElementById("chatHeader").textContent = "💬 المحادثة مع تلميذ رقم " + num;
+  var reg = getReg();
+  var waBtn = document.getElementById("chatWaBtn");
+  if(reg.type === "teacher" && waBtn){ waBtn.style.display = "block"; }
+  else if(waBtn){ waBtn.style.display = "none"; }
+  goTo("chat");
+}
+function openChatWhatsApp(){
+  if(!CURRENT_CHAT) return;
+  fdb.ref('student_info/'+CURRENT_CHAT).once('value').then(function(snap){
+    var info = snap.val() || {};
+    var phone = info.phone || "";
+    if(!phone){
+      alert("⚠️ لم يسجل الولي رقم هاتفه بعد.\n\nاطلب منه تسجيل رقمه من: معلومات ابني");
+      return;
+    }
+    phone = phone.replace(/[^0-9]/g, "");
+    if(phone.startsWith("0")) phone = "213" + phone.substring(1);
+    var msg = "السلام عليكم، أنا الأستاذ سعيد. بخصوص " + (STUDENT_NAMES[CURRENT_CHAT] || "ابنكم") + "، ";
+    window.open("https://wa.me/"+phone+"?text="+encodeURIComponent(msg), "_blank");
+  });
+}
+function loadChat(){
+  var reg = getReg();
+  if(!CURRENT_CHAT){
+    if(reg.type === "student" || reg.type === "parent"){
+      CURRENT_CHAT = reg.num;
+      document.getElementById("chatHeader").textContent = "💬 المحادثة مع الأستاذ";
+      var waBtn = document.getElementById("chatWaBtn");
+      if(waBtn) waBtn.style.display = "none";
+    } else { return; }
   }
+  var area = document.getElementById("chatMessages");
+  if(!area) return;
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+  fdb.ref('chats/'+CURRENT_CHAT).on('value', function(snap){
+    var data = snap.val() || {};
+    var arr = [];
+    for(var k in data){ arr.push(data[k]); }
+    arr.sort(function(a,b){ return a.time - b.time; });
+    var h = "";
+    arr.forEach(function(m){
+      var cls = (m.from === "teacher") ? "t" : "s";
+      var who = (m.from === "teacher") ? "👨‍🏫 الأستاذ" : "👦 أنا";
+      if(m.type === "audio"){
+        h += '<div class="bub '+cls+'"><span class="who">'+who+'<span class="time">'+fmtTime(m.time)+'</span></span>🎤 <audio controls src="'+m.audio+'" style="width:100%;margin-top:6px"></audio></div>';
+      } else {
+        h += '<div class="bub '+cls+'"><span class="who">'+who+'<span class="time">'+fmtTime(m.time)+'</span></span>'+esc(m.text)+'</div>';
+      }
+    });
+    if(!h) h = '<p style="text-align:center;color:#64748B;padding:20px">لا رسائل بعد.</p>';
+    area.innerHTML = h;
+    area.scrollTop = area.scrollHeight;
+  });
 }
-
-function openSubject(name, icon) {
-  document.getElementById('currentSubjectTitle').textContent = icon + ' ' + name;
-  showScreen('subjects');
-}
-
-// Quiz & Confetti
-function checkAnswer(correct) {
-  if(correct) {
-    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-    alert('إجابة صحيحة! أحسنت يا بطل 🎉');
-  } else {
-    alert('حاول مرة أخرى يا شاطر! 💪');
-  }
-}
-
-// AI Message System
-async function sendAiMessage() {
-  const input = document.getElementById('aiQuery');
-  const text = input.value.trim();
+function sendChatMsg(){
+  var input = document.getElementById("chatInput");
+  var text = input.value.trim();
   if(!text) return;
-
-  const chatList = document.getElementById('chatList');
-  chatList.innerHTML += `<div class="chat-bubble user">${text}</div>`;
-  input.value = '';
-
-  const loadId = 'load_' + Date.now();
-  chatList.innerHTML += `<div class="chat-bubble ai" id="${loadId}">جاري التفكير... ⏳</div>`;
-  chatList.scrollTop = chatList.scrollHeight;
-
-  setTimeout(() => {
-    document.getElementById(loadId).textContent = "أحسنت يا بطل! سؤال ممتاز في المادة، الأستاذ سعيد يشجعك على الاستمرار 🌟";
-  }, 1000);
+  if(!CURRENT_CHAT){ alert("⚠️"); return; }
+  var reg = getReg();
+  var from = (reg.type === "teacher") ? "teacher" : "student";
+  fdb.ref('chats/'+CURRENT_CHAT).push({text:text, from:from, type:"text", time:Date.now()}).then(function(){ input.value = ""; });
+}
+var chatInputEl = document.getElementById("chatInput");
+if(chatInputEl){
+  chatInputEl.addEventListener("keypress", function(e){
+    if(e.key === "Enter"){ e.preventDefault(); sendChatMsg(); }
+  });
 }
 
-// Init
-checkAuth();
+// ===== 21. ملفي الشخصي =====
+function loadMyFile(){
+  var area = document.getElementById("myFileContent");
+  if(!area) return;
+  var reg = getReg();
+  if(reg.type !== "student") return;
+  var num = reg.num;
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+  fdb.ref('evaluations/'+num).once('value').then(function(snapEval){
+    var evals = snapEval.val() || {};
+    fdb.ref('behavior/'+num).once('value').then(function(snapBeh){
+      var beh = snapBeh.val() || {};
+      fdb.ref('attendance_s/'+num).once('value').then(function(snapAtt){
+        var att = attFromMirror(num, snapAtt.val());
+        renderMyFile(num, evals, beh, att);
+      });
+    });
+  });
+}
+function renderMyFile(num, evals, beh, att){
+  var area = document.getElementById("myFileContent");
+  var h = "";
+
+  h += '<div class="card"><h3>⭐ التقييمات</h3>';
+  var evalArr = [];
+  for(var k in evals){ evalArr.push(evals[k]); }
+  evalArr.sort(function(a,b){ return b.time - a.time; });
+  if(!evalArr.length) h += '<p>لا تقييمات بعد.</p>';
+  evalArr.slice(0, 15).forEach(function(e){
+    var subjName = "";
+    SUBJECTS.forEach(function(s){ if(s.id === e.subject) subjName = s.icon + " " + s.name; });
+    h += '<div class="eval-item"><div class="header"><span class="subject">'+subjName+'</span><span class="score-badge">'+e.score+'/10</span></div>';
+    if(e.note) h += '<p class="note">📝 '+esc(e.note)+'</p>';
+    h += '<p class="date">📅 '+fmtDate(e.time)+'</p></div>';
+  });
+  h += '</div>';
+
+  h += '<div class="card"><h3>👍 السلوك</h3>';
+  var behArr = [];
+  for(var k2 in beh){ behArr.push(beh[k2]); }
+  behArr.sort(function(a,b){ return b.time - a.time; });
+  if(!behArr.length) h += '<p>لا ملاحظات بعد.</p>';
+  behArr.slice(0, 15).forEach(function(b){
+    var cls = b.type === "positive" ? "positive" : "negative";
+    var icon = b.type === "positive" ? "✅" : "⚠️";
+    h += '<div class="behavior-item '+cls+'"><div class="text">'+icon+' '+esc(b.note)+'</div><div class="date">📅 '+fmtDate(b.time)+'</div></div>';
+  });
+  h += '</div>';
+
+  h += '<div class="card"><h3>📅 الغيابات</h3>';
+  var absences = 0, total = 0;
+  for(var date in att){
+    if(att[date][num]){
+      total++;
+      if(att[date][num] === "absent") absences++;
+    }
+  }
+  h += '<div class="statrow"><div class="stat"><b>'+total+'</b><span>يوم مسجل</span></div><div class="stat"><b style="color:#EF4444">'+absences+'</b><span>غياب</span></div></div>';
+  h += '</div>';
+
+  area.innerHTML = h;
+}
+
+// ===== 22. صورة الولي =====
+function loadParentAvatar(num){
+  var pic = localStorage.getItem("parent_pic_"+num);
+  var av = document.getElementById("parentAvatar");
+  if(!av) return;
+  if(pic){ av.innerHTML = '<img src="'+pic+'" class="avatar" alt="صورتي">'; }
+  else { av.innerHTML = '<div class="avatar-def">👨‍👩‍👦</div>'; }
+}
+function changeParentPhoto(){
+  var reg = getReg();
+  if(reg.type !== "parent") return;
+  var num = reg.num;
+  var input = document.createElement("input");
+  input.type = "file"; input.accept = "image/*";
+  input.onchange = function(e){
+    var file = e.target.files[0]; if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(ev){
+      try{
+        localStorage.setItem("parent_pic_"+num, ev.target.result);
+        alert("✅ تم الحفظ!");
+        loadParentAvatar(num);
+      }catch(err){ alert("⚠️ الصورة كبيرة"); }
+    };
+    reader.readAsDataURL(file);
+  };
+  input.click();
+}
+
+// ===== 23. لوحة الولي =====
+function loadParentPanel(num){
+  var area = document.getElementById("parentContent");
+  if(!area) return;
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+  fdb.ref('evaluations/'+num).once('value').then(function(snapEval){
+    var evals = snapEval.val() || {};
+    fdb.ref('behavior/'+num).once('value').then(function(snapBeh){
+      var beh = snapBeh.val() || {};
+      fdb.ref('attendance_s/'+num).once('value').then(function(snapAtt){
+        var att = attFromMirror(num, snapAtt.val());
+        renderParentPanel(num, evals, beh, att);
+      });
+    });
+  });
+}
+function renderParentPanel(num, evals, beh, att){
+  var area = document.getElementById("parentContent");
+  var h = "";
+
+  h += '<div class="card"><h3>👦 معلومات الابن</h3>';
+  h += '<p><b>الرقم:</b> ' + num + '</p>';
+  h += '<p><b>الاسم:</b> ' + (STUDENT_NAMES[num] || "غير مسجل") + '</p>';
+  h += '</div>';
+
+  h += '<div class="card"><h3>⭐ التقييمات</h3>';
+  var evalArr = [];
+  for(var k in evals){ evalArr.push(evals[k]); }
+  evalArr.sort(function(a,b){ return b.time - a.time; });
+  if(!evalArr.length) h += '<p>لا تقييمات بعد.</p>';
+  evalArr.slice(0, 10).forEach(function(e){
+    var subjName = "";
+    SUBJECTS.forEach(function(s){ if(s.id === e.subject) subjName = s.icon + " " + s.name; });
+    h += '<div class="eval-item"><div class="header"><span class="subject">'+subjName+'</span><span class="score-badge">'+e.score+'/10</span></div>';
+    if(e.note) h += '<p class="note">📝 '+esc(e.note)+'</p>';
+    h += '<p class="date">📅 '+fmtDate(e.time)+'</p></div>';
+  });
+  h += '</div>';
+
+  h += '<div class="card"><h3>👍 السلوك</h3>';
+  var behArr = [];
+  for(var k2 in beh){ behArr.push(beh[k2]); }
+  behArr.sort(function(a,b){ return b.time - a.time; });
+  if(!behArr.length) h += '<p>لا ملاحظات بعد.</p>';
+  behArr.slice(0, 10).forEach(function(b){
+    var cls = b.type === "positive" ? "positive" : "negative";
+    var icon = b.type === "positive" ? "✅" : "⚠️";
+    h += '<div class="behavior-item '+cls+'"><div class="text">'+icon+' '+esc(b.note)+'</div><div class="date">📅 '+fmtDate(b.time)+'</div></div>';
+  });
+  h += '</div>';
+
+  h += '<div class="card"><h3>📅 الغيابات</h3>';
+  var absences = 0, total = 0;
+  for(var date in att){
+    if(att[date][num]){
+      total++;
+      if(att[date][num] === "absent") absences++;
+    }
+  }
+  h += '<div class="statrow"><div class="stat"><b>'+total+'</b><span>يوم مسجل</span></div><div class="stat"><b style="color:#EF4444">'+absences+'</b><span>غياب</span></div></div>';
+  h += '</div>';
+
+  h += '<div class="card"><h3>📱 التواصل المباشر</h3>';
+  h += '<a href="https://wa.me/'+TEACHER_WA+'" target="_blank" class="btn" style="text-decoration:none;display:block;text-align:center;background:#25D366">📱 واتساب الأستاذ</a>';
+  h += '<a href="tel:+213556220521" class="btn green" style="text-decoration:none;display:block;text-align:center;margin-top:8px">📞 اتصال هاتفي</a>';
+  h += '</div>';
+
+  area.innerHTML = h;
+}
+
+// ===== 24. المعلومات الشخصية =====
+function loadPersonalInfo(){
+  var reg = getReg();
+  var num = reg.num;
+  if(!num){ return; }
+  fdb.ref('student_info/'+num).once('value').then(function(snap){
+    var d = snap.val() || {};
+    document.getElementById("pi_birth").value = d.birth || "";
+    document.getElementById("pi_address").value = d.address || "";
+    document.getElementById("pi_father").value = d.father || "";
+    document.getElementById("pi_mother").value = d.mother || "";
+    document.getElementById("pi_phone").value = d.phone || "";
+    document.getElementById("pi_blood").value = d.blood || "";
+    document.getElementById("pi_medical").value = d.medical || "";
+    document.getElementById("pi_notes").value = d.notes || "";
+  });
+}
+function savePersonalInfo(){
+  var reg = getReg();
+  var num = reg.num;
+  if(!num){ alert("⚠️ خطأ"); return; }
+  var data = {
+    birth: document.getElementById("pi_birth").value,
+    address: document.getElementById("pi_address").value.trim(),
+    father: document.getElementById("pi_father").value.trim(),
+    mother: document.getElementById("pi_mother").value.trim(),
+    phone: document.getElementById("pi_phone").value.trim(),
+    blood: document.getElementById("pi_blood").value,
+    medical: document.getElementById("pi_medical").value.trim(),
+    notes: document.getElementById("pi_notes").value.trim(),
+    updated: Date.now()
+  };
+  fdb.ref('student_info/'+num).set(data).then(function(){
+    alert("✅ تم الحفظ!");
+  }).catch(function(err){ alert("⚠️ " + err.message); });
+}
+function viewStudentInfo(num){
+  var area = document.getElementById("infoDisplay");
+  if(!area) return;
+  if(!num){ area.innerHTML = ""; return; }
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+  fdb.ref('student_info/'+num).once('value').then(function(snap){
+    var d = snap.val() || {};
+    var name = STUDENT_NAMES[num] || "غير مسجل";
+    var h = '<div class="card"><h3>📋 '+esc(name)+'</h3>';
+    if(!d.birth && !d.address && !d.father && !d.mother && !d.phone){
+      h += '<p>لم يملأ الولي بعد.</p>';
+    } else {
+      if(d.birth) h += '<p>📅 <b>الميلاد:</b> '+d.birth+'</p>';
+      if(d.address) h += '<p>🏠 <b>العنوان:</b> '+esc(d.address)+'</p>';
+      if(d.father) h += '<p>👨 <b>الأب:</b> '+esc(d.father)+'</p>';
+      if(d.mother) h += '<p>👩 <b>الأم:</b> '+esc(d.mother)+'</p>';
+      if(d.phone) h += '<p>📱 <b>الهاتف:</b> <a href="tel:'+d.phone+'" style="color:#3B82F6">'+esc(d.phone)+'</a></p>';
+      if(d.blood) h += '<p>🩸 <b>الدم:</b> '+d.blood+'</p>';
+      if(d.medical) h += '<p>⚠️ <b>حساسية:</b> '+esc(d.medical)+'</p>';
+      if(d.notes) h += '<p>📝 <b>ملاحظات:</b> '+esc(d.notes)+'</p>';
+    }
+    h += '</div>';
+    area.innerHTML = h;
+  });
+}
+
+// ===== 25. التقييم =====
+function initEvaluateScreen(){
+  fillStudentSelects();
+  fillSubjectSelects();
+  loadEvaluationsList();
+}
+function saveEvaluation(){
+  var num = document.getElementById("eval_student").value;
+  var subj = document.getElementById("eval_subject").value;
+  var score = parseFloat(document.getElementById("eval_score").value);
+  var note = document.getElementById("eval_note").value.trim();
+  if(!num || !subj){ alert("⚠️ اختر"); return; }
+  if(isNaN(score) || score < 0 || score > 10){ alert("⚠️ 0-10"); return; }
+  fdb.ref('evaluations/'+num).push({subject:subj, score:score, note:note, time:Date.now()}).then(function(){
+    alert("✅ تم!");
+    document.getElementById("eval_score").value = "";
+    document.getElementById("eval_note").value = "";
+    loadEvaluationsList();
+  });
+}
+function loadEvaluationsList(){
+  var area = document.getElementById("evaluationsList");
+  if(!area) return;
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+  fdb.ref('evaluations').once('value').then(function(snap){
+    var data = snap.val() || {};
+    var arr = [];
+    for(var num in data){
+      for(var k in data[num]){ arr.push({num:num, data:data[num][k]}); }
+    }
+    arr.sort(function(a,b){ return b.data.time - a.data.time; });
+    var h = "";
+    if(!arr.length) h = '<div class="card"><p>لا تقييمات بعد.</p></div>';
+    arr.slice(0, 30).forEach(function(item){
+      var subjName = "";
+      SUBJECTS.forEach(function(s){ if(s.id === item.data.subject) subjName = s.icon + " " + s.name; });
+      var name = STUDENT_NAMES[item.num] ? " - "+STUDENT_NAMES[item.num] : "";
+      h += '<div class="eval-item"><div class="header"><span class="subject">👦 '+item.num+name+' — '+subjName+'</span><span class="score-badge">'+item.data.score+'/10</span></div>';
+      if(item.data.note) h += '<p class="note">📝 '+esc(item.data.note)+'</p>';
+      h += '<p class="date">📅 '+fmtDate(item.data.time)+'</p></div>';
+    });
+    area.innerHTML = h;
+  });
+}
+
+// ===== 26. الغيابات =====
+function initAttendanceScreen(){
+  var d = document.getElementById("attend_date");
+  if(d && !d.value) d.value = todayStr();
+  renderAttendanceList();
+  if(d){ d.onchange = function(){ renderAttendanceList(); }; }
+}
+function renderAttendanceList(){
+  var area = document.getElementById("attendanceList");
+  if(!area) return;
+  var date = document.getElementById("attend_date").value;
+  if(!date){ area.innerHTML = ""; return; }
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+  fdb.ref('attendance/'+date).once('value').then(function(snap){
+    var data = snap.val() || {};
+    var h = '<div class="card"><h3>📋 '+date+'</h3>';
+    for(var n in STUDENT_LIST){
+      var name = STUDENT_NAMES[n] ? " - "+STUDENT_NAMES[n] : "";
+      var status = data[n] || "";
+      var presentCls = status === "present" ? "present" : "";
+      var absentCls = status === "absent" ? "absent" : "";
+      h += '<div class="attend-item"><span class="name">👦 '+n+name+'</span><span class="actions">';
+      h += '<button class="attend-btn '+presentCls+'" onclick="markAttendance(\''+n+'\',\'present\')">✅</button>';
+      h += '<button class="attend-btn '+absentCls+'" onclick="markAttendance(\''+n+'\',\'absent\')">❌</button>';
+      h += '</span></div>';
+    }
+    h += '</div>';
+    area.innerHTML = h;
+  });
+}
+function markAttendance(num, status){
+  var date = document.getElementById("attend_date").value;
+  if(!date) return;
+  var up = {}; up['attendance/'+date+'/'+num] = status; up['attendance_s/'+num+'/'+date] = status;
+  fdb.ref().update(up).then(function(){ renderAttendanceList(); });
+}
+function markAllPresent(){
+  var date = document.getElementById("attend_date").value;
+  if(!date) return;
+  if(!confirm("الجميع حاضرون؟")) return;
+  var up = {};
+  for(var n in STUDENT_LIST){ up['attendance/'+date+'/'+n] = "present"; up['attendance_s/'+n+'/'+date] = "present"; }
+  fdb.ref().update(up).then(function(){
+    alert("✅"); renderAttendanceList();
+  });
+}
+
+// ===== 27. السلوك =====
+function initBehaviorScreen(){
+  fillStudentSelects();
+  loadBehaviorList();
+}
+function saveBehavior(){
+  var num = document.getElementById("beh_student").value;
+  var type = document.getElementById("beh_type").value;
+  var note = document.getElementById("beh_note").value.trim();
+  if(!num){ alert("⚠️"); return; }
+  if(!note){ alert("⚠️ اكتب ملاحظة"); return; }
+  fdb.ref('behavior/'+num).push({type:type, note:note, time:Date.now()}).then(function(){
+    alert("✅");
+    document.getElementById("beh_note").value = "";
+    loadBehaviorList();
+  });
+}
+function loadBehaviorList(){
+  var area = document.getElementById("behaviorList");
+  if(!area) return;
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+  fdb.ref('behavior').once('value').then(function(snap){
+    var data = snap.val() || {};
+    var arr = [];
+    for(var num in data){
+      for(var k in data[num]){ arr.push({num:num, data:data[num][k]}); }
+    }
+    arr.sort(function(a,b){ return b.data.time - a.data.time; });
+    var h = "";
+    if(!arr.length) h = '<div class="card"><p>لا ملاحظات بعد.</p></div>';
+    arr.slice(0, 30).forEach(function(item){
+      var cls = item.data.type === "positive" ? "positive" : "negative";
+      var icon = item.data.type === "positive" ? "✅" : "⚠️";
+      var name = STUDENT_NAMES[item.num] ? " - "+STUDENT_NAMES[item.num] : "";
+      h += '<div class="behavior-item '+cls+'"><div class="who">👦 '+item.num+name+'</div><div class="text">'+icon+' '+esc(item.data.note)+'</div><div class="date">📅 '+fmtDate(item.data.time)+'</div></div>';
+    });
+    area.innerHTML = h;
+  });
+}
+
+// ===== 28. التسجيل الصوتي للتلميذ =====
+var mediaRecorder = null;
+var audioChunks = [];
+var recTimerInterval = null;
+var recSeconds = 0;
+
+function startRecording(){
+  if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+    alert("⚠️ متصفحك لا يدعم التسجيل"); return;
+  }
+  navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){
+    mediaRecorder = new MediaRecorder(stream);
+    audioChunks = [];
+    mediaRecorder.ondataavailable = function(e){ audioChunks.push(e.data); };
+    mediaRecorder.onstop = function(){
+      var blob = new Blob(audioChunks, {type:'audio/webm'});
+      var reader = new FileReader();
+      reader.onloadend = function(){ uploadRecording(reader.result); };
+      reader.readAsDataURL(blob);
+      stream.getTracks().forEach(function(t){ t.stop(); });
+    };
+    mediaRecorder.start();
+    recSeconds = 0;
+    document.getElementById("recStatus").textContent = "🔴 جارٍ التسجيل...";
+    document.getElementById("recStartBtn").style.display = "none";
+    document.getElementById("recStopBtn").style.display = "block";
+    document.getElementById("recCancelBtn").style.display = "block";
+    document.querySelector(".recorder-circle").classList.add("recording");
+    recTimerInterval = setInterval(function(){
+      recSeconds++;
+      var m = Math.floor(recSeconds/60), s = recSeconds % 60;
+      document.getElementById("recTimer").textContent = ("0"+m).slice(-2)+":"+("0"+s).slice(-2);
+      if(recSeconds >= 120) stopRecording();
+    }, 1000);
+  }).catch(function(err){ alert("⚠️ " + err.message); });
+}
+function stopRecording(){
+  if(mediaRecorder && mediaRecorder.state !== "inactive") mediaRecorder.stop();
+  clearInterval(recTimerInterval);
+  document.getElementById("recStatus").textContent = "⏸️ جاهز";
+  document.getElementById("recStartBtn").style.display = "block";
+  document.getElementById("recStopBtn").style.display = "none";
+  document.getElementById("recCancelBtn").style.display = "none";
+  document.querySelector(".recorder-circle").classList.remove("recording");
+  document.getElementById("recTimer").textContent = "00:00";
+}
+function cancelRecording(){
+  audioChunks = [];
+  if(mediaRecorder && mediaRecorder.state !== "inactive"){
+    mediaRecorder.onstop = null;
+    mediaRecorder.stop();
+  }
+  clearInterval(recTimerInterval);
+  document.getElementById("recStatus").textContent = "⏸️ جاهز";
+  document.getElementById("recStartBtn").style.display = "block";
+  document.getElementById("recStopBtn").style.display = "none";
+  document.getElementById("recCancelBtn").style.display = "none";
+  document.querySelector(".recorder-circle").classList.remove("recording");
+  document.getElementById("recTimer").textContent = "00:00";
+}
+function uploadRecording(base64){
+  var reg = getReg();
+  if(reg.type !== "student") return;
+  var num = reg.num;
+  fdb.ref('recordings/'+num).push({audio:base64, time:Date.now(), duration:recSeconds}).then(function(){
+    alert("✅ تم إرسال التسجيل!");
+    loadMyRecordings();
+  }).catch(function(err){ alert("⚠️ " + err.message); });
+}
+function loadMyRecordings(){
+  var area = document.getElementById("recordingsList");
+  if(!area) return;
+  var reg = getReg();
+  if(reg.type !== "student") return;
+  fdb.ref('recordings/'+reg.num).once('value').then(function(snap){
+    var data = snap.val() || {};
+    var arr = [];
+    for(var k in data){ arr.push({key:k, data:data[k]}); }
+    arr.sort(function(a,b){ return b.data.time - a.data.time; });
+    var h = '<div class="card"><h3>📼 تسجيلاتي السابقة</h3>';
+    if(!arr.length) h += '<p>لا تسجيلات بعد.</p>';
+    arr.forEach(function(item){
+      h += '<div class="recording-item"><div class="info"><div class="title">🎤 تسجيل</div><div class="date">📅 '+fmtDate(item.data.time)+'</div></div><audio controls src="'+item.data.audio+'" style="max-width:140px"></audio></div>';
+    });
+    h += '</div>';
+    area.innerHTML = h;
+  });
+}
+
+// ===== 29. استماع التسجيلات للأستاذ =====
+function initListenScreen(){
+  fillStudentSelects();
+  var sel = document.getElementById("listen_student");
+  if(sel){
+    sel.onchange = function(){ loadStudentRecordings(sel.value); };
+    if(sel.value) loadStudentRecordings(sel.value);
+  }
+}
+function loadStudentRecordings(num){
+  var area = document.getElementById("listenList");
+  if(!area) return;
+  if(!num){ area.innerHTML = ""; return; }
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+  fdb.ref('recordings/'+num).once('value').then(function(snap){
+    var data = snap.val() || {};
+    var arr = [];
+    for(var k in data){ arr.push({key:k, data:data[k]}); }
+    arr.sort(function(a,b){ return b.data.time - a.data.time; });
+    var name = STUDENT_NAMES[num] ? " - "+STUDENT_NAMES[num] : "";
+    var h = '<div class="card"><h3>🎧 تسجيلات تلميذ رقم '+num+name+'</h3>';
+    if(!arr.length) h += '<p>لا تسجيلات.</p>';
+    arr.forEach(function(item){
+      h += '<div class="recording-item"><div class="info"><div class="title">🎤 تسجيل</div><div class="date">📅 '+fmtDate(item.data.time)+'</div></div><audio controls src="'+item.data.audio+'" style="max-width:140px"></audio><button class="ub r" onclick="deleteRecording(\''+num+'\',\''+item.key+'\')">🗑</button></div>';
+    });
+    h += '</div>';
+    area.innerHTML = h;
+  });
+}
+function deleteRecording(num, key){
+  if(!confirm("حذف؟")) return;
+  fdb.ref('recordings/'+num+'/'+key).remove().then(function(){ loadStudentRecordings(num); });
+}
+
+// ===== 30. ملاحظات الأستاذ الصوتية =====
+var noteRecorder = null;
+var noteChunks = [];
+function initRecordNote(){
+  fillStudentSelects();
+  loadTeacherNotesList();
+}
+function startNoteRecording(){
+  if(!navigator.mediaDevices){ alert("⚠️"); return; }
+  navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){
+    noteRecorder = new MediaRecorder(stream);
+    noteChunks = [];
+    noteRecorder.ondataavailable = function(e){ noteChunks.push(e.data); };
+    noteRecorder.onstop = function(){
+      var blob = new Blob(noteChunks, {type:'audio/webm'});
+      var reader = new FileReader();
+      reader.onloadend = function(){
+        var num = document.getElementById("note_student").value;
+        var title = document.getElementById("note_title").value.trim();
+        if(!num || !title){ alert("⚠️ املأ"); return; }
+        fdb.ref('voice_notes/'+num).push({audio:reader.result, title:title, time:Date.now()}).then(function(){
+          alert("✅ تم حفظ الملاحظة!");
+          document.getElementById("note_title").value = "";
+          loadTeacherNotesList();
+        });
+      };
+      reader.readAsDataURL(blob);
+      stream.getTracks().forEach(function(t){ t.stop(); });
+    };
+    noteRecorder.start();
+    document.getElementById("noteRecStatus").textContent = "🔴 جارٍ التسجيل...";
+    document.getElementById("noteRecStart").style.display = "none";
+    document.getElementById("noteRecStop").style.display = "block";
+  }).catch(function(err){ alert("⚠️ " + err.message); });
+}
+function stopNoteRecording(){
+  if(noteRecorder && noteRecorder.state !== "inactive") noteRecorder.stop();
+  document.getElementById("noteRecStatus").textContent = "⏸️ جاهز";
+  document.getElementById("noteRecStart").style.display = "block";
+  document.getElementById("noteRecStop").style.display = "none";
+}
+function loadTeacherNotesList(){
+  var area = document.getElementById("teacherNotesList");
+  if(!area) return;
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+  fdb.ref('voice_notes').once('value').then(function(snap){
+    var data = snap.val() || {};
+    var arr = [];
+    for(var num in data){
+      for(var k in data[num]){ arr.push({num:num, key:k, data:data[num][k]}); }
+    }
+    arr.sort(function(a,b){ return b.data.time - a.data.time; });
+    var h = "";
+    if(!arr.length) h = '<div class="card"><p>لا ملاحظات بعد.</p></div>';
+    arr.slice(0, 20).forEach(function(item){
+      var name = STUDENT_NAMES[item.num] || "رقم "+item.num;
+      h += '<div class="recording-item"><div class="info"><div class="title">📝 '+esc(item.data.title)+' — '+esc(name)+'</div><div class="date">📅 '+fmtDate(item.data.time)+'</div></div><audio controls src="'+item.data.audio+'" style="max-width:140px"></audio><button class="ub r" onclick="deleteVoiceNote(\''+item.num+'\',\''+item.key+'\')">🗑</button></div>';
+    });
+    area.innerHTML = h;
+  });
+}
+function deleteVoiceNote(num, key){
+  if(!confirm("حذف؟")) return;
+  fdb.ref('voice_notes/'+num+'/'+key).remove().then(function(){ loadTeacherNotesList(); });
+}
+function loadVoiceNotes(){
+  var area = document.getElementById("voiceNotesList");
+  if(!area) return;
+  var reg = getReg();
+  if(reg.type !== "student"){
+    area.innerHTML = '<div class="card"><p>هذه الميزة للتلاميذ فقط.</p></div>';
+    return;
+  }
+  var num = reg.num;
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+  fdb.ref('voice_notes/'+num).once('value').then(function(snap){
+    var data = snap.val() || {};
+    var arr = [];
+    for(var k in data){ arr.push(data[k]); }
+    arr.sort(function(a,b){ return b.time - a.time; });
+    var h = "";
+    if(!arr.length) h = '<div class="card"><p>لا ملاحظات صوتية بعد.</p></div>';
+    arr.forEach(function(item){
+      h += '<div class="recording-item"><div class="info"><div class="title">📝 '+esc(item.title)+'</div><div class="date">📅 '+fmtDate(item.time)+'</div></div><audio controls src="'+item.audio+'" style="max-width:140px"></audio></div>';
+    });
+    area.innerHTML = h;
+  });
+}
+
+// ===== 31. التقويمات =====
+var QUIZZES = {
+  "q1": {name:"رياضيات ١", qs:[
+    {q:"15 + 27 = ؟", mcq:["32","42","40","37"], a:1},
+    {q:"100 - 45 = ؟", mcq:["55","65","45","50"], a:0}
+  ]},
+  "q2": {name:"رياضيات ٢", qs:[
+    {q:"7 × 10 = ؟", mcq:["70","17","700","7"], a:0},
+    {q:"12 × 10 = ؟", mcq:["120","102","1200","22"], a:0}
+  ]},
+  "q3": {name:"لغة عربية", qs:[
+    {q:"ماذا تبقى الأم ساهرةً عليه؟", mcq:["راحة أبنائها","أعمالها","دروسها","بيت الجار"], a:0},
+    {q:"ما سبب وجودي في الدنيا وفق النص؟", mcq:["الأب","الأم","المدرسة","الأصدقاء"], a:1}
+  ]}
+};
+var quizCur = null, quizIdx = 0, quizScore = 0;
+function renderQuizList(){
+  var area = document.getElementById("quizArea");
+  if(!area) return;
+  var h = "";
+  for(var k in QUIZZES){
+    h += '<div class="card" style="cursor:pointer" onclick="startQuiz(\''+k+'\')"><h3>✏️ '+QUIZZES[k].name+'</h3><p>اضغط للبدء</p></div>';
+  }
+  area.innerHTML = h;
+}
+function startQuiz(key){ quizCur = key; quizIdx = 0; quizScore = 0; renderQuizQuestion(); }
+function renderQuizQuestion(){
+  var area = document.getElementById("quizArea");
+  var item = QUIZZES[quizCur].qs[quizIdx];
+  var h = '<div class="card"><p style="color:#64748B;font-size:12px">'+QUIZZES[quizCur].name+' — سؤال '+(quizIdx+1)+' / '+QUIZZES[quizCur].qs.length+'</p>';
+  h += '<p class="qq">'+item.q+'</p><div class="opts">';
+  item.mcq.forEach(function(o,i){ h += '<button class="opt" onclick="answerQuiz('+i+')">'+o+'</button>'; });
+  h += '</div><p class="fb" id="qfb"></p></div>';
+  area.innerHTML = h;
+}
+function answerQuiz(i){
+  var item = QUIZZES[quizCur].qs[quizIdx];
+  var fb = document.getElementById("qfb");
+  if(i === item.a){ quizScore++; fb.textContent = "✅ صحيح"; fb.className = "fb ok"; }
+  else{ fb.textContent = "❌ الصحيح: "+item.mcq[item.a]; fb.className = "fb no"; }
+  document.querySelectorAll("#quizArea .opt").forEach(function(b){ b.disabled = true; });
+  setTimeout(function(){
+    quizIdx++;
+    if(quizIdx < QUIZZES[quizCur].qs.length) renderQuizQuestion();
+    else finishQuiz();
+  }, 1200);
+}
+function finishQuiz(){
+  var area = document.getElementById("quizArea");
+  var total = QUIZZES[quizCur].qs.length;
+  var pct = Math.round(quizScore / total * 100);
+  var msg = pct >= 75 ? "🌟 ممتاز!" : (pct >= 50 ? "👍 جيد" : "💪 راجع وحاول");
+  area.innerHTML = '<div class="card" style="text-align:center"><h3>'+QUIZZES[quizCur].name+'</h3><p class="score">'+quizScore+' / '+total+'</p><p style="color:#64748B">'+msg+'</p><button class="btn" style="margin-top:14px" onclick="renderQuizList()">🔄 العودة</button></div>';
+  try{
+    var key = window.__U+"@s3_dz_2026";
+    var d = JSON.parse(localStorage.getItem(key)||'{"best":[-1,-1,-1],"att":0}');
+    d.att++;
+    if(quizScore > d.best[0]) d.best[0] = quizScore;
+    localStorage.setItem(key, JSON.stringify(d));
+  }catch(e){}
+}
+
+// ===== 32. التقدم =====
+function renderProgress(){
+  try{
+    var d = JSON.parse(localStorage.getItem(window.__U+"@s3_dz_2026")||'{"best":[-1,-1,-1],"att":0}');
+    var t = document.getElementById("st-total");
+    if(t) t.textContent = d.best.reduce(function(a,b){return a+(b>0?b:0)},0);
+    var a = document.getElementById("st-att");
+    if(a) a.textContent = d.att;
+    var b = document.getElementById("st-best");
+    if(b) b.textContent = d.best.filter(function(x){return x>=3}).length + " / 3";
+  }catch(e){}
+}
+var resetBtn = document.getElementById("resetProg");
+if(resetBtn){
+  resetBtn.onclick = function(){
+    if(!confirm("مسح سجل التقدم؟")) return;
+    localStorage.removeItem(window.__U+"@s3_dz_2026");
+    renderProgress();
+  };
+}
+
+// ===== 33. الشارات =====
+function loadBadges(){
+  var area = document.getElementById("badgesContent");
+  if(!area) return;
+  var reg = getReg();
+  if(reg.type !== "student") return;
+  var num = reg.num;
+  fdb.ref('evaluations/'+num).once('value').then(function(snapEval){
+    var evals = snapEval.val() || {};
+    var totalEval = 0, highEvals = 0;
+    for(var k in evals){ totalEval++; if(evals[k].score >= 8) highEvals++; }
+    fdb.ref('recordings/'+num).once('value').then(function(snapRec){
+      var recs = snapRec.val() || {};
+      var recCount = 0;
+      for(var k2 in recs){ recCount++; }
+      fdb.ref('behavior/'+num).once('value').then(function(snapBeh){
+        var beh = snapBeh.val() || {};
+        var positiveBeh = 0;
+        for(var k3 in beh){ if(beh[k3].type === "positive") positiveBeh++; }
+        renderBadges(totalEval, highEvals, recCount, positiveBeh);
+      });
+    });
+  });
+}
+function renderBadges(totalEval, highEvals, recCount, positiveBeh){
+  var area = document.getElementById("badgesContent");
+  var badges = [
+    {name:"المجتهد", desc:"أول تقييم", emoji:"📝", unlocked: totalEval >= 1},
+    {name:"المتفوق", desc:"3 تقييمات 8+", emoji:"🌟", unlocked: highEvals >= 3},
+    {name:"المتحدث", desc:"أول تسجيل", emoji:"🎤", unlocked: recCount >= 1},
+    {name:"الخطيب", desc:"5 تسجيلات", emoji:"🗣️", unlocked: recCount >= 5},
+    {name:"مؤدب", desc:"3 سلوكات", emoji:"👍", unlocked: positiveBeh >= 3},
+    {name:"النجم", desc:"10 سلوكات", emoji:"⭐", unlocked: positiveBeh >= 10}
+  ];
+  var h = '<div class="grid-menu">';
+  badges.forEach(function(b){
+    var cls = b.unlocked ? "badge-card" : "badge-card locked";
+    h += '<div class="'+cls+'"><div class="emoji">'+b.emoji+'</div><div class="name">'+b.name+'</div><div class="desc">'+b.desc+'</div></div>';
+  });
+  h += '</div>';
+  area.innerHTML = h;
+}
+
+// ===== 34. جدول الحصص =====
+function loadSchedule(){
+  var area = document.getElementById("scheduleContent");
+  if(!area) return;
+  var reg = getReg();
+  var editor = document.getElementById("scheduleEditor");
+  if(editor) editor.style.display = (reg.type === "teacher") ? "block" : "none";
+
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+  fdb.ref('schedule').once('value').then(function(snap){
+    var data = snap.val() || {};
+    var days = ["الأحد","الاثنين","الثلاثاء","الأربعاء","الخميس"];
+    var dayKeys = ["sunday","monday","tuesday","wednesday","thursday"];
+    var h = "";
+    for(var i=0;i<days.length;i++){
+      var dayKey = dayKeys[i];
+      var day = data[dayKey] || {};
+      var slots = [];
+      for(var timeKey in day){
+        slots.push({time: day[timeKey].time, subject: day[timeKey].subject, key: timeKey});
+      }
+      slots.sort(function(a,b){ return a.time.localeCompare(b.time); });
+      h += '<div class="schedule-day"><div class="day-name">📅 '+days[i]+'</div>';
+      if(slots.length === 0){
+        h += '<p style="color:#94a3b8;font-size:13px;text-align:center;padding:10px">لا حصص مسجلة</p>';
+      } else {
+        slots.forEach(function(s){
+          var editBtn = (reg.type === "teacher") ? '<button class="ub" style="padding:4px 10px;font-size:11px;background:#3B82F6" onclick="openEditScheduleItem(\''+dayKey+'\',\''+s.key+'\')">✏️</button>' : '';
+          var delBtn = (reg.type === "teacher") ? '<button class="ub r" style="padding:4px 10px;font-size:11px" onclick="deleteScheduleItem(\''+dayKey+'\',\''+s.key+'\')">🗑</button>' : '';
+          h += '<div class="schedule-item"><span class="subject">'+s.subject+'</span><span class="time">'+s.time+' '+editBtn+' '+delBtn+'</span></div>';
+        });
+      }
+      h += '</div>';
+    }
+    area.innerHTML = h;
+  });
+}
+function saveScheduleItem(){
+  var day = document.getElementById("sch_day").value;
+  var time = document.getElementById("sch_time").value;
+  var subject = document.getElementById("sch_subject").value.trim();
+  if(!day || !time || !subject){ alert("⚠️ املأ جميع الخانات"); return; }
+  var key = "s" + Date.now();
+  fdb.ref('schedule/'+day+'/'+key).set({time:time, subject:subject}).then(function(){
+    alert("✅ تم إضافة الحصة!");
+    document.getElementById("sch_subject").value = "";
+    loadSchedule();
+  });
+}
+function deleteScheduleItem(day, key){
+  if(!confirm("حذف هذه الحصة؟")) return;
+  fdb.ref('schedule/'+day+'/'+key).remove().then(function(){ loadSchedule(); });
+}
+function openEditScheduleItem(dayKey, itemKey){
+  fdb.ref('schedule/'+dayKey+'/'+itemKey).once('value').then(function(snap){
+    var d = snap.val() || {};
+    var dayNames = {sunday:"الأحد", monday:"الاثنين", tuesday:"الثلاثاء", wednesday:"الأربعاء", thursday:"الخميس"};
+    document.getElementById("edit_sch_day").value = dayNames[dayKey] || dayKey;
+    document.getElementById("edit_sch_day").dataset.key = dayKey;
+    document.getElementById("edit_sch_time").value = d.time || "";
+    document.getElementById("edit_sch_subject").value = d.subject || "";
+    document.getElementById("edit_sch_subject").dataset.itemKey = itemKey;
+    document.getElementById("editScheduleModal").style.display = "flex";
+  });
+}
+function closeEditScheduleModal(){
+  document.getElementById("editScheduleModal").style.display = "none";
+}
+function saveEditScheduleItem(){
+  var dayKey = document.getElementById("edit_sch_day").dataset.key;
+  var itemKey = document.getElementById("edit_sch_subject").dataset.itemKey;
+  var newTime = document.getElementById("edit_sch_time").value.trim();
+  var newSubject = document.getElementById("edit_sch_subject").value.trim();
+  if(!newTime || !newSubject){ alert("⚠️ املأ الوقت والمادة"); return; }
+  fdb.ref('schedule/'+dayKey+'/'+itemKey).update({time:newTime, subject:newSubject}).then(function(){
+    alert("✅ تم التعديل!");
+    closeEditScheduleModal();
+    loadSchedule();
+  });
+}
+function deleteEditScheduleItem(){
+  var dayKey = document.getElementById("edit_sch_day").dataset.key;
+  var itemKey = document.getElementById("edit_sch_subject").dataset.itemKey;
+  if(!confirm("حذف هذه الحصة؟")) return;
+  fdb.ref('schedule/'+dayKey+'/'+itemKey).remove().then(function(){
+    alert("✅ تم الحذف!");
+    closeEditScheduleModal();
+    loadSchedule();
+  });
+}
+function seedSchedule(){
+  fdb.ref('schedule').once('value').then(function(snap){
+    if(snap.val()){ return; }
+    var data = {
+      sunday: {"s1": {time:"08:00-09:30", subject:"🕌 تربية إسلامية + 🔢 رياضيات"},"s2": {time:"09:45-11:15", subject:"📖 قراءة أداء وفهم + 🔢 رياضيات"},"s3": {time:"13:00-15:00", subject:"👂 فهم المنطوق والتعبير الشفهي + 🏃 تربية بدنية"}},
+      monday: {"s1": {time:"08:00-09:30", subject:"🔬 تربية علمية + 📖 قراءة وظاهرة تركيبية"},"s2": {time:"09:45-11:15", subject:"🔢 رياضيات + 🎨 تربية فنية"},"s3": {time:"13:00-15:00", subject:"🔢 رياضيات + 📜 محفوظات + 🇬🇧 لغة إنجليزية"}},
+      tuesday: {"s1": {time:"08:00-09:30", subject:"🕌 تربية إسلامية + 🏃 تربية بدنية"},"s2": {time:"09:45-11:15", subject:"🗣️ إنتاج شفهي + 🎨 تربية فنية"}},
+      wednesday: {"s1": {time:"08:00-09:30", subject:"🇬🇧 لغة إنجليزية + 🌍 تاريخ"},"s2": {time:"09:45-11:15", subject:"🔬 تربية علمية + 📖 قراءة وظاهرة صرفية وإملائية"},"s3": {time:"13:00-15:00", subject:"🔢 رياضيات + 📚 مطالعة"}},
+      thursday: {"s1": {time:"08:00-09:30", subject:"🕌 تربية إسلامية + 🔢 رياضيات"},"s2": {time:"09:45-11:15", subject:"🎲 ألعاب رياضياتية + ✍️ إنتاج كتابي + 🎨 تربية فنية"}}
+    };
+    fdb.ref('schedule').set(data);
+  });
+}
+
+// ===== 35. أعياد الميلاد =====
+function loadBirthdays(){
+  var area = document.getElementById("birthdaysContent");
+  if(!area) return;
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+  fdb.ref('board/birthdays').once('value').then(function(snap){
+    var data = snap.val() || {};
+    var today = new Date();
+    var month = today.getMonth()+1, day = today.getDate();
+    var arr = [];
+    for(var num in data){
+      var parts = String(data[num].birth || "").split("-");
+      var m = parseInt(parts[1],10), d = parseInt(parts[2],10);
+      if(!m || !d) continue;
+      var daysUntil = (m*31+d) - (month*31+day);
+      if(daysUntil < 0) daysUntil += 365;
+      arr.push({num:num, name:data[num].name, m:m, d:d, days:daysUntil});
+    }
+    arr.sort(function(a,b){ return a.days - b.days; });
+    var h = "";
+    if(!arr.length) h = '<div class="card"><p>لم يسجل الأولياء تواريخ ميلاد أبنائهم بعد.</p></div>';
+    arr.slice(0, 15).forEach(function(item){
+      var name = item.name || "تلميذ رقم "+item.num;
+      var isToday = item.days === 0;
+      var cls = isToday ? "honor-card rank1" : "honor-card";
+      var emoji = isToday ? "🎉🎂🎈" : (item.days < 7 ? "🎈" : "🎂");
+      h += '<div class="'+cls+'"><div class="rank">'+emoji+'</div><div class="info"><div class="name">'+esc(name)+'</div><div class="score">'+item.d+'/'+item.m+(isToday?" — 🎉 اليوم!":" — بعد "+item.days+" يوم")+'</div></div></div>';
+    });
+    area.innerHTML = h;
+  }).catch(function(){ area.innerHTML = '<div class="card"><p>تعذّر التحميل.</p></div>'; });
+}
+
+// ===== 36. ألبوم القسم =====
+function saveAlbumPhoto(){
+  var title = document.getElementById("album_title").value.trim();
+  var url = document.getElementById("album_url").value.trim();
+  if(!title || !url){ alert("⚠️ املأ العنوان والرابط"); return; }
+  fdb.ref('album').push({title:title, url:url, time:Date.now()}).then(function(){
+    alert("✅ تم!");
+    document.getElementById("album_title").value = "";
+    document.getElementById("album_url").value = "";
+    loadAlbum();
+  });
+}
+function loadAlbum(){
+  var area = document.getElementById("albumGrid");
+  if(!area) return;
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+  fdb.ref('album').once('value').then(function(snap){
+    var data = snap.val() || {};
+    var arr = [];
+    for(var k in data){ arr.push({key:k, data:data[k]}); }
+    arr.sort(function(a,b){ return b.data.time - a.data.time; });
+    var h = '<div class="album-grid">';
+    if(!arr.length) h = '<div class="card"><p>لا صور بعد.</p></div>';
+    arr.forEach(function(item){
+      var reg = getReg();
+      var delBtn = (reg.type === "teacher") ? '<button class="ub r" style="display:block;margin:8px auto" onclick="deleteAlbumPhoto(\''+item.key+'\')">🗑</button>' : '';
+      h += '<div class="album-card"><img src="'+item.data.url+'" onerror="this.src=\'https://via.placeholder.com/300x200?text=No+Image\'"><div class="title">'+esc(item.data.title)+'</div>'+delBtn+'</div>';
+    });
+    h += '</div>';
+    area.innerHTML = h;
+  });
+}
+function deleteAlbumPhoto(key){
+  if(!confirm("حذف الصورة؟")) return;
+  fdb.ref('album/'+key).remove().then(function(){ loadAlbum(); });
+}
+
+// ===== 37. لوحة الشرف =====
+function loadHonor(){
+  var area = document.getElementById("honorContent");
+  if(!area) return;
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+  fdb.ref('board/honor').once('value').then(function(snap){
+    var v = snap.val() || [];
+    var arr = Array.isArray(v) ? v : Object.keys(v).map(function(k){ return v[k]; });
+    arr = arr.filter(Boolean);
+    var h = "";
+    if(!arr.length) h = '<div class="card"><p>لا توجد بيانات كافية بعد.</p></div>';
+    arr.slice(0, 10).forEach(function(item, i){
+      var name = item.name || "تلميذ رقم "+item.num;
+      var rank = i+1;
+      var cls = "honor-card";
+      if(rank === 1) cls += " rank1";
+      else if(rank === 2) cls += " rank2";
+      else if(rank === 3) cls += " rank3";
+      var medal = rank === 1 ? "🥇" : (rank === 2 ? "🥈" : (rank === 3 ? "🥉" : "🏅"));
+      h += '<div class="'+cls+'"><div class="rank">'+medal+'</div><div class="info"><div class="name">'+rank+'. '+esc(name)+'</div><div class="score">⭐ '+Math.round(item.score)+' نقطة</div></div></div>';
+    });
+    area.innerHTML = h;
+  }).catch(function(){ area.innerHTML = '<div class="card"><p>تعذّر التحميل.</p></div>'; });
+}
+
+// ===== 38. المناسبات =====
+function saveEvent(){
+  var title = document.getElementById("event_title").value.trim();
+  var date = document.getElementById("event_date").value;
+  var type = document.getElementById("event_type").value;
+  if(!title || !date){ alert("⚠️ املأ"); return; }
+  fdb.ref('events').push({title:title, date:date, type:type, time:Date.now()}).then(function(){
+    alert("✅ تم!");
+    document.getElementById("event_title").value = "";
+    loadEvents();
+  });
+}
+function loadEvents(){
+  var area = document.getElementById("eventsList");
+  if(!area) return;
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+  fdb.ref('events').once('value').then(function(snap){
+    var data = snap.val() || {};
+    var arr = [];
+    for(var k in data){ arr.push({key:k, data:data[k]}); }
+    arr.sort(function(a,b){ return a.data.date.localeCompare(b.data.date); });
+    var h = "";
+    if(!arr.length) h = '<div class="card"><p>لا مناسبات.</p></div>';
+    arr.forEach(function(item){
+      var icons = {holiday:"🎉", exam:"📝", activity:"🎨", other:"📌"};
+      var icon = icons[item.data.type] || "📌";
+      var reg = getReg();
+      var delBtn = (reg.type === "teacher") ? '<button class="ub r" onclick="deleteEvent(\''+item.key+'\')">🗑</button>' : '';
+      h += '<div class="event-item '+item.data.type+'"><div><div class="title">'+icon+' '+esc(item.data.title)+'</div><div class="date">📅 '+item.data.date+'</div></div>'+delBtn+'</div>';
+    });
+    area.innerHTML = h;
+  });
+}
+function deleteEvent(key){
+  if(!confirm("حذف؟")) return;
+  fdb.ref('events/'+key).remove().then(function(){ loadEvents(); });
+}
+
+// ===== 39. الأهداف =====
+function loadGoals(){
+  var area = document.getElementById("goalsContent");
+  if(!area) return;
+  var reg = getReg();
+  if(reg.type !== "student"){
+    area.innerHTML = '<div class="card"><p>هذه الميزة للتلاميذ فقط.</p></div>';
+    return;
+  }
+  var num = reg.num;
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+  fdb.ref('evaluations/'+num).once('value').then(function(snapEval){
+    var evals = snapEval.val() || {};
+    var starsEarned = 0;
+    for(var k in evals){ if(evals[k].score >= 8) starsEarned++; }
+    fdb.ref('recordings/'+num).once('value').then(function(snapRec){
+      var recs = snapRec.val() || {};
+      var recCount = 0;
+      for(var k2 in recs){ recCount++; }
+      fdb.ref('behavior/'+num).once('value').then(function(snapBeh){
+        var beh = snapBeh.val() || {};
+        var posBeh = 0;
+        for(var k3 in beh){ if(beh[k3].type === "positive") posBeh++; }
+        renderGoals(starsEarned, recCount, posBeh);
+      });
+    });
+  });
+}
+function renderGoals(stars, recs, behs){
+  var area = document.getElementById("goalsContent");
+  var h = "";
+  var goals = [
+    {title:"⭐ اجمع 30 نجمة هذا الأسبوع", current:stars, target:30},
+    {title:"🎤 سجّل 3 تسجيلات صوتية", current:recs, target:3},
+    {title:"👍 احصل على 5 سلوكات إيجابية", current:behs, target:5}
+  ];
+  goals.forEach(function(g){
+    var pct = Math.min(100, Math.round(g.current/g.target*100));
+    var done = g.current >= g.target;
+    h += '<div class="goal-item"><div class="title">'+g.title+(done?' ✅':'')+'</div>';
+    h += '<div class="goal-bar"><div class="fill" style="width:'+pct+'%"></div></div>';
+    h += '<div class="progress">'+g.current+' / '+g.target+' ('+pct+'%)</div></div>';
+  });
+  area.innerHTML = h;
+}
+
+// ===== 40. الرسوم البيانية =====
+function loadCharts(){
+  var area = document.getElementById("chartsContent");
+  if(!area) return;
+  var reg = getReg();
+  if(reg.type !== "student"){
+    area.innerHTML = '<div class="card"><p>هذه الميزة للتلاميذ فقط.</p></div>';
+    return;
+  }
+  var num = reg.num;
+  area.innerHTML = '<div class="loading">جارٍ التحميل...</div>';
+  fdb.ref('evaluations/'+num).once('value').then(function(snapEval){
+    var evals = snapEval.val() || {};
+    fdb.ref('behavior/'+num).once('value').then(function(snapBeh){
+      var beh = snapBeh.val() || {};
+      renderCharts(evals, beh);
+    });
+  });
+}
+function renderCharts(evals, beh){
+  var area = document.getElementById("chartsContent");
+  var h = "";
+  h += '<div class="card"><h3>📚 معدل كل مادة</h3>';
+  var subjScores = {};
+  for(var k in evals){
+    var e = evals[k];
+    if(!subjScores[e.subject]) subjScores[e.subject] = {sum:0, cnt:0};
+    subjScores[e.subject].sum += e.score;
+    subjScores[e.subject].cnt++;
+  }
+  var hasData = false;
+  for(var subj in subjScores){
+    hasData = true;
+    var avg = (subjScores[subj].sum / subjScores[subj].cnt).toFixed(1);
+    var subjName = "";
+    SUBJECTS.forEach(function(s){ if(s.id === subj) subjName = s.icon + " " + s.name; });
+    var pct = Math.round(avg/10*100);
+    h += '<div style="margin-bottom:12px"><div style="font-weight:700;font-size:13px;color:#1E293B;margin-bottom:4px">'+subjName+' — '+avg+'/10</div><div class="goal-bar"><div class="fill" style="width:'+pct+'%"></div></div></div>';
+  }
+  if(!hasData) h += '<p>لا توجد تقييمات بعد.</p>';
+  h += '</div>';
+  h += '<div class="card"><h3>👍 السلوك</h3>';
+  var pos = 0, neg = 0;
+  for(var num in beh){
+    for(var k2 in beh[num]){
+      if(beh[num][k2].type === "positive") pos++;
+      else neg++;
+    }
+  }
+  h += '<div class="statrow"><div class="stat"><b style="color:#10B981">'+pos+'</b><span>سلوك إيجابي</span></div><div class="stat"><b style="color:#EF4444">'+neg+'</b><span>يحتاج تصحيح</span></div></div>';
+  h += '</div>';
+  area.innerHTML = h;
+}
+
+// ===== 41. المكافآت =====
+function loadRewards(){
+  var area = document.getElementById("rewardsGrid");
+  var starsSpan = document.getElementById("myStars");
+  if(!area) return;
+  var reg = getReg();
+  if(reg.type !== "student"){
+    area.innerHTML = '<div class="card"><p>هذه الميزة للتلاميذ فقط.</p></div>';
+    if(starsSpan) starsSpan.textContent = "—";
+    return;
+  }
+  var num = reg.num;
+  fdb.ref('rewards_requests/'+num).once('value').then(function(snapReq){
+    var requests = snapReq.val() || {};
+    var spent = 0;
+    for(var k in requests){
+      if(requests[k].status === "approved" || requests[k].status === "pending") spent += requests[k].stars;
+    }
+    var earned = localStorage.getItem("student_stars_"+num) || 0;
+    var available = Math.max(0, parseInt(earned) - spent);
+    if(starsSpan) starsSpan.textContent = available;
+    var h = "";
+    REWARDS.forEach(function(r){
+      var canBuy = available >= r.stars;
+      h += '<div class="reward-card"><div class="emoji">'+r.icon+'</div><div class="name">'+r.name+'</div><div class="price">⭐ '+r.stars+' نجمة</div><button class="btn '+(canBuy?'green':'ghost')+'" onclick="requestReward(\''+r.id+'\')" '+(canBuy?'':'disabled')+'>'+(canBuy?'🎁 اطلب':'غير كافٍ')+'</button></div>';
+    });
+    area.innerHTML = h;
+  });
+}
+function requestReward(rewardId){
+  var reg = getReg();
+  if(reg.type !== "student") return;
+  var reward = REWARDS.find(function(r){ return r.id === rewardId; });
+  if(!reward) return;
+  var num = reg.num;
+  if(!confirm("طلب "+reward.name+" مقابل "+reward.stars+" نجمة؟")) return;
+  fdb.ref('rewards_requests/'+num).push({rewardId:reward.id, name:reward.name, stars:reward.stars, status:"pending", time:Date.now()}).then(function(){
+    alert("✅ تم إرسال طلبك!");
+    loadRewards();
+  });
+}
+
+// ===== 42. إعلان الأستاذ =====
+function loadAnnouncement(){
+  fdb.ref('announcement').once('value').then(function(snap){
+    var data = snap.val();
+    var banner = document.getElementById("announcementBanner");
+    var text = document.getElementById("announcementText");
+    if(!banner || !text) return;
+    if(data && data.text){
+      text.textContent = data.text;
+      banner.style.display = "flex";
+    } else {
+      banner.style.display = "none";
+    }
+    var input = document.getElementById("announcement_input");
+    if(input) input.value = (data && data.text) || "";
+  });
+}
+function saveAnnouncement(){
+  var txt = document.getElementById("announcement_input").value.trim();
+  if(!txt){ alert("⚠️ اكتب الإعلان"); return; }
+  fdb.ref('announcement').set({text:txt, time:Date.now()}).then(function(){
+    alert("✅ تم نشر الإعلان!");
+    loadAnnouncement();
+    goTo("teacher-home");
+  });
+}
+function deleteAnnouncement(){
+  if(!confirm("حذف الإعلان؟")) return;
+  fdb.ref('announcement').remove().then(function(){
+    alert("✅ تم الحذف");
+    document.getElementById("announcement_input").value = "";
+    loadAnnouncement();
+  });
+}
+
+// ===== 44. التشغيل النهائي =====
+initSound();
+renderQuizList();
+renderProgress();
+setInterval(renderProgress, 5000);
+
+startApp();
+setTimeout(function(){
+  var reg = {type: (CURRENT_USER_TYPE === "anon" ? null : CURRENT_USER_TYPE)};
+  if(reg.type){
+    fillSubjectSelects();
+    fillStudentSelects();
+    renderSubjectsGrid("studentSubjectsGrid", "showSubject");
+    renderSubjectsGrid("teacherSubjectsGrid", "viewTeacherLessons");
+    if(reg.type === "student") loadMyRecordings();
+  }
+}, 1000);
+
+// ===== PWA: العمل دون إنترنت =====
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
 </script>
 </body>
 </html>
