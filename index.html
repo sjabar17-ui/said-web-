@@ -245,6 +245,11 @@ textarea.inp{resize:vertical;min-height:90px}
 [data-theme=dark] .gate-card .pk{background:#16223A;border-color:#26364F;box-shadow:0 3px 0 #0B1220}
 [data-theme=dark] #picSel{background:#1E293B}
 @media (prefers-reduced-motion:reduce){#gate::before,#gate::after,.gate-card,.gate-logo{animation:none}}
+/* ===== إصلاح التخطيط: شريط التنقل ثابت والمحتوى يتمرر ===== */
+html,body{height:100%;overflow:hidden}
+#app{height:100vh;height:100dvh;max-height:100dvh}
+.content{min-height:0;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.mon-btn{display:none!important}
 </style>
 </head> <body>
 
@@ -3471,6 +3476,10 @@ function pqAssignDates(){var st=document.getElementById('pq_start').value||today
  var q=window.__PQ||{},bySubj={},n=0,miss=[];Object.keys(q).forEach(function(id){var x=q[id];if(x.status==='draft'&&x.subj&&!x.date)(bySubj[x.subj]=bySubj[x.subj]||[]).push(id);});
  var up={};Object.keys(bySubj).forEach(function(sj){var area=areaOf(sbj(sj)),days=perArea[area];if(!days){miss.push(sbj(sj));return;}var ids=bySubj[sj].sort(function(a,b){return (q[a].time||0)-(q[b].time||0);}),d=new Date(st+'T12:00:00'),guard=0,left=0,i=0;while(i<ids.length&&guard++<500){var ds=d.toISOString().slice(0,10),dw=d.getDay();if(dw<=4&&days[dw]&&!hol[ds]){var c=days[dw];while(c-->0&&i<ids.length){up['pub_queue/'+ids[i]+'/date']=ds;n++;i++;}}d.setDate(d.getDate()+1);}});
  if(!n){alert(miss.length?'⚠️ لا حصص في الجدول للمادة: '+miss.join('، ')+'\nحمّل جدولك أولًا من شاشة «جدول الحصص».':'لا دروس بلا تاريخ.');return;}return fdb.ref().update(up).then(function(){alert('✅ وُزّعت تواريخ '+n+' درسًا حسب أيام حصص كل مادة (وتخطّيت العطل المسجلة في المناسبات).'+(miss.length?'\n⚠️ بلا جدول: '+miss.join('، '):''));pqLoad();});});}
+
+// زر الصوت داخل الشريط العلوي بدل الزر العائم
+function initSound(){var act=document.querySelector('.topbar .actions');if(!act||document.getElementById('soundBtn'))return;var b=document.createElement('button');b.id='soundBtn';b.title='صوت النقر';b.textContent=soundEnabled?'🔊':'🔇';b.onclick=function(e){e.stopPropagation();soundEnabled=!soundEnabled;b.textContent=soundEnabled?'🔊':'🔇';if(soundEnabled)playClick();};act.insertBefore(b,act.firstChild);}
+QA.teacher.push(['📊 المراقبة','monitor']);
 </script>
 </body>
 </html>
