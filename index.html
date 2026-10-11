@@ -1400,12 +1400,8 @@ function sendReport(){
   window.open("https://wa.me/" + TEACHER_WA + "?text=" + encodeURIComponent(msg), "_blank");
 }
 function initStudentTools(){
-  var waBtn = document.createElement("button");
-  waBtn.className = "wa-btn";
-  waBtn.innerHTML = "📤";
-  waBtn.title = "أرسل تقريري";
-  waBtn.onclick = sendReport;
-  document.body.appendChild(waBtn);
+  var old = document.querySelector(".wa-btn");
+  if(old) old.remove();
 }
 
 // ===== 9. أدوات الأستاذ =====
@@ -1555,7 +1551,7 @@ function renderMonitorTable(){
   };
 }
 function askAllReports(){
-  var msg = "🔔 *رسالة من الأستاذ سعيد*\n\nافتحوا التطبيق واضغطوا على زر 📤 لإرسال تقرير تقدمكم.\n\nشكراً 🌹";
+  var msg = "🔔 *رسالة من الأستاذ سعيد*\n\nافتحوا التطبيق وتابعوا دروسكم وأنشطتكم.\n\nشكراً 🌹";
   window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank");
 }
 
