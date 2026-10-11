@@ -3205,7 +3205,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',function(){navig
 
 // ===== زر الرجوع (سهم) + زر الرجوع في الهاتف =====
 (function(){
-  var HOMES=['student-home','parent-home','teacher-home'],stack=[],pushed=0,backing=false,skip=0;
+  var HOMES=['student-home','parent-home','teacher-home'],stack=[],pushed=0,backing=false,skip=0,cs=(function(){var a=document.querySelector('.screen.active');return a?String(a.id).replace(/^screen-/,''):null;})();
   var tb=document.querySelector('.topbar');if(!tb)return;
   var btn=document.createElement('button');btn.id='backBtn';btn.type='button';btn.setAttribute('aria-label','رجوع');
   btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>';
@@ -3215,17 +3215,16 @@ if('serviceWorker' in navigator){window.addEventListener('load',function(){navig
   function sub(){
     var ov=document.getElementById('mfOv');if(ov)return function(){ov.remove();};
     var ms=document.getElementById('moreSheet');if(ms)return function(){ms.remove();};
-    var cs=window.CUR_SCREEN;
     if(cs==='myfiles'&&window.MF&&MF.cat)return function(){mfOpen();};
     if(cs==='textbook'&&window.__TBLVL===1)return function(){tbOpen();};
     return null;
   }
-  function show(){var cs=window.CUR_SCREEN;btn.style.display=(cs&&!isHome(cs))?'flex':'none';}
+  function show(){btn.style.display=(cs&&!isHome(cs))?'flex':'none';}
   function popTo(){var prev=stack.pop();backing=true;try{goTo(prev||homeOf());}finally{backing=false;}show();}
   btn.onclick=function(){var f=sub();if(f){f();return;}if(pushed>0)history.back();else popTo();};
   var g=goTo;
   goTo=function(sc){
-    var prev=window.CUR_SCREEN,r=g.apply(this,arguments);
+    var prev=cs,r=g.apply(this,arguments);cs=sc;
     if(!backing&&sc!==prev){
       if(isHome(sc)){stack=[];if(pushed>0){var n=pushed;pushed=0;skip=1;try{history.go(-n);}catch(e){skip=0;}}}
       else{if(prev)stack.push(prev);try{history.pushState({sb:1},'');pushed++;}catch(e){}}
@@ -3237,7 +3236,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',function(){navig
     if(pushed>0)pushed--;
     var f=sub();
     if(f){f();try{history.pushState({sb:1},'');pushed++;}catch(e){}return;}
-    if(!window.CUR_SCREEN||isHome(window.CUR_SCREEN))return;
+    if(!cs||isHome(cs))return;
     popTo();
   });
   window.goBack=function(){btn.onclick();};
