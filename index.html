@@ -290,7 +290,10 @@ html,body{height:100%;overflow:hidden}
 .ntoast{position:fixed;top:78px;left:50%;transform:translateX(-50%);background:#1E293B;color:#fff;padding:12px 18px;border-radius:16px;font-weight:800;z-index:3000;box-shadow:0 6px 20px rgba(0,0,0,.3);max-width:90%;text-align:center}
 .cp-rec{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:8px}
 </style>
-<style id="glassTheme">.tbic{display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:15px;flex:none;color:#fff;background:linear-gradient(145deg,#38BDF8,#2563EB);box-shadow:inset 0 1px 1px rgba(255,255,255,.7),0 8px 16px rgba(37,99,235,.35)}.tbic svg{width:24px;height:24px}
+<style id="glassTheme">.topbar .tbl{margin-inline-end:auto}
+#backBtn{display:none;flex:none;align-items:center;justify-content:center;width:42px;height:42px;margin-inline-end:10px;border-radius:14px;border:1px solid rgba(255,255,255,.5);background:rgba(255,255,255,.22);color:#fff;cursor:pointer;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 4px 10px rgba(0,0,0,.12);padding:0}
+#backBtn svg{width:24px;height:24px}
+.tbic{display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:15px;flex:none;color:#fff;background:linear-gradient(145deg,#38BDF8,#2563EB);box-shadow:inset 0 1px 1px rgba(255,255,255,.7),0 8px 16px rgba(37,99,235,.35)}.tbic svg{width:24px;height:24px}
 .tbtile{display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 8px;border-radius:20px;border:1px solid var(--gl-b);background:var(--gl-w);color:var(--ink);cursor:pointer;font-family:inherit;box-shadow:var(--gl-s)}.tbtile small{color:var(--sub);font-size:12px}
 .tbro{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 
@@ -3199,6 +3202,47 @@ if('serviceWorker' in navigator){window.addEventListener('load',function(){navig
   function pwAttach(){var gb=document.getElementById('gbody');if(!gb)return;var ins=gb.querySelectorAll('input[type=password]');for(var k=0;k<ins.length;k++){(function(i){if(i.__eye)return;i.__eye=1;var w=document.createElement('div');w.className='pwbox';i.parentNode.insertBefore(w,i);w.appendChild(i);var b=document.createElement('button');b.type='button';b.className='pweye';b.setAttribute('aria-label','إظهار أو إخفاء كلمة السر');b.innerHTML=EYE;b.onclick=function(){var show=i.type==='password';i.type=show?'text':'password';b.innerHTML=show?EYEX:EYE;};w.appendChild(b);})(ins[k]);}}
   var gb0=document.getElementById('gbody');if(gb0){new MutationObserver(pwAttach).observe(gb0,{childList:true,subtree:true});pwAttach();}
 })();
+
+// ===== زر الرجوع (سهم) + زر الرجوع في الهاتف =====
+(function(){
+  var HOMES=['student-home','parent-home','teacher-home'],stack=[],pushed=0,backing=false,skip=0;
+  var tb=document.querySelector('.topbar');if(!tb)return;
+  var btn=document.createElement('button');btn.id='backBtn';btn.type='button';btn.setAttribute('aria-label','رجوع');
+  btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>';
+  tb.insertBefore(btn,tb.firstChild);
+  function isHome(x){return HOMES.indexOf(x)>-1;}
+  function homeOf(){var r=getReg();return r.type==='teacher'?'teacher-home':r.type==='parent'?'parent-home':'student-home';}
+  function sub(){
+    var ov=document.getElementById('mfOv');if(ov)return function(){ov.remove();};
+    var ms=document.getElementById('moreSheet');if(ms)return function(){ms.remove();};
+    var cs=window.CUR_SCREEN;
+    if(cs==='myfiles'&&window.MF&&MF.cat)return function(){mfOpen();};
+    if(cs==='textbook'&&window.__TBLVL===1)return function(){tbOpen();};
+    return null;
+  }
+  function show(){var cs=window.CUR_SCREEN;btn.style.display=(cs&&!isHome(cs))?'flex':'none';}
+  function popTo(){var prev=stack.pop();backing=true;try{goTo(prev||homeOf());}finally{backing=false;}show();}
+  btn.onclick=function(){var f=sub();if(f){f();return;}if(pushed>0)history.back();else popTo();};
+  var g=goTo;
+  goTo=function(sc){
+    var prev=window.CUR_SCREEN,r=g.apply(this,arguments);
+    if(!backing&&sc!==prev){
+      if(isHome(sc)){stack=[];if(pushed>0){var n=pushed;pushed=0;skip=1;try{history.go(-n);}catch(e){skip=0;}}}
+      else{if(prev)stack.push(prev);try{history.pushState({sb:1},'');pushed++;}catch(e){}}
+    }
+    show();return r;
+  };
+  window.addEventListener('popstate',function(){
+    if(skip){skip=0;return;}
+    if(pushed>0)pushed--;
+    var f=sub();
+    if(f){f();try{history.pushState({sb:1},'');pushed++;}catch(e){}return;}
+    if(!window.CUR_SCREEN||isHome(window.CUR_SCREEN))return;
+    popTo();
+  });
+  window.goBack=function(){btn.onclick();};
+  show();
+})();
 // ===== الوضع الليلي =====
 (function(){var t=localStorage.getItem('theme')||(window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');var b=document.createElement('button');b.id='themeBtn';function ap(){document.documentElement.setAttribute('data-theme',t);b.textContent=t==='dark'?'☀️':'🌙';}b.onclick=function(){t=t==='dark'?'light':'dark';localStorage.setItem('theme',t);ap();};document.body.appendChild(b);ap();})();
 // ===== المساعد الذكي تحت مراجعة الأستاذ =====
@@ -3662,8 +3706,8 @@ function idbOpen(){return new Promise(function(res,rej){var r=indexedDB.open('sa
 function idbGet(k){return idbOpen().then(function(db){return new Promise(function(res){var q=db.transaction('f').objectStore('f').get(k);q.onsuccess=function(){res(q.result||null);};q.onerror=function(){res(null);};});}).catch(function(){return null;});}
 function idbSet(k,v){return idbOpen().then(function(db){return new Promise(function(res){var t=db.transaction('f','readwrite');t.objectStore('f').put(v,k);t.oncomplete=function(){res(true);};t.onerror=function(){res(false);};});}).catch(function(){return false;});}
 function tbData(k,m){var key=k+':'+(m.size||0)+':'+(m.time||0);return idbGet(key).then(function(c){if(c)return c;return mfFileData(k).then(function(d){idbSet(key,d);return d;});});}
-function tbOpen(){var b=document.getElementById('tbBody');if(!b)return;b.innerHTML='<div class="loading">جارٍ التحميل...</div>';fdb.ref('kb_meta').once('value').then(function(sn){var d=sn.val()||{},bySj={};window.__TBM=d;Object.keys(d).forEach(function(k){var x=d[k];if(TB_CATS.indexOf(x.cat)>-1&&x.hasFile){var sj=x.sj||'other';(bySj[sj]=bySj[sj]||[]).push(k);}});window.__TBS=bySj;var subs=MF_SUBJ.filter(function(s){return bySj[s[0]];});if(!subs.length){b.innerHTML='<div class="card"><p>لم يضع أستاذك الكتب بعد.</p></div>';return;}var h='<div class="card"><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">';subs.forEach(function(s){h+='<button class="tbtile" onclick="tbSubj(\''+s[0]+'\')"><span class="tbic">'+ic('book')+'</span><b>'+esc(s[1])+'</b><small>'+bySj[s[0]].length+' كتاب</small></button>';});h+='</div></div>';b.innerHTML=h;}).catch(function(){b.innerHTML='<div class="card"><p>⚠️ تعذّر التحميل.</p></div>';});}
-function tbSubj(sj){var b=document.getElementById('tbBody'),d=window.__TBM||{},ks=((window.__TBS||{})[sj]||[]).slice();ks.sort(function(x,y){return (d[x].cat===d[y].cat)?((d[y].time||0)-(d[x].time||0)):(d[x].cat==='textbook'?-1:1);});var h='<div class="card" style="display:flex;align-items:center;gap:10px"><button class="ibtn ghost sm" onclick="tbOpen()">رجوع</button><h3 style="margin:0">'+esc(mfSjName(sj))+'</h3></div>';ks.forEach(function(k){var x=d[k];h+='<div class="card"><b style="word-break:break-word">'+esc(x.title||'كتاب')+'</b><div style="font-size:12px;color:var(--sub);margin:4px 0 10px">'+(x.cat==='textbook'?'الكتاب المدرسي':'كتاب الأنشطة')+' · '+mfSize(x.size||0)+'</div><button class="ibtn up" style="width:100%" onclick="tbRead(\''+k+'\')">'+ic('book')+' اقرأ</button></div>';});b.innerHTML=h;window.scrollTo(0,0);var c=document.getElementById('content');if(c)c.scrollTop=0;}
+function tbOpen(){window.__TBLVL=0;var b=document.getElementById('tbBody');if(!b)return;b.innerHTML='<div class="loading">جارٍ التحميل...</div>';fdb.ref('kb_meta').once('value').then(function(sn){var d=sn.val()||{},bySj={};window.__TBM=d;Object.keys(d).forEach(function(k){var x=d[k];if(TB_CATS.indexOf(x.cat)>-1&&x.hasFile){var sj=x.sj||'other';(bySj[sj]=bySj[sj]||[]).push(k);}});window.__TBS=bySj;var subs=MF_SUBJ.filter(function(s){return bySj[s[0]];});if(!subs.length){b.innerHTML='<div class="card"><p>لم يضع أستاذك الكتب بعد.</p></div>';return;}var h='<div class="card"><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">';subs.forEach(function(s){h+='<button class="tbtile" onclick="tbSubj(\''+s[0]+'\')"><span class="tbic">'+ic('book')+'</span><b>'+esc(s[1])+'</b><small>'+bySj[s[0]].length+' كتاب</small></button>';});h+='</div></div>';b.innerHTML=h;}).catch(function(){b.innerHTML='<div class="card"><p>⚠️ تعذّر التحميل.</p></div>';});}
+function tbSubj(sj){window.__TBLVL=1;var b=document.getElementById('tbBody'),d=window.__TBM||{},ks=((window.__TBS||{})[sj]||[]).slice();ks.sort(function(x,y){return (d[x].cat===d[y].cat)?((d[y].time||0)-(d[x].time||0)):(d[x].cat==='textbook'?-1:1);});var h='<div class="card" style="display:flex;align-items:center;gap:10px"><button class="ibtn ghost sm" onclick="tbOpen()">رجوع</button><h3 style="margin:0">'+esc(mfSjName(sj))+'</h3></div>';ks.forEach(function(k){var x=d[k];h+='<div class="card"><b style="word-break:break-word">'+esc(x.title||'كتاب')+'</b><div style="font-size:12px;color:var(--sub);margin:4px 0 10px">'+(x.cat==='textbook'?'الكتاب المدرسي':'كتاب الأنشطة')+' · '+mfSize(x.size||0)+'</div><button class="ibtn up" style="width:100%" onclick="tbRead(\''+k+'\')">'+ic('book')+' اقرأ</button></div>';});b.innerHTML=h;window.scrollTo(0,0);var c=document.getElementById('content');if(c)c.scrollTop=0;}
 function tbRead(k){var m=(window.__TBM||{})[k]||{},ov=mfOverlay(m.title||'الكتاب'),b=ov.querySelector('.vbody');b.innerHTML='<div class="loading">⏳ جارٍ فتح الكتاب (في المرة الأولى فقط)...</div>';tbData(k,m).then(function(d){if(!d)throw 0;viewData(m.title||'الكتاب',d,m.ftype||'');var o2=document.getElementById('mfOv');if(o2){o2.classList.add('tbro');o2.addEventListener('contextmenu',function(e){e.preventDefault();});}}).catch(function(){b.innerHTML='<div class="card"><p>⚠️ تعذّر فتح الكتاب.</p></div>';});}
 function mfShow(c){MF.cat=c;MF.sj='all';document.getElementById('mfHome').style.display='none';document.getElementById('mfCat').style.display='';mfRender();window.scrollTo(0,0);document.getElementById('content').scrollTop=0;}
 function mfSj(s){MF.sj=s;mfRender();}
