@@ -262,6 +262,20 @@ html,body{height:100%;overflow:hidden}
 .ibtn.sm{padding:6px 10px;font-size:12px;border-radius:11px}
 .nbadge{position:absolute;top:-4px;right:-2px;min-width:18px;height:18px;border-radius:9px;background:#EF4444;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;padding:0 5px;box-shadow:0 0 0 2px var(--card)}
 #qaFab,#aiFab{touch-action:none}
+
+.mf-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.mf-tile{position:relative;background:var(--card);border-radius:18px;padding:16px 8px;border:1.5px solid var(--border);text-align:center;font-weight:800;color:var(--ink);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:8px;font-family:inherit;font-size:13px;box-shadow:var(--shadow)}
+.mf-tile .mfi{width:48px;height:48px;border-radius:15px;display:flex;align-items:center;justify-content:center;color:#fff}
+.mf-tile .mfi svg{width:26px;height:26px}
+.mf-tile small{font-weight:600;color:var(--sub);font-size:11px}
+.mf-chip{padding:7px 12px;border-radius:999px;border:1.5px solid var(--border);background:var(--card);color:var(--ink);font-family:inherit;font-weight:700;font-size:12px;cursor:pointer}
+.mf-chip.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.mf-row{display:flex;flex-direction:column;gap:8px;background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:12px;margin-bottom:10px}
+.mf-row .mfa{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sec-h{font-weight:800;margin:18px 0 10px;font-size:16px;display:flex;align-items:center;gap:8px}
+.upz{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+
+.mf-row>div>span svg{width:24px;height:24px}
 </style>
 </head> <body>
 
@@ -407,7 +421,7 @@ html,body{height:100%;overflow:hidden}
 <label>صورة أو PDF صغير (اختياري):</label><input type="file" id="nd_file" accept="image/*,application/pdf" style="width:100%" onchange="ndPickFile(this)">
 <button class="btn" id="nd_recb" onclick="ndRec()">🎙️ سجّل شرحًا صوتيًا</button>
 <input class="inp" id="nd_drive" placeholder="رابط ملف كبير (Google Drive، اختياري)">
-<h3>✏️ النشاط</h3><select class="inp" id="nd_type"><option value="daily">يومي</option><option value="weekly">أسبوعي</option><option value="integration">إدماج</option></select>
+<h3>✏️ النشاط</h3><label>ورقة النشاط أو الواجب للتحميل (صورة أو PDF صغير، اختياري):</label><input type="file" id="nd_hwfile" accept="image/*,application/pdf" style="width:100%" onchange="hwPick(this)"><select class="inp" id="nd_type"><option value="daily">يومي</option><option value="weekly">أسبوعي</option><option value="integration">إدماج</option></select>
 <textarea class="inp" id="nd_act" rows="3" placeholder="نص النشاط"></textarea>
 <textarea class="inp" id="nd_ans" rows="2" placeholder="الإجابة النموذجية (لا يراها التلميذ إلا بعد تصحيحك)"></textarea>
 <button class="btn green" onclick="ndSave()">💾 حفظ ونشر</button></div>
@@ -489,7 +503,7 @@ html,body{height:100%;overflow:hidden}
         <button class="menu-btn gradient-green" onclick="goTo('newHomework')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-notepad"/></svg></span>إضافة واجب</button>
         <button class="menu-btn gradient-blue" onclick="goTo('notebook')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-notebook"/></svg></span>كراس القسم</button>
         <button class="menu-btn gradient-green" onclick="goTo('studentsList')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-chat"/></svg></span>الرسائل</button>
-        <button class="menu-btn gradient-blue" onclick="goTo('files')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-folder"/></svg></span>ملفاتي</button>
+        <button class="menu-btn gradient-blue" onclick="goTo('myfiles')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-folder"/></svg></span>ملفاتي</button>
         <button class="menu-btn gradient-green" onclick="goTo('evaluate')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-star"/></svg></span>تقييم</button>
         <button class="menu-btn gradient-blue" onclick="goTo('attendance')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-calendar"/></svg></span>غيابات</button>
         <button class="menu-btn gradient-green" onclick="goTo('behavior')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-thumb"/></svg></span>سلوك</button>
@@ -729,6 +743,7 @@ html,body{height:100%;overflow:hidden}
         <label>📅 تاريخ التسليم (اختياري):</label>
         <input class="inp" id="nh_due" type="date">
         <textarea class="inp" id="nh_content" placeholder="نص الواجب"></textarea>
+        <label>ورقة الواجب للتحميل (صورة أو PDF صغير، اختياري):</label><input type="file" id="nh_file" accept="image/*,application/pdf" style="width:100%" onchange="hwPick(this)">
         <label>✅ الإجابة النموذجية (اختياري):</label>
         <textarea class="inp" id="nh_answer" placeholder="الحل..."></textarea>
         <button class="btn green" onclick="saveHomework()">💾 حفظ</button>
@@ -750,6 +765,7 @@ html,body{height:100%;overflow:hidden}
       <div id="chatStudentsList"><div class="loading">جارٍ التحميل...</div></div>
     </div>
 
+    <div class="screen" id="screen-myfiles"><div id="mfHome"></div><div id="mfCat" style="display:none"></div></div>
     <div class="screen" id="screen-files">
       <div class="card"><h3>📁 ملفاتي</h3></div>
       <div class="card">
@@ -1629,14 +1645,13 @@ function renderSubjectContent(lessons, homework, isStudent, today){
   window.__LESSONS = lessons;
   var area = document.getElementById("lessonsList");
   var h = "";
-
-  h += '<h3 style="color:#3B82F6;font-weight:800;margin:16px 0 10px;font-size:16px">📖 الدروس</h3>';
+  var sj = window.__SUBJ;
+  h += '<div class="sec-h" style="color:#3B82F6">📖 الدرس</div>';
   var lessonCount = 0;
   for(var k in lessons){
     var d = lessons[k];
     lessonCount++;
     var locked = isStudent && ((d.date && d.date > today) || (d.publishAt && Date.now() < d.publishAt));
-
     if(locked){
       h += '<div class="card" style="opacity:.65;background:#F1F5F9;border-color:#CBD5E1">';
       h += '<h3>🔒 '+esc(d.title)+'</h3>';
@@ -1654,65 +1669,33 @@ function renderSubjectContent(lessons, homework, isStudent, today){
         h += '<div class="video-wrap"><iframe src="'+vid+'" allowfullscreen></iframe></div>';
       }
       if(d.img) h += '<img src="'+d.img+'" class="lesson-img" onerror="this.style.display=\'none\'">';
-      if(d.pdf) h += '<a href="'+d.pdf+'" target="_blank" class="btn green" style="display:block;text-align:center;margin-top:10px;text-decoration:none">📄 فتح PDF</a>';
       if(d.imgData) h += '<img src="'+d.imgData+'" class="lesson-img">';
-      if(d.pdfData) h += '<button class="btn green" style="display:block;width:100%;margin-top:10px" onclick="openDataPdf(\''+d.hw+'\',\''+window.__SUBJ+'\',\''+k+'\')">📄 فتح PDF</button>';
+      var nm = (d.title||'lesson').replace(/[\\\/:*?"<>|]/g,'_');
+      if(d.pdf) h += '<div style="display:flex;gap:8px;margin-top:10px"><a href="'+esc(directLink(d.pdf))+'" download target="_blank" rel="noopener" class="ibtn" style="flex:1">'+ic('download')+' تحميل PDF</a><a href="'+esc(d.pdf)+'" target="_blank" rel="noopener" class="ibtn ghost" style="flex:1">فتح</a></div>';
+      if(d.pdfData) h += '<div style="display:flex;gap:8px;margin-top:10px"><button class="ibtn" style="flex:1" onclick="dlLesson(\''+sj+'\',\''+k+'\',\'pdfData\',\''+nm.replace(/'/g,'')+'.pdf\')">'+ic('download')+' تحميل PDF</button><button class="ibtn ghost" style="flex:1" onclick="openDataPdf(\''+d.hw+'\',\''+sj+'\',\''+k+'\')">فتح</button></div>';
+      if(d.imgData) h += '<button class="ibtn ghost" style="width:100%;margin-top:8px" onclick="dlLesson(\''+sj+'\',\''+k+'\',\'imgData\',\''+nm.replace(/'/g,'')+'.jpg\')">'+ic('download')+' تحميل الصورة</button>';
+      if(d.drive) h += '<div style="display:flex;gap:8px;margin-top:10px"><a href="'+esc(directLink(d.drive))+'" download target="_blank" rel="noopener" class="ibtn" style="flex:1">'+ic('download')+' تحميل الملف</a><a href="'+esc(d.drive)+'" target="_blank" rel="noopener" class="ibtn ghost" style="flex:1">فتح</a></div>';
       if(d.audio) h += '<audio controls src="'+d.audio+'" style="width:100%;margin-top:10px"></audio>';
       if(isStudent) h += '<button class="btn" style="width:100%;margin-top:10px" onclick="speakLesson(\''+k+'\')">🔊 اقرأ لي الدرس</button>';
       if(isStudent) h += '<button class="btn" style="width:100%;margin-top:10px" onclick="aiAskLesson(\''+k+'\')">🤖 اسأل المساعد عن هذا الدرس</button>';
-      if(isStudent && d.goal){ var gid = (window.__SUBJ+'_'+k).replace(/[.$#\[\]\/]/g,'_'), sub = d.hw ? (window.__SUBS||{})[skey(window.__SUBJ, d.hw)] : true, gs = localStorage.getItem('gc_'+CURRENT_USER_NUM+'_'+gid);
+      if(isStudent && d.goal){ var gid = (sj+'_'+k).replace(/[.$#\[\]\/]/g,'_'), sub = d.hw ? (window.__SUBS||{})[skey(sj, d.hw)] : true, gs = localStorage.getItem('gc_'+CURRENT_USER_NUM+'_'+gid);
         h += '<div class="ai-b">🎯 <b>هدفنا:</b> '+esc(d.goal)+(gs ? '<br>نتيجتك: '+GC_LBL[gs] : (sub ? '<br><button class="btn" onclick="goalStart(\''+k+'\')">✅ تحقق من أنك فهمت</button>' : '<br><span style="font-size:12px">أرسل نشاطك أولًا ثم تحقق من فهمك</span>'))+'</div>'; }
-      if(d.drive) h += '<a href="'+esc(d.drive)+'" target="_blank" class="btn" style="display:block;text-align:center;margin-top:10px;text-decoration:none">📎 ملف إضافي (Drive)</a>';
       h += '</div>';
     }
   }
   if(lessonCount === 0) h += '<div class="card"><p>لا دروس بعد.</p></div>';
 
-  h += '<h3 style="color:#10B981;font-weight:800;margin:16px 0 10px;font-size:16px">📝 الواجبات</h3>';
-  var hwCount = 0;
-  for(var k2 in homework){
-    var hw = homework[k2];
-    hwCount++;
-    var hwDate = hw.date || "";
-    var locked2 = isStudent && ((hwDate && hwDate > today) || (hw.publishAt && Date.now() < hw.publishAt));
-
-    if(locked2){
-      h += '<div class="card" style="opacity:.65;background:#F1F5F9;border-color:#CBD5E1">';
-      h += '<h3>🔒 '+esc(hw.title)+'</h3>';
-      h += '<p style="color:#8B5CF6;font-size:13px;font-weight:700;margin-top:8px">📅 تاريخ الواجب: '+hwDate+'</p>';
-      h += '<p style="color:#64748B;font-size:12px;margin-top:4px">⏳ لم يحن وقت هذا الواجب بعد</p>';
-      h += '</div>';
-    } else {
-      h += '<div class="card"><h3>📝 '+esc(hw.title)+'</h3>';
-      if(hwDate) h += '<p style="color:#8B5CF6;font-size:12px;font-weight:700;margin-top:4px">📅 '+hwDate+'</p>';
-      var typeNames = {daily:"📅 يومي", weekly:"📆 أسبوعي", integration:"🔗 إدماج"};
-      if(hw.type) h += '<p style="color:#3B82F6;font-size:12px;font-weight:700">'+(typeNames[hw.type]||"")+'</p>';
-      h += '<p style="background:#ECFDF5;padding:12px;border-radius:10px;line-height:2;color:#1E293B;margin-top:8px">'+esc(hw.content)+'</p>';
-      if(!isStudent && hw.answer){
-        h += '<p style="background:#FEF3C7;padding:12px;border-radius:10px;margin-top:8px;color:#78350F;font-size:13px"><b>✅ الإجابة النموذجية:</b><br>'+esc(hw.answer)+'</p>';
-      }
-      if(isStudent){
-        var sk = (window.__SUBJ+'_'+k2).replace(/[.$#\[\]\/]/g,'_'), sb = (window.__SUBS||{})[sk], can = (!hwDate || hwDate === today || (window.__REOPEN||{})[k2]);
-        function stars(g){ return new Array(Math.round(g/2)+1).join('⭐'); }
-        if(sb && sb.grade != null){ h += '<div class="ai-b">✅ أُرسل حلّك<br>'+stars(sb.grade)+(sb.note ? '<br>💬 '+esc(sb.note) : '')+'</div>'; if(hw.answer) h += '<p style="background:#FEF3C7;padding:12px;border-radius:10px;margin-top:8px;color:#78350F;font-size:13px"><b>✅ الإجابة النموذجية:</b><br>'+esc(hw.answer)+'</p>'; }
-        else if(sb && sb.autoScore != null){ h += '<div class="ai-b">✅ أجبت<br>'+stars(sb.autoScore)+'</div>'; }
-        else if(sb && !sb.retry){ h += '<div class="ai-b">✅ أُرسل حلّك — ⏳ بانتظار التصحيح</div>'; }
-        else if(!can){ h += '<div class="ai-b">⏳ انتهى وقت إرسال هذا الواجب</div>'; }
-        else {
-          if(sb && sb.retry) h += '<div class="ai-b">✏️ أعد المحاولة'+(sb.note ? ': '+esc(sb.note) : '')+'</div>';
-          if(hw.mcq){ window.__HWMCQ = window.__HWMCQ || {}; window.__HWMCQ[sk] = hw.mcq; hw.mcq.forEach(function(q,qi){ h += '<div class="ai-b"><b>'+(qi+1)+'. '+esc(q.q)+'</b>'; q.o.forEach(function(o,oi){ h += '<label style="display:block;margin:6px 0"><input type="radio" name="mq_'+sk+'_'+qi+'" value="'+oi+'"> '+esc(o)+'</label>'; }); h += '</div>'; }); h += '<button class="btn" onclick="mcqSubmit(\''+sk+'\')">📤 أرسل إجاباتي</button>'; }
-          else { h += '<input type="file" id="f_'+sk+'" accept="image/*,application/pdf" style="margin-top:10px;width:100%"><button class="btn" onclick="submitWork(\''+sk+'\')">📤 إرسال حلّي للأستاذ</button>'; }
-        }
-      }
-      h += '</div>';
-    }
-  }
-  if(hwCount === 0) h += '<div class="card"><p>لا واجبات بعد.</p></div>';
+  var daily=[], weekly=[], k2;
+  for(k2 in homework){ var tp = homework[k2].type; if(tp==='weekly'||tp==='integration') weekly.push(k2); else daily.push(k2); }
+  h += '<div class="sec-h" style="color:#10B981">✏️ النشاط اليومي</div>';
+  daily.forEach(function(x){ h += hwCard(x, homework[x], isStudent, today); });
+  if(!daily.length) h += '<div class="card"><p>لا أنشطة بعد.</p></div>';
+  h += '<div class="sec-h" style="color:#8B5CF6">📆 الواجبات الأسبوعية</div>';
+  weekly.forEach(function(x){ h += hwCard(x, homework[x], isStudent, today); });
+  if(!weekly.length) h += '<div class="card"><p>لا واجبات أسبوعية بعد.</p></div>';
   h += quizSection(isStudent, today);
-
   area.innerHTML = h;
 }
-
 function viewTeacherLessons(subjId){
   var area = document.getElementById("teacherLessonsList");
   if(!area) return;
@@ -1799,7 +1782,7 @@ function saveHomework(){
   var due = document.getElementById("nh_due").value;
   var answer = document.getElementById("nh_answer").value.trim();
   if(!title || !content){ alert("⚠️ املأ العنوان والمحتوى"); return; }
-  fdb.ref('homework/'+subj).push({title:title, content:content, type:type, date:date, due:due, answer:answer, time:Date.now()}).then(function(){
+  var HO={title:title, content:content, type:type, date:date, due:due, answer:answer, time:Date.now()};if(HWF){HO.fileData=HWF.data;HO.fileName=HWF.name;}fdb.ref('homework/'+subj).push(HO).then(function(){HWF=null;var _f=document.getElementById('nh_file');if(_f)_f.value='';
     alert("✅ تم الحفظ!");
     document.getElementById("nh_title").value = "";
     document.getElementById("nh_content").value = "";
@@ -3284,9 +3267,9 @@ function ndMcq(txt){var out=[];txt.split('\n').forEach(function(l){var p=l.split
 function ndSave(){var sj=document.getElementById('nd_subject').value,date=document.getElementById('nd_date').value,title=document.getElementById('nd_title').value.trim(),v=function(i){return document.getElementById(i).value.trim();};if(!sj||!date||!title){alert('⚠️ اختر المادة والتاريخ واكتب العنوان');return;}
  var L={title:title,goal:v('nd_goal'),date:date,content:v('nd_explain'),video:v('nd_video'),drive:v('nd_drive'),time:Date.now()};if(ND.file)L[ND.file.kind==='pdf'?'pdfData':'imgData']=ND.file.data;if(ND.audio)L.audio=ND.audio;
  var mcq=[],act=v('nd_act'),up={},lk=fdb.ref('lessons/'+sj).push().key;
- if(act||mcq.length){var hk=fdb.ref('homework/'+sj).push().key,H={title:title,date:date,content:act||'أجب عن الأسئلة',type:document.getElementById('nd_type').value,answer:v('nd_ans'),time:Date.now()};if(mcq.length)H.mcq=mcq;L.hw=hk;up['homework/'+sj+'/'+hk]=H;}
+ if(act||mcq.length){var hk=fdb.ref('homework/'+sj).push().key,H={title:title,date:date,content:act||'أجب عن الأسئلة',type:document.getElementById('nd_type').value,answer:v('nd_ans'),time:Date.now()};if(mcq.length)H.mcq=mcq;if(HWF){H.fileData=HWF.data;H.fileName=HWF.name;}L.hw=hk;up['homework/'+sj+'/'+hk]=H;}
  up['lessons/'+sj+'/'+lk]=L;
- fdb.ref().update(up).then(function(){alert('✅ نُشر درس '+date);var d=new Date(date);d.setDate(d.getDate()+1);document.getElementById('nd_date').value=d.toISOString().slice(0,10);['nd_title','nd_goal','nd_explain','nd_video','nd_drive','nd_act','nd_ans'].forEach(function(i){document.getElementById(i).value='';});document.getElementById('nd_file').value='';ND.file=null;ND.audio=null;document.getElementById('nd_recb').textContent='🎙️ سجّل شرحًا صوتيًا';ndFillCopy();}).catch(function(){alert('⚠️ تعذّر الحفظ. قد يكون الملف كبيرًا.');});}
+ fdb.ref().update(up).then(function(){alert('✅ نُشر درس '+date);var d=new Date(date);d.setDate(d.getDate()+1);document.getElementById('nd_date').value=d.toISOString().slice(0,10);['nd_title','nd_goal','nd_explain','nd_video','nd_drive','nd_act','nd_ans'].forEach(function(i){document.getElementById(i).value='';});document.getElementById('nd_file').value='';var _hf=document.getElementById('nd_hwfile');if(_hf)_hf.value='';HWF=null;ND.file=null;ND.audio=null;document.getElementById('nd_recb').textContent='🎙️ سجّل شرحًا صوتيًا';ndFillCopy();}).catch(function(){alert('⚠️ تعذّر الحفظ. قد يكون الملف كبيرًا.');});}
 function ndAbList(){var sj=document.getElementById('nd_subject').value,stu=document.getElementById('nd_ab_stu').value,a=document.getElementById('ndAbList');Promise.all([fdb.ref('homework/'+sj).once('value'),fdb.ref('reopen/'+stu).once('value')]).then(function(r){var hw=r[0].val()||{},ro=r[1].val()||{},h='';Object.keys(hw).sort(function(x,y){return (hw[y].date||'')>(hw[x].date||'')?1:-1;}).forEach(function(k){h+='<div class="ai-b"><b>'+esc(hw[k].date||'')+' — '+esc(hw[k].title)+'</b><br>'+(ro[k]?'🔓 مفتوح لهذا التلميذ <button class="btn" onclick="ndAbSet(\''+stu+'\',\''+k+'\',null)">إغلاق</button>':'<button class="btn" onclick="ndAbSet(\''+stu+'\',\''+k+'\',true)">🔓 افتح الإرسال له</button>')+'</div>';});fdb.ref('quizzes/'+sj).once('value').then(function(qs){var qz=qs.val()||{};Object.keys(qz).forEach(function(k){var kk='q'+k;h+='<div class="ai-b">🧩 <b>'+esc(qz[k].date||'')+' — '+esc(qz[k].title)+'</b><br>'+(ro[kk]?'🔓 مفتوح <button class="btn" onclick="ndAbSet(\''+stu+'\',\''+kk+'\',null)">إغلاق</button>':'<button class="btn" onclick="ndAbSet(\''+stu+'\',\''+kk+'\',true)">🔓 افتح الإرسال له</button>')+'</div>';});a.innerHTML=h||'<p>لا شيء.</p>';});});}
 function ndAbSet(stu,k,v){fdb.ref('reopen/'+stu+'/'+k).set(v).then(ndAbList);}
 function mcqSubmit(sk){var list=(window.__HWMCQ||{})[sk];if(!list)return;var ok=0;for(var i=0;i<list.length;i++){var el=document.querySelector('input[name="mq_'+sk+'_'+i+'"]:checked');if(!el){alert('أجب عن كل الأسئلة');return;}if(+el.value===list[i].c)ok++;}qsend('set','submissions/'+CURRENT_USER_NUM+'/'+sk,{type:'mcq',autoScore:Math.round(ok*10/list.length),subj:window.__SUBJ,time:Date.now()}).then(function(r){if(r==='queued')alert('📡 لا اتصال: ستُرسل إجاباتك عند عودة الإنترنت');else celebrate('أنهيت الاختبار! ⭐');showSubject(window.__SUBJ);}).catch(function(){alert('⚠️ تعذّر الإرسال');});}
@@ -3369,7 +3352,7 @@ function libAdminLoad(){var a=document.getElementById('libAdminList');fdb.ref('l
 function libDel(k){if(!confirm('حذف من المكتبة؟'))return;fdb.ref('library/'+k).remove().then(libAdminLoad);}
 function loadReadingTexts(){var a=document.getElementById('textsDyn');if(!a)return;fdb.ref('library').once('value').then(function(sn){var d=sn.val()||{},h='';Object.keys(d).sort(function(x,y){return d[y].time-d[x].time;}).forEach(function(k){var x=d[k];if(x.kind!=='text')return;h+='<div class="card"><h3>📖 '+esc(x.title)+'</h3>'+(x.audio?'<audio controls src="'+x.audio+'" style="width:100%;margin-bottom:8px"></audio><p style="font-size:12px;color:var(--sub)">استمع إلى قراءة الأستاذ ثم اقرأ</p>':'')+'<p style="background:#EFF6FF;padding:14px;border-radius:12px;line-height:2;white-space:pre-line">'+esc(x.text)+'</p><button class="btn" onclick="speakText(\''+k+'\')">🔊 اقرأ لي</button></div>';});window.__TXT=d;a.innerHTML=h||'<div class="card"><p>لا نصوص بعد.</p></div>';}).catch(function(){a.innerHTML='<p>تعذّر التحميل.</p>';});}
 function speakText(k){var x=(window.__TXT||{})[k];if(!x||!window.speechSynthesis){alert('الصوت غير متاح على هذا الهاتف');return;}var u=new SpeechSynthesisUtterance(x.text);u.lang='ar';u.rate=.8;speechSynthesis.cancel();speechSynthesis.speak(u);}
-function loadPublicFiles(){var a=document.getElementById('libraryList');if(!a)return;a.innerHTML='<div class="loading">جارٍ التحميل...</div>';Promise.all([fdb.ref('files/public').once('value'),fdb.ref('library').once('value')]).then(function(r){var old=r[0].val()||{},lib=r[1].val()||{},h='',k,items=[];for(k in lib)if(lib[k].kind!=='text')items.push({k:k,x:lib[k]});for(k in old)items.push({k:'o'+k,x:{kind:'link',title:old[k].title,url:old[k].url}});items.forEach(function(it){var x=it.x;h+='<div class="card"><h3>'+(x.kind==='file'?'📄':'🔗')+' '+esc(x.title)+'</h3>'+(x.kind==='file'?(x.type==='application/pdf'?'<button class="btn green" style="width:100%" onclick="libOpenPdf(\''+it.k+'\')">📂 فتح</button>':'<img src="'+x.data+'" style="max-width:100%;border-radius:12px">'):'<a href="'+esc(x.url)+'" target="_blank" class="btn green" style="display:block;text-align:center;text-decoration:none">📂 فتح</a>')+'</div>';});a.innerHTML=h||'<div class="card"><p>لا ملفات بعد.</p></div>';}).catch(function(){a.innerHTML='<p>تعذّر التحميل.</p>';});}
+function loadPublicFiles(){var a=document.getElementById('libraryList');if(!a)return;a.innerHTML='<div class="loading">جارٍ التحميل...</div>';Promise.all([fdb.ref('files/public').once('value'),fdb.ref('library').once('value')]).then(function(r){var old=r[0].val()||{},lib=r[1].val()||{},h='',k,items=[];for(k in lib)if(lib[k].kind!=='text')items.push({k:k,x:lib[k]});for(k in old)items.push({k:'o'+k,x:{kind:'link',title:old[k].title,url:old[k].url}});items.forEach(function(it){var x=it.x;h+='<div class="card"><h3>'+(x.kind==='file'?'📄':'🔗')+' '+esc(x.title)+'</h3>'+(x.kind==='file'?(x.type==='application/pdf'?'<div style="display:flex;gap:8px"><button class="ibtn" style="flex:1" onclick="libDlPdf(\''+it.k+'\')">'+ic('download')+' تحميل</button><button class="ibtn ghost" style="flex:1" onclick="libOpenPdf(\''+it.k+'\')">فتح</button></div>':'<img src="'+x.data+'" style="max-width:100%;border-radius:12px"><button class="ibtn" style="width:100%;margin-top:8px" onclick="libDlPdf(\''+it.k+'\')">'+ic('download')+' تحميل الصورة</button>'):'<div style="display:flex;gap:8px"><a href="'+esc(directLink(x.url))+'" download target="_blank" rel="noopener" class="ibtn" style="flex:1">'+ic('download')+' تحميل</a><a href="'+esc(x.url)+'" target="_blank" rel="noopener" class="ibtn ghost" style="flex:1">فتح</a></div>')+'</div>';});a.innerHTML=h||'<div class="card"><p>لا ملفات بعد.</p></div>';}).catch(function(){a.innerHTML='<p>تعذّر التحميل.</p>';});}
 function libOpenPdf(k){fdb.ref('library/'+k+'/data').once('value').then(function(sn){return fetch(sn.val());}).then(function(r){return r.blob();}).then(function(b){window.open(URL.createObjectURL(b),'_blank');});}
 // ===== الإرسال عند عودة الإنترنت =====
 function obGet(){try{return JSON.parse(localStorage.getItem('outbox')||'[]');}catch(e){return [];}}
@@ -3450,7 +3433,7 @@ function tlDel(k){if(!confirm('حذف الوثيقة؟'))return;var up={};up['tl
 function tlGetText(id){return fdb.ref('tlib_text/'+id).once('value').then(function(sn){var v=sn.val()||[];if(!Array.isArray(v))v=Object.keys(v).sort(function(a,b){return a-b;}).map(function(k){return v[k];});return v.join('');});}
 function tlClassifyAll(){var pr=document.getElementById('tl_prog');fdb.ref('tlib').once('value').then(function(sn){var d=sn.val()||{},ids=Object.keys(d).filter(function(k){return (d[k].cat||'unsorted')==='unsorted';});if(!ids.length){pr.textContent='لا وثائق غير مصنَّفة.';return;}var p=Promise.resolve(),subs=(window.SUBJECTS||[]).map(function(x){return {id:x.id,name:x.name};});ids.forEach(function(k,i){p=p.then(function(){pr.textContent='🧠 تصنيف ('+(i+1)+'/'+ids.length+') '+d[k].title;return tlGetText(k).then(function(t){return aiCall({task:'classify',title:d[k].title,snippet:t.slice(0,1800),subjects:subs});}).then(function(j){var o=atJson(j.answer)||{},up={};if(TL_CATS[o.cat]&&o.cat!=='unsorted')up['tlib/'+k+'/cat']=o.cat;if(o.subject_id&&subs.some(function(x){return x.id===o.subject_id;}))up['tlib/'+k+'/subj']=o.subject_id;if(o.title)up['tlib/'+k+'/title']=String(o.title).slice(0,120);return fdb.ref().update(up);}).catch(function(){}).then(function(){return sleep(3000);});});});p.then(function(){pr.textContent='✅ انتهى التصنيف، راجعه وصحّح ما شئت.';tlLoad();});});}
 function tlChunks(t){var out=[],cur='';t.split(/\n+/).forEach(function(x){if(cur.length+x.length>6000&&cur){out.push(cur);cur='';}cur+=x+'\n';});if(cur.trim())out.push(cur);return out;}
-function tlExtract(id){var pr=document.getElementById('tl_prog'),distId=(document.getElementById('tl_dist')||{}).value,subs=(window.SUBJECTS||[]).map(function(x){return {id:x.id,name:x.name};});Promise.all([fdb.ref('tlib/'+id).once('value'),tlGetText(id),distId?tlGetText(distId):Promise.resolve('')]).then(function(r){var doc=r[0].val()||{},ch=tlChunks(r[1]),dist=r[2].slice(0,3000),n=0,p=Promise.resolve();if(ch.length>15){alert('الوثيقة كبيرة، سأعالج أول 15 جزءًا الآن.');ch=ch.slice(0,15);}ch.forEach(function(c,i){p=p.then(function(){pr.textContent='📬 يقرأ المساعد الجزء '+(i+1)+' من '+ch.length+' ('+n+' درسًا حتى الآن)';return aiCall({task:'extract',text:c,subjects:subs,today:todayStr(),hint:{subject_id:doc.subj||null,dist:dist}}).then(function(j){var o=atJson(j.answer),ls=(o&&o.lessons)||[],up={};ls.forEach(function(l){if(!l||!l.title)return;var key=fdb.ref('pub_queue').push().key;up['pub_queue/'+key]={subj:(subs.some(function(x){return x.id===l.subject_id;})?l.subject_id:(doc.subj||'')),date:/^\d{4}-\d{2}-\d{2}$/.test(l.date||'')?l.date:'',title:String(l.title).slice(0,150),goal:l.goal||'',explanation:l.explanation||'',activity:l.activity||'',answer:l.model_answer||'',quiz:(l.quiz||[]).map(function(x){return {q:x.q,o:x.options,c:(x.correct|0)-1};}).filter(function(x){return x.q&&x.o&&x.o.length>=2&&x.c>=0&&x.c<x.o.length;}),src:id,status:'draft',time:Date.now()};n++;});return Object.keys(up).length?fdb.ref().update(up):null;}).catch(function(e){if(e&&e.code==='limit'||e&&e.code==='nourl')throw e;}).then(function(){return sleep(6000);});});});p.then(function(){pr.textContent='✅ جُهّز '+n+' درسًا للمراجعة';goTo('pubQueue');}).catch(function(e){pr.textContent='⚠️ '+aiErr(e);});});}
+function tlExtract(id){var pr=tlPr(),distId=(document.getElementById('tl_dist')||{}).value,subs=(window.SUBJECTS||[]).map(function(x){return {id:x.id,name:x.name};});Promise.all([fdb.ref('tlib/'+id).once('value'),tlGetText(id),distId?tlGetText(distId):Promise.resolve('')]).then(function(r){var doc=r[0].val()||{},ch=tlChunks(r[1]),dist=r[2].slice(0,3000),n=0,p=Promise.resolve();if(ch.length>15){alert('الوثيقة كبيرة، سأعالج أول 15 جزءًا الآن.');ch=ch.slice(0,15);}ch.forEach(function(c,i){p=p.then(function(){pr.textContent='📬 يقرأ المساعد الجزء '+(i+1)+' من '+ch.length+' ('+n+' درسًا حتى الآن)';return aiCall({task:'extract',text:c,subjects:subs,today:todayStr(),hint:{subject_id:doc.subj||null,dist:dist}}).then(function(j){var o=atJson(j.answer),ls=(o&&o.lessons)||[],up={};ls.forEach(function(l){if(!l||!l.title)return;var key=fdb.ref('pub_queue').push().key;up['pub_queue/'+key]={subj:(subs.some(function(x){return x.id===l.subject_id;})?l.subject_id:(doc.subj||'')),date:/^\d{4}-\d{2}-\d{2}$/.test(l.date||'')?l.date:'',title:String(l.title).slice(0,150),goal:l.goal||'',explanation:l.explanation||'',activity:l.activity||'',answer:l.model_answer||'',quiz:(l.quiz||[]).map(function(x){return {q:x.q,o:x.options,c:(x.correct|0)-1};}).filter(function(x){return x.q&&x.o&&x.o.length>=2&&x.c>=0&&x.c<x.o.length;}),src:id,status:'draft',time:Date.now()};n++;});return Object.keys(up).length?fdb.ref().update(up):null;}).catch(function(e){if(e&&e.code==='limit'||e&&e.code==='nourl')throw e;}).then(function(){return sleep(6000);});});});p.then(function(){pr.textContent='✅ جُهّز '+n+' درسًا للمراجعة';goTo('pubQueue');}).catch(function(e){pr.textContent='⚠️ '+aiErr(e);});});}
 function pqSet(id,f,v){fdb.ref('pub_queue/'+id+'/'+f).set(v);if(window.__PQ&&window.__PQ[id])window.__PQ[id][f]=v;}
 function pqLoad(){var a=document.getElementById('pqList');var ps=document.getElementById('pq_start');if(ps&&!ps.value)ps.value=todayStr();a.innerHTML='<div class="loading">جارٍ التحميل...</div>';fdb.ref('pub_queue').once('value').then(function(sn){var d=sn.val()||{};window.__PQ=d;var ids=Object.keys(d).filter(function(k){return d[k].status==='draft';}).sort(function(x,y){var a1=d[x].date||'9999',b1=d[y].date||'9999';return a1<b1?-1:a1>b1?1:0;}),h='';ids.forEach(function(k){var x=d[k],ready=x.subj&&/^\d{4}-\d{2}-\d{2}$/.test(x.date||'');h+='<div class="ai-b" style="border:1px solid var(--border)">'+(ready?'🟢':'🟡 أكمل المادة والتاريخ')+'<br><select onchange="pqSet(\''+k+'\',\'subj\',this.value);pqLoad()">'+tlSubjOpts(x.subj)+'</select> <input type="date" value="'+esc(x.date||'')+'" onchange="pqSet(\''+k+'\',\'date\',this.value);pqLoad()"><input class="inp" value="'+esc(x.title)+'" onchange="pqSet(\''+k+'\',\'title\',this.value)"><details><summary>الهدف · الشرح · النشاط · الإجابة</summary><label>الهدف التعلّمي</label><input class="inp" value="'+esc(x.goal||'')+'" onchange="pqSet(\''+k+'\',\'goal\',this.value)"><label>الشرح</label><textarea class="inp" rows="5" onchange="pqSet(\''+k+'\',\'explanation\',this.value)">'+esc(x.explanation||'')+'</textarea><label>النشاط</label><textarea class="inp" rows="3" onchange="pqSet(\''+k+'\',\'activity\',this.value)">'+esc(x.activity||'')+'</textarea><label>الإجابة النموذجية</label><textarea class="inp" rows="3" onchange="pqSet(\''+k+'\',\'answer\',this.value)">'+esc(x.answer||'')+'</textarea></details>'+(x.quiz&&x.quiz.length?'<p style="font-size:12px">🧩 '+x.quiz.length+' أسئلة اختيار ستُنشر مع الدرس</p>':'')+'<button class="btn green" onclick="pqPublish(\''+k+'\')">✅ اعتماد ونشر</button> <button class="btn" onclick="pqDel(\''+k+'\')">🗑</button></div>';});a.innerHTML=h||'<div class="card"><p>لا دروس بانتظار المراجعة. من «مكتبة الأستاذ» اضغط «حضّر دروسًا» على إحدى وثائقك.</p></div>';}).catch(function(){a.innerHTML='<p>تعذّر التحميل.</p>';});}
 function pqDel(id){if(!confirm('حذف هذه المسودة؟'))return;fdb.ref('pub_queue/'+id).remove().then(pqLoad);}
@@ -3517,6 +3500,78 @@ setTimeout(function(){var c=document.getElementById('showTestChk');if(c)c.checke
 // ===== أيقونات عصرية للتحميل والرفع والحذف =====
 var IC={download:'<path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>',upload:'<path d="M12 15V3m0 0 4 4m-4-4-4 4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>',trash:'<path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/>',file:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/>',folder:'<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',send:'<path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/>'};
 function ic(n){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+(IC[n]||'')+'</svg>';}
+
+// ================= ملفاتي (مدير الملفات) =================
+TL_CATS.classnb='كراس القسم';TL_CATS.weekly='لوحة القيادة الأسبوعية';TL_CATS.other='أقسام أخرى';
+IC.book='<path d="M4 5a2 2 0 0 1 2-2h13v15H6a2 2 0 0 0-2 2z"/><path d="M4 20a2 2 0 0 0 2 2h13v-4"/>';
+IC.landmark='<path d="M3 10 12 4l9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8"/><path d="M3 21h18"/>';
+IC.note='<path d="M5 3h11l4 4v14H5z"/><path d="M8 11h8M8 15h8M8 7h4"/>';
+IC.journal='<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v18M12 8h4M12 12h4"/>';
+IC.cls='<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 5.5a3 3 0 0 1 0 5.5M18 14.5c2 .7 3 2.7 3 5.5"/>';
+IC.cal='<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>';
+IC.dash='<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>';
+IC.back='<path d="m9 18 6-6-6-6"/>';
+var MF_CATS=[['guide','دليل الأستاذ','book','#3B82F6',0],['ministry','المذكرات الوزارية','landmark','#8B5CF6',1],['daily_notes','مذكرات الأستاذ','note','#10B981',1],['notebook','الكراس اليومي للأستاذ','journal','#F59E0B',0],['classnb','كراس القسم','cls','#EC4899',0],['monthly','التوزيع الشهري','cal','#06B6D4',0],['annual','التوزيع السنوي','cal','#14B8A6',0],['weekly','لوحة القيادة الأسبوعية','dash','#6366F1',0],['other','أقسام أخرى','folder','#64748B',0]];
+var MF_SUBJ=[['islamic','التربية الإسلامية'],['arabic','اللغة العربية'],['math','الرياضيات'],['history','التاريخ والجغرافيا'],['science','التربية العلمية والتكنولوجية'],['art','التربية الفنية'],['songs','الأناشيد والمحفوظات'],['reading','المطالعة'],['other','أخرى']];
+var MF_OTHER=['other','projects','memo','songs','curriculum','unsorted'];
+var MF_MAX=3500000;
+var MF={d:{},cat:null,sj:'all'};
+function mfSjName(k){var r=MF_SUBJ.filter(function(x){return x[0]===k;})[0];return r?r[1]:'';}
+function mfSize(n){return n>1048576?(n/1048576).toFixed(1)+' م.ب':Math.max(1,Math.round(n/1024))+' ك.ب';}
+function mfOpen(){MF.cat=null;document.getElementById('mfHome').style.display='';document.getElementById('mfCat').style.display='none';var a=document.getElementById('mfHome');a.innerHTML='<div class="loading">جارٍ التحميل...</div>';fdb.ref('tlib').once('value').then(function(sn){MF.d=sn.val()||{};mfHome();}).catch(function(){a.innerHTML='<div class="card"><p>تعذّر التحميل.</p></div>';});}
+function mfKeys(cat){var o=cat==='other'?MF_OTHER:[cat],r=[],k;for(k in MF.d)if(o.indexOf(MF.d[k].cat||'unsorted')>-1)r.push(k);return r;}
+function mfHome(){var h='<div class="card"><h3>📁 ملفاتي</h3><p>اختر قسمًا ثم ارفع ملفاتك أو حمّلها أو احذفها. يقرأ المساعد نصوصها ليستعين بها.</p></div><div class="mf-grid">';MF_CATS.forEach(function(c,i){h+='<button class="mf-tile" onclick="mfShow(\''+c[0]+'\')"><span class="mfi" style="background:'+c[3]+'">'+ic(c[2])+'</span>'+(i<8?(i+1)+'. ':'')+c[1]+'<small>'+mfKeys(c[0]).length+' ملف</small></button>';});h+='</div><button class="ibtn ghost" style="width:100%" onclick="goTo(\'files\')">'+ic('folder')+' الروابط والملفات القديمة</button>';document.getElementById('mfHome').innerHTML=h;}
+function mfShow(c){MF.cat=c;MF.sj='all';document.getElementById('mfHome').style.display='none';document.getElementById('mfCat').style.display='';mfRender();window.scrollTo(0,0);document.getElementById('content').scrollTop=0;}
+function mfSj(s){MF.sj=s;mfRender();}
+function mfRender(){var c=MF_CATS.filter(function(x){return x[0]===MF.cat;})[0],hasSj=!!c[4],a=document.getElementById('mfCat'),ks=mfKeys(MF.cat),cnt={},opts='';
+ ks.forEach(function(k){var s=MF.d[k].sj||'other';cnt[s]=(cnt[s]||0)+1;});
+ var sel=(MF.sj!=='all'?MF.sj:'');MF_SUBJ.forEach(function(s){opts+='<option value="'+s[0]+'"'+(s[0]===sel?' selected':'')+'>'+s[1]+'</option>';});
+ var h='<div class="card" style="display:flex;align-items:center;gap:10px"><button class="ibtn ghost sm" onclick="mfOpen()">رجوع</button><h3 style="margin:0">'+c[1]+'</h3></div>';
+ if(hasSj){h+='<div class="card"><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="mf-chip'+(MF.sj==='all'?' on':'')+'" onclick="mfSj(\'all\')">الكل ('+ks.length+')</button>';MF_SUBJ.forEach(function(s){h+='<button class="mf-chip'+(MF.sj===s[0]?' on':'')+'" onclick="mfSj(\''+s[0]+'\')">'+s[1]+(cnt[s[0]]?' ('+cnt[s[0]]+')':'')+'</button>';});h+='</div></div>';}
+ h+='<div class="card"><h3>رفع ملفات</h3>'+(hasSj?'<label>المادة:</label><select class="inp" id="mf_sj">'+opts+'</select>':'')+'<input type="file" id="mf_files" multiple style="display:none" onchange="mfPicked()"><button class="ibtn up" style="width:100%" onclick="document.getElementById(\'mf_files\').click()">'+ic('upload')+' اختر ملفًا أو أكثر من هاتفك</button><p style="font-size:12px;color:var(--sub);margin-top:6px">PDF أو Word أو صور أو نص، حتى 3.5 م.ب للملف.</p><div id="mf_prog" style="font-size:13px"></div></div>';
+ if(MF.cat==='classnb')h+='<button class="ibtn" style="width:100%;margin-bottom:12px" onclick="goTo(\'notebook\')">'+ic('send')+' نشر ملاحظة في كراس القسم للتلاميذ</button>';
+ var list=ks.filter(function(k){return !hasSj||MF.sj==='all'||(MF.d[k].sj||'other')===MF.sj;}).sort(function(x,y){return (MF.d[y].time||0)-(MF.d[x].time||0);});
+ if(!list.length)h+='<div class="card"><p style="text-align:center;color:var(--sub)">لا ملفات في هذا القسم بعد.</p></div>';
+ list.forEach(function(k){var x=MF.d[k],ex=['guide','daily_notes','notebook','ministry','other','projects'].indexOf(x.cat||'unsorted')>-1&&x.chars>0;
+  h+='<div class="mf-row"><div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--blue2);width:26px;flex:none">'+ic('file')+'</span><div style="flex:1;min-width:0"><b style="word-break:break-word">'+esc(x.title||x.fname||'ملف')+'</b><div style="font-size:12px;color:var(--sub);margin-top:3px">'+(x.sj&&hasSj?esc(mfSjName(x.sj))+' · ':'')+(x.hasFile?mfSize(x.size||0)+' · ':'نص فقط · ')+new Date(x.time||0).toLocaleDateString('ar-DZ')+'</div></div></div><div class="mfa"><button class="ibtn sm" onclick="mfDl(\''+k+'\')">'+ic('download')+' تحميل</button>'+(ex?'<button class="ibtn ghost sm" onclick="tlExtract(\''+k+'\')">📬 حضّر دروسًا</button>':'')+(hasSj?'<select class="inp" style="width:auto;margin:0;padding:6px" onchange="mfSet(\''+k+'\',\'sj\',this.value)">'+MF_SUBJ.map(function(s){return '<option value="'+s[0]+'"'+((x.sj||'other')===s[0]?' selected':'')+'>'+s[1]+'</option>';}).join('')+'</select>':'')+'<button class="ibtn del sm" onclick="mfDel(\''+k+'\')">'+ic('trash')+' حذف</button></div></div>';});
+ a.innerHTML=h;}
+function mfSet(k,f,v){fdb.ref('tlib/'+k+'/'+f).set(v).then(function(){MF.d[k][f]=v;mfRender();});}
+function mfDel(k){if(!confirm('حذف هذا الملف نهائيًا؟'))return;var up={};up['tlib/'+k]=null;up['tlib_text/'+k]=null;up['tlib_file/'+k]=null;fdb.ref().update(up).then(function(){delete MF.d[k];mfRender();});}
+function saveBlob(b,name){var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=name||'file';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},2000);}
+function dataToBlob(u){return fetch(u).then(function(r){return r.blob();});}
+function mfDl(k){var x=MF.d[k]||{};if(x.hasFile){fdb.ref('tlib_file/'+k).once('value').then(function(sn){var u=sn.val();if(!u)throw 0;return dataToBlob(u);}).then(function(b){saveBlob(b,x.fname||(x.title+'.pdf'));}).catch(function(){alert('⚠️ تعذّر تحميل الملف');});}else{tlGetText(k).then(function(t){saveBlob(new Blob([t],{type:'text/plain;charset=utf-8'}),(x.title||'document')+'.txt');});}}
+function mfRead(f){return new Promise(function(res,rej){var r=new FileReader();r.onload=function(){res(r.result);};r.onerror=function(){rej();};r.readAsDataURL(f);});}
+function mfText(f){var n=f.name.toLowerCase();if(!/\.(pdf|docx|txt)$/.test(n))return Promise.resolve({text:'',pages:0});return Promise.resolve(extractFile(f)).then(function(r){var t=(typeof r==='string'?r:(r&&r.text))||'';return {text:t,pages:(r&&r.pages)||0};}).catch(function(){return {text:'',pages:0};});}
+function mfSave(f,data,tx,cat,sj){var id=fdb.ref('tlib').push().key,up={},T=(tx.text||'').slice(0,2500000),parts=T?Math.ceil(T.length/150000):0,i;for(i=0;i<parts;i++)up['tlib_text/'+id+'/'+i]=T.slice(i*150000,(i+1)*150000);var meta={title:f.name.replace(/\.[^.]+$/,''),cat:cat,subj:'',sj:sj||'',pages:tx.pages||0,chars:T.length,parts:parts,prev:T.replace(/\s+/g,' ').trim().slice(0,120),fname:f.name,ftype:f.type||'',size:f.size,hasFile:1,time:Date.now()};up['tlib/'+id]=meta;up['tlib_file/'+id]=data;return fdb.ref().update(up).then(function(){MF.d[id]=meta;});}
+function mfPicked(){var fs=document.getElementById('mf_files').files,pr=document.getElementById('mf_prog');if(!fs.length)return;var se=document.getElementById('mf_sj'),sj=se?se.value:'',cat=MF.cat,p=Promise.resolve(),ok=0,bad=[];Array.prototype.forEach.call(fs,function(f,i){p=p.then(function(){pr.innerHTML='⏳ ('+(i+1)+'/'+fs.length+') '+esc(f.name);if(f.size>MF_MAX){bad.push(f.name+' (أكبر من 3.5 م.ب)');return;}return mfRead(f).then(function(data){return mfText(f).then(function(tx){return mfSave(f,data,tx,cat,sj);});}).then(function(){ok++;}).catch(function(){bad.push(f.name+' (تعذّر الرفع)');});});});p.then(function(){sfx(ok?'ok':'err');pr.innerHTML=(ok?'✅ رُفع '+ok+' ملف':'')+(bad.length?'<br>⚠️ '+bad.map(esc).join('<br>⚠️ '):'');document.getElementById('mf_files').value='';var h=pr.innerHTML;mfRender();document.getElementById('mf_prog').innerHTML=h;});}
+var _gt2=goTo;goTo=function(s){_gt2(s);if(s==='myfiles')mfOpen();};
+function tlPr(){var a=document.getElementById('mf_prog');return (a&&a.offsetParent)?a:document.getElementById('tl_prog');}
+
+// ================= تحميل مباشر =================
+function directLink(u){u=String(u||'');var m=u.match(/drive\.google\.com\/file\/d\/([^\/?#]+)/)||u.match(/drive\.google\.com\/(?:open|uc)\?[^#]*id=([^&#]+)/);if(m)return 'https://drive.google.com/uc?export=download&id='+m[1];m=u.match(/docs\.google\.com\/(document|presentation|spreadsheets)\/d\/([^\/?#]+)/);if(m)return 'https://docs.google.com/'+m[1]+'/d/'+m[2]+'/export?format='+(m[1]==='document'?'pdf':m[1]==='presentation'?'pdf':'xlsx');if(/dropbox\.com/.test(u)){var b=u.replace(/[?&]dl=0/,'');return b+(b.indexOf('?')>-1?'&':'?')+'dl=1';}return u;}
+function dlLesson(sj,k,field,name){fdb.ref('lessons/'+sj+'/'+k+'/'+field).once('value').then(function(sn){return dataToBlob(sn.val());}).then(function(b){saveBlob(b,name);}).catch(function(){alert('⚠️ تعذّر التحميل');});}
+function dlHw(sj,k){fdb.ref('homework/'+sj+'/'+k).once('value').then(function(sn){var v=sn.val()||{};return dataToBlob(v.fileData).then(function(b){saveBlob(b,v.fileName||'worksheet');});}).catch(function(){alert('⚠️ تعذّر التحميل');});}
+function libDlPdf(k){fdb.ref('library/'+k).once('value').then(function(sn){var v=sn.val()||{};return dataToBlob(v.data).then(function(b){saveBlob(b,(v.title||'file')+(v.type==='application/pdf'?'.pdf':'.jpg'));});}).catch(function(){alert('⚠️ تعذّر التحميل');});}
+var HWF=null;
+function hwPick(el){var f=el.files&&el.files[0];HWF=null;if(!f)return;if(f.size>600000){alert('⚠️ الملف كبير (الحد 600 ك.ب). صغّره أو ضع رابط Drive.');el.value='';return;}mfRead(f).then(function(d){HWF={data:d,name:f.name};});}
+function upPicked(sk){var f=(document.getElementById('f_'+sk)||{}).files;var e=document.getElementById('fn_'+sk);if(e)e.textContent=f&&f[0]?'📎 '+f[0].name:'';}
+function hwCard(k2,hw,isStudent,today){var h='',hwDate=hw.date||'',locked2=isStudent&&((hwDate&&hwDate>today)||(hw.publishAt&&Date.now()<hw.publishAt));
+ if(locked2){return '<div class="card" style="opacity:.65;background:#F1F5F9;border-color:#CBD5E1"><h3>🔒 '+esc(hw.title)+'</h3><p style="color:#8B5CF6;font-size:13px;font-weight:700;margin-top:8px">📅 تاريخ النشاط: '+hwDate+'</p><p style="color:#64748B;font-size:12px;margin-top:4px">⏳ لم يحن وقته بعد</p></div>';}
+ h+='<div class="card"><h3>📝 '+esc(hw.title)+'</h3>';
+ if(hwDate)h+='<p style="color:#8B5CF6;font-size:12px;font-weight:700;margin-top:4px">📅 '+hwDate+'</p>';
+ h+='<p style="background:#ECFDF5;padding:12px;border-radius:10px;line-height:2;color:#1E293B;margin-top:8px">'+esc(hw.content)+'</p>';
+ if(hw.fileData)h+='<button class="ibtn" style="width:100%;margin-top:10px" onclick="dlHw(\''+window.__SUBJ+'\',\''+k2+'\')">'+ic('download')+' تحميل ورقة النشاط</button>';
+ if(!isStudent&&hw.answer)h+='<p style="background:#FEF3C7;padding:12px;border-radius:10px;margin-top:8px;color:#78350F;font-size:13px"><b>✅ الإجابة النموذجية:</b><br>'+esc(hw.answer)+'</p>';
+ if(isStudent){var sk=(window.__SUBJ+'_'+k2).replace(/[.$#\[\]\/]/g,'_'),sb=(window.__SUBS||{})[sk],can=(!hwDate||hwDate===today||(window.__REOPEN||{})[k2]);
+  var stars=function(g){return new Array(Math.round(g/2)+1).join('⭐');};
+  if(sb&&sb.grade!=null){h+='<div class="ai-b">✅ أُرسل حلّك<br>'+stars(sb.grade)+(sb.note?'<br>💬 '+esc(sb.note):'')+'</div>';if(hw.answer)h+='<p style="background:#FEF3C7;padding:12px;border-radius:10px;margin-top:8px;color:#78350F;font-size:13px"><b>✅ الإجابة النموذجية:</b><br>'+esc(hw.answer)+'</p>';}
+  else if(sb&&sb.autoScore!=null){h+='<div class="ai-b">✅ أجبت<br>'+stars(sb.autoScore)+'</div>';}
+  else if(sb&&!sb.retry){h+='<div class="ai-b">✅ أُرسل حلّك — ⏳ بانتظار التصحيح</div>';}
+  else if(!can){h+='<div class="ai-b">⏳ انتهى وقت إرسال هذا النشاط</div>';}
+  else{if(sb&&sb.retry)h+='<div class="ai-b">✏️ أعد المحاولة'+(sb.note?': '+esc(sb.note):'')+'</div>';
+   if(hw.mcq){window.__HWMCQ=window.__HWMCQ||{};window.__HWMCQ[sk]=hw.mcq;hw.mcq.forEach(function(q,qi){h+='<div class="ai-b"><b>'+(qi+1)+'. '+esc(q.q)+'</b>';q.o.forEach(function(o,oi){h+='<label style="display:block;margin:6px 0"><input type="radio" name="mq_'+sk+'_'+qi+'" value="'+oi+'"> '+esc(o)+'</label>';});h+='</div>';});h+='<button class="ibtn up" style="width:100%" onclick="mcqSubmit(\''+sk+'\')">'+ic('send')+' أرسل إجاباتي</button>';}
+   else{h+='<div class="upz"><input type="file" id="f_'+sk+'" accept="image/*,application/pdf" style="display:none" onchange="upPicked(\''+sk+'\')"><button class="ibtn ghost" style="width:100%" onclick="document.getElementById(\'f_'+sk+'\').click()">'+ic('upload')+' اختر صورة حلّك أو PDF</button><div id="fn_'+sk+'" style="font-size:12px;color:var(--sub)"></div><button class="ibtn up" style="width:100%" onclick="submitWork(\''+sk+'\')">'+ic('send')+' إرسال حلّي للأستاذ</button></div>';}}}
+ return h+'</div>';}
 QA.teacher.push(['📊 المراقبة','monitor']);
 </script>
 </body>
