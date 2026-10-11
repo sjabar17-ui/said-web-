@@ -276,6 +276,19 @@ html,body{height:100%;overflow:hidden}
 .upz{margin-top:10px;display:flex;flex-direction:column;gap:6px}
 
 .mf-row>div>span svg{width:24px;height:24px}
+
+.nv-t{position:relative}
+.chrono{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.22);border-radius:14px;padding:4px 12px;font-weight:800;font-size:15px;direction:ltr;font-variant-numeric:tabular-nums;width:max-content;margin-top:4px}
+.chrono svg{width:20px;height:20px;flex:none}
+.chrono small{font-size:10px;font-weight:700;opacity:.92;direction:rtl}
+.chrono.live{background:rgba(16,185,129,.38)}
+.chrono.live::before{content:"";width:8px;height:8px;border-radius:50%;background:#34D399;animation:chPulse 1.2s infinite}
+@keyframes chPulse{50%{opacity:.25}}
+.ntcard{background:var(--card);border:2px solid #EF4444;border-radius:18px;padding:12px;margin-bottom:14px}
+.ntrow{display:flex;align-items:center;gap:10px;width:100%;border:none;background:#FEF2F2;color:#991B1B;border-radius:12px;padding:10px 12px;font-family:inherit;font-weight:800;font-size:14px;margin-top:6px;cursor:pointer;text-align:right}
+.ntrow b{background:#EF4444;color:#fff;border-radius:10px;min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;padding:0 6px}
+.ntoast{position:fixed;top:78px;left:50%;transform:translateX(-50%);background:#1E293B;color:#fff;padding:12px 18px;border-radius:16px;font-weight:800;z-index:3000;box-shadow:0 6px 20px rgba(0,0,0,.3);max-width:90%;text-align:center}
+.cp-rec{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:8px}
 </style>
 </head> <body>
 
@@ -761,7 +774,7 @@ html,body{height:100%;overflow:hidden}
     </div>
 
     <div class="screen" id="screen-studentsList">
-      <div class="card"><h3>💬 محادثات التلاميذ</h3></div>
+      <div class="card"><h3>💬 محادثات التلاميذ</h3><button class="ibtn up" style="width:100%" onclick="goTo('compose')">✉️ رسالة جديدة (مكتوبة أو صوتية)</button></div>
       <div id="chatStudentsList"><div class="loading">جارٍ التحميل...</div></div>
     </div>
 
@@ -942,10 +955,22 @@ html,body{height:100%;overflow:hidden}
       </div>
     </div>
 
+    <div class="screen" id="screen-compose">
+      <div class="card"><h3>✉️ رسالة جديدة</h3>
+        <label>إلى:</label><select class="inp" id="cp_to"></select>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px"><button class="mf-chip on" id="cp_t1" onclick="cpTab(1)">✍️ مكتوبة</button><button class="mf-chip" id="cp_t2" onclick="cpTab(2)">🎤 بصوتي</button><button class="mf-chip" id="cp_t3" onclick="cpTab(3)">🔊 بصوت المساعد</button></div>
+      </div>
+      <div class="card" id="cp_p1"><textarea class="inp" id="cp_text" rows="5" placeholder="اكتب رسالتك..."></textarea><button class="ibtn up" style="width:100%" onclick="cpSend('text')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg> إرسال الرسالة المكتوبة</button></div>
+      <div class="card" id="cp_p2" style="display:none"><div class="cp-rec"><div id="cp_st" style="font-weight:700;color:var(--sub)">⏸️ جاهز للتسجيل</div><button class="ibtn" id="cp_rb" onclick="cpRecToggle()" style="padding:14px 22px;font-size:15px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg> ابدأ التسجيل</button><audio id="cp_audio" controls style="width:100%;display:none"></audio></div><button class="ibtn up" id="cp_send2" style="width:100%;margin-top:10px" disabled onclick="cpSend('audio')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg> إرسال الرسالة الصوتية</button><p style="font-size:12px;color:var(--sub);margin-top:8px">حتى دقيقتين. الرسالة الصوتية تُرسل لتلميذ واحد.</p></div>
+      <div class="card" id="cp_p3" style="display:none"><p style="font-size:13px;color:var(--sub);margin-bottom:6px">اكتب النص، فيقرؤه مساعد التطبيق بصوته على هاتف التلميذ أو الولي حين يفتح الرسالة.</p><textarea class="inp" id="cp_text3" rows="5" placeholder="اكتب ما يقوله المساعد..."></textarea><button class="ibtn ghost" style="width:100%;margin-bottom:8px" onclick="cpListen()">🔊 استمع قبل الإرسال</button><button class="ibtn up" style="width:100%" onclick="cpSend('tts')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg> إرسال بصوت المساعد</button></div>
+      <div id="cp_msg" style="font-weight:800;text-align:center;margin-top:8px"></div>
+    </div>
+
     <div class="screen" id="screen-chat">
       <div class="card" style="background:#DBEAFE;padding:12px 16px">
         <h3 id="chatHeader" style="margin:0;font-size:15px">💬 المحادثة</h3>
         <button class="btn" id="chatWaBtn" onclick="openChatWhatsApp()" style="display:none;margin-top:10px;background:#25D366;font-size:13px">📱 واتساب ولي التلميذ</button>
+        <button class="ibtn" id="chatCpBtn" style="display:none;margin-top:10px;width:100%" onclick="cpOpenFor(CURRENT_CHAT)">✉️ رسالة صوتية أو بصوت المساعد</button>
       </div>
       <div id="chatHours" style="font-size:13px;color:#92400E;padding:4px 8px"></div>
       <div id="chatMessages" style="max-height:50vh;overflow-y:auto;padding:10px 0"></div>
@@ -1920,7 +1945,7 @@ function loadChatStudents(){
     if(!arr.length) h = '<div class="card"><p>لا محادثات بعد.</p></div>';
     arr.forEach(function(item){
       var name = STUDENT_NAMES[item.num] ? " - "+STUDENT_NAMES[item.num] : "";
-      h += '<div class="card" style="cursor:pointer" onclick="openChat(\''+item.num+'\')"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><div><b>👦 رقم '+item.num+name+'</b><p style="font-size:12px;color:#64748B;margin-top:4px">'+esc(item.lastMsg.substring(0,40))+'</p></div><span style="color:#3B82F6;font-weight:800">›</span></div></div>';
+      h += '<div class="card" style="cursor:pointer" onclick="openChat(\''+item.num+'\')"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><div><b>👦 رقم '+item.num+name+'</b>'+ntDot(item.num)+'<p style="font-size:12px;color:#64748B;margin-top:4px">'+esc(item.lastMsg.substring(0,40))+'</p></div><span style="color:#3B82F6;font-weight:800">›</span></div></div>';
     });
     area.innerHTML = h;
   });
@@ -1978,13 +2003,13 @@ function loadChat(){
       if(m.type === "audio"){
         h += '<div class="bub '+cls+'"><span class="who">'+who+'<span class="time">'+fmtTime(m.time)+'</span></span>🎤 <audio controls src="'+m.audio+'" style="width:100%;margin-top:6px"></audio></div>';
       } else {
-        h += '<div class="bub '+cls+'"><span class="who">'+who+'<span class="time">'+fmtTime(m.time)+'</span></span>'+esc(m.text)+'</div>';
+        h += '<div class="bub '+cls+'"><span class="who">'+who+'<span class="time">'+fmtTime(m.time)+'</span></span><span class="bt">'+esc(m.text)+'</span>'+(m.tts?'<button class="spk" onclick="aiSpeakBtn(this)">🔊</button>':'')+'</div>';
       }
     });
     if(!h) h = '<p style="text-align:center;color:#64748B;padding:20px">لا رسائل بعد.</p>';
     area.innerHTML = h;
     area.scrollTop = area.scrollHeight;
-    try{localStorage.setItem('cs_'+reg.type+CURRENT_CHAT,String(Date.now()));}catch(e){}
+    try{var _pv=+(localStorage.getItem('cs_'+reg.type+CURRENT_CHAT)||0),_lt=arr.filter(function(m){return m.from==='teacher'&&m.tts&&m.time>_pv;}).pop();if(_lt&&reg.type!=='teacher'&&AI_AUTO)aiSpeakRaw(_lt.text);}catch(e){}try{localStorage.setItem('cs_'+reg.type+CURRENT_CHAT,String(Date.now()));}catch(e){}
   });
 }
 function sendChatMsg(){
@@ -1994,7 +2019,7 @@ function sendChatMsg(){
   if(!CURRENT_CHAT){ alert("⚠️"); return; }
   var reg = getReg();
   var from = (reg.type === "teacher") ? "teacher" : "student";
-  qsend('push','chats/'+CURRENT_CHAT,{text:text, from:from, who:reg.type, type:"text", time:Date.now()}).then(function(){ input.value = ""; });
+  qsend('push','chats/'+CURRENT_CHAT,{text:text, from:from, who:reg.type, type:"text", time:Date.now()}).then(function(){ input.value = ""; ntPing(CURRENT_CHAT, from==='teacher'?'chat_t':(reg.type==='parent'?'chat_p':'chat_s')); });
 }
 var chatInputEl = document.getElementById("chatInput");
 if(chatInputEl){
@@ -2397,7 +2422,7 @@ function uploadRecording(base64){
   var num = reg.num;
   if(base64.length > 900000){ alert('⚠️ التسجيل طويل جدًا، اختصره'); return; }
   qsend('push','recordings/'+num,{audio:base64, time:Date.now(), duration:recSeconds, type:(document.getElementById('rec_type')||{}).value||'oral', title:((document.getElementById('rec_title')||{}).value||'').trim()}).then(function(r){
-    alert(r==='queued'?'📡 لا اتصال: سيُرسل تسجيلك تلقائيًا عند عودة الإنترنت':"✅ تم إرسال التسجيل!");
+    ntPing(num,'rec');alert(r==='queued'?'📡 لا اتصال: سيُرسل تسجيلك تلقائيًا عند عودة الإنترنت':"✅ تم إرسال التسجيل!");
     loadMyRecordings();
   }).catch(function(err){ alert("⚠️ " + err.message); });
 }
@@ -2476,7 +2501,7 @@ function startNoteRecording(){
         var num = document.getElementById("note_student").value;
         var title = document.getElementById("note_title").value.trim();
         if(!num || !title){ alert("⚠️ املأ"); return; }
-        fdb.ref('voice_notes/'+num).push({audio:reader.result, title:title, time:Date.now()}).then(function(){
+        fdb.ref('voice_notes/'+num).push({audio:reader.result, title:title, time:Date.now()}).then(function(){ ntPing(num,'voice');
           alert("✅ تم حفظ الملاحظة!");
           document.getElementById("note_title").value = "";
           loadTeacherNotesList();
@@ -3117,7 +3142,7 @@ function aiOk(n,k){var a=document.getElementById('a_'+n+'_'+k).value.trim();if(!
 
 // ===== حلول التلاميذ: إرسال وتصحيح (ملفات صغيرة داخل قاعدة البيانات) =====
 function fileToData(f,cb){var r=new FileReader();r.onload=function(){if(f.type.indexOf('image/')!==0){cb(r.result);return;}var im=new Image();im.onload=function(){var m=1000,k=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);cb(c.toDataURL('image/jpeg',0.7));};im.onerror=function(){cb(null);};im.src=r.result;};r.onerror=function(){cb(null);};r.readAsDataURL(f);}
-function submitWork(sk){var f=(document.getElementById('f_'+sk)||{}).files;f=f&&f[0];if(!f){alert('اختر صورة أو ملف PDF أولًا');return;}if(f.type==='application/pdf'&&f.size>600000){alert('⚠️ ملف PDF كبير (الحد 600 ك.ب). صوّر الورقة بدلًا من ذلك.');return;}fileToData(f,function(d){if(!d||d.length>850000){alert('⚠️ تعذّر الإرسال: الملف كبير أو غير صالح');return;}qsend('set','submissions/'+CURRENT_USER_NUM+'/'+sk,{data:d,type:f.type,subj:window.__SUBJ,time:Date.now()}).then(function(r){if(r==='queued')alert('📡 لا اتصال: سيُرسل حلّك تلقائيًا عند عودة الإنترنت');else celebrate('أحسنت! أُرسل حلّك 🎉');showSubject(window.__SUBJ);}).catch(function(){alert('⚠️ تعذّر الإرسال');});});}
+function submitWork(sk){var f=(document.getElementById('f_'+sk)||{}).files;f=f&&f[0];if(!f){alert('اختر صورة أو ملف PDF أولًا');return;}if(f.type==='application/pdf'&&f.size>600000){alert('⚠️ ملف PDF كبير (الحد 600 ك.ب). صوّر الورقة بدلًا من ذلك.');return;}fileToData(f,function(d){if(!d||d.length>850000){alert('⚠️ تعذّر الإرسال: الملف كبير أو غير صالح');return;}qsend('set','submissions/'+CURRENT_USER_NUM+'/'+sk,{data:d,type:f.type,subj:window.__SUBJ,time:Date.now()}).then(function(r){if(r==='queued')alert('📡 لا اتصال: سيُرسل حلّك تلقائيًا عند عودة الإنترنت');else celebrate('أحسنت! أُرسل حلّك 🎉');ntPing(CURRENT_USER_NUM,'sub');showSubject(window.__SUBJ);}).catch(function(){alert('⚠️ تعذّر الإرسال');});});}
 function gradeLoad(){var a=document.getElementById('gradeList');a.innerHTML='<div class="loading">جارٍ التحميل...</div>';fdb.ref('submissions').once('value').then(function(s){var d=s.val()||{},h='',n=0;for(var u in d)for(var k in d[u]){var x=d[u][k];if(x.grade!=null||x.autoScore!=null||x.retry)continue;n++;var id=u+'_'+k.replace(/[^a-zA-Z0-9_-]/g,'');h+='<div class="ai-b"><b>'+esc(STUDENT_NAMES[u]||('تلميذ '+u))+'</b> — '+esc(x.subj||'')+'<br>'+(x.type==='application/pdf'?'<button class="btn" onclick="openPdf(\''+u+'\',\''+k+'\')">📄 فتح PDF</button>':'<img src="'+x.data+'" style="max-width:100%;border-radius:12px;margin:8px 0">')+'<input id="g_'+id+'" type="number" min="0" max="10" step="0.5" placeholder="العلامة من 10" style="width:100%;margin:6px 0"><input id="n_'+id+'" placeholder="ملاحظتك للتلميذ" style="width:100%;margin-bottom:6px"><button class="btn" onclick="gradeSave(\''+u+'\',\''+k+'\',\''+id+'\')">💾 حفظ التصحيح</button> <button class="btn" onclick="gradeRetry(\''+u+'\',\''+k+'\',\''+id+'\')">🔁 أعد المحاولة</button></div>';}a.innerHTML=h||'<p style="text-align:center">لا حلول بانتظار التصحيح 🎉</p>';});}
 function openPdf(u,k){fdb.ref('submissions/'+u+'/'+k+'/data').once('value').then(function(s){return fetch(s.val());}).then(function(r){return r.blob();}).then(function(b){window.open(URL.createObjectURL(b),'_blank');});}
 function gradeSave(u,k,id){var g=parseFloat(document.getElementById('g_'+id).value);if(isNaN(g)||g<0||g>10){alert('العلامة بين 0 و10');return;}fdb.ref('submissions/'+u+'/'+k).update({grade:g,note:document.getElementById('n_'+id).value.trim(),gradedAt:Date.now()}).then(gradeLoad);}
@@ -3588,6 +3613,50 @@ function mfPdfRender(pdf,body,z){z=z||1;var PV=window.__PV||(window.__PV={});PV.
 function mfZoom(d){var PV=window.__PV;if(!PV||!PV.pdf)return;var nz=Math.max(1,Math.min(3,PV.z+d*0.5));if(nz===PV.z)return;var b=PV.body,ratio=b.scrollHeight?b.scrollTop/b.scrollHeight:0;mfPdfRender(PV.pdf,b,nz);b.scrollTop=ratio*b.scrollHeight;}
 function viewData(title,d,type){var ov=mfOverlay(title),body=ov.querySelector('.vbody');if(/^image\//.test(type||'')||/^data:image\//.test(d)){body.innerHTML='<img src="'+d+'" style="width:100%;border-radius:8px">';return;}body.innerHTML='<div class="loading">⏳ جارٍ فتح الملف...</div>';dataToBlob(d).then(function(b){return b.arrayBuffer();}).then(function(ab){return loadScript(PDFJS_URL).then(function(){pdfjsLib.GlobalWorkerOptions.workerSrc=PDFW_URL;return pdfjsLib.getDocument({data:ab,cMapUrl:'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/cmaps/',cMapPacked:true,standardFontDataUrl:'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/standard_fonts/'}).promise;});}).then(function(pdf){mfPdfRender(pdf,body);}).catch(function(){body.innerHTML='<div class="card"><p>⚠️ تعذّر عرض الملف هنا. استعمل «تحميل».</p></div>';});}
 function mfView(k){var x=MF.d[k]||{};if(x.url){window.open(x.url,'_blank');return;}if(!x.hasFile){var ov=mfOverlay(x.title||'نص'),b=ov.querySelector('.vbody');b.innerHTML='<div class="loading">⏳</div>';tlGetText(k).then(function(t){b.innerHTML='<div class="card" style="white-space:pre-wrap;line-height:2">'+esc(t||'لا نص')+'</div>';});return;}var ft=((x.ftype||'')+' '+(x.fname||'')).toLowerCase();if(/pdf|image\//.test(ft)||/\.(png|jpe?g|gif|webp)$/.test(ft)){var ov2=mfOverlay(x.title||'ملف'),b2=ov2.querySelector('.vbody');b2.innerHTML='<div class="loading">⏳ جارٍ تحميل الملف...</div>';mfFileData(k).then(function(d){viewData(x.title||'ملف',d,x.ftype||'');}).catch(function(){b2.innerHTML='<div class="card"><p>⚠️ تعذّر فتح الملف.</p></div>';});}else{var ov3=mfOverlay(x.title||'ملف'),b3=ov3.querySelector('.vbody');b3.innerHTML='<div class="loading">⏳</div>';tlGetText(k).then(function(t){b3.innerHTML=t?'<div class="card" style="white-space:pre-wrap;line-height:2">'+esc(t.slice(0,80000))+'</div>':'<div class="card"><p>لا معاينة لهذا النوع من الملفات. استعمل «تحميل».</p></div>';});}}
+
+// ================= رسالة جديدة (مكتوبة / صوتية / بصوت المساعد) =================
+var CP={rec:null,chunks:[],audio:null,sec:0,tm:null};
+function cpInit(){var o='<option value="all">📣 كل التلاميذ</option>',ks=Object.keys(STUDENT_LIST).sort(function(a,b){return a-b;});ks.forEach(function(n){o+='<option value="'+n+'">'+n+' - '+esc(STUDENT_NAMES[n]||'')+'</option>';});document.getElementById('cp_to').innerHTML=o;cpTab(1);cpReset();document.getElementById('cp_msg').textContent='';}
+function cpOpenFor(n){goTo('compose');if(n)document.getElementById('cp_to').value=n;}
+function cpTab(n){[1,2,3].forEach(function(i){document.getElementById('cp_p'+i).style.display=(i===n?'':'none');document.getElementById('cp_t'+i).className='mf-chip'+(i===n?' on':'');});if(window.speechSynthesis)speechSynthesis.cancel();}
+function cpReset(){CP.audio=null;CP.sec=0;clearInterval(CP.tm);var a=document.getElementById('cp_audio');if(a){a.style.display='none';a.removeAttribute('src');}var b=document.getElementById('cp_send2');if(b)b.disabled=true;var st=document.getElementById('cp_st');if(st)st.textContent='⏸️ جاهز للتسجيل';var rb=document.getElementById('cp_rb');if(rb)rb.innerHTML=ic('mic')+' ابدأ التسجيل';}
+function cpRecToggle(){var rb=document.getElementById('cp_rb'),st=document.getElementById('cp_st');if(CP.rec&&CP.rec.state==='recording'){CP.rec.stop();return;}cpReset();navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){CP.chunks=[];var mr;try{mr=new MediaRecorder(stream,{audioBitsPerSecond:24000});}catch(e){mr=new MediaRecorder(stream);}CP.rec=mr;mr.ondataavailable=function(e){if(e.data&&e.data.size)CP.chunks.push(e.data);};mr.onstop=function(){clearInterval(CP.tm);stream.getTracks().forEach(function(t){t.stop();});var b=new Blob(CP.chunks,{type:mr.mimeType||'audio/webm'}),r=new FileReader();r.onload=function(){CP.audio=r.result;var a=document.getElementById('cp_audio');a.src=r.result;a.style.display='block';document.getElementById('cp_send2').disabled=false;st.textContent='✅ تم التسجيل ('+CP.sec+' ث). استمع ثم أرسل';rb.innerHTML=ic('mic')+' إعادة التسجيل';};r.readAsDataURL(b);};mr.start();CP.sec=0;rb.innerHTML='⏹️ إيقاف التسجيل';st.textContent='🔴 يسجّل... 0 ث';CP.tm=setInterval(function(){CP.sec++;st.textContent='🔴 يسجّل... '+CP.sec+' ث';if(CP.sec>=120&&CP.rec.state==='recording')CP.rec.stop();},1000);}).catch(function(){alert('اسمح للمتصفح باستعمال الميكروفون');});}
+function cpListen(){var t=document.getElementById('cp_text3').value.trim();if(!t){alert('اكتب النص أولًا');return;}aiSpeakRaw(t);}
+function cpSend(kind){var to=document.getElementById('cp_to').value,msg=document.getElementById('cp_msg'),payload={from:'teacher',who:'teacher',time:Date.now()},targets;
+ if(kind==='text'){var t=document.getElementById('cp_text').value.trim();if(!t){alert('اكتب الرسالة أولًا');return;}payload.type='text';payload.text=t;}
+ else if(kind==='tts'){var t3=document.getElementById('cp_text3').value.trim();if(!t3){alert('اكتب النص أولًا');return;}payload.type='text';payload.text=t3;payload.tts=1;}
+ else{if(!CP.audio){alert('سجّل رسالتك أولًا');return;}if(to==='all'){alert('الرسالة الصوتية تُرسل لتلميذ واحد. اختر تلميذًا.');return;}if(CP.audio.length>900000){alert('التسجيل طويل جدًا، اختصره');return;}payload.type='audio';payload.audio=CP.audio;}
+ targets=(to==='all')?Object.keys(realList()):[to];if(!targets.length){alert('لا تلاميذ');return;}
+ msg.textContent='⏳ جارٍ الإرسال...';var p=Promise.resolve(),done=0;
+ targets.forEach(function(n){p=p.then(function(){return qsend('push','chats/'+n,payload);}).then(function(){done++;ntPing(n,'chat_t');});});
+ p.then(function(){sfx('ok');msg.style.color='#059669';msg.textContent='✅ أُرسلت إلى '+done+' '+(done>1?'تلميذًا':'تلميذ');if(kind==='text')document.getElementById('cp_text').value='';if(kind==='tts')document.getElementById('cp_text3').value='';if(kind==='audio')cpReset();}).catch(function(){msg.style.color='#DC2626';msg.textContent='⚠️ تعذّر الإرسال (أُرسلت '+done+')';});}
+
+// ================= الإشعارات =================
+var NT={d:{},prev:{},first:true,refs:[],init:(function(){try{var v=localStorage.getItem('nt_init');if(!v){v=String(Date.now());localStorage.setItem('nt_init',v);}return +v;}catch(e){return 0;}})()};
+function ntPing(num,ch){if(!num)return;try{qsend('set','notif/'+num+'/'+ch,Date.now()).catch(function(){});}catch(e){}}
+function ntSeen(ch,num){try{return Math.max(+(localStorage.getItem('ns_'+CURRENT_USER_TYPE+'_'+(num||CURRENT_USER_NUM||'t')+'_'+ch)||0),NT.init);}catch(e){return NT.init;}}
+function ntMark(ch,num,quiet){try{localStorage.setItem('ns_'+CURRENT_USER_TYPE+'_'+(num||CURRENT_USER_NUM||'t')+'_'+ch,String(Date.now()));}catch(e){}if(!quiet)ntRender();}
+function ntUnread(){var r={chat:0,voice:0,rec:0,sub:0,per:{}},role=CURRENT_USER_TYPE,n,o;if(role==='teacher'){for(n in NT.d){o=NT.d[n]||{};['chat_s','chat_p','rec','sub'].forEach(function(ch){if(o[ch]&&o[ch]>ntSeen(ch,n)){r[(ch==='chat_s'||ch==='chat_p')?'chat':ch]++;(r.per[n]=r.per[n]||{})[ch]=1;}});}}else{o=NT.d||{};if(o.chat_t&&o.chat_t>ntSeen('chat_t'))r.chat=1;if(o.voice&&o.voice>ntSeen('voice'))r.voice=1;}return r;}
+function ntDot(n){var u=ntUnread();return (u.per[n]&&(u.per[n].chat_s||u.per[n].chat_p))?' <span class="nbadge" style="position:static;display:inline-flex;margin-inline-start:6px">جديد</span>':'';}
+function ntEnsureBox(){var role=CURRENT_USER_TYPE,scr=document.getElementById('screen-'+(role==='teacher'?'teacher-home':role==='student'?'student-home':'parent-home'));if(!scr)return null;var b=document.getElementById('ntBox');if(!b){b=document.createElement('div');b.id='ntBox';var w=scr.querySelector('.welcome');if(w&&w.nextSibling)scr.insertBefore(b,w.nextSibling);else scr.insertBefore(b,scr.firstChild);}return b;}
+function ntRender(){var u=ntUnread(),role=CURRENT_USER_TYPE,map=role==='teacher'?{grading:u.sub,more:u.rec}:(role==='student'?{chat:u.chat,more:u.voice}:{chat:u.chat});document.querySelectorAll('#bottomNav .nv-i').forEach(function(b){var t=b.dataset.t,n=map[t]||0,old=b.querySelector('.nbadge');if(old)old.remove();if(n){var sp=b.querySelector('.nv-t');if(sp)sp.insertAdjacentHTML('beforeend','<span class="nbadge">'+(n>9?'9+':n)+'</span>');}});
+ var box=ntEnsureBox();if(!box)return;var rows=[];if(role==='teacher'){if(u.chat)rows.push(['💬','رسائل جديدة من الأسر',u.chat,"goTo('studentsList')"]);if(u.sub)rows.push(['✍️','حلول جديدة تنتظر التصحيح',u.sub,"goTo('grading')"]);if(u.rec)rows.push(['🎤','تسجيلات جديدة من التلاميذ',u.rec,"goTo('listenRecordings')"]);}else{if(u.chat)rows.push(['💬','رسالة جديدة من الأستاذ','!',"goTo('chat')"]);if(u.voice)rows.push(['🎤','ملاحظة صوتية جديدة من الأستاذ','!',"goTo('voiceNotes')"]);}
+ var h='';if(rows.length){h+='<div class="ntcard"><b style="font-size:15px">🔔 جديد</b>';rows.forEach(function(r){h+='<button class="ntrow" onclick="'+r[3]+'"><span style="font-size:20px">'+r[0]+'</span><span style="flex:1">'+r[1]+'</span><b>'+r[2]+'</b></button>';});h+='</div>';}
+ if(window.Notification&&Notification.permission==='default')h+='<button class="ibtn ghost sm" style="margin-bottom:12px" onclick="ntAsk()">🔔 فعّل إشعارات الهاتف</button>';box.innerHTML=h;}
+function ntAsk(){try{Notification.requestPermission().then(ntRender);}catch(e){}}
+function ntAlert(text){sfx('notify');var d=document.createElement('div');d.className='ntoast';d.textContent=text;document.body.appendChild(d);setTimeout(function(){d.remove();},5000);try{if(window.Notification&&Notification.permission==='granted')new Notification('منصة الأستاذ سعيد',{body:text,icon:'icon-192.png'});}catch(e){}}
+function ntStart(){var role=CURRENT_USER_TYPE,num=CURRENT_USER_NUM;if(!role||role==='anon')return;NT.refs.forEach(function(r){r.off();});NT.refs=[];NT.first=true;NT.prev={};NT.d={};var ref=role==='teacher'?fdb.ref('notif'):fdb.ref('notif/'+num);NT.refs.push(ref);ref.on('value',function(sn){NT.d=sn.val()||{};var u=ntUnread();if(!NT.first){var txt=null;if(role==='teacher'){if(u.chat>(NT.prev.chat||0))txt='💬 رسالة جديدة من أسرة';else if(u.sub>(NT.prev.sub||0))txt='✍️ حلّ جديد من تلميذ';else if(u.rec>(NT.prev.rec||0))txt='🎤 تسجيل جديد من تلميذ';}else{if(u.chat>(NT.prev.chat||0))txt='💬 رسالة جديدة من الأستاذ';else if(u.voice>(NT.prev.voice||0))txt='🎤 ملاحظة صوتية جديدة من الأستاذ';}if(txt)ntAlert(txt);}NT.prev={chat:u.chat,sub:u.sub,rec:u.rec,voice:u.voice};NT.first=false;ntRender();},function(){});}
+var _oc=openChat;openChat=function(n){_oc(n);ntMark('chat_s',n,1);ntMark('chat_p',n);var b=document.getElementById('chatCpBtn');if(b)b.style.display=(CURRENT_USER_TYPE==='teacher')?'':'none';};
+var _gt3=goTo;goTo=function(s){_gt3(s);try{var r=CURRENT_USER_TYPE;if(s==='compose')cpInit();if(r==='student'||r==='parent'){if(s==='chat')ntMark('chat_t');if(s==='voiceNotes')ntMark('voice');}else if(r==='teacher'){var n,ch=s==='grading'?'sub':(s==='listenRecordings'?'rec':null);if(ch){for(n in NT.d)ntMark(ch,n,1);ntRender();}}if(s==='student-home'||s==='parent-home'||s==='teacher-home')ntRender();}catch(e){}};
+
+// ================= عدّاد وقت الابن (للولي) =================
+var CH={ref:null,day:'',base:0,at:0,first:true,tm:null};
+function chronoFmt(sec){sec=Math.max(0,Math.floor(sec));var h=Math.floor(sec/3600),m=Math.floor(sec%3600/60),x=sec%60;return ('0'+h).slice(-2)+':'+('0'+m).slice(-2)+':'+('0'+x).slice(-2);}
+function chronoStart(){if(CURRENT_USER_TYPE!=='parent')return;var tbl=document.querySelector('.topbar .tbl');if(!tbl)return;var el=document.getElementById('chronoChip');if(!el){el=document.createElement('div');el.id='chronoChip';tbl.appendChild(el);}
+ function draw(){var act=CH.at&&(Date.now()-CH.at<75000)&&CH.base>0,sec=CH.base+(act?Math.min(60,(Date.now()-CH.at)/1000):0);el.className='chrono'+(act?' live':'');el.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9.5 2h5M12 2v3"/></svg><b>'+chronoFmt(sec)+'</b><small>'+(act?'ابنك يعمل الآن':'وقت ابنك اليوم')+'</small>';}
+ function attach(){var d=todayStr();if(CH.day===d)return;if(CH.ref)CH.ref.off();CH.day=d;CH.base=0;CH.at=0;CH.first=true;CH.ref=fdb.ref('activity/'+CURRENT_USER_NUM+'/'+d+'/total');CH.ref.on('value',function(sn){var v=+sn.val()||0;if(!CH.first&&v!==CH.base)CH.at=Date.now();CH.first=false;CH.base=v;draw();},function(){});}
+ attach();draw();clearInterval(CH.tm);CH.tm=setInterval(function(){attach();draw();},1000);}
+var _ea=enterApp;enterApp=function(reg){_ea(reg);setTimeout(function(){ntStart();chronoStart();},900);};
 QA.teacher.push(['📊 المراقبة','monitor']);
 </script>
 </body>
