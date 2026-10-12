@@ -445,7 +445,7 @@ button[onclick^="aiMic('at_q'"]::before{content:"";display:inline-block;width:1.
     </div>
     <div id="gbody"></div>
     <div class="gmsg" id="gm"></div>
-    <div class="gfoot">قسم السنة الثالثة · 2026 / 2027 · الإصدار 62</div>
+    <div class="gfoot">قسم السنة الثالثة · 2026 / 2027 · الإصدار 64</div>
   </div>
 </div>
 
@@ -2528,7 +2528,7 @@ function loadMyRecordings(){
     var h = '<div class="card"><h3>📼 تسجيلاتي السابقة</h3>';
     if(!arr.length) h += '<p>لا تسجيلات بعد.</p>';
     arr.forEach(function(item){
-      h += '<div class="recording-item"><div class="info"><div class="title">'+recLabel(item.data)+'</div><div class="date">📅 '+fmtDate(item.data.time)+'</div></div><audio controls src="'+item.data.audio+'" style="max-width:140px"></audio>'+(item.data.stars?'<span>'+new Array(item.data.stars+1).join('⭐')+'</span>':'')+'</div>';
+      h += '<div class="recording-item"><div class="info"><div class="title">'+recLabel(item.data)+'</div><div class="date">📅 '+fmtDate(item.data.time)+'</div></div><audio controls src="'+item.data.audio+'" style="max-width:140px"></audio>'+(item.data.stars?'<span>'+new Array(item.data.stars+1).join('⭐')+'</span>':'')+'<button class="ub r" onclick="deleteMyRec(\''+item.key+'\')">🗑</button></div>';
     });
     h += '</div>';
     area.innerHTML = h;
@@ -2675,15 +2675,12 @@ var QUIZZES = {
   ]}
 };
 var quizCur = null, quizIdx = 0, quizScore = 0;
-function renderQuizList(){
-  var area = document.getElementById("quizArea");
-  if(!area) return;
-  var h = "";
-  for(var k in QUIZZES){
-    h += '<div class="card" style="cursor:pointer" onclick="startQuiz(\''+k+'\')"><h3>✏️ '+QUIZZES[k].name+'</h3><p>اضغط للبدء</p></div>';
-  }
-  area.innerHTML = h;
-}
+function renderQuizList(){var area=document.getElementById("quizArea");if(!area)return;var h='<div id="tqBox"><div class="loading">⏳</div></div><h3 style="margin:14px 4px 6px">📚 تدريبات جاهزة</h3>';for(var k in QUIZZES){h+='<div class="card" style="cursor:pointer" onclick="startQuiz(\''+k+'\')"><h3>✏️ '+QUIZZES[k].name+'</h3><p>اضغط للبدء</p></div>';}area.innerHTML=h;tqLoad();}
+function deleteMyRec(key){if(!confirm('حذف هذا التسجيل؟'))return;fdb.ref('recordings/'+CURRENT_USER_NUM+'/'+key).remove().then(function(){loadMyRecordings();}).catch(function(){alert('⚠️ تعذّر الحذف');});}
+function tqSk(sj,k){return ('q_'+sj+'_'+k).replace(/[.$#\[\]\/]/g,'_');}
+function tqLoad(){var n=CURRENT_USER_NUM,box=document.getElementById('tqBox');if(!box)return;Promise.all([fdb.ref('quizzes').once('value'),fdb.ref('submissions/'+n).once('value').catch(function(){return null;}),fdb.ref('reopen/'+n).once('value').catch(function(){return null;})]).then(function(r){var all=r[0].val()||{},subs=(r[1]&&r[1].val())||{},ro=(r[2]&&r[2].val())||{},td=todayStr(),rows=[];Object.keys(all).forEach(function(sj){Object.keys(all[sj]||{}).forEach(function(k){var q=all[sj][k];if(!q||!q.mcq||!q.mcq.length)return;if((q.date&&q.date>td)||(q.publishAt&&Date.now()<q.publishAt))return;rows.push({sj:sj,k:k,q:q});});});rows.sort(function(x,y){return String(y.q.date||'').localeCompare(String(x.q.date||''))||((y.q.time||0)-(x.q.time||0));});window.__TQ={};var h='<h3 style="margin:6px 4px">🧩 اختبارات أستاذك</h3>';if(!rows.length)h+='<div class="card"><p style="margin:0">لا اختبارات من أستاذك بعد.</p></div>';rows.forEach(function(x){var sk=tqSk(x.sj,x.k),sb=subs[sk],sjn='';(window.SUBJECTS||[]).forEach(function(s){if(s.id===x.sj)sjn=(s.icon||'')+' '+(s.name||'');});var can=!x.q.date||x.q.date===td||ro['q'+x.k];window.__TQ[sk]=x;h+='<div class="card"><h3 style="margin:0 0 4px">🧩 '+esc(x.q.title||'اختبار')+'</h3><div style="font-size:12px;color:var(--sub);margin-bottom:6px">'+(sjn?esc(sjn)+' · ':'')+'📅 '+esc(x.q.date||'')+' · '+x.q.mcq.length+' أسئلة</div>'+(sb&&sb.autoScore!=null?'<div class="ai-b">✅ أجبت · '+new Array(Math.round(sb.autoScore/2)+1).join('⭐')+' ('+sb.autoScore+'/10)</div>':(can?'<button class="btn" onclick="tqOpen(\''+sk+'\')">▶ ابدأ الاختبار</button>':'<div class="ai-b">⏳ انتهى وقت هذا الاختبار</div>'))+'</div>';});box.innerHTML=h;}).catch(function(){box.innerHTML='<div class="card"><p>⚠️ تعذّر تحميل اختبارات أستاذك.</p></div>';});}
+function tqOpen(sk){var x=(window.__TQ||{})[sk];if(!x)return;var area=document.getElementById('quizArea'),h='<div class="card"><h3>🧩 '+esc(x.q.title||'اختبار')+'</h3></div>';x.q.mcq.forEach(function(qq,qi){h+='<div class="ai-b"><b>'+(qi+1)+'. '+esc(qq.q)+'</b>';(qq.o||[]).forEach(function(o,oi){h+='<label style="display:block;margin:6px 0"><input type="radio" name="tq_'+sk+'_'+qi+'" value="'+oi+'"> '+esc(o)+'</label>';});h+='</div>';});h+='<button class="btn" onclick="tqSubmit(\''+sk+'\')">📤 أرسل إجاباتي</button> <button class="btn ghost" onclick="renderQuizList()">رجوع للقائمة</button>';area.innerHTML=h;}
+function tqSubmit(sk){var x=(window.__TQ||{})[sk];if(!x)return;var list=x.q.mcq,ok=0,i;for(i=0;i<list.length;i++){var el=document.querySelector('input[name="tq_'+sk+'_'+i+'"]:checked');if(!el){alert('أجب عن كل الأسئلة');return;}if(+el.value===list[i].c)ok++;}qsend('set','submissions/'+CURRENT_USER_NUM+'/'+sk,{type:'mcq',autoScore:Math.round(ok*10/list.length),subj:x.sj,time:Date.now()}).then(function(r){if(r==='queued')alert('📡 لا اتصال: ستُرسل إجاباتك عند عودة الإنترنت');else{try{celebrate('أنهيت الاختبار! ⭐');}catch(e){}}renderQuizList();}).catch(function(){alert('⚠️ تعذّر الإرسال');});}
 function startQuiz(key){ quizCur = key; quizIdx = 0; quizScore = 0; renderQuizQuestion(); }
 function renderQuizQuestion(){
   var area = document.getElementById("quizArea");
@@ -3265,7 +3262,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',function(){navig
     var prev=cs,r=g.apply(this,arguments);cs=sc;
     if(!backing&&sc!==prev){
       if(isHome(sc)){stack=[];if(pushed>0){var n=pushed;pushed=0;skip=1;try{history.go(-n);}catch(e){skip=0;}}}
-      else{if(prev)stack.push(prev);try{history.pushState({sb:1},'');pushed++;}catch(e){}}
+      else if(prev!=='ai'){if(prev)stack.push(prev);try{history.pushState({sb:1},'');pushed++;}catch(e){}}
     }
     show();return r;
   };
@@ -3309,7 +3306,7 @@ var NAV_ICONS={home:'<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 
 function buildNav(role){var o=document.getElementById('bottomNav');if(o)o.remove();var items=NAVS[role];if(!items)return;var nav=document.createElement('nav');nav.id='bottomNav';nav.className=role==='student'?'nv-b':'nv-a';items.forEach(function(it){var b=document.createElement('button');b.className='nv-i';b.dataset.t=it[0];var st=it[3]?' style="background:'+it[3]+';color:'+it[4]+'"':'';b.innerHTML='<span class="nv-t"'+st+'><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+NAV_ICONS[it[2]]+'</svg></span><span class="nv-l">'+it[1]+'</span>';b.onclick=function(){if(it[0]==='more')openMore(role);else goTo(it[0]);};nav.appendChild(b);});var oldf=document.getElementById('aiFab');if(oldf)oldf.remove();if(role!=='teacher'){var fab=document.createElement('button');fab.id='aiFab';fab.setAttribute('aria-label','الأستاذ سعيد الذكي');fab.innerHTML='<span class="orb"><svg viewBox="0 0 32 32" width="30" height="30"><defs><linearGradient id="spk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#A5B4FC"/></linearGradient></defs><path fill="url(#spk)" d="M15 4c1 7 4 10 11 11-7 1-10 4-11 11-1-7-4-10-11-11 7-1 10-4 11-11z"/><path fill="#67E8F9" d="M25 3c.4 2.2 1.3 3.1 3.5 3.5-2.2.4-3.1 1.3-3.5 3.5-.4-2.2-1.3-3.1-3.5-3.5 2.2-.4 3.1-1.3 3.5-3.5z"/><circle cx="6" cy="26" r="1.6" fill="#C4B5FD"/></svg></span>';fab.title='اسألني';fab.onclick=function(){goTo('ai');aiFabListen('aiInput',aiSend);};document.body.appendChild(fab);var ot=document.getElementById('aiTip');if(ot)ot.remove();if(role==='student'){var tip=document.createElement('div');tip.id='aiTip';tip.textContent='اسألني عن درسك ✨';document.body.appendChild(tip);setTimeout(function(){tip.remove();},8500);try{aiNudge();}catch(e){}}}
 document.getElementById('app').appendChild(nav);navActive('');}
 function navActive(s){var n=document.getElementById('bottomNav');if(!n)return;[].forEach.call(n.children,function(b){b.classList.toggle('on',b.dataset.t===s);});}
-function openMore(role){var o=document.getElementById('moreSheet');if(o){o.remove();return;}var used=(NAVS[role]||[]).map(function(x){return x[0];});var src=document.querySelector('#screen-'+role+'-home .grid-menu');if(!src)return;var sh=document.createElement('div');sh.id='moreSheet';sh.onclick=function(e){if(e.target===sh)sh.remove();};var g=document.createElement('div');g.className='grid-menu';[].forEach.call(src.children,function(c){var m=(c.getAttribute('onclick')||'').match(/goTo\('([^']+)'\)/);if(role==='student'&&/sendReport\(/.test(c.getAttribute('onclick')||''))return;if(m&&(used.indexOf(m[1])>-1||(role==='student'&&['ai','lessons','texts','studentNotebook','textbook','myFile','recorder','charts','rewards','voiceNotes'].indexOf(m[1])>-1)))return;var k=c.cloneNode(true);k.addEventListener('click',function(){sh.remove();});g.appendChild(k);});sh.appendChild(g);var vv=document.createElement('div');vv.style.cssText='text-align:center;font-size:12px;color:#fff;opacity:.85;margin-top:14px';vv.textContent='الإصدار 62';sh.appendChild(vv);document.body.appendChild(sh);}
+function openMore(role){var o=document.getElementById('moreSheet');if(o){o.remove();return;}var used=(NAVS[role]||[]).map(function(x){return x[0];});var src=document.querySelector('#screen-'+role+'-home .grid-menu');if(!src)return;var sh=document.createElement('div');sh.id='moreSheet';sh.onclick=function(e){if(e.target===sh)sh.remove();};var g=document.createElement('div');g.className='grid-menu';[].forEach.call(src.children,function(c){var m=(c.getAttribute('onclick')||'').match(/goTo\('([^']+)'\)/);if(role==='student'&&/sendReport\(/.test(c.getAttribute('onclick')||''))return;if(m&&(used.indexOf(m[1])>-1||(role==='student'&&['ai','lessons','texts','studentNotebook','textbook','myFile','recorder','charts','rewards','voiceNotes'].indexOf(m[1])>-1)))return;var k=c.cloneNode(true);k.addEventListener('click',function(){sh.remove();});g.appendChild(k);});sh.appendChild(g);var vv=document.createElement('div');vv.style.cssText='text-align:center;font-size:12px;color:#fff;opacity:.85;margin-top:14px';vv.textContent='الإصدار 64';sh.appendChild(vv);document.body.appendChild(sh);}
 if(/[?&]invite=/.test(location.search))GATE_VIEW='r';
 var __goTo=goTo;goTo=function(s){__goTo(s);navActive(s);window.CUR_SCREEN=s;if(s==="student-home"||s==="parent-home"||s==="teacher-home"){renderToday(CURRENT_USER_TYPE);setTimeout(todayExtras,800);setTimeout(todayExtras,2200);}};
 
@@ -3346,9 +3343,9 @@ function renderToday(role){var box=document.getElementById('todayBox_'+role);if(
   h+=goalCard(r[6].val());
   h+=tcard('🖨️','تقرير ابني','اضغط لطباعته أو حفظه PDF',0,'printStudentReport(CURRENT_USER_NUM)');
   box.innerHTML=h;}).catch(function(){});}
- else if(role==='teacher'){Promise.all([fdb.ref('submissions').once('value'),fdb.ref('ai_q').once('value'),fdb.ref('chats').once('value'),fdb.ref('attendance/'+td).once('value'),fdb.ref('board/birthdays').once('value'),fdb.ref('attendance_s').once('value'),fdb.ref('absence_notices').once('value')]).then(function(r){var nt=r[6].val()||{},sb=r[0].val()||{},aq=r[1].val()||{},ch=r[2].val()||{},at=r[3].val(),bd=r[4].val()||{},as=r[5].val()||{},h='',u,k,c=0,q=0,m=0,ab=[],al=[],b=[];
+ else if(role==='teacher'){Promise.all([fdb.ref('submissions').once('value'),fdb.ref('ai_q').once('value'),fdb.ref('chats').once('value'),fdb.ref('attendance/'+td).once('value'),fdb.ref('board/birthdays').once('value'),fdb.ref('attendance_s').once('value'),fdb.ref('absence_notices').once('value')]).then(function(r){var nt=r[6].val()||{},sb=r[0].val()||{},aq=r[1].val()||{},ch=r[2].val()||{},at=r[3].val(),bd=r[4].val()||{},as=r[5].val()||{},h='',u,k,c=0,q=0,qp=0,m=0,ab=[],al=[],b=[];
   for(u in sb)for(k in sb[u]){var z=sb[u][k];if(z.grade==null&&z.autoScore==null&&!z.retry)c++;}
-  for(u in aq)for(k in aq[u])if(aq[u][k].status==='pending')q++;
+  for(u in aq)for(k in aq[u])if(aq[u][k].status==='pending'){qp++;if((aq[u][k].time||0)>ntSeen('ask',u))q++;}
   for(u in ch){var ks=Object.keys(ch[u]||{}).sort();if(ks.length){var lm=ch[u][ks[ks.length-1]];if(lm.from!=='teacher'&&(lm.time||0)>Math.max(ntSeen('chat_s',u),ntSeen('chat_p',u)))m++;}}
   if(at)for(u in at)if(at[u]==='absent')ab.push(STUDENT_NAMES[u]||u);
   for(u in as){var ds=Object.keys(as[u]).sort().reverse().slice(0,3);if(ds.length===3&&ds.every(function(d){return as[u][d]==='absent';}))al.push(STUDENT_NAMES[u]||u);}
@@ -3356,7 +3353,7 @@ function renderToday(role){var box=document.getElementById('todayBox_'+role);if(
   if(al.length)h+=tcard('🚨','تنبيه مبكر','غياب 3 أيام متتالية: '+esc(al.join('، ')),al.length,"goTo('attendance')");
   h+=prgCard();h+=tcard('✍️','حلول بانتظار التصحيح',c?'اضغط للتصحيح':'لا شيء ينتظرك 🎉',c,"goTo('grading')");
   h+=tcard('📌','النشر للتلاميذ','واجبات، مطالعة، درس اليوم، كراس القسم',0,"pubHome()");h+=tcard('💬','رسائل جديدة',m?'اضغط لفتح الرسائل':'لا رسائل جديدة',m,"goTo('studentsList')");
-  if(q)h+=tcard('❓','أسئلة التلاميذ بانتظار جوابك',q+' سؤال',q,"askOpen()");   h+=tcard('🤖','مساعد الأستاذ','حضّر درسًا أو اختبارًا، أو اسأله',0,"goTo('aiTeacher')");
+  if(q)h+=tcard('❓','أسئلة جديدة من التلاميذ',q+(q>1?' أسئلة جديدة':' سؤال جديد'),q,"askOpen()");   h+=tcard('🤖','مساعد الأستاذ','حضّر درسًا أو اختبارًا، أو اسأله'+(qp?' · '+qp+' سؤال معلّق':''),0,"goTo('aiTeacher')");
   var nl=[];for(u in nt)if(nt[u][td])nl.push(STUDENT_NAMES[u]||u);
   if(nl.length)h+=tcard('📝','أخطر أولياؤهم بغيابهم',esc(nl.join('، ')),nl.length,"goTo('attendance')");
   h+=tcard('🗓️','غيابات اليوم',at?(ab.length?esc(ab.join('، ')):'لا غياب اليوم 🎉'):'لم يُسجَّل الحضور بعد',ab.length,"goTo('attendance')");
