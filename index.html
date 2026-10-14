@@ -495,6 +495,7 @@ body.fab-scroll #aiFab,body.fab-scroll #fabMain,body.fab-scroll #qaFab{opacity:.
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+<script>window.__ERRS=[];window.__FEAT={};window.addEventListener('error',function(e){try{window.__ERRS.push(String(e.message||e).slice(0,140)+(e.lineno?' @'+e.lineno+':'+(e.colno||''):''));}catch(x){}});window.addEventListener('unhandledrejection',function(e){try{window.__ERRS.push('promise: '+String((e.reason&&e.reason.message)||e.reason).slice(0,120));}catch(x){}});</script>
 <script>
   var firebaseConfig = {
     apiKey: "AIzaSyDrWcrE1nOSaEPA4qQPN_SJxDGEylJTI6o",
@@ -557,7 +558,7 @@ body.fab-scroll #aiFab,body.fab-scroll #fabMain,body.fab-scroll #qaFab{opacity:.
     </div>
     <div id="gbody"></div>
     <div class="gmsg" id="gm"></div>
-    <div class="gfoot">قسم السنة الثالثة · 2026 / 2027 · الإصدار 99</div>
+    <div class="gfoot">قسم السنة الثالثة · 2026 / 2027 · الإصدار 100</div>
   </div>
 </div>
 
@@ -3429,7 +3430,7 @@ var NAV_ICONS={home:'<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 
 function buildNav(role){var o=document.getElementById('bottomNav');if(o)o.remove();var items=NAVS[role];if(!items)return;var nav=document.createElement('nav');nav.id='bottomNav';nav.className=role==='student'?'nv-b':'nv-a';items.forEach(function(it){var b=document.createElement('button');b.className='nv-i';b.dataset.t=it[0];var st=it[3]?' style="background:'+it[3]+';color:'+it[4]+'"':'';b.innerHTML='<span class="nv-t"'+st+'><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+NAV_ICONS[it[2]]+'</svg></span><span class="nv-l">'+it[1]+'</span>';b.onclick=function(){if(it[0]==='more')openMore(role);else goTo(it[0]);};nav.appendChild(b);});var oldf=document.getElementById('aiFab');if(oldf)oldf.remove();if(role!=='teacher'){var fab=document.createElement('button');fab.id='aiFab';fab.setAttribute('aria-label','الأستاذ سعيد الذكي');fab.innerHTML='<span class="orb"><svg viewBox="0 0 32 32" width="30" height="30"><defs><linearGradient id="spk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#A5B4FC"/></linearGradient></defs><path fill="url(#spk)" d="M15 4c1 7 4 10 11 11-7 1-10 4-11 11-1-7-4-10-11-11 7-1 10-4 11-11z"/><path fill="#67E8F9" d="M25 3c.4 2.2 1.3 3.1 3.5 3.5-2.2.4-3.1 1.3-3.5 3.5-.4-2.2-1.3-3.1-3.5-3.5 2.2-.4 3.1-1.3 3.5-3.5z"/><circle cx="6" cy="26" r="1.6" fill="#C4B5FD"/></svg></span>';fab.title='اسألني';fab.onclick=function(){goTo('ai');aiFabListen('aiInput',aiSend);};document.body.appendChild(fab);var ot=document.getElementById('aiTip');if(ot)ot.remove();if(role==='student'){var tip=document.createElement('div');tip.id='aiTip';tip.textContent='اسألني عن درسك ✨';document.body.appendChild(tip);setTimeout(function(){tip.remove();},8500);try{aiNudge();}catch(e){}}}
 document.getElementById('app').appendChild(nav);navActive('');}
 function navActive(s){var n=document.getElementById('bottomNav');if(!n)return;[].forEach.call(n.children,function(b){b.classList.toggle('on',b.dataset.t===s);});}
-function openMore(role){var o=document.getElementById('moreSheet');if(o){o.remove();return;}var used=(NAVS[role]||[]).map(function(x){return x[0];});var src=document.querySelector('#screen-'+role+'-home .grid-menu');if(!src)return;var sh=document.createElement('div');sh.id='moreSheet';sh.onclick=function(e){if(e.target===sh)sh.remove();};var g=document.createElement('div');g.className='grid-menu';var hd=document.createElement('div');hd.className='ms-hd';hd.innerHTML='<b>المزيد</b><button type="button" class="ibtn ghost sm">→ رجوع</button>';hd.querySelector('button').onclick=function(){sh.remove();};g.appendChild(hd);[].forEach.call(src.children,function(c){var m=(c.getAttribute('onclick')||'').match(/goTo\('([^']+)'\)/);if(role==='student'&&/sendReport\(/.test(c.getAttribute('onclick')||''))return;if(m&&(used.indexOf(m[1])>-1||(role==='student'&&['ai','lessons','texts','studentNotebook','textbook','myFile','recorder','charts','rewards','voiceNotes'].indexOf(m[1])>-1)))return;var k=c.cloneNode(true);k.addEventListener('click',function(){sh.remove();});g.appendChild(k);});sh.appendChild(g);var vv=document.createElement('div');vv.style.cssText='text-align:center;font-size:12px;color:#fff;opacity:.85;margin-top:14px';vv.textContent='الإصدار 99';sh.appendChild(vv);document.body.appendChild(sh);}
+function openMore(role){var o=document.getElementById('moreSheet');if(o){o.remove();return;}var used=(NAVS[role]||[]).map(function(x){return x[0];});var src=document.querySelector('#screen-'+role+'-home .grid-menu');if(!src)return;var sh=document.createElement('div');sh.id='moreSheet';sh.onclick=function(e){if(e.target===sh)sh.remove();};var g=document.createElement('div');g.className='grid-menu';var hd=document.createElement('div');hd.className='ms-hd';hd.innerHTML='<b>المزيد</b><button type="button" class="ibtn ghost sm">→ رجوع</button>';hd.querySelector('button').onclick=function(){sh.remove();};g.appendChild(hd);[].forEach.call(src.children,function(c){var m=(c.getAttribute('onclick')||'').match(/goTo\('([^']+)'\)/);if(role==='student'&&/sendReport\(/.test(c.getAttribute('onclick')||''))return;if(m&&(used.indexOf(m[1])>-1||(role==='student'&&['ai','lessons','texts','studentNotebook','textbook','myFile','recorder','charts','rewards','voiceNotes'].indexOf(m[1])>-1)))return;var k=c.cloneNode(true);k.addEventListener('click',function(){sh.remove();});g.appendChild(k);});sh.appendChild(g);var vv=document.createElement('div');vv.style.cssText='text-align:center;font-size:12px;color:#fff;opacity:.85;margin-top:14px';vv.textContent='الإصدار 100';sh.appendChild(vv);try{var miss=['picker','send','v98','hj'].filter(function(k){return !(window.__FEAT&&__FEAT[k]);}),er=(window.__ERRS||[]).slice(0,3);if(miss.length||er.length){var dg=document.createElement('div');dg.style.cssText='font-size:11px;color:#FCA5A5;max-width:92%;margin:6px auto 0;direction:ltr;text-align:left;word-break:break-all';dg.textContent='⚠️ '+(miss.length?'not loaded: '+miss.join(',')+' | ':'')+er.join(' | ');sh.appendChild(dg);}else{var ok=document.createElement('div');ok.style.cssText='font-size:11px;color:#86EFAC;text-align:center;margin-top:4px';ok.textContent='✅ كل الأجزاء تعمل';sh.appendChild(ok);}}catch(e){}document.body.appendChild(sh);}
 if(/[?&]invite=/.test(location.search))GATE_VIEW='r';
 var __goTo=goTo;goTo=function(s){__goTo(s);navActive(s);window.CUR_SCREEN=s;if(s==="student-home"||s==="parent-home"||s==="teacher-home"){renderToday(CURRENT_USER_TYPE);setTimeout(todayExtras,800);setTimeout(todayExtras,2200);}};
 
@@ -4314,7 +4315,7 @@ function mfTextApply(k,v){tlGetText(k).then(function(t){var f=v==='B'?arB(t):v==
 QA.teacher.push(['📊 المراقبة','monitor']);
 
 // ===== منتقي التاريخ: أرقام لاتينية وأشهر جزائرية (يحل محل منتقي المتصفح) =====
-(function(){
+try{(function(){
 var M=['جانفي','فيفري','مارس','أفريل','ماي','جوان','جويلية','أوت','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],W=['أحد','اثن','ثلا','أرب','خمي','جمع','سبت'],st=null;
 function p2(n){return (n<10?'0':'')+n;}
 function iso(y,m,d){return y+'-'+p2(m+1)+'-'+p2(d);}
@@ -4336,10 +4337,10 @@ document.addEventListener('click',function(ev){var t=ev.target;if(t&&t.getAttrib
 var q=0;new MutationObserver(function(){if(q)return;q=1;requestAnimationFrame(function(){q=0;conv();});}).observe(document.documentElement,{childList:true,subtree:true});conv();
 // الأزرار العائمة تتوارى أثناء التمرير حتى لا تغطي المحتوى
 var ft=0;document.addEventListener('scroll',function(e){var t=e.target;if(t&&t.closest&&t.closest('#mfOv'))return;document.body.classList.add('fab-scroll');clearTimeout(ft);ft=setTimeout(function(){document.body.classList.remove('fab-scroll');},700);},true);
-})();
+})();window.__FEAT['picker']=1;}catch(e){window.__ERRS.push('picker: '+String((e&&e.message)||e).slice(0,120));}
 
 // ===== إرسال ملف من «ملفاتي» إلى أقسام التلميذ دون إعادة رفع =====
-(function(){
+try{(function(){
 var SEND_TO=[['readtask','المطالعة والتعبير'],['weeklyhw','الواجبات الأسبوعية'],['classnb','كراس القسم'],['textbook','الكتاب المدرسي'],['activitybook','كتاب الأنشطة']];
 function sel(k,cat){var o=SEND_TO.filter(function(c){return c[0]!==cat;});return '<select class="inp" style="width:auto;margin:0;padding:6px" onchange="mfSend(\''+k+'\',this.value);this.value=\'\'"><option value="">📌 أرسل للتلاميذ إلى...</option>'+o.map(function(c){return '<option value="'+c[0]+'">'+c[1]+'</option>';}).join('')+'</select>';}
 window.mfSend=function(k,cat){
@@ -4367,10 +4368,10 @@ var _pcd=pubCard;pubCard=function(k,x,cat){var h=_pcd(k,x,cat),e='';if(!x.hasFil
 window.pubOpenUrlT=function(k){var x=MF.d[k]||{};if(x.url)window.open(directLink(x.url),'_blank');};
 function pubExtra(){[].forEach.call(document.querySelectorAll('#pb_list .mfa'),function(a){if(a.__x)return;var d=a.querySelector('button.del');if(!d)return;var m=(d.getAttribute('onclick')||'').match(/pubDel\('([^']+)'/);if(!m)return;a.__x=1;var k=m[1],x=MF.d[k]||{},h='';if(!x.hasFile&&x.url)h+='<button class="ibtn ghost sm" onclick="pubOpenUrlT(\''+k+'\')">🔗 فتح الرابط</button>';if(!x.hasFile&&x.chars>0)h+='<button class="ibtn ghost sm" onclick="mfTextCheck(\''+k+'\')">📝 النص</button>';if(h){var t=document.createElement('span');t.innerHTML=h;while(t.firstChild)a.insertBefore(t.firstChild,d);}});}
 var q2=0;new MutationObserver(function(){if(q2)return;q2=1;requestAnimationFrame(function(){q2=0;pubExtra();});}).observe(document.body,{childList:true,subtree:true});
-})();
+})();window.__FEAT['send']=1;}catch(e){window.__ERRS.push('send: '+String((e&&e.message)||e).slice(0,120));}
 
 // ===== v98: اعتماد الإرسال، رفع أوراق الكراس اليومي، ومساعد الأستاذ يبدأ بالدردشة =====
-(function(){
+try{(function(){
 // ---------- 1) الكراس اليومي: صفوف خاصة بكل تاريخ (تُحفظ كما في الورقة) ----------
 window.DN_OV=window.DN_OV||{};var DN_OVL={};
 function hhmm(m){return ('0'+Math.floor(m/60)).slice(-2)+':'+('0'+(m%60)).slice(-2);}
@@ -4456,14 +4457,14 @@ window.atChip=function(k){if(k==='draft'){var b=document.getElementById('atDraft
 function draftUi(){[].forEach.call(document.querySelectorAll('#pb_list .card'),function(c){if(c.__d)return;var d=c.querySelector('button.del');if(!d)return;var m=(d.getAttribute('onclick')||'').match(/pubDel\('([^']+)'/);if(!m)return;var k=m[1],x=MF.d[k]||{};if(!x.draft)return;c.__d=1;var a=d.parentNode;var t=document.createElement('span');t.innerHTML='<button class="ibtn up sm" onclick="mfApprove(\''+k+'\')">✅ اعتمد ونشر للتلاميذ</button>';a.insertBefore(t.firstChild,a.firstChild);var b=c.querySelector('b');if(b)b.insertAdjacentHTML('beforebegin','<span class="chip" style="background:#FEF3C7;color:#92400E">⏳ مسودة: لا يراها التلميذ</span> ');});}
 var q3=0;new MutationObserver(function(){if(q3)return;q3=1;requestAnimationFrame(function(){q3=0;draftUi();});}).observe(document.body,{childList:true,subtree:true});
 var _mfr2=mfRender;mfRender=function(){_mfr2.apply(this,arguments);try{[].forEach.call(document.querySelectorAll('#mfCat .mf-row'),function(r){var b=r.querySelector('button[onclick^="mfView("]');if(!b)return;var m=(b.getAttribute('onclick')||'').match(/mfView\('([^']+)'\)/);if(!m)return;var k=m[1],x=MF.d[k]||{};if(!x.draft||r.__d)return;r.__d=1;var a=r.querySelector('.mfa');if(!a)return;var t=document.createElement('span');t.innerHTML='<button class="ibtn up sm" onclick="mfApprove(\''+k+'\')">✅ اعتمد ونشر للتلاميذ</button>';a.insertBefore(t.firstChild,a.firstChild);var bb=r.querySelector('b');if(bb)bb.insertAdjacentHTML('beforebegin','<span class="chip" style="background:#FEF3C7;color:#92400E">⏳ مسودة</span> ');});}catch(e){}};
-})();
+})();window.__FEAT['v98']=1;}catch(e){window.__ERRS.push('v98: '+String((e&&e.message)||e).slice(0,120));}
 
 // ===== الكراس اليومي: التاريخ الهجري بجانب الميلادي (بنفس صيغة واجهة التطبيق) =====
-(function(){
+try{(function(){
 function hs(d){try{return new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura-nu-latn',{day:'numeric',month:'long',year:'numeric'}).format(d);}catch(e){return '';}}
 var _dlh=dnLongHtml;
 dnLongHtml=function(v){var h=hs(new Date(v+'T00:00:00'));return _dlh(v)+(h?' <span class="dn-hj">· '+esc(h).replace(/(\d+)/g,'<span class="rd">$1</span>')+'</span>':'');};
-})();
+})();window.__FEAT['hj']=1;}catch(e){window.__ERRS.push('hj: '+String((e&&e.message)||e).slice(0,120));}
 </script>
 </body>
 </html>
