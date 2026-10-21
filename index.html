@@ -624,7 +624,7 @@ body.fab-scroll #aiFab,body.fab-scroll #fabMain,body.fab-scroll #qaFab{opacity:.
     </div>
     <div id="gbody"></div>
     <div class="gmsg" id="gm"></div>
-    <div class="gfoot">قسم السنة الثالثة · 2026 / 2027 · الإصدار 118.1</div>
+    <div class="gfoot">قسم السنة الثالثة · 2026 / 2027 · الإصدار 119</div>
   </div>
 </div>
 
@@ -3502,7 +3502,7 @@ var NAV_ICONS={home:'<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 
 function buildNav(role){var o=document.getElementById('bottomNav');if(o)o.remove();var items=NAVS[role];if(!items)return;var nav=document.createElement('nav');nav.id='bottomNav';nav.className=role==='student'?'nv-b':'nv-a';items.forEach(function(it){var b=document.createElement('button');b.className='nv-i';b.dataset.t=it[0];var st=it[3]?' style="background:'+it[3]+';color:'+it[4]+'"':'';b.innerHTML='<span class="nv-t"'+st+'><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+NAV_ICONS[it[2]]+'</svg></span><span class="nv-l">'+it[1]+'</span>';b.onclick=function(){if(it[0]==='more')openMore(role);else goTo(it[0]);};nav.appendChild(b);});var oldf=document.getElementById('aiFab');if(oldf)oldf.remove();if(role!=='teacher'){var fab=document.createElement('button');fab.id='aiFab';fab.setAttribute('aria-label','الأستاذ سعيد الذكي');fab.innerHTML='<span class="orb"><svg viewBox="0 0 32 32" width="30" height="30"><defs><linearGradient id="spk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#A5B4FC"/></linearGradient></defs><path fill="url(#spk)" d="M15 4c1 7 4 10 11 11-7 1-10 4-11 11-1-7-4-10-11-11 7-1 10-4 11-11z"/><path fill="#67E8F9" d="M25 3c.4 2.2 1.3 3.1 3.5 3.5-2.2.4-3.1 1.3-3.5 3.5-.4-2.2-1.3-3.1-3.5-3.5 2.2-.4 3.1-1.3 3.5-3.5z"/><circle cx="6" cy="26" r="1.6" fill="#C4B5FD"/></svg></span>';fab.title='اسألني';fab.onclick=function(){goTo('ai');aiFabListen('aiInput',aiSend);};document.body.appendChild(fab);var ot=document.getElementById('aiTip');if(ot)ot.remove();if(role==='student'){var tip=document.createElement('div');tip.id='aiTip';tip.textContent='اسألني عن درسك ✨';document.body.appendChild(tip);setTimeout(function(){tip.remove();},8500);try{aiNudge();}catch(e){}}}
 document.getElementById('app').appendChild(nav);navActive('');}
 function navActive(s){var n=document.getElementById('bottomNav');if(!n)return;[].forEach.call(n.children,function(b){b.classList.toggle('on',b.dataset.t===s);});}
-function openMore(role){var o=document.getElementById('moreSheet');if(o){o.remove();return;}var used=(NAVS[role]||[]).map(function(x){return x[0];});var src=document.querySelector('#screen-'+role+'-home .grid-menu');if(!src)return;var sh=document.createElement('div');sh.id='moreSheet';sh.onclick=function(e){if(e.target===sh)sh.remove();};var g=document.createElement('div');g.className='grid-menu';var hd=document.createElement('div');hd.className='ms-hd';hd.innerHTML='<b>المزيد</b><button type="button" class="ibtn ghost sm">→ رجوع</button>';hd.querySelector('button').onclick=function(){sh.remove();};g.appendChild(hd);[].forEach.call(src.children,function(c){var m=(c.getAttribute('onclick')||'').match(/goTo\('([^']+)'\)/);if(role==='student'&&/sendReport\(/.test(c.getAttribute('onclick')||''))return;if(m&&(used.indexOf(m[1])>-1||(role==='student'&&['ai','lessons','texts','studentNotebook','textbook','myFile','recorder','charts','rewards','voiceNotes','quizzes'].indexOf(m[1])>-1)))return;var k=c.cloneNode(true);k.addEventListener('click',function(){sh.remove();});g.appendChild(k);});sh.appendChild(g);var vv=document.createElement('div');vv.style.cssText='text-align:center;font-size:12px;color:#fff;opacity:.85;margin-top:14px';vv.textContent='الإصدار 118.1';sh.appendChild(vv);try{var miss=['picker','send','v98','hj','disp','simple','v107','v108','v110','v112','v113','v114','v115','v116','v117','v118'].filter(function(k){return !(window.__FEAT&&__FEAT[k]);}),er=(window.__ERRS||[]).slice(0,3);if(miss.length||er.length){var dg=document.createElement('div');dg.style.cssText='font-size:11px;color:#FCA5A5;max-width:92%;margin:6px auto 0;direction:ltr;text-align:left;word-break:break-all';dg.textContent='⚠️ '+(miss.length?'not loaded: '+miss.join(',')+' | ':'')+er.join(' | ');sh.appendChild(dg);}else{var ok=document.createElement('div');ok.style.cssText='font-size:11px;color:#86EFAC;text-align:center;margin-top:4px';ok.textContent='✅ كل الأجزاء تعمل';sh.appendChild(ok);}}catch(e){}document.body.appendChild(sh);}
+function openMore(role){var o=document.getElementById('moreSheet');if(o){o.remove();return;}var used=(NAVS[role]||[]).map(function(x){return x[0];});var src=document.querySelector('#screen-'+role+'-home .grid-menu');if(!src)return;var sh=document.createElement('div');sh.id='moreSheet';sh.onclick=function(e){if(e.target===sh)sh.remove();};var g=document.createElement('div');g.className='grid-menu';var hd=document.createElement('div');hd.className='ms-hd';hd.innerHTML='<b>المزيد</b><button type="button" class="ibtn ghost sm">→ رجوع</button>';hd.querySelector('button').onclick=function(){sh.remove();};g.appendChild(hd);[].forEach.call(src.children,function(c){var m=(c.getAttribute('onclick')||'').match(/goTo\('([^']+)'\)/);if(role==='student'&&/sendReport\(/.test(c.getAttribute('onclick')||''))return;if(m&&(used.indexOf(m[1])>-1||(role==='student'&&['ai','lessons','texts','studentNotebook','textbook','myFile','recorder','charts','rewards','voiceNotes','quizzes'].indexOf(m[1])>-1)))return;var k=c.cloneNode(true);k.addEventListener('click',function(){sh.remove();});g.appendChild(k);});sh.appendChild(g);var vv=document.createElement('div');vv.style.cssText='text-align:center;font-size:12px;color:#fff;opacity:.85;margin-top:14px';vv.textContent='الإصدار 119';sh.appendChild(vv);try{var miss=['picker','send','v98','hj','disp','simple','v107','v108','v110','v112','v113','v114','v115','v116','v117','v118','v119'].filter(function(k){return !(window.__FEAT&&__FEAT[k]);}),er=(window.__ERRS||[]).slice(0,3);if(miss.length||er.length){var dg=document.createElement('div');dg.style.cssText='font-size:11px;color:#FCA5A5;max-width:92%;margin:6px auto 0;direction:ltr;text-align:left;word-break:break-all';dg.textContent='⚠️ '+(miss.length?'not loaded: '+miss.join(',')+' | ':'')+er.join(' | ');sh.appendChild(dg);}else{var ok=document.createElement('div');ok.style.cssText='font-size:11px;color:#86EFAC;text-align:center;margin-top:4px';ok.textContent='✅ كل الأجزاء تعمل';sh.appendChild(ok);}}catch(e){}document.body.appendChild(sh);}
 if(/[?&]invite=/.test(location.search))GATE_VIEW='r';
 var __goTo=goTo;goTo=function(s){__goTo(s);navActive(s);window.CUR_SCREEN=s;if(s==="student-home"||s==="parent-home"||s==="teacher-home"){renderToday(CURRENT_USER_TYPE);setTimeout(todayExtras,800);setTimeout(todayExtras,2200);}};
 
@@ -5215,10 +5215,10 @@ window.brainLoad=function(){var b=document.getElementById('brainList');if(!b)ret
  },function(){b.innerHTML='<div class="card"><p>⚠️ تعذّر التحميل.</p></div>';});};
 window.brainPlay=function(id,prev){var ov=mfOverlay('🧩 ألعاب العقل'),b=ov.querySelector('.vbody');b.style.direction='rtl';b.innerHTML='<div class="loading">⏳</div>';
  fdb.ref('kb_meta/'+id).once('value').then(function(sn){var x=sn.val();if(!x||!(prev||!x.hide)){b.innerHTML='<div class="card"><p>⚠️ اللعبة غير متاحة الآن.</p></div>';return;}
-  var bt=BT[x.bt]||BT.other,lv=x.lv||[];window.__BGX=x;
+  var bt=BT[x.bt]||BT.other,lv=x.lv||[];window.__BGX=x;window.__BGID=id;
   var h='<div class="card"><div class="pubh"><span class="chip">'+bt[0]+' '+bt[1]+'</span><b>'+E(x.title)+'</b></div>'+(x.tz?'<div class="pubn">'+E(x.tz)+'</div>':'')+((x.mt&&x.mt.length)?'<div style="font-size:13px;margin:6px 0">🎒 تحتاج: '+x.mt.map(E).join('، ')+'</div>':'')+(prev?'<div style="font-size:12px;color:#B45309;margin-top:6px">👁 معاينة الأستاذ'+(x.hide?' (مسودة مخفية عن التلاميذ)':'')+'</div>':'')+'</div>'
   +'<div class="card"><div style="font-size:15px;font-weight:800;margin-bottom:8px">اختر البداية المناسبة وجرّب</div><div style="display:flex;gap:8px">'+LVN.map(function(l,i){return '<button class="ibtn" id="bgl_'+i+'" style="flex:1;background:'+l[2]+';color:#fff;font-weight:900" onclick="brainLevel('+i+')">'+l[1]+' '+l[0]+'</button>';}).join('')+'</div></div><div id="bg_lv"></div>';
-  b.innerHTML=h;
+  b.innerHTML=h;try{bgStars();}catch(e){}
  }).catch(function(){b.innerHTML='<div class="card"><p>⚠️ تعذّر فتح اللعبة.</p></div>';});};
 window.brainLevel=function(i){var x=window.__BGX||{},l=(x.lv||[])[i],box=document.getElementById('bg_lv');if(!l||!box)return;
  [0,1,2].forEach(function(j){var e=document.getElementById('bgl_'+j);if(e)e.style.outline=j===i?'4px solid #1B2B25':'none';});
@@ -5226,7 +5226,7 @@ window.brainLevel=function(i){var x=window.__BGX||{},l=(x.lv||[])[i],box=documen
  box.innerHTML='<div class="card"><div style="font-size:16px;line-height:1.9;font-weight:700">'+E(l.i)+'</div><div id="bg_fig" style="margin-top:10px;text-align:center;min-height:60px"><div class="loading">⏳</div></div></div>'
   +(hs.length?'<div class="card"><div id="bg_hints"></div><button class="ibtn ghost" id="bg_hbtn" style="width:100%" onclick="brainHint('+i+')">💡 أريد تلميحًا</button></div>':'')
   +'<div class="card"><div class="mfa">'+(x.dm?'<button class="ibtn ghost sm" onclick="brainDemo()">▶ شاهد شرح القاعدة</button>':'')+(x.du?'<button class="ibtn ghost sm" onclick="brainDemoUrl()">🎬 فيديو الشرح</button>':'')+(x.cd?'<button class="ibtn ghost sm" onclick="brainCard()">🖨️ ورقة التحدّي</button>':'')+'</div><div id="bg_demo" style="margin-top:8px;text-align:center"></div></div>';
- window.__BGH=0;bgImg(fid,function(d){var f=document.getElementById('bg_fig');if(f)f.innerHTML=d?'<img src="'+d+'" alt="" style="max-width:100%;border-radius:14px;background:#FFF9E6">':'<span style="font-size:13px;color:#B45309">لا رسم لهذا المستوى.</span>';});};
+ window.__BGH=0;bgImg(fid,function(d){var f=document.getElementById('bg_fig');if(f&&window.brainIX&&brainIX(i,f,d))return;if(f)f.innerHTML=d?'<img src="'+d+'" alt="" style="max-width:100%;border-radius:14px;background:#FFF9E6">':'<span style="font-size:13px;color:#B45309">لا رسم لهذا المستوى.</span>';});};
 window.brainHint=function(i){var x=window.__BGX||{},l=(x.lv||[])[i],hs=(l&&l.h)||[],n=window.__BGH||0;if(n>=hs.length)return;window.__BGH=n+1;var box=document.getElementById('bg_hints');
  if(box)box.insertAdjacentHTML('beforeend','<div style="background:#FFF4D2;border:2px solid #E8B23A;border-radius:14px;padding:10px;margin-bottom:8px;font-size:15px;line-height:1.8">💡 <b>تلميح '+(n+1)+':</b> '+E(hs[n])+'</div>');
  var bt=document.getElementById('bg_hbtn');if(bt){if(n+1>=hs.length)bt.style.display='none';else bt.textContent='💡 تلميح آخر';}};
@@ -5313,8 +5313,112 @@ window.lpkCopyTitles=function(){var st=document.getElementById('lpk_ct');fdb.ref
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,function(){window.prompt('انسخ العناوين:',txt);});}else{var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}catch(e){window.prompt('انسخ العناوين:',txt);}document.body.removeChild(ta);}
  }).catch(function(){if(st)st.textContent='⚠️ تعذّر قراءة الكراس.';});};
 var _lpkO=window.lpkOpen;if(typeof _lpkO==='function'){window.lpkOpen=function(){var r=_lpkO.apply(this,arguments);try{var b=document.querySelector('#mfOv .vbody'),c=b&&b.querySelector('.card');if(c&&!document.getElementById('lpk_cb'))c.insertAdjacentHTML('beforeend','<button class="ibtn ghost" id="lpk_cb" style="width:100%;margin-top:8px" onclick="lpkCopyTitles()">📋 انسخ عناوين دروس الرياضيات في كراسي</button><div id="lpk_ct" style="font-size:12px;margin-top:6px;line-height:1.8"></div>');}catch(e){}return r;};}
-window.__FEAT=window.__FEAT||{};window.__FEAT['v118']=1;
+window.__FEAT=window.__FEAT||{};window.__FEAT['v118','v119']=1;
 })();}catch(e){(window.__ERRS=window.__ERRS||[]).push('v118: '+String((e&&e.message)||e).slice(0,120));}
+
+// ===== v119: اكتب على اللعبة: خانات تفاعلية (4 ألعاب) + قلم فوق الرسم (كل الألعاب) + احتفال ونجوم =====
+try{(function(){
+function E(s){return esc(String(s==null?'':s));}
+var IXK={'المربع السحري':'magic','مربع الرموز':'sym','البطاقة التي انقلبت':'par','النصف الذي في المرآة':'mir'};
+var G11=[[8,0,6,3,5,0,0,9,2],[8,1,0,0,5,0,0,0,2],[8,0,0,0,5,0,0,0,2]];
+var G9=[[['c','s','t'],['s','t',null],['t',null,null]],[['s','t',null],['t',null,null],[null,null,'t']],[['t','c',null],['c',null,null],[null,null,null]]];
+var G12=[['BBW','BBB','WWW'],['BBWW','WBBW','WBBB','BWWB'],['BBWWW','WBBWW','WWBBW','WWBBB','BWWWB']];
+var G7=[[['B','W']],[['B','W'],['W','W']],[['B','W'],['W','B'],['B','B']]];
+(function(){if(document.getElementById('bgx_css'))return;var s=document.createElement('style');s.id='bgx_css';s.textContent='.bgx-grid{display:grid;gap:8px;direction:ltr;justify-content:center;margin:6px auto}.bgx-c{display:flex;align-items:center;justify-content:center;font-weight:900;border-radius:16px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;transition:transform .08s}.bgx-c:active{transform:scale(.94)}.bgx-g{background:#FFE9A8;border:4px solid #E8B23A;color:#1B2B25}.bgx-q{background:#fff;border:4px dashed #F4725B;color:#F4725B}.bgx-f{background:#E2F6E8;border:4px solid #2E9E6B;color:#12503a}.bgx-k{background:#1B2B25;border:4px solid #1B2B25}.bgx-w{background:#fff;border:4px solid #9DB8AD}.bgx-sel{box-shadow:0 0 0 5px #2B72B5}.bgx-bad{border-color:#D9483B!important;background:#FDECEA!important}.bgx-p{flex:1;min-width:46px;height:50px;border-radius:14px;border:3px solid #E8B23A;background:#FFF4D2;font:900 24px inherit;color:#1B2B25;cursor:pointer}.bgx-p:active{background:#FFE9A8}.bgx-ch{display:inline-block;padding:4px 10px;border-radius:12px;font-size:13px;font-weight:800;margin:2px}.bgx-cel{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(255,248,225,.82);pointer-events:none;animation:bgxf 2.4s ease forwards}.bgx-cel div{background:#fff;border:6px solid #FFD45C;border-radius:30px;padding:22px 30px;text-align:center;font-size:30px;font-weight:900;color:#0B5A40;box-shadow:0 12px 0 #E8B23A}@keyframes bgxf{0%{opacity:0;transform:scale(.8)}12%{opacity:1;transform:scale(1)}80%{opacity:1}100%{opacity:0}}';document.head.appendChild(s);})();
+function done(i){try{return localStorage.getItem('bgstar_'+(window.__BGID||'')+'_'+i)==='1';}catch(e){return false;}}
+window.bgStars=function(){[0,1,2].forEach(function(i){var b=document.getElementById('bgl_'+i);if(b&&done(i)&&b.textContent.indexOf('⭐')<0)b.textContent=b.textContent+' ⭐';});};
+function cele(msg){try{sfx('ok');}catch(e){}var o=document.createElement('div');o.className='bgx-cel';o.innerHTML='<div>🎉 '+E(msg)+'<br><span style="font-size:34px">⭐ ⭐ ⭐</span></div>';document.body.appendChild(o);setTimeout(function(){if(o.parentNode)o.parentNode.removeChild(o);},2500);}
+function win(i,msg){try{localStorage.setItem('bgstar_'+(window.__BGID||'')+'_'+i,'1');}catch(e){}bgStars();cele(msg);}
+function msg(h,col){var m=document.getElementById('bgx_msg');if(m){m.style.color=col||'#1B2B25';m.innerHTML=h;}}
+var S=null;
+function shell(f,body,extra){f.innerHTML='<div id="bgx" style="text-align:center">'+body+'<div id="bgx_msg" style="min-height:26px;margin:8px 4px;font-size:15px;font-weight:700;line-height:1.8"></div><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><button class="ibtn up" onclick="bgxCheck()" style="font-weight:900">✅ تحقق</button><button class="ibtn ghost" onclick="bgxReset()">↩ من جديد</button>'+(extra||'')+'</div></div>';}
+// ---------- المربع السحري
+function lineSums(v){var L=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]],N=['صف 1','صف 2','صف 3','عمود 1','عمود 2','عمود 3','قطر ↘','قطر ↙'];return L.map(function(l,k){var a=l.map(function(j){return v[j];});var full=a.every(function(n){return n>0;});return {n:N[k],full:full,s:full?a[0]+a[1]+a[2]:null};});}
+function drawMagic(){var s=S,h='<div class="bgx-grid" style="grid-template-columns:repeat(3,92px)">';
+ for(var i=0;i<9;i++){var g=s.G[i]>0,v=s.v[i],c=g?'bgx-g':(v?'bgx-f':'bgx-q'),dup=v&&s.dup&&s.v.filter(function(n){return n===v;}).length>1;h+='<div class="bgx-c '+c+(i===s.sel?' bgx-sel':'')+(dup?' bgx-bad':'')+'" style="width:92px;height:92px;font-size:54px" onclick="bgxTap('+i+')">'+(v||'؟')+'</div>';}
+ h+='</div><div style="display:flex;gap:6px;margin:8px 0;direction:ltr">';
+ for(var n=1;n<=9;n++){var used=s.v.indexOf(n)>-1;h+='<button class="bgx-p" style="'+(used?'opacity:.45':'')+'" onclick="bgxPad('+n+')">'+n+'</button>';}
+ h+='<button class="bgx-p" style="background:#FDECEA;border-color:#F4725B" onclick="bgxPad(0)">⌫</button></div><div style="font-size:12px;color:#6b7a73">اضغط خانة فارغة، ثم اختر العدد</div>';
+ var f=document.getElementById('bg_fig');shell(f,h,(S.i===2?'<button class="ibtn ghost" onclick="bgxNew()">🔄 حلّ آخر</button>':''));}
+// ---------- مربع الرموز
+var SYMS=[null,'c','s','t'];
+function symSvg(k,sz){var r=sz*0.3;if(k==='c')return '<svg width="'+sz+'" height="'+sz+'" viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="none" stroke="#2F7FB8" stroke-width="10"/></svg>';if(k==='s')return '<svg width="'+sz+'" height="'+sz+'" viewBox="0 0 100 100"><rect x="22" y="22" width="56" height="56" rx="5" fill="none" stroke="#F4725B" stroke-width="10"/></svg>';if(k==='t')return '<svg width="'+sz+'" height="'+sz+'" viewBox="0 0 100 100"><polygon points="50,18 84,78 16,78" fill="none" stroke="#2E9E6B" stroke-width="10" stroke-linejoin="round"/></svg>';return '';}
+function drawSym(){var s=S,h='<div class="bgx-grid" style="grid-template-columns:repeat(3,96px)">';
+ for(var i=0;i<9;i++){var r=Math.floor(i/3),c=i%3,g=s.G[r][c],v=s.v[i],cl=g?'bgx-g':(v?'bgx-f':'bgx-q');h+='<div class="bgx-c '+cl+(s.bad&&s.bad[i]?' bgx-bad':'')+'" style="width:96px;height:96px;font-size:50px" onclick="bgxTap('+i+')">'+(g?symSvg(g,70):(v?symSvg(v,70):'؟'))+'</div>';}
+ h+='</div><div style="font-size:12px;color:#6b7a73;margin-top:4px">اضغط الخانة الفارغة لتغيّر الرمز: ○ ثم □ ثم △ ثم فارغ</div>';shell(document.getElementById('bg_fig'),h);}
+// ---------- البطاقة التي انقلبت
+function drawPar(){var s=S,n=s.n,cell={3:92,4:80,5:68}[n],h='<div class="bgx-grid" style="grid-template-columns:repeat('+n+','+cell+'px)">';
+ for(var i=0;i<n*n;i++){var b=s.v[i]==='B';h+='<div class="bgx-c '+(b?'bgx-k':'bgx-w')+(s.bad&&s.bad[i]?' bgx-bad':'')+'" style="width:'+cell+'px;height:'+cell+'px" onclick="bgxTap('+i+')"></div>';}
+ h+='</div><div style="font-size:12px;color:#6b7a73;margin-top:4px">اضغط البطاقة لتقلبها: أسود ↔ أبيض</div><div id="bgx_par" style="font-size:13px;margin-top:6px"></div>';shell(document.getElementById('bg_fig'),h);}
+// ---------- النصف الذي في المرآة
+function drawMir(){var s=S,rows=s.G.length,h='<div style="position:relative;display:inline-block"><div class="bgx-grid" style="grid-template-columns:repeat(4,72px);gap:7px">';
+ for(var r=0;r<rows;r++)for(var c=0;c<4;c++){var i=r*4+c,left=c<2,v=s.v[i],cl=left?(v==='B'?'bgx-k':'bgx-w'):(v==='B'?'bgx-k':(v==='W'?'bgx-w':'bgx-q'));h+='<div class="bgx-c '+cl+(s.bad&&s.bad[r]&&!left?' bgx-bad':'')+'" style="width:72px;height:72px;font-size:38px" '+(left?'':'onclick="bgxTap('+i+')"')+'>'+((!left&&!v)?'؟':'')+'</div>';}
+ h+='</div><div style="position:absolute;top:-6px;bottom:-6px;left:50%;border-left:5px dashed #F4725B;margin-left:-2px;pointer-events:none"></div></div><div style="font-size:12px;color:#6b7a73;margin-top:6px">اضغط الخانة المجهولة: أسود ثم أبيض ثم فارغ</div>';shell(document.getElementById('bg_fig'),h);}
+function draw(){if(S.k==='magic')drawMagic();else if(S.k==='sym')drawSym();else if(S.k==='par')drawPar();else drawMir();}
+function init(k,i){var o={k:k,i:i};
+ if(k==='magic'){o.G=G11[i].slice();o.v=G11[i].slice();o.sel=-1;}
+ else if(k==='sym'){o.G=G9[i];o.v=[];for(var j=0;j<9;j++)o.v.push(G9[i][Math.floor(j/3)][j%3]||null);}
+ else if(k==='par'){o.n=G12[i].length;o.v=G12[i].join('').split('');o.o=o.v.slice();}
+ else{o.G=G7[i];o.v=[];o.o=[];G7[i].forEach(function(row){o.v.push(row[0],row[1],null,null);});}
+ return o;}
+window.bgxStart=function(k,i){S=init(k,i);draw();};
+window.bgxReset=function(){S=init(S.k,S.i);draw();};
+window.bgxNew=function(){var keep=S.found;S=init(S.k,S.i);S.found=keep;draw();msg('جرّب ترتيباً مختلفاً للأعداد في الخانات الفارغة.');};
+window.bgxTap=function(i){var s=S;
+ if(s.k==='magic'){if(s.G[i]>0){msg('هذه الخانة معطاة ولا تُغيَّر 🔒','#B45309');return;}s.sel=i;s.dup=false;draw();return;}
+ if(s.k==='sym'){var r=Math.floor(i/3),c=i%3;if(s.G[r][c]){msg('هذه الخانة معطاة ولا تُغيَّر 🔒','#B45309');return;}var k=SYMS.indexOf(s.v[i]||null);s.v[i]=SYMS[(k+1)%4];s.bad=null;draw();return;}
+ if(s.k==='par'){s.v[i]=s.v[i]==='B'?'W':'B';s.bad=null;draw();return;}
+ var cyc=[null,'B','W'];s.v[i]=cyc[(cyc.indexOf(s.v[i]||null)+1)%3];s.bad=null;draw();};
+window.bgxPad=function(n){var s=S;if(s.k!=='magic')return;if(s.sel<0){msg('اختر خانة فارغة أولاً 👆','#B45309');return;}s.v[s.sel]=n;s.dup=false;draw();msg('');};
+window.bgxCheck=function(){var s=S,i=s.i;
+ if(s.k==='magic'){var ls=lineSums(s.v),dups=false,cnt={};s.v.forEach(function(n){if(n)cnt[n]=(cnt[n]||0)+1;});for(var n in cnt)if(cnt[n]>1)dups=true;s.dup=true;draw();
+  var chips=ls.map(function(l){return '<span class="bgx-ch" style="background:'+(!l.full?'#EEE':(l.s===15?'#DDF5E3':'#FDECEA'))+';color:'+(!l.full?'#7a7a7a':(l.s===15?'#12663f':'#B33A2B'))+'">'+l.n+' '+(!l.full?'…':(l.s===15?'✅ 15':'❌ '+l.s))+'</span>';}).join('');
+  var all=s.v.every(function(n){return n>0;}),good=ls.filter(function(l){return l.full&&l.s===15;}).length;
+  var m=(dups?'<div style="color:#B33A2B">⚠️ كرّرتَ عدداً (الخانات المكرَّرة بالأحمر). كل عدد من 1 إلى 9 يُستعمل مرة واحدة.</div>':'')+'<div>'+chips+'</div>';
+  if(all&&!dups&&good===8){var key=s.v.join('');s.found=s.found||{};
+   if(i===2){if(Object.keys(s.found).length&&!s.found[key]){s.found[key]=1;msg(m+'<div style="color:#12663f">🎉🎉 وجدتَ الحلّين! أنت بطل!</div>','#12663f');win(i,'وجدتَ الحلّين!');return;}
+    if(s.found[key]){msg(m+'<div style="color:#B45309">هذا الحلّ نفسه. اضغط «🔄 حلّ آخر» وجرّب ترتيباً مختلفاً.</div>');return;}
+    s.found[key]=1;msg(m+'<div style="color:#12663f">🎉 حلّ صحيح! هل تجد حلّاً ثانياً مختلفاً؟ اضغط «🔄 حلّ آخر».</div>','#12663f');win(i,'حلّ صحيح!');return;}
+   msg(m+'<div style="color:#12663f">🎉 أحسنت! كل الخطوط مجموعها 15.</div>','#12663f');win(i,'أحسنت! أكملتَ المربع السحري');return;}
+  msg(m+(all?'':'<div>أكمل الخانات الفارغة ثم اضغط «تحقق».</div>')+(all&&!dups&&good<8?'<div>اقتربتَ! '+good+' من 8 خطوط مجموعها 15. حاول من جديد.</div>':''));return;}
+ if(s.k==='sym'){var bad={},ok=true,miss=false,rows=[],cols=[];
+  for(var r=0;r<3;r++){var a=[s.v[r*3],s.v[r*3+1],s.v[r*3+2]];rows.push(a);cols.push([s.v[r],s.v[3+r],s.v[6+r]]);}
+  function chk(arr,idx){if(arr.some(function(x){return !x;})){miss=true;return true;}var u={};arr.forEach(function(x){u[x]=1;});if(Object.keys(u).length<3){idx.forEach(function(j){bad[j]=1;});ok=false;return false;}return true;}
+  for(var r2=0;r2<3;r2++){chk(rows[r2],[r2*3,r2*3+1,r2*3+2]);chk(cols[r2],[r2,3+r2,6+r2]);}
+  s.bad=bad;draw();
+  if(ok&&!miss){msg('🎉 أحسنت! في كل سطر وعمود الرموز الثلاثة مرة واحدة.','#12663f');win(i,'أحسنت! أكملتَ مربع الرموز');return;}
+  msg(ok?'أكمل الخانات الفارغة ثم اضغط «تحقق».':'⚠️ في الخانات الحمراء رمزٌ تكرّر في سطر أو عمود. جرّب غيره.','#B33A2B');return;}
+ if(s.k==='par'){var n=s.n,badc={},even=true,rc=[],cc=[];for(var r3=0;r3<n;r3++){var cr=0,cl=0;for(var c3=0;c3<n;c3++){if(s.v[r3*n+c3]==='B')cr++;if(s.v[c3*n+r3]==='B')cl++;}rc.push(cr);cc.push(cl);}
+  var rtxt=rc.map(function(x,k){return '<span class="bgx-ch" style="background:'+(x%2===0?'#DDF5E3':'#FDECEA')+'">سطر '+(k+1)+': '+x+(x%2===0?' ✅':' ❌')+'</span>';}).join(''),ctxt=cc.map(function(x,k){return '<span class="bgx-ch" style="background:'+(x%2===0?'#DDF5E3':'#FDECEA')+'">عمود '+(k+1)+': '+x+(x%2===0?' ✅':' ❌')+'</span>';}).join('');
+  even=rc.concat(cc).every(function(x){return x%2===0;});var e=document.getElementById('bgx_par');if(e)e.innerHTML='<div>عدد الأسود:</div><div>'+rtxt+'</div><div>'+ctxt+'</div>';
+  if(even){var changed=s.v.join('')!==s.o.join('');msg(changed?'🎉 صحيح! أعدتَ العدد الزوجي من الأسود في كل سطر وعمود.':'العدد زوجي في كل شيء أصلاً. اقلب البطاقة التي ترى أنها انقلبت أولاً.',changed?'#12663f':'#B45309');if(changed)win(i,'أحسنت! وجدتَ البطاقة');return;}
+  msg('⚠️ ما زال عدد الأسود فرديّاً في بعض الأسطر أو الأعمدة (❌). أيّ بطاقة تقاطعها تُصلحها؟','#B33A2B');return;}
+ var rowsN=s.G.length,badr={},okm=true,miss2=false;for(var r4=0;r4<rowsN;r4++){var q=s.v.slice(r4*4,r4*4+4);if(!q[2]||!q[3]){miss2=true;continue;}if(q[2]!==q[1]||q[3]!==q[0]){badr[r4]=1;okm=false;}}
+ s.bad=badr;draw();if(okm&&!miss2){msg('🎉 أحسنت! الشكل متماثل حول الخط.','#12663f');win(i,'أحسنت! الشكل متماثل');return;}
+ msg(okm?'أكمل الخانات المجهولة ثم اضغط «تحقق».':'⚠️ في الأسطر الحمراء النصف الأيمن ليس صورة المرآة للنصف الأيسر. جرّب من جديد.','#B33A2B');};
+// ---------- القلم فوق الرسم (لكل الألعاب غير التفاعلية)
+var PEN=null;
+function penDraw(){var cv=document.getElementById('bgpc');if(!cv||!PEN)return;var r=cv.getBoundingClientRect(),dpr=window.devicePixelRatio||1;cv.width=Math.max(1,Math.round(r.width*dpr));cv.height=Math.max(1,Math.round(r.height*dpr));var g=cv.getContext('2d');g.lineCap='round';g.lineJoin='round';
+ PEN.s.forEach(function(st){if(!st.p.length)return;g.globalCompositeOperation=st.e?'destination-out':'source-over';g.strokeStyle=st.c;g.lineWidth=(st.e?30:6)*dpr;g.beginPath();st.p.forEach(function(p,k){var x=p[0]*cv.width,y=p[1]*cv.height;if(k===0)g.moveTo(x,y);else g.lineTo(x,y);if(st.p.length===1)g.lineTo(x+0.1,y);});g.stroke();});}
+function bgPen(f,d){PEN={s:[],c:'#1B2B25',e:false,on:false,cur:null};f.innerHTML='<div id="bgpw" style="position:relative;display:inline-block;max-width:100%"><img id="bgpi" src="'+d+'" alt="" style="max-width:100%;display:block;border-radius:14px;background:#FFF9E6"><canvas id="bgpc" style="position:absolute;left:0;top:0;width:100%;height:100%;border-radius:14px;pointer-events:none"></canvas></div><div id="bgpt" style="margin-top:8px"></div>';penBar();
+ var cv=document.getElementById('bgpc');
+ function pt(e){var r=cv.getBoundingClientRect();return [(e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height];}
+ cv.addEventListener('pointerdown',function(e){if(!PEN.on)return;e.preventDefault();try{cv.setPointerCapture(e.pointerId);}catch(x){}PEN.cur={c:PEN.c,e:PEN.e,p:[pt(e)]};PEN.s.push(PEN.cur);penDraw();});
+ cv.addEventListener('pointermove',function(e){if(!PEN.on||!PEN.cur)return;e.preventDefault();PEN.cur.p.push(pt(e));penDraw();});
+ var up=function(){PEN.cur=null;};cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);window.addEventListener('resize',penDraw);}
+function penBar(){var b=document.getElementById('bgpt');if(!b)return;
+ if(!PEN.on){b.innerHTML='<button class="ibtn up" onclick="bgPenOn(1)" style="font-weight:900">✏️ اكتب على الرسم</button>';return;}
+ var cols=['#1B2B25','#D9483B','#2B72B5','#1F9D6B'];
+ b.innerHTML='<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;align-items:center">'+cols.map(function(c){return '<button onclick="bgPenC(\''+c+'\')" aria-label="لون" style="width:44px;height:44px;border-radius:50%;border:'+((!PEN.e&&PEN.c===c)?'5px solid #E8B23A':'3px solid #ccc')+';background:'+c+'"></button>';}).join('')+'<button class="ibtn ghost sm" onclick="bgPenE()" style="'+(PEN.e?'outline:4px solid #E8B23A':'')+'">🧽 ممحاة</button><button class="ibtn ghost sm" onclick="bgPenU()">↩ تراجع</button><button class="ibtn ghost sm" onclick="bgPenX()">🗑 امسح الكل</button><button class="ibtn up sm" onclick="bgPenOn(0)">✔ تم</button></div><div style="font-size:12px;color:#6b7a73;margin-top:4px">اكتب أو ارسم بإصبعك فوق الرسم</div>';}
+window.bgPenOn=function(on){if(!PEN)return;PEN.on=!!on;var cv=document.getElementById('bgpc');if(cv){cv.style.pointerEvents=on?'auto':'none';cv.style.touchAction=on?'none':'auto';}penBar();};
+window.bgPenC=function(c){PEN.c=c;PEN.e=false;penBar();};window.bgPenE=function(){PEN.e=!PEN.e;penBar();};window.bgPenU=function(){PEN.s.pop();penDraw();};window.bgPenX=function(){PEN.s=[];penDraw();};
+// ---------- نقطة الدخول من شاشة المستوى
+window.brainIX=function(i,f,d){var x=window.__BGX||{},k=IXK[String(x.title||'').trim()];
+ if(k){bgxStart(k,i);return true;}
+ if(d){bgPen(f,d);return true;}
+ return false;};
+window.__FEAT=window.__FEAT||{};window.__FEAT['v119']=1;
+})();}catch(e){(window.__ERRS=window.__ERRS||[]).push('v119: '+String((e&&e.message)||e).slice(0,120));}
 </script>
 </body>
 </html>
