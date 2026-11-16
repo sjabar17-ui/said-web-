@@ -624,7 +624,7 @@ body.fab-scroll #aiFab,body.fab-scroll #fabMain,body.fab-scroll #qaFab{opacity:.
     </div>
     <div id="gbody"></div>
     <div class="gmsg" id="gm"></div>
-    <div class="gfoot">قسم السنة الثالثة · 2026 / 2027 · الإصدار 143.7</div>
+    <div class="gfoot">قسم السنة الثالثة · 2026 / 2027 · الإصدار 143.10</div>
   </div>
 </div>
 
@@ -3502,7 +3502,7 @@ var NAV_ICONS={home:'<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 
 function buildNav(role){var o=document.getElementById('bottomNav');if(o)o.remove();var items=NAVS[role];if(!items)return;var nav=document.createElement('nav');nav.id='bottomNav';nav.className=role==='student'?'nv-b':'nv-a';items.forEach(function(it){var b=document.createElement('button');b.className='nv-i';b.dataset.t=it[0];var st=it[3]?' style="background:'+it[3]+';color:'+it[4]+'"':'';b.innerHTML='<span class="nv-t"'+st+'><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+NAV_ICONS[it[2]]+'</svg></span><span class="nv-l">'+it[1]+'</span>';b.onclick=function(){if(it[0]==='more')openMore(role);else goTo(it[0]);};nav.appendChild(b);});var oldf=document.getElementById('aiFab');if(oldf)oldf.remove();if(role!=='teacher'){var fab=document.createElement('button');fab.id='aiFab';fab.setAttribute('aria-label','الأستاذ سعيد الذكي');fab.innerHTML='<span class="orb"><svg viewBox="0 0 32 32" width="30" height="30"><defs><linearGradient id="spk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#A5B4FC"/></linearGradient></defs><path fill="url(#spk)" d="M15 4c1 7 4 10 11 11-7 1-10 4-11 11-1-7-4-10-11-11 7-1 10-4 11-11z"/><path fill="#67E8F9" d="M25 3c.4 2.2 1.3 3.1 3.5 3.5-2.2.4-3.1 1.3-3.5 3.5-.4-2.2-1.3-3.1-3.5-3.5 2.2-.4 3.1-1.3 3.5-3.5z"/><circle cx="6" cy="26" r="1.6" fill="#C4B5FD"/></svg></span>';fab.title='اسألني';fab.onclick=function(){goTo('ai');aiFabListen('aiInput',aiSend);};document.body.appendChild(fab);var ot=document.getElementById('aiTip');if(ot)ot.remove();if(role==='student'){var tip=document.createElement('div');tip.id='aiTip';tip.textContent='اسألني عن درسك ✨';document.body.appendChild(tip);setTimeout(function(){tip.remove();},8500);try{aiNudge();}catch(e){}}}
 document.getElementById('app').appendChild(nav);navActive('');}
 function navActive(s){var n=document.getElementById('bottomNav');if(!n)return;[].forEach.call(n.children,function(b){b.classList.toggle('on',b.dataset.t===s);});}
-function openMore(role){var o=document.getElementById('moreSheet');if(o){o.remove();return;}var used=(NAVS[role]||[]).map(function(x){return x[0];});var src=document.querySelector('#screen-'+role+'-home .grid-menu');if(!src)return;var sh=document.createElement('div');sh.id='moreSheet';sh.onclick=function(e){if(e.target===sh)sh.remove();};var g=document.createElement('div');g.className='grid-menu';var hd=document.createElement('div');hd.className='ms-hd';hd.innerHTML='<b>المزيد</b><button type="button" class="ibtn ghost sm">→ رجوع</button>';hd.querySelector('button').onclick=function(){sh.remove();};g.appendChild(hd);[].forEach.call(src.children,function(c){var m=(c.getAttribute('onclick')||'').match(/goTo\('([^']+)'\)/);if(role==='student'&&/sendReport\(/.test(c.getAttribute('onclick')||''))return;if(m&&(used.indexOf(m[1])>-1||(role==='student'&&['ai','lessons','texts','studentNotebook','textbook','myFile','recorder','charts','rewards','voiceNotes','quizzes'].indexOf(m[1])>-1)))return;var k=c.cloneNode(true);k.addEventListener('click',function(){sh.remove();});g.appendChild(k);});sh.appendChild(g);var vv=document.createElement('div');vv.style.cssText='text-align:center;font-size:12px;color:#fff;opacity:.85;margin-top:14px';vv.textContent='الإصدار 143.7';sh.appendChild(vv);try{var miss=['picker','send','v98','hj','disp','simple','v107','v108','v110','v112','v113','v114','v115','v116','v117','v118','v119','v120','v121','v122','v123','v124','v125','v126','v127','v128','v129','v130','v131','v132','v133','v134','v135','v136','v1361','v1362','v137','v1371','v1372','v138','v1381','v1382','v1383','v1384','v1391','v13911','v1392','v1393','v1394','v13941','v1395','v13951','v1396','v13961','v1397','v1401','v1402','v1403','v1404','v1405','v1406','v1407','v1411'].filter(function(k){return !(window.__FEAT&&__FEAT[k]);}),er=(window.__ERRS||[]).slice(0,3);if(miss.length||er.length){var dg=document.createElement('div');dg.style.cssText='font-size:11px;color:#FCA5A5;max-width:92%;margin:6px auto 0;direction:ltr;text-align:left;word-break:break-all';dg.textContent='⚠️ '+(miss.length?'not loaded: '+miss.join(',')+' | ':'')+er.join(' | ');sh.appendChild(dg);}else{var ok=document.createElement('div');ok.style.cssText='font-size:11px;color:#86EFAC;text-align:center;margin-top:4px';ok.textContent='✅ كل الأجزاء تعمل';sh.appendChild(ok);}}catch(e){}document.body.appendChild(sh);}
+function openMore(role){var o=document.getElementById('moreSheet');if(o){o.remove();return;}var used=(NAVS[role]||[]).map(function(x){return x[0];});var src=document.querySelector('#screen-'+role+'-home .grid-menu');if(!src)return;var sh=document.createElement('div');sh.id='moreSheet';sh.onclick=function(e){if(e.target===sh)sh.remove();};var g=document.createElement('div');g.className='grid-menu';var hd=document.createElement('div');hd.className='ms-hd';hd.innerHTML='<b>المزيد</b><button type="button" class="ibtn ghost sm">→ رجوع</button>';hd.querySelector('button').onclick=function(){sh.remove();};g.appendChild(hd);[].forEach.call(src.children,function(c){var m=(c.getAttribute('onclick')||'').match(/goTo\('([^']+)'\)/);if(role==='student'&&/sendReport\(/.test(c.getAttribute('onclick')||''))return;if(m&&(used.indexOf(m[1])>-1||(role==='student'&&['ai','lessons','texts','studentNotebook','textbook','myFile','recorder','charts','rewards','voiceNotes','quizzes'].indexOf(m[1])>-1)))return;var k=c.cloneNode(true);k.addEventListener('click',function(){sh.remove();});g.appendChild(k);});sh.appendChild(g);var vv=document.createElement('div');vv.style.cssText='text-align:center;font-size:12px;color:#fff;opacity:.85;margin-top:14px';vv.textContent='الإصدار 143.10';sh.appendChild(vv);try{var miss=['picker','send','v98','hj','disp','simple','v107','v108','v110','v112','v113','v114','v115','v116','v117','v118','v119','v120','v121','v122','v123','v124','v125','v126','v127','v128','v129','v130','v131','v132','v133','v134','v135','v136','v1361','v1362','v137','v1371','v1372','v138','v1381','v1382','v1383','v1384','v1391','v13911','v1392','v1393','v1394','v13941','v1395','v13951','v1396','v13961','v1397','v1401','v1402','v1403','v1404','v1405','v1406','v1407','v1411'].filter(function(k){return !(window.__FEAT&&__FEAT[k]);}),er=(window.__ERRS||[]).slice(0,3);if(miss.length||er.length){var dg=document.createElement('div');dg.style.cssText='font-size:11px;color:#FCA5A5;max-width:92%;margin:6px auto 0;direction:ltr;text-align:left;word-break:break-all';dg.textContent='⚠️ '+(miss.length?'not loaded: '+miss.join(',')+' | ':'')+er.join(' | ');sh.appendChild(dg);}else{var ok=document.createElement('div');ok.style.cssText='font-size:11px;color:#86EFAC;text-align:center;margin-top:4px';ok.textContent='✅ كل الأجزاء تعمل';sh.appendChild(ok);}}catch(e){}document.body.appendChild(sh);}
 if(/[?&]invite=/.test(location.search))GATE_VIEW='r';
 var __goTo=goTo;goTo=function(s){__goTo(s);navActive(s);window.CUR_SCREEN=s;if(s==="student-home"||s==="parent-home"||s==="teacher-home"){renderToday(CURRENT_USER_TYPE);setTimeout(todayExtras,800);setTimeout(todayExtras,2200);}};
 
@@ -8626,6 +8626,152 @@ document.addEventListener('click',function(e){var b=e.target&&e.target.closest?e
 try{var _g=window.goTo;if(typeof _g==='function'){window.goTo=function(s){var r=_g.apply(this,arguments);if(s==='reading')enter();return r;};}}catch(e){}
 try{var mo=new MutationObserver(function(){tick();});['lstList','sghList','rdgList','pubL_readtask'].forEach(function(id){var b=$(id);if(b)mo.observe(b,{childList:true,subtree:id==='pubL_readtask'});});}catch(e){}
 build();
+}catch(e){try{console.error(e);}catch(e2){}}})();
+</script>
+
+
+<script id="v1438js">
+(function(){try{
+window.__FEAT=window.__FEAT||{};window.__FEAT['v1438']=1;
+var DAYN=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+function pad(n){return ('0'+n).slice(-2);}
+function fmt(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
+function parse(s){return new Date(s+'T12:00:00');}
+function dayName(s){return DAYN[parse(s).getDay()];}
+function slotMin(t){var m=/^(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})$/.exec(String(t||'').trim());return m?((+m[3])*60+(+m[4]))-((+m[1])*60+(+m[2])):0;}
+function areaOfSj(sj){var lb=(MF_SUBJ.filter(function(x){return x[0]===sj;})[0]||[0,''])[1];return areaOf(lb)||sj;}
+function daysOf(sc,area){var strong=[],any=[];for(var di=0;di<5;di++){var d=TT_DAYS[di],sl=(sc&&sc[d])||{},s=false,a=false;for(var q in sl){var ar=sl[q].area||areaOf(sl[q].subject);if(ar!==area)continue;a=true;if(slotMin(sl[q].time)>=45)s=true;}if(s)strong.push(di);if(a)any.push(di);}return strong.length?strong:any;}
+function fallbackSchedule(){var o={};TT_DAYS.forEach(function(d){o[d]={};(TT[d]||[]).forEach(function(x,i){o[d]['s'+i]={time:x[0]+'-'+x[1],subject:x[2],area:x[3]};});});return o;}
+function nextSlot(ds,days,hol){var d=parse(ds);for(var g=0;g<120;g++){d.setDate(d.getDate()+1);var s=fmt(d);if(days.indexOf(d.getDay())>-1&&!hol[s])return s;}return null;}
+function cut(s,n){s=String(s||'');return s.length>n?s.slice(0,n)+'…':s;}
+function load(sj){return Promise.all([fdb.ref('tlib').once('value'),fdb.ref('schedule').once('value'),fdb.ref('events').once('value'),fdb.ref('meta/pp/'+sj).once('value')]).then(function(r){var tl=r[0].val()||{},sc=r[1].val()||{},ev=r[2].val()||{},hol={};Object.keys(ev).forEach(function(k){if(ev[k]&&ev[k].type==='holiday'&&ev[k].date)hol[ev[k].date]=1;});var area=areaOfSj(sj),days=daysOf(sc,area);if(!days.length)days=daysOf(fallbackSchedule(),area);return {tl:tl,days:days,hol:hol,pp:r[3].val()};});}
+function lessonsOf(tl,sj){var ks=Object.keys(tl).filter(function(k){var x=tl[k];return x&&x.lsn&&x.sj===sj&&!x.hid;});ks.sort(function(a,c){return String(tl[a].date||'').localeCompare(String(tl[c].date||''))||((tl[a].ord||0)-(tl[c].ord||0));});return ks;}
+function pathsFor(up,tl,id,ds){up['tlib/'+id+'/date']=ds;up['kb_meta/'+id+'/date']=ds;up['tlib/'+id+'/edited']=1;['lf','af','mf'].forEach(function(k){var h=tl[id][k];if(!h)return;up['tlib/'+h+'/date']=ds;if(k!=='mf')up['kb_meta/'+h+'/date']=ds;});}
+function plan(D,sj,id){var tl=D.tl,ks=lessonsOf(tl,sj),today=todayStr(),i0=ks.indexOf(id);if(i0<0)return {err:'لم أجد الدرس.'};if(!D.days.length)return {err:'لا حصص في جدولك لهذه المادة، فلا أعرف أيام حصصها. حمّل جدولك أولاً.'};
+ var chain=ks.slice(i0).filter(function(k){return String(tl[k].date||'')>=today;}),moves=[];for(var j=0;j<chain.length;j++){var k=chain[j],f=tl[k].date,to=nextSlot(f,D.days,D.hol);if(!to)return {err:'تعذّر إيجاد حصة تالية للدرس «'+(tl[k].title||'')+'».'};moves.push({id:k,f:f,t:to,title:tl[k].title||'',shown:(f===today&&!tl[k].hide)});}return {moves:moves};}
+function confirmText(sj,P){var nm=lwName(sj),m=P.moves,h='أجّل «'+cut(m[0].title,50)+'» وما بعده حصةً واحدة؟\n\nسيُنقل '+m.length+' من دروس «'+nm+'»:\n';m.slice(0,12).forEach(function(x){h+='• '+cut(x.title,38)+': '+dayName(x.f)+' '+x.f+' ← '+dayName(x.t)+' '+x.t+'\n';});if(m.length>12)h+='… و'+(m.length-12)+' دروس أخرى\n';h+='\nتُتخطّى العطل المسجّلة، ولا تُمسّ الدروس السابقة ولا دروس المواد الأخرى. وبإمكانك التراجع بزرّ «↩ تراجع».';var sh=m.filter(function(x){return x.shown;});if(sh.length)h+='\n\n⚠️ «'+cut(sh[0].title,40)+'» ظاهر للتلاميذ اليوم وسيختفي عنهم لأن تاريخه سيتغيّر.';return h;}
+function postpone(sj,id){load(sj).then(function(D){var P=plan(D,sj,id);if(P.err){alert('⚠️ '+P.err);return;}if(!confirm(confirmText(sj,P)))return;var up={};P.moves.forEach(function(x){pathsFor(up,D.tl,x.id,x.t);});up['meta/pp/'+sj]={t:Date.now(),m:P.moves.map(function(x){return {id:x.id,f:x.f,t:x.t};})};fdb.ref().update(up).then(function(){try{sfx('ok');}catch(e){}window.lwSubject(sj);}).catch(function(){alert('⚠️ تعذّر الحفظ. لم يتغيّر شيء.');});});}
+function undo(sj){load(sj).then(function(D){var pp=D.pp;if(!pp||!pp.m||!pp.m.length){alert('لا ترحيل سابق لهذه المادة.');return;}var ok=[],skip=[];pp.m.forEach(function(x){var L=D.tl[x.id];if(L&&L.date===x.t)ok.push(x);else skip.push(x);});if(!ok.length){alert('⚠️ لا يمكن التراجع: تغيّرت تواريخ هذه الدروس بعد الترحيل.');return;}var msg='أتراجع عن آخر ترحيل لدروس «'+lwName(sj)+'»؟\nستعود '+ok.length+' دروس إلى تواريخها السابقة.'+(skip.length?'\n(لن أمسّ '+skip.length+' دروس غُيّرت تواريخها بعد الترحيل.)':'');if(!confirm(msg))return;var up={};ok.forEach(function(x){pathsFor(up,D.tl,x.id,x.f);});up['meta/pp/'+sj]=null;fdb.ref().update(up).then(function(){try{sfx('ok');}catch(e){}window.lwSubject(sj);}).catch(function(){alert('⚠️ تعذّر التراجع.');});});}
+function inject(sj){var n=0,iv=setInterval(function(){var cards=document.querySelectorAll('.card.lwr');if(cards.length||++n>40){clearInterval(iv);var today=todayStr();Array.prototype.forEach.call(cards,function(c){if(c.querySelector('[data-pp]'))return;var mfa=c.querySelector('.mfa'),b=c.querySelector('button[onclick*="lwEdit"]');if(!mfa||!b)return;var m=/lwEdit\('([^']+)'\)/.exec(b.getAttribute('onclick')||''),dm=/📅\s*(\d{4}-\d{2}-\d{2})/.exec(c.textContent||'');if(!m||!dm||dm[1]<today)return;var pb=document.createElement('button');pb.className='ibtn ghost sm';pb.setAttribute('data-pp',m[1]);pb.textContent='⏭️ أجّل من هنا';pb.onclick=function(){postpone(sj,m[1]);};mfa.appendChild(pb);});
+  var first=document.querySelector('.vbody .card .mfa');if(first&&!document.querySelector('[data-ppu]'))fdb.ref('meta/pp/'+sj).once('value').then(function(s){var v=s.val();if(!v||!v.m||!v.m.length||document.querySelector('[data-ppu]'))return;var ub=document.createElement('button');ub.className='ibtn ghost sm';ub.setAttribute('data-ppu','1');ub.textContent='↩ تراجع عن آخر ترحيل ('+v.m.length+')';ub.onclick=function(){undo(sj);};first.appendChild(ub);});}},120);}
+try{var _ls=window.lwSubject;if(typeof _ls==='function'){window.lwSubject=function(sj){var r=_ls.apply(this,arguments);try{inject(sj);}catch(e){}return r;};}}catch(e){}
+window.__pp={plan:plan,nextSlot:nextSlot,daysOf:daysOf};
+}catch(e){try{console.error(e);}catch(e2){}}})();
+</script>
+
+
+<script id="v1439js">
+(function(){try{
+window.__FEAT=window.__FEAT||{};window.__FEAT['v1439']=1;
+function E(x){return (typeof esc2==='function')?esc2(x):String(x==null?'':x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function pad(n){return ('0'+n).slice(-2);}
+function cl(s,n){s=String(s==null?'':s).trim();return s.length>n?s.slice(0,n):s;}
+function norm(j){var a=null;if(Array.isArray(j))a=j;else if(j&&Array.isArray(j.days))a=j.days;else if(j&&j.kind==='day')a=[j];return a;}
+window.nbjParse=function(txt){
+  var j;try{j=JSON.parse(txt);}catch(e){return {err:'الملف ليس JSON صالحًا.'};}
+  var a=norm(j);if(!a||!a.length)return {err:'لا أجد أيامًا في الملف. المتوقع: ملف الكراس الذي أعدّه Claude.'};
+  if(a.length>31)return {err:'عدد الأيام في الملف أكبر من 31.'};
+  var recs=[],warns=[];
+  a.forEach(function(d,i){
+    var g=(d&&d.greg)||{},iso=(g.y&&g.m&&g.d)?(g.y+'-'+pad(g.m)+'-'+pad(g.d)):'';
+    if(!iso||isNaN(new Date(iso+'T12:00:00'))){warns.push('اليوم '+(i+1)+': تاريخ غير صالح، تُجوهل.');return;}
+    var wd=new Date(iso+'T12:00:00').getDay();
+    if(wd>4){warns.push(iso+': يوم عطلة، تُجوهل.');return;}
+    if(iso<DN_START){warns.push(iso+': قبل بداية الكراس، تُجوهل.');return;}
+    var rows=(Array.isArray(d.rows)?d.rows:[]).map(function(r){return {p:r&&r.p==='a'?'a':'m',brk:!!(r&&r.brk)&&!(r&&r.p==='a'),n:cl(r&&r.n,120),d:(+(r&&r.d)||30),t:cl(r&&r.t,300),o:cl(r&&r.o,600),m:cl(r&&r.m,200)};}).filter(function(r){return r.n;});
+    if(!rows.length){warns.push(iso+': لا حصص في اليوم، تُجوهل.');return;}
+    if(recs.some(function(x){return x.date===iso;})){warns.push(iso+': مكرر، تُجوهل النسخة الثانية.');return;}
+    recs.push({n:i+1,src:'JSON',img:null,o:{kind:'day'},err:'',warns:[],rows:rows,date:iso,use:true,miss:[],fill:false,score:9});
+  });
+  if(!recs.length)return {err:'لم يبقَ يوم صالح.\n'+warns.join('\n')};
+  return {recs:recs,warns:warns};
+};
+window.nbjPicked=function(){
+  var fi=document.getElementById('nbj_f'),st=document.getElementById('nbu_st'),res=document.getElementById('nbu_res');
+  if(!fi||!fi.files.length)return;var f=fi.files[0];
+  if(f.size>2e6){st.textContent='⚠️ الملف كبير جدًا لملف كراس.';fi.value='';return;}
+  var rd=new FileReader();
+  rd.onerror=function(){st.textContent='⚠️ تعذّرت قراءة الملف.';};
+  rd.onload=function(){
+    var r=nbjParse(String(rd.result||''));fi.value='';
+    if(r.err){st.textContent='⚠️ '+r.err;return;}
+    NBU.recs=r.recs;NBU.plan=null;res.innerHTML='';
+    var h='<div class="card"><b>📥 قرأتُ '+r.recs.length+' يوم من الملف</b><div style="font-size:13px;line-height:1.9;margin-top:6px">';
+    r.recs.forEach(function(x){var wd=new Date(x.date+'T12:00:00').getDay(),c=x.rows.filter(function(y){return y.t||y.o||y.m;}).length;h+='• '+DN_DAYS[wd]+' '+E(x.date)+' — '+c+' حصة بمحتوى من '+x.rows.length+'<br>';});
+    if(r.warns.length)h+='<div style="color:#B45309;margin-top:6px">'+r.warns.map(E).join('<br>')+'</div>';
+    h+='</div></div>';res.insertAdjacentHTML('beforeend',h);
+    st.textContent='✅ جاهز. اضغط «ابنِ خطة التوزيع» ثم راجعها واعتمدها. لا يُكتب شيء قبل اعتمادك.';
+    if(!document.getElementById('nbu_bar'))res.insertAdjacentHTML('beforeend','<div class="card" id="nbu_bar"><button class="ibtn up" style="width:100%" onclick="nbuShowPlan()">🔀 ابنِ خطة التوزيع حسب برنامجي</button><div id="nbu_ap" style="font-size:13px;margin-top:8px;line-height:1.9"></div></div>');
+  };
+  rd.readAsText(f,'utf-8');
+};
+var _o=window.nbUpOpen;
+window.nbUpOpen=function(){
+  _o.apply(this,arguments);
+  var c=document.querySelector('#mfOv .vbody .card');if(!c||c.querySelector('.nbj-btn'))return;
+  var st=document.getElementById('nbu_st');
+  var h='<input type="file" id="nbj_f" accept=".json,application/json" style="display:none" onchange="nbjPicked()"><button class="ibtn nbj-btn" style="width:100%;margin-top:8px" onclick="document.getElementById(\'nbj_f\').click()">📥 استيراد من ملف JSON (بلا مساعد)</button>';
+  if(st)st.insertAdjacentHTML('beforebegin',h);else c.insertAdjacentHTML('beforeend',h);
+};
+}catch(e){try{console.error(e);}catch(e2){}}})();
+</script>
+
+
+<script id="v14310js">
+(function(){try{
+window.__FEAT=window.__FEAT||{};window.__FEAT['v14310']=1;
+var st=document.createElement('style');
+st.textContent='@media print{html:has(body.dnp),body.dnp{height:auto!important;min-height:0!important;overflow:visible!important;display:block!important}body.dnp #dnPrintRoot .dns{page-break-after:always;break-after:page}body.dnp #dnPrintRoot .dns:last-child{page-break-after:auto;break-after:auto}}';
+document.head.appendChild(st);
+function rowsOf(v){if(!v)return null;var a=Array.isArray(v)?v:Object.keys(v).sort(function(x,y){return x-y;}).map(function(k){return v[k];});return a.length?a:null;}
+function loadDay(x){
+  var o=null,rw=null,fb=null;
+  try{o=JSON.parse(localStorage.getItem('dn_'+x.iso)||'null');}catch(e){}
+  try{rw=JSON.parse(localStorage.getItem('dnov_'+x.iso)||'null');}catch(e){}
+  if(!rw&&DN_OV[x.iso]&&DN_OV[x.iso].length)rw=DN_OV[x.iso];
+  var need=(!o||!rw);
+  var p=need?Promise.race([fdb.ref('daily_nb/'+x.iso).once('value').then(function(s){return s.val();}),new Promise(function(r){setTimeout(function(){r(null);},6000);})]).catch(function(){return null;}):Promise.resolve(null);
+  return p.then(function(v){
+    fb=v;
+    var d=o||(fb?{f:fb.f||{},n:fb.n||''}:{f:{},n:''});
+    var r=rw||rowsOf(fb&&fb.rows);
+    return {iso:x.iso,i:x.i,d:d,rows:r};
+  });
+}
+window.dnPrintWeek=function(){
+  if(!document.getElementById('dnSheet'))return;
+  dnSave();
+  var s=document.getElementById('dn_st'),b0=dnSun(new Date(DN.date+'T00:00:00')),days=[],i;
+  for(i=0;i<5;i++){var d=new Date(b0.getFullYear(),b0.getMonth(),b0.getDate()+i),iso=dnFmt(d);if(iso>=DN_START)days.push({iso:iso,i:i});}
+  if(!days.length){if(s)s.textContent='⚠️ هذا الأسبوع قبل بداية الكراس.';return;}
+  if(s)s.textContent='⏳ أجهّز صفحات الأسبوع...';
+  Promise.all(days.map(loadDay)).then(function(arr){
+    var oDate=DN.date,oIdx=DN.idx,oOv=DN_OV[oDate],root=document.createElement('div');root.id='dnPrintRoot';
+    arr.forEach(function(x){
+      DN.date=x.iso;DN.idx=x.i;var had=Object.prototype.hasOwnProperty.call(DN_OV,x.iso),prev=DN_OV[x.iso];
+      if(x.rows)DN_OV[x.iso]=x.rows;
+      var tmp=document.createElement('div');tmp.innerHTML=dnSheet(x.i);
+      if(x.rows){if(had)DN_OV[x.iso]=prev;else delete DN_OV[x.iso];}
+      [].forEach.call(tmp.querySelectorAll('.dnf'),function(e){var k=e.getAttribute('data-k')||'',v=(e.id==='dn_note')?(x.d.n||''):((x.d.f||{})[k]||'');var dv=document.createElement('div');dv.className='dns-txt'+(k.slice(-2)==='_t'?' dn-topic':'');dv.textContent=v;e.parentNode.replaceChild(dv,e);});
+      var di=tmp.querySelector('input[type=date]');if(di){var sp=document.createElement('span');sp.textContent=di.value;di.parentNode.replaceChild(sp,di);}
+      [].forEach.call(tmp.querySelectorAll('[id]'),function(e){e.removeAttribute('id');});
+      root.appendChild(tmp.firstChild);
+    });
+    DN.date=oDate;DN.idx=oIdx;if(oOv)DN_OV[oDate]=oOv;
+    var old=document.getElementById('dnPrintRoot');if(old)old.remove();
+    document.body.appendChild(root);document.body.classList.add('dnp');
+    var done=function(){document.body.classList.remove('dnp');var r=document.getElementById('dnPrintRoot');if(r)r.remove();window.removeEventListener('afterprint',done);};
+    window.addEventListener('afterprint',done);
+    if(s)s.textContent='✅ '+arr.length+' صفحات جاهزة. اختر «حفظ بصيغة PDF» من نافذة الطباعة.';
+    setTimeout(function(){window.print();},50);
+  }).catch(function(e){if(s)s.textContent='⚠️ تعذّر تجهيز الأسبوع.';});
+};
+var _r=dnRender;
+dnRender=function(){
+  _r.apply(this,arguments);
+  var a=document.querySelector('#mfOv .dn-acts');
+  if(a&&!a.querySelector('.dnw-btn')){var b=document.createElement('button');b.className='ibtn up dnw-btn';b.textContent='📚 تحميل الأسبوع (5 صفحات)';b.onclick=function(){dnPrintWeek();};var pb=a.querySelector('button[onclick="dnPrint()"]');if(pb&&pb.nextSibling)a.insertBefore(b,pb.nextSibling);else a.appendChild(b);}
+};
 }catch(e){try{console.error(e);}catch(e2){}}})();
 </script>
 
