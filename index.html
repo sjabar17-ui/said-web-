@@ -624,7 +624,7 @@ body.fab-scroll #aiFab,body.fab-scroll #fabMain,body.fab-scroll #qaFab{opacity:.
     </div>
     <div id="gbody"></div>
     <div class="gmsg" id="gm"></div>
-    <div class="gfoot">قسم السنة الثالثة · 2026 / 2027 · الإصدار 143.10</div>
+    <div class="gfoot">قسم السنة الثالثة · 2026 / 2027 · الإصدار 143.12</div>
   </div>
 </div>
 
@@ -763,6 +763,8 @@ body.fab-scroll #aiFab,body.fab-scroll #fabMain,body.fab-scroll #qaFab{opacity:.
         <button class="menu-btn gradient-green" onclick="mfNameFix()"><span class="circle-icon"><svg class="svg-icon"><use href="#i-notepad"/></svg></span>توحيد الاسم في المذكرات</button>
         <button class="menu-btn gradient-blue" onclick="parHub()"><span class="circle-icon"><svg class="svg-icon"><use href="#i-notepad"/></svg></span>الأولياء (مرآة تطبيقهم)</button>
         <button class="menu-btn gradient-blue" onclick="compTools()"><span class="circle-icon"><svg class="svg-icon"><use href="#i-notepad"/></svg></span>المسابقة وتنظيف التجربة</button>
+        <button class="menu-btn gradient-green" onclick="wdOpen()"><span class="circle-icon"><svg class="svg-icon"><use href="#i-chart"/></svg></span>لوحة القيادة الأسبوعية</button>
+        <button class="menu-btn gradient-green" onclick="ceOpen()"><span class="circle-icon"><svg class="svg-icon"><use href="#i-chart"/></svg></span>بطاقات التقويم المستمر</button>
         <button class="menu-btn blue" onclick="dnOpen()"><span class="circle-icon"><svg class="svg-icon"><use href="#i-openbook"/></svg></span>الكراس اليومي</button>
         <button class="menu-btn gradient-blue" onclick="wkOpen()"><span class="circle-icon"><svg class="svg-icon"><use href="#i-notepad"/></svg></span>لوحة القيادة الأسبوعية</button>
         <button class="menu-btn gradient-green" onclick="lpOpen()"><span class="circle-icon"><svg class="svg-icon"><use href="#i-openbook"/></svg></span>استيراد دروس</button>
@@ -3502,7 +3504,7 @@ var NAV_ICONS={home:'<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 
 function buildNav(role){var o=document.getElementById('bottomNav');if(o)o.remove();var items=NAVS[role];if(!items)return;var nav=document.createElement('nav');nav.id='bottomNav';nav.className=role==='student'?'nv-b':'nv-a';items.forEach(function(it){var b=document.createElement('button');b.className='nv-i';b.dataset.t=it[0];var st=it[3]?' style="background:'+it[3]+';color:'+it[4]+'"':'';b.innerHTML='<span class="nv-t"'+st+'><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+NAV_ICONS[it[2]]+'</svg></span><span class="nv-l">'+it[1]+'</span>';b.onclick=function(){if(it[0]==='more')openMore(role);else goTo(it[0]);};nav.appendChild(b);});var oldf=document.getElementById('aiFab');if(oldf)oldf.remove();if(role!=='teacher'){var fab=document.createElement('button');fab.id='aiFab';fab.setAttribute('aria-label','الأستاذ سعيد الذكي');fab.innerHTML='<span class="orb"><svg viewBox="0 0 32 32" width="30" height="30"><defs><linearGradient id="spk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#A5B4FC"/></linearGradient></defs><path fill="url(#spk)" d="M15 4c1 7 4 10 11 11-7 1-10 4-11 11-1-7-4-10-11-11 7-1 10-4 11-11z"/><path fill="#67E8F9" d="M25 3c.4 2.2 1.3 3.1 3.5 3.5-2.2.4-3.1 1.3-3.5 3.5-.4-2.2-1.3-3.1-3.5-3.5 2.2-.4 3.1-1.3 3.5-3.5z"/><circle cx="6" cy="26" r="1.6" fill="#C4B5FD"/></svg></span>';fab.title='اسألني';fab.onclick=function(){goTo('ai');aiFabListen('aiInput',aiSend);};document.body.appendChild(fab);var ot=document.getElementById('aiTip');if(ot)ot.remove();if(role==='student'){var tip=document.createElement('div');tip.id='aiTip';tip.textContent='اسألني عن درسك ✨';document.body.appendChild(tip);setTimeout(function(){tip.remove();},8500);try{aiNudge();}catch(e){}}}
 document.getElementById('app').appendChild(nav);navActive('');}
 function navActive(s){var n=document.getElementById('bottomNav');if(!n)return;[].forEach.call(n.children,function(b){b.classList.toggle('on',b.dataset.t===s);});}
-function openMore(role){var o=document.getElementById('moreSheet');if(o){o.remove();return;}var used=(NAVS[role]||[]).map(function(x){return x[0];});var src=document.querySelector('#screen-'+role+'-home .grid-menu');if(!src)return;var sh=document.createElement('div');sh.id='moreSheet';sh.onclick=function(e){if(e.target===sh)sh.remove();};var g=document.createElement('div');g.className='grid-menu';var hd=document.createElement('div');hd.className='ms-hd';hd.innerHTML='<b>المزيد</b><button type="button" class="ibtn ghost sm">→ رجوع</button>';hd.querySelector('button').onclick=function(){sh.remove();};g.appendChild(hd);[].forEach.call(src.children,function(c){var m=(c.getAttribute('onclick')||'').match(/goTo\('([^']+)'\)/);if(role==='student'&&/sendReport\(/.test(c.getAttribute('onclick')||''))return;if(m&&(used.indexOf(m[1])>-1||(role==='student'&&['ai','lessons','texts','studentNotebook','textbook','myFile','recorder','charts','rewards','voiceNotes','quizzes'].indexOf(m[1])>-1)))return;var k=c.cloneNode(true);k.addEventListener('click',function(){sh.remove();});g.appendChild(k);});sh.appendChild(g);var vv=document.createElement('div');vv.style.cssText='text-align:center;font-size:12px;color:#fff;opacity:.85;margin-top:14px';vv.textContent='الإصدار 143.10';sh.appendChild(vv);try{var miss=['picker','send','v98','hj','disp','simple','v107','v108','v110','v112','v113','v114','v115','v116','v117','v118','v119','v120','v121','v122','v123','v124','v125','v126','v127','v128','v129','v130','v131','v132','v133','v134','v135','v136','v1361','v1362','v137','v1371','v1372','v138','v1381','v1382','v1383','v1384','v1391','v13911','v1392','v1393','v1394','v13941','v1395','v13951','v1396','v13961','v1397','v1401','v1402','v1403','v1404','v1405','v1406','v1407','v1411'].filter(function(k){return !(window.__FEAT&&__FEAT[k]);}),er=(window.__ERRS||[]).slice(0,3);if(miss.length||er.length){var dg=document.createElement('div');dg.style.cssText='font-size:11px;color:#FCA5A5;max-width:92%;margin:6px auto 0;direction:ltr;text-align:left;word-break:break-all';dg.textContent='⚠️ '+(miss.length?'not loaded: '+miss.join(',')+' | ':'')+er.join(' | ');sh.appendChild(dg);}else{var ok=document.createElement('div');ok.style.cssText='font-size:11px;color:#86EFAC;text-align:center;margin-top:4px';ok.textContent='✅ كل الأجزاء تعمل';sh.appendChild(ok);}}catch(e){}document.body.appendChild(sh);}
+function openMore(role){var o=document.getElementById('moreSheet');if(o){o.remove();return;}var used=(NAVS[role]||[]).map(function(x){return x[0];});var src=document.querySelector('#screen-'+role+'-home .grid-menu');if(!src)return;var sh=document.createElement('div');sh.id='moreSheet';sh.onclick=function(e){if(e.target===sh)sh.remove();};var g=document.createElement('div');g.className='grid-menu';var hd=document.createElement('div');hd.className='ms-hd';hd.innerHTML='<b>المزيد</b><button type="button" class="ibtn ghost sm">→ رجوع</button>';hd.querySelector('button').onclick=function(){sh.remove();};g.appendChild(hd);[].forEach.call(src.children,function(c){var m=(c.getAttribute('onclick')||'').match(/goTo\('([^']+)'\)/);if(role==='student'&&/sendReport\(/.test(c.getAttribute('onclick')||''))return;if(m&&(used.indexOf(m[1])>-1||(role==='student'&&['ai','lessons','texts','studentNotebook','textbook','myFile','recorder','charts','rewards','voiceNotes','quizzes'].indexOf(m[1])>-1)))return;var k=c.cloneNode(true);k.addEventListener('click',function(){sh.remove();});g.appendChild(k);});sh.appendChild(g);var vv=document.createElement('div');vv.style.cssText='text-align:center;font-size:12px;color:#fff;opacity:.85;margin-top:14px';vv.textContent='الإصدار 143.12';sh.appendChild(vv);try{var miss=['picker','send','v98','hj','disp','simple','v107','v108','v110','v112','v113','v114','v115','v116','v117','v118','v119','v120','v121','v122','v123','v124','v125','v126','v127','v128','v129','v130','v131','v132','v133','v134','v135','v136','v1361','v1362','v137','v1371','v1372','v138','v1381','v1382','v1383','v1384','v1391','v13911','v1392','v1393','v1394','v13941','v1395','v13951','v1396','v13961','v1397','v1401','v1402','v1403','v1404','v1405','v1406','v1407','v1411'].filter(function(k){return !(window.__FEAT&&__FEAT[k]);}),er=(window.__ERRS||[]).slice(0,3);if(miss.length||er.length){var dg=document.createElement('div');dg.style.cssText='font-size:11px;color:#FCA5A5;max-width:92%;margin:6px auto 0;direction:ltr;text-align:left;word-break:break-all';dg.textContent='⚠️ '+(miss.length?'not loaded: '+miss.join(',')+' | ':'')+er.join(' | ');sh.appendChild(dg);}else{var ok=document.createElement('div');ok.style.cssText='font-size:11px;color:#86EFAC;text-align:center;margin-top:4px';ok.textContent='✅ كل الأجزاء تعمل';sh.appendChild(ok);}}catch(e){}document.body.appendChild(sh);}
 if(/[?&]invite=/.test(location.search))GATE_VIEW='r';
 var __goTo=goTo;goTo=function(s){__goTo(s);navActive(s);window.CUR_SCREEN=s;if(s==="student-home"||s==="parent-home"||s==="teacher-home"){renderToday(CURRENT_USER_TYPE);setTimeout(todayExtras,800);setTimeout(todayExtras,2200);}};
 
@@ -8773,6 +8775,235 @@ dnRender=function(){
   if(a&&!a.querySelector('.dnw-btn')){var b=document.createElement('button');b.className='ibtn up dnw-btn';b.textContent='📚 تحميل الأسبوع (5 صفحات)';b.onclick=function(){dnPrintWeek();};var pb=a.querySelector('button[onclick="dnPrint()"]');if(pb&&pb.nextSibling)a.insertBefore(b,pb.nextSibling);else a.appendChild(b);}
 };
 }catch(e){try{console.error(e);}catch(e2){}}})();
+</script>
+
+
+<script id="v14311js">
+(function(){try{
+window.__FEAT=window.__FEAT||{};window.__FEAT['v14311']=1;
+var LV=[['a','أ','تحكم أقصى'],['b','ب','تحكم مقبول'],['c','ج','تحكم جزئي'],['d','د','تحكم محدود']];
+var MON=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+var G='https://www.education.gov.dz';
+var SRC_AR='دليل تقييم مكتسبات مرحلة التعليم الابتدائي — اللغة العربية (وزارة التربية الوطنية، 2022/2023)';
+var OFF_ORAL=['الالتزام بآداب الاستماع','إدراك موضوع الخطاب وفكرته الأساسية','تدوين رؤوس الأقلام','التجاوب مع التعليمات','المشاركة في تحليل الخطاب','سلامة لغة التواصل','توظيف الدلالات اللفظية وغير اللفظية','الاسترسال واليسر','توظيف أفعال القول المناسبة'];
+var OFF_READ=['قراءة وحدات لغوية كاملة قراءة مسترسلة','قراءة معبرة عن المعاني','احترام علامات الوقف وتمثلها','استخدام التنغيم والنبر المناسبين','احترام الوصل والفصل','إبراز علامات الإعراب وفق قواعد القراءة','مدة القراءة'];
+var OFF_PROD=['احترام التعليمة والهيئات المرفقة','وضوح التصميم وفق طبيعة المنتج','ترابط الأفكار وتسلسلها','الالتزام بقواعد اللغة','إدراج قيمة أو تحديد موقف أو إبداء رأي','وضوح الخط'];
+var CARDS=[
+{id:'prod',ic:'✍️',t:'الإنتاج الكتابي',foot:'معًا .. ننمّي مهارات الكتابة ونحقّق النجاح',
+ sets:{mine:{n:'بطاقتي',g:[{t:'معايير التقويم',c:['فهم التعليمة وموضوع الإنتاج','تنظيم الأفكار وترتيبها','بناء النص ومترابطه','توظيف المكتسبات (نحو + صرف + إملاء)','أدوات الربط','سلامة اللغة والتراكيب','علامات الوقف','الخط والتنظيم','الإبداع وتقديم أفكار مميزة']}]},
+  off:{n:'الدليل الوزاري',g:[{t:'الإنتاج الكتابي — معايير الدليل',c:OFF_PROD}]}},
+ st:'part',cf:[
+ ['ok','سلّم التقدير: الدليل يعتمد أربعة مستويات (أ تحكم أقصى، ب تحكم مقبول، ج تحكم جزئي، د تحكم محدود)، وهو المستعمل هنا.'],
+ ['ok','يطابق الدليل: «فهم التعليمة» ↔ احترام التعليمة والهيئات المرفقة · «تنظيم الأفكار» و«بناء النص» ↔ ترابط الأفكار وتسلسلها · «الخط والتنظيم» ↔ وضوح الخط.'],
+ ['warn','الدليل يضع معيارًا واحدًا هو «الالتزام بقواعد اللغة»، وبطاقتك تفصّله إلى أربعة أعمدة: توظيف المكتسبات، أدوات الربط، سلامة اللغة، علامات الوقف.'],
+ ['warn','«الإبداع» قريب من معيار «إدراج قيمة أو تحديد موقف أو إبداء رأي» لكنه ليس هو.'],
+ ['miss','معيار غير ممثَّل في بطاقتك: «وضوح التصميم وفق طبيعة المنتج».'],
+ ['tip','للتقدير الرسمي اضغط «الدليل الوزاري» (6 معايير). أبقِ بطاقتك إن أردت متابعة أدقّ؛ ما زاد على معايير الدليل اجتهاد من البطاقة وليس نصًّا فيه.'],
+ ['src','ص 5 و6 من '+SRC_AR]]},
+{id:'read',ic:'📖',t:'القراءة والمحفوظات',foot:'قراءة واعية .. معرفة أعمق .. وتفكير أوسع',
+ sets:{mine:{n:'بطاقتي',g:[{t:'القراءة',c:['سلامة القراءة والأداء','الطلاقة والتنغيم','الفهم السطحي','التذوق والإبداع']},{t:'المحفوظات',c:['الحفظ السليم','الأداء والنطق','الحنّ (إن وجد)','الفهم والتوظيف','الإبداع']}]},
+  off:{n:'الدليل الوزاري',g:[{t:'الأداء القرائي — معايير الدليل',c:OFF_READ},{t:'المحفوظات (من بطاقتك — لا شبكة رسمية)',c:['الحفظ السليم','الأداء والنطق','الحنّ (إن وجد)','الفهم والتوظيف','الإبداع']}]}},
+ st:'part',cf:[
+ ['ok','سلّم التقدير أ–د من الدليل. ومدة القراءة تُقدَّر هكذا في الدليل: أ ≤ 60 ثانية · ب من 61 إلى 80 · ج من 81 إلى 100 · د أكثر من 100 ثانية (ص 8). ونص الأداء القرائي يمثل 50% من الحد الأدنى المنصوص عليه في الكفاءة (120 كلمة)، ويُقيَّم بنصوص متعددة بمعدل نص لكل خمسة تلاميذ على فترات مختلفة تفاديًا للحفظ (ص 7 و8).'],
+ ['ok','الأداء القرائي في الدليل 7 معايير: قراءة مسترسلة، قراءة معبرة، علامات الوقف، التنغيم والنبر، الوصل والفصل، علامات الإعراب، مدة القراءة؛ ويُقيَّم خارج فترة الامتحان (ص 5).'],
+ ['warn','«سلامة القراءة والأداء» ≈ المسترسلة + الوصل والفصل + الإعراب · «الطلاقة والتنغيم» ≈ المعبرة + التنغيم والنبر. أما «الفهم السطحي» فهو في الدليل ضمن «فهم المكتوب — المحمول الفكري» (تحديد معلومات صريحة) لا ضمن الأداء القرائي، و«التذوق والإبداع» غير وارد.'],
+ ['miss','غائب عن بطاقتك: «احترام علامات الوقف وتمثلها» و«مدة القراءة».'],
+ ['warn','المحفوظات: لم أجد في الأدلة المرفقة شبكة معايير لها. أعمدتها الخمسة اجتهاد من البطاقة، فراجعها مع المفتش أو وثيقة المنهاج.'],
+ ['src','ص 5 و7 و8 من '+SRC_AR]]},
+{id:'music',ic:'🎵',t:'التربية الموسيقية',foot:'معًا .. نغرس حبّ الموسيقى في قلوبنا',
+ sets:{mine:{n:'بطاقتي',g:[{t:'الاستماع والتفاعل',c:['الإنصات وحسن الاستماع','المشاركة والإجابة']},{t:'الغناء والأداء',c:['جودة الأداء والصوت','الالتزام بالإيقاع']},{t:'المعرفة الموسيقية',c:['التمييز بين الأصوات','معرفة الآلات الموسيقية']},{t:'الإبداع والتعبير',c:['اقتراح أفكار موسيقية','التعبير الحركي المناسب']},{t:'الذوق الموسيقي',c:['إبداء الرأي والتذوق']}]}},
+ st:'part',cf:[
+ ['ok','منهاج التربية الموسيقية (السنة 3): الكفاءة الختامية «يستمع إلى التشكيلات والمجموعات الموسيقية قصد التعرف عليها وعلى نوع الموسيقى التي تعزفها»، ويؤدي أناشيد وأغاني تربوية أداءً سليمًا.'],
+ ['ok','«الاستماع والتفاعل» و«المعرفة الموسيقية» تطابق كفاءة «التذوق الموسيقي» (الغناء الجماعي، تصنيف الآلات إلى إيقاعية ونفخية ووترية، التعرف على أصوات الآلات). و«الغناء والأداء» يطابق أداء الأناشيد أداءً سليمًا.'],
+ ['warn','«الإبداع والتعبير» (أفكار موسيقية، تعبير حركي) و«إبداء الرأي والتذوق» لم أجدهما بهذه الصيغة في المنهاج.'],
+ ['warn','لم يرد في المنهاج شبكة معايير ولا سلّم تقدير للموسيقى. سلّم (أ–د) هنا مستعار من دليل تقييم العربية للتوحيد فقط.'],
+ ['warn','المرجع الذي وصلتُ إليه نسخة من المنهاج منشورة على موقع تعليمي، وليس ملفًّا من مشروعك. قابِلها بالوثيقة الأصلية عندك.'],
+ ['src','منهاج السنة الثالثة ابتدائي (جميع المواد)، وزارة التربية الوطنية — نسخة eddirasa.com']]},
+{id:'art',ic:'🎨',t:'التربية التشكيلية',foot:'الفنّ لغة راقية .. وتنمية للذوق والجمال',
+ sets:{mine:{n:'بطاقتي',g:[{t:'المهارات الفنية',c:['التلوين والرسم','التشكيل والتركيب']},{t:'الإبداع والابتكار',c:['اقتراح أفكار جديدة','تنفيذ أعمال مبتكرة']},{t:'جماليات العمل',c:['تنظيم الفضاء','الدقة والعناية']},{t:'التذوق الفني',c:['التعبير عن المشاعر','احترام الذوق العام']},{t:'المشاركة والتفاعل',c:['المشاركة في الأنشطة الفنية']}]}},
+ st:'part',cf:[
+ ['ok','منهاج التربية التشكيلية: الكفاءة النهائية «تبليغ الأفكار والتجارب والأحاسيس الشخصية من خلال إنجازات فنية تشكيلية»، ومركّباتها ثلاثة: التعبير اللغوي (فهم وتصور) · التعبير التشكيلي (إبداع وإنتاج) · الاتصال والحكم (نقد وتذوق).'],
+ ['ok','«المهارات الفنية» و«الإبداع والابتكار» ↔ التعبير التشكيلي · «التذوق الفني» ↔ الاتصال والحكم.'],
+ ['warn','«جماليات العمل» و«المشاركة والتفاعل» اجتهاد من البطاقة (الدقة والعناية قريبة من معيار «يعتني بأدواته المدرسية وبيئته» الوارد مثالًا).'],
+ ['miss','لا عمود يقابل «التعبير اللغوي»: التعريف بالألوان الحارة والباردة والتمييز بينها، ومبادئ الزخرفة (التكرار، التقابل) المقررة في السنة 3.'],
+ ['warn','لم يرد في المنهاج سلّم تقدير ولا شبكة معايير لها؛ سلّم (أ–د) مستعار من دليل تقييم العربية. والمرجع نسخة من المنهاج على موقع تعليمي، فقابِلها بالأصل عندك.'],
+ ['src','منهاج السنة الثالثة ابتدائي (جميع المواد)، وزارة التربية الوطنية — نسخة eddirasa.com']]},
+{id:'math',ic:'🔢',t:'الرياضيات',foot:'معًا .. نغرس حبّ الرياضيات ونبني التميّز',
+ sets:{mine:{n:'بطاقتي',g:[{t:'الأعداد والحساب',c:['العمليات الحسابية','التفكيك والتركيب','المقارنة والترتيب','الشفوي والكتابي']},{t:'المقادير والقياس',c:['القياس: الأوراق المالية','التعامل مع الطول والكتلة والسعة']},{t:'المجال الهندسي والفضائي',c:['الموقع والاتجاه','التعرف على الأشكال الهندسية']},{t:'تنظيم المعطيات (مضاف)',c:['الجداول والتمثيلات البيانية']}]}},
+ st:'part',cf:[
+ ['ok','دليل استخدام كتاب الرياضيات (السنة 3) يهيكل المنهاج في أربعة ميادين: الأعداد والحساب · تنظيم المعطيات · المقادير والقياس · الفضاء والهندسة.'],
+ ['miss','بطاقتك فيها ثلاثة ميادين فقط. أضفتُ ميدان «تنظيم المعطيات» (الجداول والتمثيلات البيانية) لتكتمل الميادين الأربعة؛ يمكنك تجاهل عموده.'],
+ ['warn','لم أجد في دليل الرياضيات شبكة معايير ولا سلّم تقدير. أعمدة الأعداد والقياس والهندسة تنظيم من البطاقة وتوافق محتوى الكتاب، وسلّم (أ–د) مستعار من دليل تقييم العربية.'],
+ ['tip','الدليل يربط التقويم بوضعيات الإدماج والحصيلة في نهاية المقطع، فاستعمل هذه البطاقة لمتابعة شهرية لا لعلامة الحصيلة.'],
+ ['src','دليل استخدام كتاب الرياضيات، السنة الثالثة ابتدائي — مقدمة الدليل وفقرة ميادين التعلم']]},
+{id:'ar',ic:'📚',t:'اللغة العربية (شهرية)',foot:'معًا .. نتابع التعلّم ونشجّع التميّز',
+ sets:{mine:{n:'بطاقتي',g:[{t:'فهم المنطوق والتعبير الشفوي',c:['الاستماع والمشاركة','إبداء الرأي واستعمال الصيغ','الإنتاج الشفوي']},{t:'القراءة والمحفوظات',c:['القراءة وفهم المكتوب','المحفوظات']},{t:'الإنتاج الكتابي',c:['تنظيم الأفكار وبناء النص','توظيف الظواهر اللغوية','الخط والتنظيم']}]},
+  off:{n:'الدليل الوزاري',g:[{t:'كفاءات اللغة العربية الأربع',c:['فهم الخطاب والتواصل الشفوي','الأداء القرائي','فهم المحمول الفكري','فهم النظام اللغوي','الإنتاج الكتابي']}]}},
+ st:'part',cf:[
+ ['ok','الدليل يحدد كفاءات اللغة العربية المقيَّمة في أربع: فهم الخطاب والتواصل الشفوي · الأداء القرائي · فهم المكتوب (جزآه: المحمول الفكري والنظام اللغوي) · الإنتاج الكتابي (ص 3 و4).'],
+ ['ok','بطاقتك الشهرية تلخّص هذه الكفاءات في ثلاث مجموعات: الشفوي، القراءة والمحفوظات، الإنتاج الكتابي؛ وهذا مطابق على مستوى الملخص.'],
+ ['warn','فيها دمج: «القراءة وفهم المكتوب» تجمع الأداء القرائي وفهم المكتوب، و«توظيف الظواهر اللغوية» ≈ فهم النظام اللغوي. و«المحفوظات» لا شبكة رسمية لها في الدليل.'],
+ ['tip','للمقارنة مع الدليل اضغط «الدليل الوزاري» فتظهر الكفاءات الخمس (المحمول الفكري والنظام اللغوي منفصلان). وللتفصيل استعمل البطاقات الأخرى.'],
+ ['src','ص 3 و4 من '+SRC_AR]]},
+{id:'oral',ic:'🗣️',t:'فهم المنطوق والتعبير الشفوي',foot:'معًا .. ننمّي مهارات التواصل',
+ sets:{mine:{n:'بطاقتي',g:[{t:'الاستماع',c:['حسن الإصغاء والانتباه إلى النص']},{t:'الفهم',c:['الفهم السطحي (المعلومات الصريحة)','الفهم العميق (الاستنتاج والربط)']},{t:'إبداء الرأي',c:['التعبير عن الرأي ومناقشة مضمون النص']},{t:'استعمال الصيغ',c:['توظيف الصيغ المدروسة في سياقات مناسبة']},{t:'الإنتاج الشفوي',c:['بناء تعبير مترابط وسليم']},{t:'التفاعل والمشاركة',c:['المشاركة في الإجابة والأنشطة']},{t:'الإبداع',c:['اقتراح أفكار جديدة أو نهاية أخرى مناسبة']}]},
+  off:{n:'الدليل الوزاري',g:[{t:'فهم الخطاب والتواصل الشفوي — معايير الدليل',c:OFF_ORAL}]}},
+ st:'part',cf:[
+ ['ok','الدليل يصنّف تقييم «فهم الخطاب والتواصل الشفوي» بنمط شفوي وفترة «متابعة مستمرة» (ص 4)، وهذا يوافق فكرة بطاقة التقويم المستمر.'],
+ ['ok','سلّم التقدير أ–د من الدليل (ص 6).'],
+ ['ok','تقابل: «حسن الإصغاء» ↔ الالتزام بآداب الاستماع · «الفهم» ↔ إدراك موضوع الخطاب وفكرته الأساسية · «التفاعل والمشاركة» ↔ التجاوب مع التعليمات والمشاركة في تحليل الخطاب · «الإنتاج الشفوي» ↔ سلامة لغة التواصل والاسترسال واليسر.'],
+ ['miss','معايير الدليل التي لا تظهر في بطاقتك: «تدوين رؤوس الأقلام» و«توظيف الدلالات اللفظية وغير اللفظية».'],
+ ['warn','«الإبداع» و«استعمال الصيغ» لا مقابل مباشر لهما في الدليل (أقربها توظيف أفعال القول المناسبة). اضغط «الدليل الوزاري» لشبكة التسعة معايير.'],
+ ['src','ص 4 و5 و6 من '+SRC_AR]]}
+];
+
+(function(){
+ function C(i){for(var k=0;k<CARDS.length;k++)if(CARDS[k].id===i)return CARDS[k];}
+ var ORIG={};['oral','prod','read','ar','math'].forEach(function(i){ORIG[i]=JSON.parse(JSON.stringify(C(i).sets.mine));});
+ var MH=C('read').sets.mine.g[1];
+ C('oral').sets={mine:{n:'الدليل الوزاري',g:[{t:'فهم الخطاب والتواصل الشفوي — معايير الدليل',c:OFF_ORAL}]}};
+ C('prod').sets={mine:{n:'الدليل الوزاري',g:[{t:'الإنتاج الكتابي — معايير الدليل',c:OFF_PROD}]}};
+ C('read').sets={mine:{n:'الدليل الوزاري',g:[{t:'الأداء القرائي — معايير الدليل',c:OFF_READ},{t:MH.t+' (لا شبكة رسمية — من بطاقتك)',c:MH.c}]}};
+ C('ar').sets={mine:{n:'الدليل الوزاري',g:[{t:'فهم الخطاب والتواصل الشفوي',c:['فهم الخطاب والتواصل الشفوي']},{t:'القراءة',c:['الأداء القرائي']},{t:'فهم المكتوب',c:['المحمول الفكري','النظام اللغوي']},{t:'الإنتاج الكتابي',c:['الإنتاج الكتابي']},{t:'المحفوظات (لا شبكة رسمية — من بطاقتك)',c:['المحفوظات']}]}};
+ var m=C('math').sets.mine.g;m.splice(3,1);
+ ['oral','prod','read','ar'].forEach(function(i){ORIG[i].n='الأصلية';C(i).sets.off=ORIG[i];});ORIG.math.n='الأصلية';C('math').sets.off=ORIG.math;
+ C('prod').cf=[['ok','عُدّلت الأعمدة لتطابق الدليل: 6 معايير للإنتاج الكتابي (ص 5 و6 من '+SRC_AR+').'],['ok','سلّم التقدير أ–د هو سلّم الدليل.'],['warn','التغيير عن بطاقتك الورقية: أعمدتها التسعة (توظيف المكتسبات، أدوات الربط، سلامة اللغة، علامات الوقف، الإبداع...) دُمجت في معايير الدليل: «الالتزام بقواعد اللغة»، «إدراج قيمة أو موقف أو رأي».'],['miss','أُضيف معيار كان ناقصًا في بطاقتك: «وضوح التصميم وفق طبيعة المنتج».']];
+ C('read').cf=[['ok','عُدّلت الأعمدة: 7 معايير للأداء القرائي من الدليل (ص 7 و8)، وبقيت أعمدة المحفوظات من بطاقتك لأنه لا توجد شبكة رسمية لها.'],['ok','مدة القراءة (ص 8): أ ≤ 60 ثانية · ب 61–80 · ج 81–100 · د أكثر من 100 ثانية.'],['warn','حُذف من بطاقتك «الفهم السطحي» و«التذوق والإبداع» لأنهما ليسا من الأداء القرائي في الدليل (الفهم يُقيَّم ضمن فهم المكتوب).'],['warn','أعمدة المحفوظات الخمسة اجتهاد من بطاقتك: تُعتمد إلى أن تثبت وثيقة رسمية خلافها.'],['src','ص 5 و7 و8 من '+SRC_AR]];
+ C('ar').cf=[['ok','عُدّلت لتطابق الكفاءات المقيَّمة في الدليل: فهم الخطاب والتواصل الشفوي · الأداء القرائي · فهم المكتوب (المحمول الفكري + النظام اللغوي) · الإنتاج الكتابي (ص 3 و4).'],['warn','المحفوظات أُبقيت من بطاقتك لعدم وجود شبكة رسمية.'],['src','ص 3 و4 من '+SRC_AR]];
+ C('oral').cf=[['ok','عُدّلت الأعمدة إلى معايير الدليل التسعة لفهم الخطاب والتواصل الشفوي، وهو مصنَّف «متابعة مستمرة» (ص 4 و5).'],['ok','سلّم التقدير أ–د (ص 6).'],['warn','حُذفت أعمدة بطاقتك الخاصة (الإبداع، استعمال الصيغ، التفاعل...) لأنها ليست معايير في الدليل؛ أقربها: توظيف أفعال القول، والتجاوب مع التعليمات والمشاركة في تحليل الخطاب.'],['src','ص 4 و5 و6 من '+SRC_AR]];
+ C('math').cf=[['warn','بقيت كما أرسلتَها: لا شبكة معايير رسمية للرياضيات في دليل الكتاب. حُذف العمود الذي كنت أضفته («تنظيم المعطيات»).'],['warn','تُعتمد إلى أن تثبت وثيقة رسمية خلافها. سلّم أ–د مستعار من دليل العربية.']];
+ ['music','art'].forEach(function(i){C(i).cf=[['warn','بقيت كما أرسلتَها: لا شبكة معايير رسمية وجدتُها. تُعتمد إلى أن تثبت وثيقة خلافها.'],['ok','الأعمدة متوافقة في عمومها مع كفاءات المنهاج (نسخة eddirasa.com، ليست من موقع الوزارة).'],['warn','سلّم أ–د مستعار من دليل العربية.']];});
+})();
+var CE={id:null,set:'mine',mon:null,d:null,tm:0};
+function $c(i){for(var k=0;k<CARDS.length;k++)if(CARDS[k].id===i)return CARDS[k];}
+function E(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function pups(){var o={};try{o=(typeof realList==='function')?realList():(window.STUDENT_LIST||{});}catch(e){o=window.STUDENT_LIST||{};}return Object.keys(o).sort(function(a,b){return (+a)-(+b);});}
+function nm(n){return (window.STUDENT_NAMES&&window.STUDENT_NAMES[n])||'';}
+function months(){var a=[],y=2026,m=8,i;for(i=0;i<10;i++){a.push(y+'-'+('0'+(m+1)).slice(-2));m++;if(m>11){m=0;y++;}}return a;}
+function monLab(v){var p=String(v).split('-');return MON[(+p[1])-1]+' '+p[0];}
+function defMon(){var t=new Date(),v=t.getFullYear()+'-'+('0'+(t.getMonth()+1)).slice(-2),a=months();return a.indexOf(v)>-1?v:(v<a[0]?a[0]:a[a.length-1]);}
+function key(){return 'ce_'+CE.id+'_'+CE.set+'_'+CE.mon;}
+function fbp(){return 'ceval/'+CE.id+'_'+CE.set+'/'+CE.mon;}
+function curSet(){var c=$c(CE.id);return (c.sets[CE.set]||c.sets.mine);}
+function allCols(){var o=[];curSet().g.forEach(function(g,gi){g.c.forEach(function(t,ci){o.push({g:gi,t:t});});});return o;}
+var css=document.createElement('style');
+css.textContent='.ce-bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}.ce-bar select{font-family:inherit}.ce-lg{display:flex;flex-wrap:wrap;gap:6px;font-size:12px;margin:6px 0}.ce-lg span{padding:3px 8px;border-radius:8px;font-weight:700}.ce-wrap{overflow:auto;max-height:68vh;border:1px solid #CBD5E1;border-radius:10px;background:#fff;-webkit-overflow-scrolling:touch}.ce-t{border-collapse:separate;border-spacing:0;font-size:11px;direction:rtl;color:#0F172A}.ce-t th,.ce-t td{border-bottom:1px solid #CBD5E1;border-left:1px solid #CBD5E1;padding:3px 4px;text-align:center;background:#fff}.ce-t thead th{position:sticky;top:0;z-index:3;background:#ECFCCB;font-weight:800;height:30px;box-sizing:border-box}.ce-t thead tr.r2 th{top:30px;height:auto;background:#F0F9E8;font-weight:600;font-size:10.5px;line-height:1.35;min-width:78px;max-width:96px;vertical-align:bottom}.ce-t .nb{position:sticky;right:0;z-index:2;min-width:32px;width:32px;background:#F1F5F9;font-weight:800}.ce-t .nn{position:sticky;right:32px;z-index:2;min-width:104px;max-width:128px;text-align:right;background:#F8FAFC;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ce-t thead .nb,.ce-t thead .nn{z-index:4;background:#E9D5FF}.ce-c{cursor:pointer;min-width:78px;height:34px;font-weight:900;font-size:15px;user-select:none;-webkit-tap-highlight-color:transparent}.ce-c.a,.cep .a{background:#86EFAC!important}.ce-c.b,.cep .b{background:#D9F99D!important}.ce-c.c,.cep .c{background:#FED7AA!important}.ce-c.d,.cep .d{background:#FCA5A5!important}.ce-note{width:170px;min-width:150px}.ce-note input{width:100%;box-sizing:border-box;border:0;background:transparent;font:inherit;font-size:12px;direction:rtl}.ce-cf .it{border-radius:10px;padding:8px 10px;margin:6px 0;font-size:13px;line-height:1.9;color:#0F172A}.ce-cf .ok{background:#DCFCE7}.ce-cf .warn{background:#FEF3C7}.ce-cf .miss{background:#FEE2E2}.ce-cf .tip{background:#E0F2FE}.ce-cf .src{background:#F1F5F9;font-size:12px}.ce-cd{display:flex;align-items:center;gap:10px;width:100%;text-align:right;margin:6px 0}.ce-cd b{flex:1}.ce-cd small{font-size:11px;opacity:.85}.cep{background:#fff;color:#000;direction:rtl;font-family:inherit;padding:0}.cep .h{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:4px;font-size:9pt}.cep .h b{font-size:13pt}.cep table{width:100%;border-collapse:collapse;font-size:7.5pt;table-layout:fixed}.cep th,.cep td{border:.6px solid #000;padding:0 1.5px;text-align:center;height:5.2mm;overflow:hidden}.cep thead th{background:#E7F5D4;font-weight:800;height:auto;line-height:1.25}.cep td.nn{text-align:right;font-weight:600}.cep td.nb{background:#EDE9FE;font-weight:800}.cep .ft{display:flex;justify-content:space-between;gap:10px;margin-top:4px;font-size:8pt}.cep .ft div{border:.6px solid #000;border-radius:6px;padding:2px 8px}@media print{.cep,.cep *{-webkit-print-color-adjust:exact;print-color-adjust:exact}}';
+document.head.appendChild(css);
+function ov(){var o=document.getElementById('mfOv');return o?o.querySelector('.vbody'):null;}
+window.ceOpen=function(){var o=mfOverlay('بطاقات التقويم المستمر'),b=o.querySelector('.vbody');b.style.direction='rtl';CE.id=null;ceList();};
+window.ceList=function(){var b=ov();if(!b)return;CE.id=null;var h='<div class="card" style="background:#fff;color:#0F172A"><b>📋 بطاقات التقويم المستمر</b><div style="font-size:13px;line-height:1.9;margin-top:6px">اختر بطاقة، ثم اضغط على الخانة لتتبدّل بين <b>أ</b> (تحكم أقصى) · <b>ب</b> (تحكم مقبول) · <b>ج</b> (تحكم جزئي) · <b>د</b> (تحكم محدود) · فارغة. هذا هو سلّم الدليل الوزاري (دليل تقييم مكتسبات مرحلة التعليم الابتدائي، ص 6). البيانات تُحفظ تلقائيًا في هاتفك وفي السحابة، لكل بطاقة وشهر على حدة.</div></div>';
+CARDS.forEach(function(c){var ofc=!!c.sets.off,cols=0;c.sets.mine.g.forEach(function(g){cols+=g.c.length;});h+='<button class="ibtn ce-cd" onclick="ceCard(\''+c.id+'\')" style="background:#fff;color:#0F172A;border:1px solid #CBD5E1"><span style="font-size:24px">'+c.ic+'</span><b>'+E(c.t)+'<br><small>'+cols+' عمودًا'+(ofc?' · معايير الدليل':'')+' · مطابقة للدليل حيث وُجد</small></b><span>←</span></button>';});
+h+='<div class="card" style="background:#FEF3C7;color:#0F172A;font-size:12.5px;line-height:1.9;margin-top:8px">⚠️ المطابقة مع الوثائق: الدليل الرسمي المرفق (اللغة العربية) يحدد معايير الشفوي والقراءة والإنتاج الكتابي. أما الموسيقى والتشكيلية والرياضيات فلا شبكة رسمية لها فيما اطّلعتُ عليه. افتح كل بطاقة ثم «🔍 مطابقة الوثائق» لترى التفصيل.</div>';b.innerHTML=h;};
+window.ceCard=function(id,set,mon){var c=$c(id);if(!c)return;CE.id=id;CE.set=(set&&c.sets[set])?set:'mine';CE.mon=mon||CE.mon||defMon();var b=ov();if(!b)return;
+var ms=months().map(function(m){return '<option value="'+m+'"'+(m===CE.mon?' selected':'')+'>'+monLab(m)+'</option>';}).join('');
+var h='<div class="ce-bar"><button class="ibtn ghost sm" onclick="ceList()">→ البطاقات</button><b style="flex:1;font-size:14px">'+c.ic+' '+E(c.t)+'</b></div><div class="ce-bar"><select class="inp" id="ce_mon" onchange="ceCard(\''+id+'\',CE_SET(),this.value)" style="width:auto">'+ms+'</select>';
+if(c.sets.off)h+='<button class="ibtn sm '+(CE.set==='mine'?'up':'ghost')+'" onclick="ceCard(\''+id+'\',\'mine\')">'+(id==='math'?'بطاقتي':'المطابقة للدليل')+'</button><button class="ibtn sm '+(CE.set==='off'?'up':'ghost')+'" onclick="ceCard(\''+id+'\',\'off\')">'+(id==='math'?'مع «تنظيم المعطيات»':'بطاقتي الأصلية (قبل التعديل)')+'</button>';
+h+='<button class="ibtn ghost sm" onclick="ceConf()">🔍 مطابقة الوثائق</button><button class="ibtn ghost sm" onclick="cePrint()">🖨️ طباعة</button></div><div class="ce-lg"><span class="a ce-c" style="min-width:0;height:auto;font-size:12px;cursor:default">أ تحكم أقصى</span><span class="b ce-c" style="min-width:0;height:auto;font-size:12px;cursor:default">ب تحكم مقبول</span><span class="c ce-c" style="min-width:0;height:auto;font-size:12px;cursor:default">ج تحكم جزئي</span><span class="d ce-c" style="min-width:0;height:auto;font-size:12px;cursor:default">د تحكم محدود</span></div><div class="ce-bar"><select class="inp" id="ce_fl" style="width:auto"><option value="a">أ</option><option value="b">ب</option><option value="c">ج</option><option value="d">د</option></select><button class="ibtn ghost sm" onclick="ceFill()">⚡ املأ الخانات الفارغة بهذا التقدير</button><span id="ce_st" style="font-size:12px;color:#334155"></span></div><div id="ce_tb"><div class="loading">⏳</div></div>';
+if(CE.set==='mine'&&id==='read')h+='<div class="card" style="background:#E0F2FE;color:#0F172A;font-size:12.5px;line-height:1.9;margin-top:8px">⏱ مدة القراءة (ص 8 من الدليل): أ ≤ 60 ثانية · ب 61–80 · ج 81–100 · د أكثر من 100 ثانية.</div>';
+b.innerHTML=h;ceLoad();};
+window.CE_SET=function(){return CE.set;};
+function ceLoad(){var k=key(),p=fbp(),o=null;try{o=JSON.parse(localStorage.getItem(k)||'null');}catch(e){}CE.d=o||{rows:{},u:0};ceTable();try{if(typeof fdb!=='undefined'&&fdb){fdb.ref(p).once('value').then(function(s){var v=s.val();if(key()!==k||!v)return;if((v.u||0)>(CE.d.u||0)){CE.d=v;if(!CE.d.rows)CE.d.rows={};try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}ceTable();}}).catch(function(){});}}catch(e){}}
+function cell(n,i){var r=CE.d.rows&&CE.d.rows[n];return (r&&r.c&&r.c[i])||'';}
+function ceTable(){var box=document.getElementById('ce_tb');if(!box)return;var s=curSet(),P=pups(),cols=allCols(),h='<div class="ce-wrap"><table class="ce-t"><thead><tr><th class="nb" rowspan="2">#</th><th class="nn" rowspan="2">الاسم واللقب</th>';
+s.g.forEach(function(g){h+='<th colspan="'+g.c.length+'">'+E(g.t)+'</th>';});h+='<th rowspan="2" class="ce-note">ملاحظات الأستاذ</th></tr><tr class="r2">';cols.forEach(function(c){h+='<th>'+E(c.t)+'</th>';});h+='</tr></thead><tbody>';
+if(!P.length)h+='<tr><td colspan="'+(cols.length+3)+'">لا يوجد تلاميذ مسجّلون بعد.</td></tr>';
+P.forEach(function(n){var r=(CE.d.rows&&CE.d.rows[n])||{};h+='<tr><td class="nb">'+E(n)+'</td><td class="nn">'+E(nm(n))+'</td>';cols.forEach(function(c,i){var v=cell(n,i),L=v?LV.filter(function(x){return x[0]===v;})[0]:null;h+='<td class="ce-c '+(v||'')+'" data-n="'+E(n)+'" data-i="'+i+'">'+(L?L[1]:'')+'</td>';});h+='<td class="ce-note"><input data-n="'+E(n)+'" value="'+E(r.n||'')+'" placeholder="..."></td></tr>';});
+h+='</tbody></table></div><div style="font-size:12px;margin-top:6px;color:#334155" id="ce_cnt"></div>';box.innerHTML=h;
+box.querySelector('table').addEventListener('click',function(e){var t=e.target;if(!t||!t.classList||!t.classList.contains('ce-c'))return;ceTap(t);});
+[].forEach.call(box.querySelectorAll('.ce-note input'),function(inp){inp.addEventListener('input',function(){var n=inp.getAttribute('data-n');var r=CE.d.rows[n]=CE.d.rows[n]||{};r.n=inp.value;ceSave();});});ceCount();}
+function ceCount(){var el=document.getElementById('ce_cnt');if(!el)return;var P=pups(),cols=allCols(),f=0;P.forEach(function(n){cols.forEach(function(c,i){if(cell(n,i))f++;});});el.textContent='الخانات المملوءة: '+f+' من '+(P.length*cols.length);}
+function ceTap(t){var n=t.getAttribute('data-n'),i=t.getAttribute('data-i'),v=cell(n,i),ord=['','a','b','c','d'],nx=ord[(ord.indexOf(v)+1)%ord.length],r=CE.d.rows[n]=CE.d.rows[n]||{};r.c=r.c||{};if(nx)r.c[i]=nx;else delete r.c[i];t.className='ce-c '+nx;var L=LV.filter(function(x){return x[0]===nx;})[0];t.textContent=L?L[1]:'';ceCount();ceSave();}
+window.ceFill=function(){var sel=document.getElementById('ce_fl'),v=sel&&sel.value;if(!v)return;var L=LV.filter(function(x){return x[0]===v;})[0];if(!confirm('تعبئة كل الخانات الفارغة بالتقدير «'+L[1]+'»؟ لا تتغير الخانات المملوءة.'))return;var P=pups(),cols=allCols();P.forEach(function(n){var r=CE.d.rows[n]=CE.d.rows[n]||{};r.c=r.c||{};cols.forEach(function(c,i){if(!r.c[i])r.c[i]=v;});});ceTable();ceSave();};
+function ceSave(){clearTimeout(CE.tm);var k=key(),p=fbp(),d=CE.d;d.u=Date.now();try{localStorage.setItem(k,JSON.stringify(d));}catch(e){}var st=document.getElementById('ce_st');if(st)st.textContent='⏳ ...';CE.tm=setTimeout(function(){try{if(typeof fdb==='undefined'||!fdb)throw 0;fdb.ref(p).set(d).then(function(){var s2=document.getElementById('ce_st');if(s2&&key()===k)s2.textContent='✅ حُفظ في السحابة';}).catch(function(){var s2=document.getElementById('ce_st');if(s2)s2.textContent='⚠️ حُفظ في هاتفك فقط';});}catch(e){var s3=document.getElementById('ce_st');if(s3)s3.textContent='⚠️ حُفظ في هاتفك فقط';}},700);}
+window.ceConf=function(){var c=$c(CE.id),b=ov();if(!c||!b)return;var ic={ok:'✅',warn:'⚠️',miss:'❌',tip:'💡',src:'📎'};var h='<div class="ce-bar"><button class="ibtn ghost sm" onclick="ceCard(\''+c.id+'\',CE_SET())">→ البطاقة</button><b style="flex:1">🔍 مطابقة «'+E(c.t)+'» للوثائق</b></div><div class="ce-cf">';c.cf.forEach(function(x){h+='<div class="it '+x[0]+'">'+ic[x[0]]+' '+E(x[1])+'</div>';});h+='</div>';b.innerHTML=h;};
+window.cePrint=function(){var c=$c(CE.id);if(!c)return;var s=curSet(),P=pups(),cols=allCols(),h='<div class="cep"><div class="h"><div>المدرسة الابتدائية: .......................<br>المستوى: السنة الثالثة ابتدائي</div><div style="text-align:center"><b>بطاقة التقويم المستمر — '+E(c.t)+(CE.set==='off'?' (الأصلية)':'')+'</b><br>الشهر: '+E(monLab(CE.mon))+'</div><div>الأستاذ: سعيد<br>الموسم الدراسي: 2026/2027</div></div><table><thead><tr><th style="width:5mm" rowspan="2">الرقم</th><th style="width:34mm" rowspan="2">الاسم واللقب</th>';
+s.g.forEach(function(g){h+='<th colspan="'+g.c.length+'">'+E(g.t)+'</th>';});h+='<th style="width:30mm" rowspan="2">ملاحظات الأستاذ</th></tr><tr>';cols.forEach(function(x){h+='<th>'+E(x.t)+'</th>';});h+='</tr></thead><tbody>';
+P.forEach(function(n){var r=(CE.d.rows&&CE.d.rows[n])||{};h+='<tr><td class="nb">'+E(n)+'</td><td class="nn">'+E(nm(n))+'</td>';cols.forEach(function(x,i){var v=cell(n,i),L=v?LV.filter(function(y){return y[0]===v;})[0]:null;h+='<td class="'+(v||'')+'">'+(L?L[1]:'')+'</td>';});h+='<td style="text-align:right">'+E(r.n||'')+'</td></tr>';});
+h+='</tbody></table><div class="ft"><div>سلّم التقدير: أ تحكم أقصى · ب تحكم مقبول · ج تحكم جزئي · د تحكم محدود</div><div>'+E(c.foot)+'</div></div></div>';
+var old=document.getElementById('dnPrintRoot');if(old)old.remove();var root=document.createElement('div');root.id='dnPrintRoot';root.innerHTML=h;document.body.appendChild(root);document.body.classList.add('dnp');
+var done=function(){document.body.classList.remove('dnp');var r=document.getElementById('dnPrintRoot');if(r)r.remove();window.removeEventListener('afterprint',done);};window.addEventListener('afterprint',done);setTimeout(function(){window.print();},50);};
+window.__CE_CARDS=CARDS;
+}catch(e){try{console.error(e);}catch(e2){}}})();
+
+</script>
+<script id="v14312js">
+(function(){try{
+window.__FEAT=window.__FEAT||{};window.__FEAT['v14312']=1;
+var T=[
+{a:'لغة عربية',s:[
+ {s:'فهم المنطوق والتعبير الشفوي',r:[
+  {d:'النص المنطوق',c:'ملاكي',k:'يفهم خطابات منطوقة من مختلف الأنماط مع التركيز على النمط السردي ويتجاوب معه'},
+  {d:'الأساليب',c:'الاستدراك (لكن)',k:'يسرد حدثا انطلاقا من سندات متنوعة في وضعيات تواصلية دالة'}]},
+ {s:'فهم المكتوب والتعبير الكتابي',r:[
+  {d:'التراكيب النحوية',c:'الفعل',kr:5,k:'يقرأ نصوصا من مختلف الأنماط مع التركيز على النمط السردي تتكون من 80 إلى 100 كلمة أغلبها مشكولة قراءة سليمة ويفهمها'},
+  {d:'الصرف / الإملاء',c:'المذكر والمؤنث'},
+  {d:'الرصيد اللغوي',c:'القيم'},
+  {d:'القراءة والمطالعة',c:'الوعد هو الوعد'},
+  {d:'المحفوظات',c:'نشيد الأبوة والطفولة'},
+  {d:'إنتاج كتابي',c:'ترتيب أحداث فقرة',kr:2,k:'ينتج كتابة نصوصا من أربعة إلى ستة أسطر من مختلف الأنماط مع التركيز على النمط السردي في وضعيات تواصلية دالة'},
+  {d:'المشروع',c:'كتابة قصة'}]}]},
+{a:'رياضيات',s:[{s:'',r:[
+ {d:'الأعداد والحساب',c:'الأعداد من 0 إلى 999 (1)\nالجمع والطرح (2)',k:'يحل مشكلات بتجنيد معارفه المتعلقة بالأعداد الطبيعية الأصغر من 100000 (قراءة وكتابة، مقارنة وترتيبا والعلاقات بينها واستعمال المعلومات الموجودة في كتابتها) وعمليات الجمع والطرح والضرب والحساب بنوعيه (آلي ومتمعن فيه)'},
+ {d:'تنظيم معطيات',c:'/',k:'يحل مشكلات باستعمال معطيات عددية منظمة في قوائم أو جداول أو مخططات أو صور وينظم معلومات في جدول'},
+ {d:'الفضاء والهندسة',c:'التنقل على مرصوفة',k:'يحل مشكلات متعلقة بوصف تنقل أو تحديد موقع شيء في الفضاء أو على مخطط ونقل شكل أو مقارنة أطوال أو استقامية أو التعامد أو التناظر المحوري باستعمال مصطلحات مناسبة'},
+ {d:'المقادير والقياس',c:'/',k:'يحل مشكلات متعلقة بمقارنة وقياس مقادير (أطوال/كتل/سعات/مدد) باستعمال الأدوات والوحدات المناسبة (أجزاء ومضاعفات المتر، الغرام ومضاعفاته، اللتر وأجزاؤه، يوم، شهر، سنة، h ; min ; s)'}]}]},
+{a:'تربية إسلامية',s:[{s:'',r:[
+ {d:'القرآن الكريم والحديث النبوي الشريف',c:'/',k:'يحسن المتعلم استظهار ما حفظ من القرآن الكريم والحديث الشريف في وضعيات التعلم والأداء'},
+ {d:'مبادئ أولية في العقيدة الإسلامية والعبادات',c:'الإيمان بالله + الإيمان بالملائكة',k:'يعدد المتعلم أركان الإيمان وقواعد الإسلام ويعرف بعض أركان الإيمان (الله / الملائكة) ويذكر بعض أسماء الله الحسنى في وضعيات تعلمية ويبدي أثرها في التواصل مع محيطه ويحسن تناول المعارف المتعلقة بالوضوء والصلاة وكيفية أدائهما ويوظفها في وضعيات الممارسة'},
+ {d:'تهذيب السلوك',c:'/',k:'يجسد المتعلم بسلوكه اليومي جملة المعارف والقيم المكتسبة ويمارسها'},
+ {d:'السيرة النبوية',c:'/',k:'يعرف المتعلم محطات من سيرة النبي صلى الله عليه وسلم وأخلاقه ويسترشد بالمواعظ الأخلاقية من سلوكه ومناقبه ويتعرف على قصتي آدم ونوح عليهما السلام'}]}]},
+{a:'تاريخ',s:[{s:'',r:[{d:'أدوات ومفاهيم المادة',c:'/',k:'يتمرس على بناء مفاهيم تخص الزمن، الحدث، السلم الزمني، الآثار، مصادر المعلومة التاريخية'}]}]},
+{a:'جغرافيا',s:[{s:'',r:[{d:'أدوات ومفاهيم المادة',c:'المعالم المكانية',k:'يختار المسار المناسب للتوجه والتنقل بعد الكشف عن معالم مكانية في محيطه القريب'}]}]},
+{a:'تربية مدنية',s:[{s:'',r:[{d:'الحياة الجماعية',c:'آداب الأكل',k:'يعبر عن سلوك إيجابي تجاه الذات والآخرين من خلال احترامه للقواعد الصحية والقواعد العامة في محيطه'}]}]},
+{a:'تربية علمية',s:[{s:'',r:[{d:'الإنسان والصحة',c:'سوء التغذية',k:'يحافظ على صحته ويهتم بصحة غيره باحترام القواعد الصحية بتجنيد موارده حول بعض مظاهر الوظائف الحيوية عند الإنسان'}]}]},
+{a:'تربية فنية',s:[
+ {s:'ت تشكيلية',r:[{d:'فن الرسم والتلوين',c:'تركيب العناصر التشكيلية بطريقة منظمة',k:'ينجز عملا فنيا تعبيريا فرديا أو جماعيا مركبا ذو بعدين أو ثلاثة أبعاد يطبق فيه قاعدة الألوان الحارة والباردة قصد المحافظة على البيئة والمحيط وتذوق جمالهما'}]},
+ {s:'ت موسيقية',r:[
+  {d:'التذوق الموسيقي والاستماع',c:'/',k:'يستمع إلى التشكيلات والمجموعات الموسيقية قصد التعرف عليها وعلى نوع الموسيقى التي تعزفها'},
+  {d:'النشيد والأغاني التربوية',c:'/',k:'يؤدي مجموعة من الأغاني التربوية والأناشيد'}]}]}
+];
+var MON=['جانفي','فيفري','مارس','أفريل','ماي','جوان','جويلية','أوت','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+var W={sun:null,d:null,tm:0};
+function E(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function fmt(d){var m=d.getMonth()+1,x=d.getDate();return d.getFullYear()+'-'+(m<10?'0':'')+m+'-'+(x<10?'0':'')+x;}
+function baseSun(){var t=new Date(),w=t.getDay(),x=new Date(t.getFullYear(),t.getMonth(),t.getDate());x.setDate(x.getDate()+(w>4?7-w:-w));return x;}
+function lab(){var a=new Date(W.sun.getTime()),b=new Date(W.sun.getTime());b.setDate(b.getDate()+4);return 'من '+a.getDate()+' '+MON[a.getMonth()]+' إلى '+b.getDate()+' '+MON[b.getMonth()]+' '+b.getFullYear();}
+function key(d){return 'wd_'+fmt(d||W.sun);}
+function ov(){var o=document.getElementById('mfOv');return o?o.querySelector('.vbody'):null;}
+// flat row list with indexes
+var ROWS=[];T.forEach(function(a){a.s.forEach(function(s){s.r.forEach(function(r){r.i=ROWS.length;ROWS.push(r);});});});
+function val(i){var v=W.d&&W.d.c&&W.d.c[i];return v==null?'':v;}
+var css=document.createElement('style');
+css.textContent='.wd-wrap{overflow:auto;border:1px solid #CBD5E1;border-radius:10px;background:#fff;-webkit-overflow-scrolling:touch}.wd-t{border-collapse:separate;border-spacing:3px;direction:rtl;font-size:11.5px;color:#0F172A;min-width:640px;width:100%}.wd-t th,.wd-t td{padding:4px 6px;text-align:center;border:1.2px solid #1e293b;border-radius:5px;vertical-align:middle;line-height:1.55}.wd-t .h1{background:#F5C842;font-weight:800}.wd-t .h2{background:#F2A65A;font-weight:800}.wd-t .h3{background:#E8A23A;font-weight:800}.wd-t .h4{background:#7FB5E0;font-weight:800}.wd-t .ta{background:#B9D4EA;font-weight:800}.wd-t .ts{background:#CFE3C3;font-weight:700}.wd-t .td{background:#F9C9A5;font-weight:700}.wd-t .tc{background:#8FB04A;padding:2px}.wd-t .tc textarea{width:100%;box-sizing:border-box;min-width:110px;border:0;background:transparent;font:inherit;font-weight:700;text-align:center;resize:none;direction:rtl;color:#0F172A}.wd-t .tk{background:#fff;font-size:10.5px;text-align:right;line-height:1.7}.wdp{background:#fff;color:#000;direction:rtl}.wdp .tt{text-align:center;font-size:17pt;font-weight:900;color:#C0504D;text-decoration:underline;margin:0 0 2mm}.wdp .wk{text-align:center;font-size:9.5pt;margin-bottom:2mm}.wdp table{width:100%;border-collapse:separate;border-spacing:1.2mm;font-size:7.6pt;table-layout:fixed}.wdp th,.wdp td{border:.5mm solid #1e293b;border-radius:1.2mm;padding:.6mm 1.2mm;text-align:center;vertical-align:middle;line-height:1.35;overflow:hidden;white-space:pre-line}.wdp .h1{background:#F5C842;font-weight:800}.wdp .h2{background:#F2A65A;font-weight:800}.wdp .h3{background:#E8A23A;font-weight:800}.wdp .h4{background:#7FB5E0;font-weight:800}.wdp .ta{background:#B9D4EA;font-weight:800}.wdp .ts{background:#CFE3C3;font-weight:700}.wdp .td{background:#F9C9A5;font-weight:700}.wdp .tc{background:#8FB04A;font-weight:700}.wdp .tk{background:#fff;font-size:7pt;text-align:right}@media print{.wdp,.wdp *{-webkit-print-color-adjust:exact;print-color-adjust:exact}}';
+document.head.appendChild(css);
+function trs(print){var h='';T.forEach(function(a){var n=0;a.s.forEach(function(s){n+=s.r.length;});var first=true;a.s.forEach(function(s){s.r.forEach(function(r,ri){h+='<tr>';if(first){h+='<td class="ta" rowspan="'+n+'"'+(s.s?'':' colspan="2"')+'>'+E(a.a)+'</td>';first=false;}
+ if(s.s){if(ri===0)h+='<td class="ts" rowspan="'+s.r.length+'">'+E(s.s)+'</td>';}else if(ri>0){}
+ h+='<td class="td">'+E(r.d)+'</td>';
+ h+=print?'<td class="tc">'+E(val(r.i))+'</td>':'<td class="tc"><textarea rows="'+(String(r.c).length>28?2:1)+'" data-i="'+r.i+'">'+E(val(r.i))+'</textarea></td>';
+ if(r.k)h+='<td class="tk"'+(r.kr?' rowspan="'+r.kr+'"':'')+'>'+E(r.k)+'</td>';
+ h+='</tr>';});});});return h;}
+function head(){return '<tr><th class="h1" colspan="2">الأنشطة</th><th class="h2">الميادين</th><th class="h3">المحتوى</th><th class="h4">الكفاءة الختامية</th></tr>';}
+window.wdOpen=function(){var o=mfOverlay('لوحة القيادة الأسبوعية'),b=o.querySelector('.vbody');b.style.direction='rtl';W.sun=baseSun();wdRender();};
+function wdRender(){var b=ov();if(!b)return;
+ b.innerHTML='<div class="card" style="background:#fff;color:#0F172A;font-size:13px;line-height:1.9"><b>🧭 لوحة القيادة الأسبوعية</b><br>الأنشطة والميادين والكفاءات الختامية ثابتة (منقولة من لوحتك). اكتب فقط «المحتوى» لكل ميدان في خانته الخضراء، وتُحفظ تلقائيًا لكل أسبوع.</div>'+
+ '<div class="ce-bar" style="margin-top:8px"><button class="ibtn ghost sm" onclick="wdNav(1)">▶ الأسبوع السابق</button><b style="flex:1;text-align:center;font-size:13px" id="wd_lab"></b><button class="ibtn ghost sm" onclick="wdNav(-1)">الأسبوع التالي ◀</button></div>'+
+ '<div class="ce-bar"><button class="ibtn ghost sm" onclick="wdCopyPrev()">📋 انسخ محتوى الأسبوع السابق</button><button class="ibtn ghost sm" onclick="wdSample()">📥 ضع محتوى لوحتي (من الصورة)</button><button class="ibtn ghost sm" onclick="wdClear()">🗑 امسح المحتوى</button><button class="ibtn up sm" onclick="wdPrint()">🖨️ طباعة / PDF</button><span id="wd_st" style="font-size:12px;color:#334155"></span></div>'+
+ '<div class="wd-wrap" id="wd_box"><div class="loading">⏳</div></div>';
+ wdLoad();}
+window.wdNav=function(dir){W.sun.setDate(W.sun.getDate()-7*dir);if(fmt(W.sun)<'2026-09-20')W.sun.setDate(W.sun.getDate()+7);wdRender();};
+function wdLoad(){var k=key(),lb=document.getElementById('wd_lab');if(lb)lb.textContent=lab();var o=null;try{o=JSON.parse(localStorage.getItem(k)||'null');}catch(e){}W.d=o||{c:{},u:0};wdTable();
+ try{if(typeof fdb!=='undefined'&&fdb){fdb.ref('weekboard/'+fmt(W.sun)).once('value').then(function(s){var v=s.val();if(key()!==k||!v)return;if((v.u||0)>(W.d.u||0)){W.d=v;if(!W.d.c)W.d.c={};try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}wdTable();}}).catch(function(){});}}catch(e){}}
+function wdTable(){var box=document.getElementById('wd_box');if(!box)return;box.innerHTML='<table class="wd-t"><thead>'+head()+'</thead><tbody>'+trs(false)+'</tbody></table>';
+ [].forEach.call(box.querySelectorAll('textarea'),function(t){t.addEventListener('input',function(){W.d.c=W.d.c||{};W.d.c[t.getAttribute('data-i')]=t.value;wdSave();});});}
+function wdSave(){clearTimeout(W.tm);var k=key(),p='weekboard/'+fmt(W.sun),d=W.d;d.u=Date.now();try{localStorage.setItem(k,JSON.stringify(d));}catch(e){}var st=document.getElementById('wd_st');if(st)st.textContent='⏳';W.tm=setTimeout(function(){try{if(typeof fdb==='undefined'||!fdb)throw 0;fdb.ref(p).set(d).then(function(){var s=document.getElementById('wd_st');if(s&&key()===k)s.textContent='✅ حُفظ';}).catch(function(){var s=document.getElementById('wd_st');if(s)s.textContent='⚠️ في هاتفك فقط';});}catch(e){var s2=document.getElementById('wd_st');if(s2)s2.textContent='⚠️ في هاتفك فقط';}},700);}
+window.wdCopyPrev=function(){var p=new Date(W.sun.getTime());p.setDate(p.getDate()-7);var o=null;try{o=JSON.parse(localStorage.getItem(key(p))||'null');}catch(e){}if(!o||!o.c){alert('لا يوجد محتوى محفوظ في الأسبوع السابق على هذا الهاتف');return;}if(!confirm('نسخ محتوى الأسبوع السابق فوق المحتوى الحالي؟'))return;W.d.c=JSON.parse(JSON.stringify(o.c));wdTable();wdSave();};
+window.wdSample=function(){if(!confirm('وضع المحتوى المكتوب في لوحتك الورقية (ملاكي، الفعل، الجمع والطرح...) مكان المحتوى الحالي؟'))return;W.d.c={};ROWS.forEach(function(r){W.d.c[r.i]=r.c;});wdTable();wdSave();};
+window.wdClear=function(){if(!confirm('مسح كل محتوى هذا الأسبوع؟'))return;W.d.c={};wdTable();wdSave();};
+window.wdPrint=function(){var h='<div class="wdp"><div class="tt">لوحة القيادة الأسبوعية</div><div class="wk">السنة الثالثة ابتدائي · الأستاذ سعيد · '+E(lab())+'</div><table><colgroup><col style="width:8%"><col style="width:8%"><col style="width:16%"><col style="width:16%"><col style="width:52%"></colgroup><thead>'+head()+'</thead><tbody>'+trs(true)+'</tbody></table></div>';
+ var old=document.getElementById('dnPrintRoot');if(old)old.remove();var root=document.createElement('div');root.id='dnPrintRoot';root.innerHTML=h;document.body.appendChild(root);var pg=document.createElement('style');pg.id='wdPg';pg.textContent='@page{size:A4 portrait;margin:6mm}';document.head.appendChild(pg);document.body.classList.add('dnp');
+ var done=function(){document.body.classList.remove('dnp');var r=document.getElementById('dnPrintRoot');if(r)r.remove();var g=document.getElementById('wdPg');if(g)g.remove();window.removeEventListener('afterprint',done);};window.addEventListener('afterprint',done);setTimeout(function(){window.print();},50);};
+}catch(e){try{console.error(e);}catch(e2){}}})();
+
 </script>
 
 </body>
