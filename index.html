@@ -624,7 +624,7 @@ body.fab-scroll #aiFab,body.fab-scroll #fabMain,body.fab-scroll #qaFab{opacity:.
     </div>
     <div id="gbody"></div>
     <div class="gmsg" id="gm"></div>
-    <div class="gfoot">قسم السنة الثالثة · 2026 / 2027 · الإصدار 143.18</div>
+    <div class="gfoot">قسم السنة الثالثة · 2026 / 2027 · الإصدار 143.19</div>
   </div>
 </div>
 
@@ -3505,7 +3505,7 @@ var NAV_ICONS={home:'<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 
 function buildNav(role){var o=document.getElementById('bottomNav');if(o)o.remove();var items=NAVS[role];if(!items)return;var nav=document.createElement('nav');nav.id='bottomNav';nav.className=role==='student'?'nv-b':'nv-a';items.forEach(function(it){var b=document.createElement('button');b.className='nv-i';b.dataset.t=it[0];var st=it[3]?' style="background:'+it[3]+';color:'+it[4]+'"':'';b.innerHTML='<span class="nv-t"'+st+'><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+NAV_ICONS[it[2]]+'</svg></span><span class="nv-l">'+it[1]+'</span>';b.onclick=function(){if(it[0]==='more')openMore(role);else goTo(it[0]);};nav.appendChild(b);});var oldf=document.getElementById('aiFab');if(oldf)oldf.remove();if(role!=='teacher'){var fab=document.createElement('button');fab.id='aiFab';fab.setAttribute('aria-label','الأستاذ سعيد الذكي');fab.innerHTML='<span class="orb"><svg viewBox="0 0 32 32" width="30" height="30"><defs><linearGradient id="spk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#A5B4FC"/></linearGradient></defs><path fill="url(#spk)" d="M15 4c1 7 4 10 11 11-7 1-10 4-11 11-1-7-4-10-11-11 7-1 10-4 11-11z"/><path fill="#67E8F9" d="M25 3c.4 2.2 1.3 3.1 3.5 3.5-2.2.4-3.1 1.3-3.5 3.5-.4-2.2-1.3-3.1-3.5-3.5 2.2-.4 3.1-1.3 3.5-3.5z"/><circle cx="6" cy="26" r="1.6" fill="#C4B5FD"/></svg></span>';fab.title='اسألني';fab.onclick=function(){goTo('ai');aiFabListen('aiInput',aiSend);};document.body.appendChild(fab);var ot=document.getElementById('aiTip');if(ot)ot.remove();if(role==='student'){var tip=document.createElement('div');tip.id='aiTip';tip.textContent='اسألني عن درسك ✨';document.body.appendChild(tip);setTimeout(function(){tip.remove();},8500);try{aiNudge();}catch(e){}}}
 document.getElementById('app').appendChild(nav);navActive('');}
 function navActive(s){var n=document.getElementById('bottomNav');if(!n)return;[].forEach.call(n.children,function(b){b.classList.toggle('on',b.dataset.t===s);});}
-function openMore(role){var o=document.getElementById('moreSheet');if(o){o.remove();return;}var used=(NAVS[role]||[]).map(function(x){return x[0];});var src=document.querySelector('#screen-'+role+'-home .grid-menu');if(!src)return;var sh=document.createElement('div');sh.id='moreSheet';sh.onclick=function(e){if(e.target===sh)sh.remove();};var g=document.createElement('div');g.className='grid-menu';var hd=document.createElement('div');hd.className='ms-hd';hd.innerHTML='<b>المزيد</b><button type="button" class="ibtn ghost sm">→ رجوع</button>';hd.querySelector('button').onclick=function(){sh.remove();};g.appendChild(hd);[].forEach.call(src.children,function(c){var m=(c.getAttribute('onclick')||'').match(/goTo\('([^']+)'\)/);if(role==='student'&&/sendReport\(/.test(c.getAttribute('onclick')||''))return;if(m&&(used.indexOf(m[1])>-1||(role==='student'&&['ai','lessons','texts','studentNotebook','textbook','myFile','recorder','charts','rewards','voiceNotes','quizzes'].indexOf(m[1])>-1)))return;var k=c.cloneNode(true);k.addEventListener('click',function(){sh.remove();});g.appendChild(k);});sh.appendChild(g);var vv=document.createElement('div');vv.style.cssText='text-align:center;font-size:12px;color:#fff;opacity:.85;margin-top:14px';vv.textContent='الإصدار 143.18';sh.appendChild(vv);try{var miss=['picker','send','v98','hj','disp','simple','v107','v108','v110','v112','v113','v114','v115','v116','v117','v118','v119','v120','v121','v122','v123','v124','v125','v126','v127','v128','v129','v130','v131','v132','v133','v134','v135','v136','v1361','v1362','v137','v1371','v1372','v138','v1381','v1382','v1383','v1384','v1391','v13911','v1392','v1393','v1394','v13941','v1395','v13951','v1396','v13961','v1397','v1401','v1402','v1403','v1404','v1405','v1406','v1407','v1411'].filter(function(k){return !(window.__FEAT&&__FEAT[k]);}),er=(window.__ERRS||[]).slice(0,3);if(miss.length||er.length){var dg=document.createElement('div');dg.style.cssText='font-size:11px;color:#FCA5A5;max-width:92%;margin:6px auto 0;direction:ltr;text-align:left;word-break:break-all';dg.textContent='⚠️ '+(miss.length?'not loaded: '+miss.join(',')+' | ':'')+er.join(' | ');sh.appendChild(dg);}else{var ok=document.createElement('div');ok.style.cssText='font-size:11px;color:#86EFAC;text-align:center;margin-top:4px';ok.textContent='✅ كل الأجزاء تعمل';sh.appendChild(ok);}}catch(e){}document.body.appendChild(sh);}
+function openMore(role){var o=document.getElementById('moreSheet');if(o){o.remove();return;}var used=(NAVS[role]||[]).map(function(x){return x[0];});var src=document.querySelector('#screen-'+role+'-home .grid-menu');if(!src)return;var sh=document.createElement('div');sh.id='moreSheet';sh.onclick=function(e){if(e.target===sh)sh.remove();};var g=document.createElement('div');g.className='grid-menu';var hd=document.createElement('div');hd.className='ms-hd';hd.innerHTML='<b>المزيد</b><button type="button" class="ibtn ghost sm">→ رجوع</button>';hd.querySelector('button').onclick=function(){sh.remove();};g.appendChild(hd);[].forEach.call(src.children,function(c){var m=(c.getAttribute('onclick')||'').match(/goTo\('([^']+)'\)/);if(role==='student'&&/sendReport\(/.test(c.getAttribute('onclick')||''))return;if(m&&(used.indexOf(m[1])>-1||(role==='student'&&['ai','lessons','texts','studentNotebook','textbook','myFile','recorder','charts','rewards','voiceNotes','quizzes'].indexOf(m[1])>-1)))return;var k=c.cloneNode(true);k.addEventListener('click',function(){sh.remove();});g.appendChild(k);});sh.appendChild(g);var vv=document.createElement('div');vv.style.cssText='text-align:center;font-size:12px;color:#fff;opacity:.85;margin-top:14px';vv.textContent='الإصدار 143.19';sh.appendChild(vv);try{var miss=['picker','send','v98','hj','disp','simple','v107','v108','v110','v112','v113','v114','v115','v116','v117','v118','v119','v120','v121','v122','v123','v124','v125','v126','v127','v128','v129','v130','v131','v132','v133','v134','v135','v136','v1361','v1362','v137','v1371','v1372','v138','v1381','v1382','v1383','v1384','v1391','v13911','v1392','v1393','v1394','v13941','v1395','v13951','v1396','v13961','v1397','v1401','v1402','v1403','v1404','v1405','v1406','v1407','v1411'].filter(function(k){return !(window.__FEAT&&__FEAT[k]);}),er=(window.__ERRS||[]).slice(0,3);if(miss.length||er.length){var dg=document.createElement('div');dg.style.cssText='font-size:11px;color:#FCA5A5;max-width:92%;margin:6px auto 0;direction:ltr;text-align:left;word-break:break-all';dg.textContent='⚠️ '+(miss.length?'not loaded: '+miss.join(',')+' | ':'')+er.join(' | ');sh.appendChild(dg);}else{var ok=document.createElement('div');ok.style.cssText='font-size:11px;color:#86EFAC;text-align:center;margin-top:4px';ok.textContent='✅ كل الأجزاء تعمل';sh.appendChild(ok);}}catch(e){}document.body.appendChild(sh);}
 if(/[?&]invite=/.test(location.search))GATE_VIEW='r';
 var __goTo=goTo;goTo=function(s){__goTo(s);navActive(s);window.CUR_SCREEN=s;if(s==="student-home"||s==="parent-home"||s==="teacher-home"){renderToday(CURRENT_USER_TYPE);setTimeout(todayExtras,800);setTimeout(todayExtras,2200);}};
 
@@ -9604,6 +9604,7 @@ function flower(r){var T=shuf(r,['dots','hatch','smudge','alt']).slice(0,3),pal=
  // fix: petals centre must be around (110,110): draw ellipses rotated about (110,110) with centre at (110,66)
  regs=regs.map(function(g,idx){return g;});
  return {h:paint({vb:'0 0 220 215',w:260,regs:regs.map(function(g,idx){if(idx>=3&&idx<11){var k2=idx-3;return {el:function(a){return '<ellipse cx="110" cy="62" rx="13" ry="30" transform="rotate('+(k2*45)+' 110 110)"'+a+'/>';},g:0,a:g.a};}return g;}),pal:pal}),T:T,nm:nm};}
+window.ADMP={paint:paint,M:M};
 // ---------- activities ----------
 function aHalf(){return M(['قواعد الزخرفة'],'أُكمل الزخرفة بالتناظر',function(r){var m=H.mode();return sm(m==='live'?'نصف الزخرفة الأيسر ملوّن، والخط الأحمر هو محور التناظر. اختر لونًا من الأسفل ثم اضغط على الخانات البيضاء في النصف الأيمن لتلوّن كل خانة بلون ما يقابلها.':'نصف الزخرفة الأيسر ملوّن. لوّن النصف الأيمن بنفس ألوان ما يقابله حول الخط الأحمر (محور التناظر).')+halfMandala(r,PMIX);});}
 function aFrieze(kind){return M(['قواعد الزخرفة','أنواع التكرار'],'أكمل الإفريز: التكرار '+kind,function(r){var m=H.mode();return sm('هذا إفريز بالتكرار '+kind+'. '+(m==='live'?'لوّن الوحدات الفارغة بنفس تتابع الألوان.':'لوّن الوحدات الفارغة بنفس تتابع الألوان.'))+'<div style="overflow:auto">'+frieze(r,kind)+'</div>';});}
@@ -9617,6 +9618,54 @@ oS('t_w_rev3','rev','ورقة عمل: تقنيات التلوين','فن الت�
 oS('t_w_idj','idj','أدمج: ورقة عمل — أزيّن لوحة','إدماج · تلوين وتصميم',[aHalf(),aFrieze('متبادل'),aMandala(PMIX,'الأربعة المتاحة',2,['أنواع الزخرفة']),aTech()],'تستعدّ لتزيين جدارية القسم: أكمل التناظر، كرّر الوحدات، ولوّن وطبّق التقنيات.','🖼️');
 oS('t_w_tq','tq','اختبار: التربية التشكيلية (ورقة عمل)','تقويم · تلوين وتصميم',[aScene(),aHalf(),aFrieze('عادي'),aFrieze('متعاكس'),aFrieze('متبادل'),aTech()],'','✅');
 })();}catch(e){(window.__ERRS=window.__ERRS||[]).push('adm_art2: '+String((e&&e.message)||e).slice(0,160));}
+
+</script>
+<script id="v14319m">
+try{(function(){
+var H=window.ADMB,ri=H.ri,shuf=H.shuf,E=H.E,P=window.ADMP,paint=P.paint,M=P.M,pfree=window.ADML.pfree;
+var MU='تربية موسيقية';
+function oS(id,kind,title,per,acts,sit,ic){window.admDef({id:id,kind:kind,subj:MU,ic:ic,title:title,per:per,wk:0,sit:sit,acts:acts});}
+function sm(t){return '<div class="ad-sm">'+t+'</div>';}
+function pal(arr){return arr.map(function(x){return {f:function(){return x[0];},n:x[1],c:x[0]};});}
+var TINT={r:'#FCA5A5',b:'#93C5FD',g:'#86EFAC',y:'#FDE68A',p:'#C4B5FD'};
+// ---- cards: classify written statements by colouring each card ----
+function cards(r,pool,names,cols,n){var P2=pal(names.map(function(x,k){return [cols[k],x];})),items=shuf(r,pool).slice(0,n),regs=[],lab=[];
+ items.forEach(function(it,k){var x=6+(k%2)*172,y=6+Math.floor(k/2)*54,txt=it[0],a=names.indexOf(it[1])+1;
+  regs.push({el:function(at){return '<rect x="'+x+'" y="'+y+'" width="166" height="48" rx="10"'+at+'/><text x="'+(x+83)+'" y="'+(y+29)+'" font-size="12" text-anchor="middle" fill="#0F172A" font-weight="700" style="pointer-events:none">'+E(txt)+'</text>';},g:0,a:a});});
+ return paint({vb:'0 0 344 '+(Math.ceil(n/2)*54+10),w:344,regs:regs,pal:P2});}
+function aCards(key,title,rule,pool,names,cols,n){return M(key,title,function(r){return sm(rule)+cards(r,pool,names,cols,n);});}
+// ---- groups of players: colour all the figures of each group by the formation name ----
+function groups(r){var names=['منفرد','ثنائي','ثلاثي','رباعي'],cols=[TINT.r,TINT.b,TINT.g,TINT.y],sizes=shuf(r,[1,2,3,4]),regs=[],x0=10;
+ sizes.forEach(function(n,gi){var gx=10+gi*84;for(var k=0;k<n;k++){(function(k,n,gx){var cy=24+k*30;regs.push({el:function(a){return '<circle cx="'+(gx+30)+'" cy="'+cy+'" r="12"'+a+'/>';},g:0,a:n});})(k,n,gx);}
+  });
+ var out=paint({vb:'0 0 350 140',w:350,regs:regs,pal:pal(names.map(function(x,k){return [cols[k],x];}))});return out;}
+function aGroups(){return M(['التشكيلات المختلفة','تشكيلة الثنائي','تشكيلة الثلاثي','تشكيلة الرباعي','العزف المنفرد'],'ألوّن كل تشكيلة بلونها',function(r){return sm('عُدّ العازفين في كل مجموعة، ثم لوّن كل العازفين فيها بلون التشكيلة المناسبة: منفرد (عازف واحد) · ثنائي · ثلاثي · رباعي.')+groups(r);});}
+// ---- instruments: colour each by its family ----
+function insts(r){var names=['إيقاعية','نفخية','وترية'],cols=[TINT.r,TINT.b,TINT.g],pl=pal(names.map(function(x,k){return [cols[k],x];}));
+ var regs,lab;
+ // simpler grid layout with simple shapes
+ regs=[];lab=[];var shapes={'الدربوكة':function(x,y,a){return '<path d="M'+(x-22)+' '+(y-18)+' H'+(x+22)+' Q'+(x+16)+' '+(y+4)+' '+(x+10)+' '+(y+22)+' H'+(x-10)+' Q'+(x-16)+' '+(y+4)+' '+(x-22)+' '+(y-18)+'Z"'+a+'/>';},
+ 'الطبل الكبير':function(x,y,a){return '<ellipse cx="'+x+'" cy="'+y+'" rx="34" ry="22"'+a+'/>';},
+ 'الناي':function(x,y,a){return '<rect x="'+(x-42)+'" y="'+(y-6)+'" width="84" height="12" rx="6"'+a+'/>';},
+ 'الأوبوا':function(x,y,a){return '<path d="M'+(x-3)+' '+(y-26)+' L'+(x+3)+' '+(y-26)+' L'+(x+12)+' '+(y+24)+' L'+(x-12)+' '+(y+24)+'Z"'+a+'/>';},
+ 'الكمان':function(x,y,a){return '<path d="M'+x+' '+(y-24)+' Q'+(x-22)+' '+(y-18)+' '+(x-12)+' '+(y-4)+' Q'+(x-26)+' '+(y+6)+' '+(x-14)+' '+(y+22)+' Q'+x+' '+(y+30)+' '+(x+14)+' '+(y+22)+' Q'+(x+26)+' '+(y+6)+' '+(x+12)+' '+(y-4)+' Q'+(x+22)+' '+(y-18)+' '+x+' '+(y-24)+'Z"'+a+'/>';},
+ 'العود':function(x,y,a){return '<path d="M'+x+' '+(y-22)+' Q'+(x-30)+' '+(y-2)+' '+(x-18)+' '+(y+18)+' Q'+x+' '+(y+30)+' '+(x+18)+' '+(y+18)+' Q'+(x+30)+' '+(y-2)+' '+x+' '+(y-22)+'Z"'+a+'/>';}};
+ var order=shuf(r,['الدربوكة','الطبل الكبير','الناي','الأوبوا','الكمان','العود']),fam={'الدربوكة':1,'الطبل الكبير':1,'الناي':2,'الأوبوا':2,'الكمان':3,'العود':3};
+ order.forEach(function(nm,k){var x=58+(k%3)*115,y=40+Math.floor(k/3)*86;regs.push({el:(function(nm,x,y){return function(a){return shapes[nm](x,y,a);};})(nm,x,y),g:0,a:fam[nm]});lab.push([x,y+48,nm]);});
+ return paint({vb:'0 0 350 186',w:350,regs:regs,pal:pl,lab:lab});}
+function aInst(){return M(['عائلة الآلات الموسيقية','الطبل الكبير','آلة الأوبوا','آلة الكمان'],'ألوّن كل آلة بلون عائلتها',function(r){return sm('إيقاعية (ضرب ونقر وطرق) · نفخية (نفخ) · وترية (أوتار). لوّن كل آلة بلون عائلتها.')+insts(r);});}
+var AL=[['عزف الكمان والناي فقط','الآلية'],['صوت بشري يغنّي مع اللحن','الغنائية'],['فرقة تعزف بلا غناء','الآلية'],['تلاميذ ينشدون نشيدًا','الغنائية'],['عزف منفرد على العود','الآلية'],['أغنية بصوت مطرب','الغنائية'],['مقطوعة بآلة الناي','الآلية'],['جوقة المدرسة','الغنائية']];
+var NA=[['موضوعه حماسي ووطني','نشيد'],['يتحدث عن الحياة اليومية','أغنية'],['قسمًا (النشيد الوطني)','نشيد'],['يتغنى بحنان الأم','أغنية'],['يُنشَد احترامًا للوطن','نشيد'],['يصف الطبيعة والبيت','أغنية']];
+var FM=[['تلميذ ينشد وحده','فردي'],['كل القسم ينشد معًا','جماعي'],['مطرب واحد على المسرح','فردي'],['جوقة المدرسة تنشد','جماعي'],['تلميذة تغنّي المقطع وحدها','فردي'],['الأسرة كلها تغنّي','جماعي']];
+var aAL=function(){return aCards(['الموسيقى الآلية','الموسيقى الغنائية'],'ألوّن: آلية أم غنائية؟','لوّن بطاقة الموسيقى الآلية بالأزرق، والموسيقى الغنائية بالأحمر.',AL,['الغنائية','الآلية'],[TINT.r,TINT.b],6);};
+var aNA=function(){return aCards(['مكونات النشيد','مكونات الأغنية'],'ألوّن: نشيد أم أغنية؟','لوّن بطاقة النشيد بالأحمر، وبطاقة الأغنية بالأخضر.',NA,['نشيد','أغنية'],[TINT.r,TINT.g],6);};
+var aFM=function(){return aCards(['الغناء الفردي','الغناء الجماعي'],'ألوّن: فردي أم جماعي؟','لوّن بطاقة الغناء الفردي بالأصفر، والجماعي بالبنفسجي.',FM,['فردي','جماعي'],[TINT.y,TINT.p],6);};
+var aCre=function(){return M('الغناء الجماعي','أبدع: أُنظّم فقرة الحفل',pfree('تنظّم مدرستك حفلًا. اكتب فقرتين: واحدة بعزف منفرد وأخرى بغناء جماعي، واذكر الآلة أو الأنشودة.',3,'فقرتان صحيحتان (أ) · آلة من عائلتها (ب) · جملتان واضحتان (ج)'),'إدماج');};
+oS('u_w_rev1','rev','ورقة عمل: التشكيلات والموسيقى','التذوق الموسيقي · ورقة تلوين',[aGroups(),aAL()],'','🎼');
+oS('u_w_rev2','rev','ورقة عمل: الآلات والغناء','التذوق الموسيقي · ورقة تلوين',[aInst(),aFM(),aNA()],'','🎻');
+oS('u_w_idj','idj','أدمج: ورقة عمل — حفل المدرسة','إدماج · تلوين وتنظيم',[aGroups(),aInst(),aFM(),aCre()],'ستشارك في حفل المدرسة: تعرّف التشكيلات والآلات وأنواع الغناء، ثم نظّم فقرتين.','🎉');
+oS('u_w_tq','tq','اختبار: التربية الموسيقية (ورقة عمل)','تقويم · التذوق الموسيقي',[aGroups(),aInst(),aAL(),aFM(),aNA()],'','✅');
+})();}catch(e){(window.__ERRS=window.__ERRS||[]).push('adm_mus2: '+String((e&&e.message)||e).slice(0,160));}
 
 </script>
 </body>
