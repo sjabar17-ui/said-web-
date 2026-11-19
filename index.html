@@ -624,7 +624,7 @@ body.fab-scroll #aiFab,body.fab-scroll #fabMain,body.fab-scroll #qaFab{opacity:.
     </div>
     <div id="gbody"></div>
     <div class="gmsg" id="gm"></div>
-    <div class="gfoot">قسم السنة الثالثة · 2026 / 2027 · الإصدار 143.57</div>
+    <div class="gfoot">قسم السنة الثالثة · 2026 / 2027 · الإصدار 143.59</div>
   </div>
 </div>
 
@@ -3505,7 +3505,7 @@ var NAV_ICONS={home:'<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 
 function buildNav(role){var o=document.getElementById('bottomNav');if(o)o.remove();var items=NAVS[role];if(!items)return;var nav=document.createElement('nav');nav.id='bottomNav';nav.className=role==='student'?'nv-b':'nv-a';items.forEach(function(it){var b=document.createElement('button');b.className='nv-i';b.dataset.t=it[0];var st=it[3]?' style="background:'+it[3]+';color:'+it[4]+'"':'';b.innerHTML='<span class="nv-t"'+st+'><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+NAV_ICONS[it[2]]+'</svg></span><span class="nv-l">'+it[1]+'</span>';b.onclick=function(){if(it[0]==='more')openMore(role);else goTo(it[0]);};nav.appendChild(b);});var oldf=document.getElementById('aiFab');if(oldf)oldf.remove();if(role!=='teacher'){var fab=document.createElement('button');fab.id='aiFab';fab.setAttribute('aria-label','الأستاذ سعيد الذكي');fab.innerHTML='<span class="orb"><svg viewBox="0 0 32 32" width="30" height="30"><defs><linearGradient id="spk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#A5B4FC"/></linearGradient></defs><path fill="url(#spk)" d="M15 4c1 7 4 10 11 11-7 1-10 4-11 11-1-7-4-10-11-11 7-1 10-4 11-11z"/><path fill="#67E8F9" d="M25 3c.4 2.2 1.3 3.1 3.5 3.5-2.2.4-3.1 1.3-3.5 3.5-.4-2.2-1.3-3.1-3.5-3.5 2.2-.4 3.1-1.3 3.5-3.5z"/><circle cx="6" cy="26" r="1.6" fill="#C4B5FD"/></svg></span>';fab.title='اسألني';fab.onclick=function(){goTo('ai');aiFabListen('aiInput',aiSend);};document.body.appendChild(fab);var ot=document.getElementById('aiTip');if(ot)ot.remove();if(role==='student'){var tip=document.createElement('div');tip.id='aiTip';tip.textContent='اسألني عن درسك ✨';document.body.appendChild(tip);setTimeout(function(){tip.remove();},8500);try{aiNudge();}catch(e){}}}
 document.getElementById('app').appendChild(nav);navActive('');}
 function navActive(s){var n=document.getElementById('bottomNav');if(!n)return;[].forEach.call(n.children,function(b){b.classList.toggle('on',b.dataset.t===s);});}
-function openMore(role){var o=document.getElementById('moreSheet');if(o){o.remove();return;}var used=(NAVS[role]||[]).map(function(x){return x[0];});var src=document.querySelector('#screen-'+role+'-home .grid-menu');if(!src)return;var sh=document.createElement('div');sh.id='moreSheet';sh.onclick=function(e){if(e.target===sh)sh.remove();};var g=document.createElement('div');g.className='grid-menu';var hd=document.createElement('div');hd.className='ms-hd';hd.innerHTML='<b>المزيد</b><button type="button" class="ibtn ghost sm">→ رجوع</button>';hd.querySelector('button').onclick=function(){sh.remove();};g.appendChild(hd);[].forEach.call(src.children,function(c){var m=(c.getAttribute('onclick')||'').match(/goTo\('([^']+)'\)/);if(role==='student'&&/sendReport\(/.test(c.getAttribute('onclick')||''))return;if(m&&(used.indexOf(m[1])>-1||(role==='student'&&['ai','lessons','texts','studentNotebook','textbook','myFile','recorder','charts','rewards','voiceNotes','quizzes'].indexOf(m[1])>-1)))return;var k=c.cloneNode(true);k.addEventListener('click',function(){sh.remove();});g.appendChild(k);});sh.appendChild(g);var vv=document.createElement('div');vv.style.cssText='text-align:center;font-size:12px;color:#fff;opacity:.85;margin-top:14px';vv.textContent='الإصدار 143.57';sh.appendChild(vv);try{var miss=['picker','send','v98','hj','disp','simple','v107','v108','v110','v112','v113','v114','v115','v116','v117','v118','v119','v120','v121','v122','v123','v124','v125','v126','v127','v128','v129','v130','v131','v132','v133','v134','v135','v136','v1361','v1362','v137','v1371','v1372','v138','v1381','v1382','v1383','v1384','v1391','v13911','v1392','v1393','v1394','v13941','v1395','v13951','v1396','v13961','v1397','v1401','v1402','v1403','v1404','v1405','v1406','v1407','v1411'].filter(function(k){return !(window.__FEAT&&__FEAT[k]);}),er=(window.__ERRS||[]).slice(0,3);if(miss.length||er.length){var dg=document.createElement('div');dg.style.cssText='font-size:11px;color:#FCA5A5;max-width:92%;margin:6px auto 0;direction:ltr;text-align:left;word-break:break-all';dg.textContent='⚠️ '+(miss.length?'not loaded: '+miss.join(',')+' | ':'')+er.join(' | ');sh.appendChild(dg);}else{var ok=document.createElement('div');ok.style.cssText='font-size:11px;color:#86EFAC;text-align:center;margin-top:4px';ok.textContent='✅ كل الأجزاء تعمل';sh.appendChild(ok);}}catch(e){}document.body.appendChild(sh);}
+function openMore(role){var o=document.getElementById('moreSheet');if(o){o.remove();return;}var used=(NAVS[role]||[]).map(function(x){return x[0];});var src=document.querySelector('#screen-'+role+'-home .grid-menu');if(!src)return;var sh=document.createElement('div');sh.id='moreSheet';sh.onclick=function(e){if(e.target===sh)sh.remove();};var g=document.createElement('div');g.className='grid-menu';var hd=document.createElement('div');hd.className='ms-hd';hd.innerHTML='<b>المزيد</b><button type="button" class="ibtn ghost sm">→ رجوع</button>';hd.querySelector('button').onclick=function(){sh.remove();};g.appendChild(hd);[].forEach.call(src.children,function(c){var m=(c.getAttribute('onclick')||'').match(/goTo\('([^']+)'\)/);if(role==='student'&&/sendReport\(/.test(c.getAttribute('onclick')||''))return;if(m&&(used.indexOf(m[1])>-1||(role==='student'&&['ai','lessons','texts','studentNotebook','textbook','myFile','recorder','charts','rewards','voiceNotes','quizzes'].indexOf(m[1])>-1)))return;var k=c.cloneNode(true);k.addEventListener('click',function(){sh.remove();});g.appendChild(k);});sh.appendChild(g);var vv=document.createElement('div');vv.style.cssText='text-align:center;font-size:12px;color:#fff;opacity:.85;margin-top:14px';vv.textContent='الإصدار 143.59';sh.appendChild(vv);try{var miss=['picker','send','v98','hj','disp','simple','v107','v108','v110','v112','v113','v114','v115','v116','v117','v118','v119','v120','v121','v122','v123','v124','v125','v126','v127','v128','v129','v130','v131','v132','v133','v134','v135','v136','v1361','v1362','v137','v1371','v1372','v138','v1381','v1382','v1383','v1384','v1391','v13911','v1392','v1393','v1394','v13941','v1395','v13951','v1396','v13961','v1397','v1401','v1402','v1403','v1404','v1405','v1406','v1407','v1411'].filter(function(k){return !(window.__FEAT&&__FEAT[k]);}),er=(window.__ERRS||[]).slice(0,3);if(miss.length||er.length){var dg=document.createElement('div');dg.style.cssText='font-size:11px;color:#FCA5A5;max-width:92%;margin:6px auto 0;direction:ltr;text-align:left;word-break:break-all';dg.textContent='⚠️ '+(miss.length?'not loaded: '+miss.join(',')+' | ':'')+er.join(' | ');sh.appendChild(dg);}else{var ok=document.createElement('div');ok.style.cssText='font-size:11px;color:#86EFAC;text-align:center;margin-top:4px';ok.textContent='✅ كل الأجزاء تعمل';sh.appendChild(ok);}}catch(e){}document.body.appendChild(sh);}
 if(/[?&]invite=/.test(location.search))GATE_VIEW='r';
 var __goTo=goTo;goTo=function(s){__goTo(s);navActive(s);window.CUR_SCREEN=s;if(s==="student-home"||s==="parent-home"||s==="teacher-home"){renderToday(CURRENT_USER_TYPE);setTimeout(todayExtras,800);setTimeout(todayExtras,2200);}};
 
@@ -10629,6 +10629,142 @@ var css=[
 ].join('\n');
 var st=document.createElement('style');st.id='kxCss3';st.textContent=css;document.head.appendChild(st);
 })();}catch(e){console.error('kidui3',e);}
+
+try{(function(){
+// v143.58: لا «جارٍ التحميل» إلى ما لا نهاية في الأهداف: إن تعذّرت القراءة تظهر رسالة واضحة
+var o=window.loadGoals;if(typeof o!=='function')return;
+window.loadGoals=function(){var r=o.apply(this,arguments);
+ setTimeout(function(){var a=document.getElementById('goalsContent');if(a&&a.querySelector('.loading')&&!a.querySelector('.goal-item'))a.innerHTML='<div class="kx-empty" data-kx="1"><span class="kx-ee">😕</span><b>تعذّر تحميل أهدافك</b><span class="kx-s">أخبر أستاذك ليصلح الأمر، ثم أعد المحاولة</span></div>';},6000);return r;};
+})();}catch(e){console.error('kidui4',e);}
+
+</script>
+<script id="v14359f">
+try{(function(){
+// ===== v143.59: «التغذية الراجعة» — رسائل من الأستاذ للتلميذ (وللولي) + سجل للطباعة =====
+// العقدة: feedback/<num>/<id> = {time, subj, strong, work, goal, read}
+// التلميذ يقرأ رسائله فقط، ولا يقرأ التقييمات (evaluations) ولا العلامات.
+function q(i){return document.getElementById(i);}
+function E(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function who(){try{return {type:CURRENT_USER_TYPE,num:CURRENT_USER_NUM};}catch(e){return {};}}
+function subjName(id){var r='';try{SUBJECTS.forEach(function(s){if(s.id===id)r=s.icon+' '+s.name;});}catch(e){}return r||'💬 عام';}
+function dstr(t){try{return new Date(t).toLocaleDateString('ar-DZ');}catch(e){return '';}}
+
+// ---------- عبارات جاهزة (يمكن تعديلها أو الكتابة بحرية) ----------
+var BASE={strong:['أحسنتَ، عملك مرتّب وواضح','اجتهدتَ وهذا ظاهر في عملك','قرأتَ بصوت واضح وثقة','أجبتَ بشكل صحيح وشرحتَ طريقتك'],
+ work:['أراجع الدرس مرة قبل الحصة','أكتب بخط أوضح وعلى السطر','أقرأ السؤال مرتين قبل أن أجيب','أنتبه أكثر لتفاصيل الإجابة'],
+ goal:['في الحصة القادمة أحاول وحدي أولاً ثم أسأل','أنجز نشاطاً صغيراً كل يوم','أشارك مرة واحدة على الأقل في كل حصة','أعيد قراءة النص مرة في البيت']};
+var BY={
+ math:{strong:['حلّلتَ المسألة خطوة بخطوة','أتقنتَ الجمع بالاحتفاظ','أتقنتَ الطرح'],work:['أتأكد من العملية بإعادة الحساب','أحفظ جدول الضرب جيداً','أرتب الأرقام في خانات صحيحة'],goal:['أحلّ ثلاث عمليات كل يوم','أحفظ جدول الضرب بـ 2 و 5 و 10']},
+ ar:{strong:['قرأتَ الجملة بطلاقة','كتبتَ الكلمات بإملاء سليم','عبّرتَ عن فكرتك بجملة تامة'],work:['أنتبه للتاء المربوطة والمفتوحة','أضع نقطة في نهاية الجملة','أقرأ الكلمات الصعبة بالتقطيع'],goal:['أكتب جملتين عن صورة','أقرأ فقرة قصيرة كل يوم']},
+ islamic:{strong:['حفظتَ بإتقان','فهمتَ معنى الدرس'],work:['أراجع الحفظ قبل النوم','أنطق الآيات بترتيل واضح'],goal:['أحفظ سطراً جديداً هذا الأسبوع']},
+ science:{strong:['لاحظتَ جيداً وسجّلتَ ما رأيت','ربطتَ الدرس بمثال من حياتك'],work:['أكتب ما لاحظتُ بجملة قصيرة','أسأل: لماذا؟'],goal:['أجرّب نشاطاً بسيطاً في البيت وأحكي عنه']},
+ history:{strong:['تذكّرتَ الأحداث بالترتيب'],work:['أربط كل حدث بتاريخه'],goal:['أحكي القصة لأحد في البيت']},
+ art:{strong:['ألوانك جميلة ومنسّقة','أنهيتَ عملك بعناية'],work:['أترك مساحة ولا أزدحم','أستعمل الألوان بهدوء'],goal:['أرسم رسماً حرّاً وأحضره']},
+ music:{strong:['أنشدتَ بصوت جميل ومنتظم'],work:['أبدأ مع المجموعة في الوقت نفسه'],goal:['أردّد النشيد مرتين في البيت']},
+ sport:{strong:['شاركتَ بحماس والتزمتَ بالقواعد'],work:['أسمع التعليمات إلى آخرها'],goal:['أتدرب على الحركة كل يوم دقيقتين']},
+ memorize:{strong:['حفظتَ المقطع بإتقان'],work:['أراجع المقطع كل يوم'],goal:['أحفظ المقطع التالي']}
+};
+function phr(sid,k){return (BY[sid]?BY[sid][k]:[]).concat(BASE[k]);}
+
+// ---------- عرض الرسائل (تلميذ/ولي) ----------
+function cards(list,num,canRead){var ks=Object.keys(list).sort(function(a,b){return (list[b].time||0)-(list[a].time||0);}),h='';
+ ks.forEach(function(k,i){var m=list[k],pal=[['#FF8A3D','#F5576C'],['#8B5CF6','#EC4899'],['#06B6D4','#3B82F6'],['#10B981','#06B6D4']][i%4],nw=!m.read;
+  h+='<div class="kx-text fbm" style="--g1:'+pal[0]+';--g2:'+pal[1]+'"><div class="kx-th"><i>💬</i><b>'+E(subjName(m.subject))+'</b>'+(nw?'<span class="fb-new">جديد</span>':'')+'<span class="fb-d">'+E(dstr(m.time))+'</span></div><div class="kx-tb">'
+   +(m.strong?'<div class="fb-r fb-s"><b>💪 أحسنتَ في</b><p>'+E(m.strong)+'</p></div>':'')
+   +(m.work?'<div class="fb-r fb-w"><b>🔧 أعمل على</b><p>'+E(m.work)+'</p></div>':'')
+   +(m.goal?'<div class="fb-r fb-g"><b>🎯 هدفي القادم</b><p>'+E(m.goal)+'</p></div>':'')
+   +(canRead&&nw?'<button class="kx-sp" onclick="fbRead(\''+num+'\',\''+k+'\',this)">✅ فهمتُ</button>':'<div class="fb-ok">'+(m.read?'✅ قرأتَها':'')+'</div>')+'</div></div>';});
+ return h;}
+function empty(){return '<div class="kx-empty" data-kx="1"><span class="kx-ee">💬</span><b>لا رسائل بعد</b><span class="kx-s">حين يكتب لك أستاذك ملاحظة عن عملك ستظهر هنا ✨</span></div>';}
+window.fbRead=function(num,k,btn){try{fdb.ref('feedback/'+num+'/'+k+'/read').set(Date.now()).then(function(){if(btn){var p=btn.parentNode;btn.outerHTML='<div class="fb-ok">✅ قرأتَها</div>';var c=p.parentNode.querySelector('.fb-new');if(c)c.remove();}unread();}).catch(function(){btn.textContent='⚠️ تعذّر الحفظ، حاول لاحقاً';});}catch(e){}};
+function load(num,area,canRead){area.innerHTML='<div class="loading">جارٍ التحميل...</div>';
+ return fdb.ref('feedback/'+num).once('value').then(function(sn){var d=sn.val()||{};area.innerHTML=Object.keys(d).length?cards(d,num,canRead):empty();return d;}).catch(function(){area.innerHTML='<div class="kx-empty" data-kx="1"><span class="kx-ee">😕</span><b>تعذّر التحميل</b><span class="kx-s">حاول مرة أخرى بعد قليل</span></div>';return {};});}
+window.fbLoad=function(){var w=who();if(w.type!=='student')return;var a=q('fbList');if(a)load(w.num,a,true);};
+window.pvFb=function(){var n=CURRENT_USER_NUM,b=pvOv('التغذية الراجعة');b.innerHTML='<div id="fbPv"></div>';load(n,q('fbPv'),true);};
+
+// ---------- شارة «جديد» على الأيقونة ----------
+function unread(){var w=who();if(w.type!=='student'&&w.type!=='parent')return;
+ fdb.ref('feedback/'+w.num).once('value').then(function(sn){var d=sn.val()||{},n=0;Object.keys(d).forEach(function(k){if(!d[k].read)n++;});
+  ['hv_feedback','hv_pvFb'].forEach(function(id){var e=q(id);if(!e)return;var o=e.querySelector('.hvb');if(o)o.remove();if(n)e.insertAdjacentHTML('beforeend','<span class="hvb">'+n+'</span>');});}).catch(function(){});}
+window.fbUnread=unread;
+
+// ---------- شاشة التلميذ + أيقونات ----------
+var FBSVG='<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.3A8 8 0 1 1 21 12z"/><path d="M8 11h8M8 14h5"/>';
+try{HV.splice(1,0,['feedback','التغذية الراجعة','#EC4899',FBSVG,null]);}catch(e){}
+try{PHV.splice(2,0,['pvFb','التغذية الراجعة','#EC4899',FBSVG,null]);}catch(e){}
+var __sh=window.studentHomeV2;if(typeof __sh==='function')window.studentHomeV2=function(){var r=__sh.apply(this,arguments);setTimeout(unread,400);return r;};
+var __ph=window.parentHomeV2;if(typeof __ph==='function')window.parentHomeV2=function(){var r=__ph.apply(this,arguments);setTimeout(unread,500);return r;};
+function mkScreen(){if(q('screen-feedback'))return;var t=q('screen-today');if(!t)return;var d=document.createElement('div');d.className='screen';d.id='screen-feedback';
+ d.innerHTML='<div class="kx-hero" data-kx="1" style="--g1:#EC4899;--g2:#8B5CF6"><div class="kx-e">💬</div><div class="kx-t"><h2>التغذية الراجعة</h2><p>رسائل أستاذك لتتقدّم خطوة بعد خطوة</p></div></div><div id="fbList"></div>';t.parentNode.appendChild(d);}
+var __g=goTo;goTo=function(s){mkScreen();__g(s);if(s==='feedback')fbLoad();};
+
+// ---------- شاشات قديمة معطّلة: نُحييها بما يقرؤه التلميذ فعلاً ----------
+function cta(a){if(a)a.innerHTML='<div class="kx-empty" data-kx="1"><span class="kx-ee">💬</span><b>انتقلت هذه الصفحة</b><span class="kx-s">ستجد ملاحظات أستاذك عن عملك في «التغذية الراجعة»</span><button class="kx-sp" style="margin-top:12px;max-width:260px" onclick="goTo(\'feedback\')">افتح التغذية الراجعة</button></div>';}
+var oMF=window.loadMyFile,oCH=window.loadCharts,oBG=window.loadBadges,oGL=window.loadGoals;
+window.loadMyFile=function(){if(who().type==='student')return cta(q('myFileContent'));return oMF&&oMF.apply(this,arguments);};
+window.loadCharts=function(){if(who().type==='student')return cta(q('chartsContent'));return oCH&&oCH.apply(this,arguments);};
+function counts(num){return Promise.all([fdb.ref('feedback/'+num).once('value').catch(function(){return null;}),fdb.ref('recordings/'+num).once('value').catch(function(){return null;}),fdb.ref('behavior/'+num).once('value').catch(function(){return null;})]).then(function(r){
+ var f=(r[0]&&r[0].val())||{},rc=(r[1]&&r[1].val())||{},b=(r[2]&&r[2].val())||{},fr=0,pos=0;Object.keys(f).forEach(function(k){if(f[k].read)fr++;});Object.keys(b).forEach(function(k){if(b[k].type==='positive')pos++;});
+ return {fb:Object.keys(f).length,fr:fr,rec:Object.keys(rc).length,pos:pos};});}
+window.loadBadges=function(){var w=who();if(w.type!=='student')return oBG&&oBG.apply(this,arguments);var a=q('badgesContent');if(!a)return;a.innerHTML='<div class="loading">جارٍ التحميل...</div>';
+ counts(w.num).then(function(c){var B=[['💬','القارئ الواعي','قرأتَ أول رسالة',c.fr>=1],['🧠','أنصت وأتحسّن','قرأتَ 5 رسائل',c.fr>=5],['🎤','المتحدث','أول تسجيل',c.rec>=1],['🗣️','الخطيب','5 تسجيلات',c.rec>=5],['👍','مؤدب','3 سلوكات',c.pos>=3],['⭐','النجم','10 سلوكات',c.pos>=10]];
+  a.innerHTML='<div class="grid-menu">'+B.map(function(b){return '<div class="badge-card'+(b[3]?'':' locked')+'"><div class="emoji">'+b[0]+'</div><div class="name">'+b[1]+'</div><div class="desc">'+b[2]+'</div></div>';}).join('')+'</div>';});};
+window.loadGoals=function(){var w=who();if(w.type!=='student')return oGL&&oGL.apply(this,arguments);var a=q('goalsContent');if(!a)return;a.innerHTML='<div class="loading">جارٍ التحميل...</div>';
+ counts(w.num).then(function(c){var G=[['💬 اقرأ 3 رسائل من أستاذك',c.fr,3],['🎤 سجّل 3 تسجيلات صوتية',c.rec,3],['👍 احصل على 5 سلوكات إيجابية',c.pos,5]];
+  a.innerHTML=G.map(function(g){var p=Math.min(100,Math.round(g[1]/g[2]*100));return '<div class="goal-item"><div class="title">'+g[0]+(g[1]>=g[2]?' ✅':'')+'</div><div class="goal-bar"><div class="fill" style="width:'+p+'%"></div></div><div class="progress">'+Math.min(g[1],g[2])+' / '+g[2]+' ('+p+'%)</div></div>';}).join('');});};
+
+// ---------- الأستاذ ----------
+var SEL={};
+window.fbTeacherOpen=function(){var ov=mfOverlay('💬 التغذية الراجعة'),b=ov.querySelector('.vbody');b.style.direction='rtl';SEL={};
+ b.innerHTML='<div style="display:flex;gap:8px;margin-bottom:10px"><button class="btn" id="fbtW" style="flex:1" onclick="fbTab(\'w\')">✍️ كتابة</button><button class="btn" id="fbtL" style="flex:1;background:#64748B" onclick="fbTab(\'l\')">📋 السجل</button></div><div id="fbBody"></div>';fbTab('w');};
+window.fbTab=function(t){var b=q('fbBody');if(!b)return;q('fbtW').style.background=t==='w'?'':'#64748B';q('fbtL').style.background=t==='l'?'':'#64748B';if(t==='w')writeUI(b);else logUI(b);};
+function names(){var r=[];try{Object.keys(STUDENT_NAMES).forEach(function(n){r.push([n,STUDENT_NAMES[n]]);});}catch(e){}r.sort(function(a,b){return (+a[0])-(+b[0]);});return r;}
+function chips(k,sid){return phr(sid,k).map(function(p){return '<button type="button" class="fbchip" onclick="fbAdd(\''+k+'\',this)">'+E(p)+'</button>';}).join('');}
+function writeUI(b){var ns=names(),sub='';try{SUBJECTS.forEach(function(s){sub+='<option value="'+E(s.id)+'">'+E(s.icon+' '+s.name)+'</option>';});}catch(e){}
+ b.innerHTML='<div class="card"><h3>1) لمن؟</h3><div style="margin-bottom:8px"><button class="ibtn ghost" onclick="fbAll(1)">الكل</button> <button class="ibtn ghost" onclick="fbAll(0)">لا أحد</button></div><div id="fbSt" style="display:flex;flex-wrap:wrap;gap:6px">'+ns.map(function(n){return '<button type="button" class="fbst" data-n="'+n[0]+'" onclick="fbPick(this)">'+n[0]+' · '+E(n[1])+'</button>';}).join('')+'</div></div>'
+ +'<div class="card"><h3>2) المادة</h3><select class="inp" id="fbSub" onchange="fbSubj()">'+sub+'</select></div>'
+ +'<div class="card"><h3>💪 أحسنتَ في</h3><textarea class="inp" id="fbStrong" rows="2"></textarea><div id="fbC1" class="fbch"></div></div>'
+ +'<div class="card"><h3>🔧 أعمل على</h3><textarea class="inp" id="fbWork" rows="2"></textarea><div id="fbC2" class="fbch"></div></div>'
+ +'<div class="card"><h3>🎯 هدفي القادم</h3><textarea class="inp" id="fbGoal" rows="2"></textarea><div id="fbC3" class="fbch"></div></div>'
+ +'<button class="btn" style="width:100%" onclick="fbSend()">📨 أرسل</button><p id="fbMsg" style="text-align:center;font-weight:800"></p>';fbSubj();}
+window.fbSubj=function(){var s=q('fbSub').value;q('fbC1').innerHTML=chips('strong',s);q('fbC2').innerHTML=chips('work',s);q('fbC3').innerHTML=chips('goal',s);};
+window.fbAdd=function(k,btn){var id={strong:'fbStrong',work:'fbWork',goal:'fbGoal'}[k],t=q(id);t.value=(t.value?t.value+'، ':'')+btn.textContent;};
+window.fbPick=function(btn){var n=btn.dataset.n;if(SEL[n]){delete SEL[n];btn.classList.remove('on');}else{SEL[n]=1;btn.classList.add('on');}};
+window.fbAll=function(on){SEL={};document.querySelectorAll('.fbst').forEach(function(e){if(on){SEL[e.dataset.n]=1;e.classList.add('on');}else e.classList.remove('on');});};
+window.fbSend=function(){var ks=Object.keys(SEL),m=q('fbMsg'),s=q('fbStrong').value.trim(),w=q('fbWork').value.trim(),g=q('fbGoal').value.trim();
+ if(!ks.length){m.textContent='⚠️ اختر تلميذاً واحداً على الأقل';return;}if(!s&&!w&&!g){m.textContent='⚠️ اكتب سطراً واحداً على الأقل';return;}
+ if(ks.length>5&&!confirm('سترسل إلى '+ks.length+' تلميذاً. متابعة؟'))return;
+ var rec={time:Date.now(),subject:q('fbSub').value,strong:s,work:w,goal:g};m.textContent='⏳ جارٍ الإرسال...';
+ Promise.all(ks.map(function(n){return fdb.ref('feedback/'+n).push(rec);})).then(function(){m.textContent='✅ أُرسلت إلى '+ks.length+' تلميذ';['fbStrong','fbWork','fbGoal'].forEach(function(i){q(i).value='';});}).catch(function(){m.textContent='⚠️ تعذّر الإرسال (تحقق من نشر القواعد)';});};
+function logUI(b){b.innerHTML='<div class="loading">⏳</div>';fdb.ref('feedback').once('value').then(function(sn){var d=sn.val()||{},ns=Object.keys(d).sort(function(a,b){return a-b;});
+  if(!ns.length){b.innerHTML='<div class="card"><p>لا رسائل مرسلة بعد.</p></div>';return;}
+  var tot=0,rd=0,h='<div class="card"><button class="btn" style="width:100%" onclick="fbPrint()">🖨️ طباعة سجل التغذية الراجعة</button></div>';
+  ns.forEach(function(n){var l=d[n],ks=Object.keys(l).sort(function(a,b){return (l[b].time||0)-(l[a].time||0);}),r=0;ks.forEach(function(k){tot++;if(l[k].read){r++;rd++;}});
+   h+='<div class="card"><h3>'+E(n+' · '+((STUDENT_NAMES||{})[n]||''))+'</h3><p style="font-size:13px">'+ks.length+' رسالة · قُرئت '+r+'</p>'+ks.slice(0,3).map(function(k){var m=l[k];return '<div style="border-top:1px solid #E2E8F0;padding:6px 0;font-size:13px"><b>'+E(subjName(m.subject))+'</b> · '+E(dstr(m.time))+(m.read?' ✅':' ⏳')+'<br>'+E([m.strong,m.work,m.goal].filter(Boolean).join(' | '))+'</div>';}).join('')+'</div>';});
+  b.innerHTML='<div class="card"><b>المجموع: '+tot+' رسالة · قُرئت '+rd+'</b></div>'+h;window.__FBD=d;}).catch(function(){b.innerHTML='<div class="card"><p>⚠️ تعذّر التحميل (تحقق من نشر القواعد).</p></div>';});}
+window.fbPrint=function(){var d=window.__FBD||{},h='';Object.keys(d).sort(function(a,b){return a-b;}).forEach(function(n){var l=d[n];h+='<h3>'+E(n+' · '+((STUDENT_NAMES||{})[n]||''))+'</h3><table><tr><th>التاريخ</th><th>المادة</th><th>أحسنتَ في</th><th>أعمل على</th><th>هدفي القادم</th><th>قُرئت</th></tr>'+Object.keys(l).sort(function(a,b){return (l[a].time||0)-(l[b].time||0);}).map(function(k){var m=l[k];return '<tr><td>'+E(dstr(m.time))+'</td><td>'+E(subjName(m.subject))+'</td><td>'+E(m.strong||'')+'</td><td>'+E(m.work||'')+'</td><td>'+E(m.goal||'')+'</td><td>'+(m.read?'✓':'')+'</td></tr>';}).join('')+'</table>';});
+ var w=window.open('','_blank');if(!w){alert('اسمح بالنوافذ المنبثقة ثم أعد المحاولة');return;}
+ w.document.write('<html dir="rtl"><head><meta charset="utf-8"><title>سجل التغذية الراجعة</title><style>body{font-family:sans-serif;padding:14px}h1{font-size:18px}h3{margin:14px 0 4px;font-size:15px}table{width:100%;border-collapse:collapse;font-size:12px}td,th{border:1px solid #444;padding:4px 6px;text-align:right}th{background:#eee}</style></head><body><h1>سجل التغذية الراجعة — القسم الثالث (ب)</h1>'+h+'</body></html>');w.document.close();setTimeout(function(){w.print();},400);};
+
+// ---------- أزرار الأستاذ ----------
+function addTeacherBtns(){if(who().type!=='teacher')return;
+ var g=document.querySelector('#screen-teacher-home .grid-menu');if(g&&!g.querySelector('.fbt')){g.insertAdjacentHTML('afterbegin','<button class="menu-btn gradient-pink fbt" onclick="var m=document.getElementById(\'moreSheet\');if(m)m.remove();fbTeacherOpen()"><span class="circle-icon"><svg class="svg-icon"><use href="#i-pencil"/></svg></span>التغذية الراجعة</button>');}
+ var s=q('screen-grading');if(s&&!q('fbTopBtn')){s.insertAdjacentHTML('afterbegin','<div class="card" id="fbTopBtn"><button class="btn" style="width:100%" onclick="fbTeacherOpen()">💬 التغذية الراجعة للتلاميذ</button></div>');}}
+function addStudentMore(){if(who().type!=='student')return;var g=document.querySelector('#screen-student-home .grid-menu');if(g&&!g.querySelector('.fbs')){g.insertAdjacentHTML('afterbegin','<button class="menu-btn gradient-pink fbs" onclick="goTo(\'feedback\')"><span class="circle-icon"><svg class="svg-icon"><use href="#i-pencil"/></svg></span>التغذية الراجعة</button>');}}
+setInterval(function(){try{mkScreen();addTeacherBtns();addStudentMore();}catch(e){}},1500);
+
+// ---------- التنسيق ----------
+var st=document.createElement('style');st.id='fbCss';st.textContent=[
+'.fbm .kx-th{flex-wrap:wrap}.fbm .fb-d{margin-inline-start:auto;font-size:12px;font-weight:800;opacity:.95;color:#fff}',
+'.fb-new{background:#fff;color:#DB2777;border-radius:999px;font-size:11px;font-weight:900;padding:2px 10px}',
+'.fb-r{border-radius:16px;padding:10px 14px;margin-bottom:8px}.fb-r b{font-size:14px;font-weight:900;display:block;margin-bottom:2px}.fb-r p{margin:0;font-size:17px;line-height:1.9;font-weight:700;white-space:pre-line}',
+'.fb-s{background:#ECFDF5;color:#065F46}.fb-w{background:#FFF7ED;color:#9A3412}.fb-g{background:#EFF6FF;color:#1E3A8A}',
+'.fb-ok{text-align:center;font-weight:900;color:#059669;font-size:14px;margin-top:4px}',
+'.fbst,.fbchip{border:2px solid #CBD5E1;background:#fff;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:800;font-family:inherit;cursor:pointer;color:#334155}',
+'.fbst.on{background:#2563EB;border-color:#2563EB;color:#fff}.fbch{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.fbchip{font-size:12px;background:#F1F5F9}',
+'html[data-theme=dark][data-role=student] .fb-s{background:#143D2E;color:#A7F3D0}html[data-theme=dark][data-role=student] .fb-w{background:#4A2A12;color:#FED7AA}html[data-theme=dark][data-role=student] .fb-g{background:#16294F;color:#BFDBFE}'
+].join('\n');document.head.appendChild(st);
+})();}catch(e){console.error('feedback',e);}
 
 </script>
 </body>
