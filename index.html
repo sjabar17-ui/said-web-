@@ -630,7 +630,7 @@ body.fab-scroll #aiFab,body.fab-scroll #fabMain,body.fab-scroll #qaFab{opacity:.
     </div>
     <div id="gbody"></div>
     <div class="gmsg" id="gm"></div>
-    <div class="gfoot">قسم السنة الثالثة · 2026 / 2027 · الإصدار 150.8</div>
+    <div class="gfoot">قسم السنة الثالثة · 2026 / 2027 · الإصدار 150.9</div>
   </div>
 </div>
 
@@ -3510,7 +3510,7 @@ var NAV_ICONS={home:'<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 
 function buildNav(role){var o=document.getElementById('bottomNav');if(o)o.remove();var items=NAVS[role];if(!items)return;var nav=document.createElement('nav');nav.id='bottomNav';nav.className=role==='student'?'nv-b':'nv-a';items.forEach(function(it){var b=document.createElement('button');b.className='nv-i';b.dataset.t=it[0];var st=it[3]?' style="background:'+it[3]+';color:'+it[4]+'"':'';b.innerHTML='<span class="nv-t"'+st+'><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+NAV_ICONS[it[2]]+'</svg></span><span class="nv-l">'+it[1]+'</span>';b.onclick=function(){if(it[0]==='more')openMore(role);else goTo(it[0]);};nav.appendChild(b);});var oldf=document.getElementById('aiFab');if(oldf)oldf.remove();if(role!=='teacher'){var fab=document.createElement('button');fab.id='aiFab';fab.setAttribute('aria-label','الأستاذ سعيد الذكي');fab.innerHTML='<span class="orb"><svg viewBox="0 0 32 32" width="30" height="30"><defs><linearGradient id="spk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#A5B4FC"/></linearGradient></defs><path fill="url(#spk)" d="M15 4c1 7 4 10 11 11-7 1-10 4-11 11-1-7-4-10-11-11 7-1 10-4 11-11z"/><path fill="#67E8F9" d="M25 3c.4 2.2 1.3 3.1 3.5 3.5-2.2.4-3.1 1.3-3.5 3.5-.4-2.2-1.3-3.1-3.5-3.5 2.2-.4 3.1-1.3 3.5-3.5z"/><circle cx="6" cy="26" r="1.6" fill="#C4B5FD"/></svg></span>';fab.title='اسألني';fab.onclick=function(){goTo('ai');aiFabListen('aiInput',aiSend);};document.body.appendChild(fab);var ot=document.getElementById('aiTip');if(ot)ot.remove();if(role==='student'){var tip=document.createElement('div');tip.id='aiTip';tip.textContent='اسألني عن درسك ✨';document.body.appendChild(tip);setTimeout(function(){tip.remove();},8500);try{aiNudge();}catch(e){}}}
 document.getElementById('app').appendChild(nav);navActive('');}
 function navActive(s){var n=document.getElementById('bottomNav');if(!n)return;[].forEach.call(n.children,function(b){b.classList.toggle('on',b.dataset.t===s);});}
-function openMore(role){var o=document.getElementById('moreSheet');if(o){o.remove();return;}var used=(NAVS[role]||[]).map(function(x){return x[0];});var src=document.querySelector('#screen-'+role+'-home .grid-menu');if(!src)return;var sh=document.createElement('div');sh.id='moreSheet';sh.onclick=function(e){if(e.target===sh)sh.remove();};var g=document.createElement('div');g.className='grid-menu';var hd=document.createElement('div');hd.className='ms-hd';hd.innerHTML='<b>المزيد</b><button type="button" class="ibtn ghost sm">→ رجوع</button>';hd.querySelector('button').onclick=function(){sh.remove();};g.appendChild(hd);[].forEach.call(src.children,function(c){var m=(c.getAttribute('onclick')||'').match(/goTo\('([^']+)'\)/);if(role==='student'&&/sendReport\(/.test(c.getAttribute('onclick')||''))return;if(m&&(used.indexOf(m[1])>-1||(role==='student'&&['ai','lessons','texts','studentNotebook','textbook','myFile','recorder','charts','rewards','voiceNotes','quizzes'].indexOf(m[1])>-1)))return;var k=c.cloneNode(true);k.addEventListener('click',function(){sh.remove();});g.appendChild(k);});sh.appendChild(g);var vv=document.createElement('div');vv.style.cssText='text-align:center;font-size:12px;color:#fff;opacity:.85;margin-top:14px';vv.textContent='الإصدار 150.8';sh.appendChild(vv);try{var miss=['picker','send','v98','hj','disp','simple','v107','v108','v110','v112','v113','v114','v115','v116','v117','v118','v119','v120','v121','v122','v123','v124','v125','v126','v127','v128','v129','v130','v131','v132','v133','v134','v135','v136','v1361','v1362','v137','v1371','v1372','v138','v1381','v1382','v1383','v1384','v1391','v13911','v1392','v1393','v1394','v13941','v1395','v13951','v1396','v13961','v1397','v1401','v1402','v1403','v1404','v1405','v1406','v1407','v1411'].filter(function(k){return !(window.__FEAT&&__FEAT[k]);}),er=(window.__ERRS||[]).slice(0,3);if(miss.length||er.length){var dg=document.createElement('div');dg.style.cssText='font-size:11px;color:#FCA5A5;max-width:92%;margin:6px auto 0;direction:ltr;text-align:left;word-break:break-all';dg.textContent='⚠️ '+(miss.length?'not loaded: '+miss.join(',')+' | ':'')+er.join(' | ');sh.appendChild(dg);}else{var ok=document.createElement('div');ok.style.cssText='font-size:11px;color:#86EFAC;text-align:center;margin-top:4px';ok.textContent='✅ كل الأجزاء تعمل';sh.appendChild(ok);}}catch(e){}document.body.appendChild(sh);}
+function openMore(role){var o=document.getElementById('moreSheet');if(o){o.remove();return;}var used=(NAVS[role]||[]).map(function(x){return x[0];});var src=document.querySelector('#screen-'+role+'-home .grid-menu');if(!src)return;var sh=document.createElement('div');sh.id='moreSheet';sh.onclick=function(e){if(e.target===sh)sh.remove();};var g=document.createElement('div');g.className='grid-menu';var hd=document.createElement('div');hd.className='ms-hd';hd.innerHTML='<b>المزيد</b><button type="button" class="ibtn ghost sm">→ رجوع</button>';hd.querySelector('button').onclick=function(){sh.remove();};g.appendChild(hd);[].forEach.call(src.children,function(c){var m=(c.getAttribute('onclick')||'').match(/goTo\('([^']+)'\)/);if(role==='student'&&/sendReport\(/.test(c.getAttribute('onclick')||''))return;if(m&&(used.indexOf(m[1])>-1||(role==='student'&&['ai','lessons','texts','studentNotebook','textbook','myFile','recorder','charts','rewards','voiceNotes','quizzes'].indexOf(m[1])>-1)))return;var k=c.cloneNode(true);k.addEventListener('click',function(){sh.remove();});g.appendChild(k);});sh.appendChild(g);var vv=document.createElement('div');vv.style.cssText='text-align:center;font-size:12px;color:#fff;opacity:.85;margin-top:14px';vv.textContent='الإصدار 150.9';sh.appendChild(vv);try{var miss=['picker','send','v98','hj','disp','simple','v107','v108','v110','v112','v113','v114','v115','v116','v117','v118','v119','v120','v121','v122','v123','v124','v125','v126','v127','v128','v129','v130','v131','v132','v133','v134','v135','v136','v1361','v1362','v137','v1371','v1372','v138','v1381','v1382','v1383','v1384','v1391','v13911','v1392','v1393','v1394','v13941','v1395','v13951','v1396','v13961','v1397','v1401','v1402','v1403','v1404','v1405','v1406','v1407','v1411'].filter(function(k){return !(window.__FEAT&&__FEAT[k]);}),er=(window.__ERRS||[]).slice(0,3);if(miss.length||er.length){var dg=document.createElement('div');dg.style.cssText='font-size:11px;color:#FCA5A5;max-width:92%;margin:6px auto 0;direction:ltr;text-align:left;word-break:break-all';dg.textContent='⚠️ '+(miss.length?'not loaded: '+miss.join(',')+' | ':'')+er.join(' | ');sh.appendChild(dg);}else{var ok=document.createElement('div');ok.style.cssText='font-size:11px;color:#86EFAC;text-align:center;margin-top:4px';ok.textContent='✅ كل الأجزاء تعمل';sh.appendChild(ok);}}catch(e){}document.body.appendChild(sh);}
 if(/[?&]invite=/.test(location.search))GATE_VIEW='r';
 var __goTo=goTo;goTo=function(s){__goTo(s);navActive(s);window.CUR_SCREEN=s;if(s==="student-home"||s==="parent-home"||s==="teacher-home"){renderToday(CURRENT_USER_TYPE);setTimeout(todayExtras,800);setTimeout(todayExtras,2200);}};
 
@@ -11783,7 +11783,7 @@ function chk(L){var er=[],wr=[],s=function(k){return typeof L[k]==='string'?L[k]
  qs.forEach(function(q,i){var x=q&&q.q;if(typeof x!=='string'||!x.trim())er.push('السؤال '+(i+1)+' فارغ');else if(x.length>300)er.push('السؤال '+(i+1)+' أطول من 300');});
  var v=L.verification;if(v!=null&&(typeof v!=='object'||['verified','partial','draft'].indexOf(v.status)<0))er.push('حقل التوثيق غير صالح');
  if(!s('text')&&!s('activity'))er.push('لا نص ولا نشاط');
- var fl=L.files;if(fl!=null){if(typeof fl!=='object')er.push('حقل files غير صالح');else['lesson','activity'].forEach(function(k){var o=fl[k];if(o==null)return;var ok=o&&typeof o.data==='string'&&/^data:(image\/(jpeg|png)|application\/pdf);base64,/.test(o.data);if(!ok)er.push('ملف «'+k+'» غير صالح (jpeg أو png أو pdf)');else if(o.data.length>2800000)er.push('ملف «'+k+'» أكبر من 2 ميغابايت');});}
+ var fl=L.files;if(fl!=null){if(typeof fl!=='object')er.push('حقل files غير صالح');else['lesson','activity','key'].forEach(function(k){var o=fl[k];if(o==null)return;var ok=o&&typeof o.data==='string'&&/^data:(image\/(jpeg|png)|application\/pdf);base64,/.test(o.data);if(!ok)er.push('ملف «'+k+'» غير صالح (jpeg أو png أو pdf)');else if(o.data.length>2800000)er.push('ملف «'+k+'» أكبر من 2 ميغابايت');});}
  var qp=null;if(L.quiz){if(typeof window.qzCheck!=='function')er.push('مدقق الكويز غير متاح');else{var r=window.qzCheck(L.quiz,t);if(r.err.length)r.err.forEach(function(x){er.push('الكويز: '+x);});else{qp=r.pack;(r.warn||[]).forEach(function(w){wr.push('كويز: '+w);});}}}
  return {er:er,wr:wr,pack:qp};}
 function match(){var sh={},k,x;
@@ -11798,9 +11798,9 @@ function qzOf(x){return x&&x.qzr?x.qzr:null;}
 function render(){var st=document.getElementById('lpk_s'),box=document.getElementById('lpk_box');if(!box)return;
  var ok=RP.rows.filter(function(r){return !r.er.length;}),mt=ok.filter(function(r){return r.shell;});
  st.innerHTML='📄 '+E(RP.src)+' — <b>'+RP.rows.length+'</b> درس: <span style="color:#16A34A">'+ok.length+' سليم</span>'+(RP.rows.length-ok.length?' · <span style="color:#DC2626">'+(RP.rows.length-ok.length)+' فيه خطأ (لن يُستورد)</span>':'')+' · 🔗 <b>'+mt.length+'</b> وُجد له درس في كراسك'+(ok.length-mt.length?' · <span style="color:#B45309">'+(ok.length-mt.length)+' بلا درس مقابل</span>':'');
- box.innerHTML='<div class="card" style="border:2px solid #7C3AED"><b>🔁 وضع الاستبدال:</b><div style="font-size:12.5px;line-height:1.9;margin-top:4px">يُستبدل <b>نص الدرس والنشاط والأسئلة والإجابة النموذجية وملاحظات التحضير والتوثيق والكويز والبطاقات</b> في كل درس مطابق (العنوان والتاريخ والهدف تبقى من كراسك). وإن كان في الحزمة ورقتا صورة (الدرس والنشاط) فتحلّان محلّ القديمتين، وإلا بقيت أوراقك القديمة كما هي. إعادة الاستيراد بعد النجاح = «0 تغيير».</div><label style="display:flex;gap:6px;align-items:center;margin-top:8px;font-size:13px"><input type="checkbox" id="rp_pub" style="width:auto"> انشر الكويز والبطاقات للتلاميذ مباشرة (وإلا يبقى منشورًا ما كان منشورًا، والباقي مسوّدة تراجعها)</label></div>'
+ box.innerHTML='<div class="card" style="border:2px solid #7C3AED"><b>🔁 وضع الاستبدال:</b><div style="font-size:12.5px;line-height:1.9;margin-top:4px">يُستبدل <b>نص الدرس والنشاط والأسئلة والإجابة النموذجية وملاحظات التحضير والتوثيق والكويز والبطاقات</b> في كل درس مطابق (العنوان والتاريخ والهدف تبقى من كراسك). وإن كان في الحزمة أوراق صور (الدرس أو النشاط أو التصحيح) فتحلّ محلّ القديمة المقابلة، وإلا بقيت أوراقك القديمة كما هي. إعادة الاستيراد بعد النجاح = «0 تغيير».</div><label style="display:flex;gap:6px;align-items:center;margin-top:8px;font-size:13px"><input type="checkbox" id="rp_pub" style="width:auto"> انشر الكويز والبطاقات للتلاميذ مباشرة (وإلا يبقى منشورًا ما كان منشورًا، والباقي مسوّدة تراجعها)</label></div>'
  +RP.rows.map(function(r){var L=r.L,h='<div class="card"><label style="display:flex;gap:8px;align-items:center;font-weight:800"><input type="checkbox" id="rpc_'+r.i+'" style="width:auto" '+((r.er.length||!r.shell)?'disabled':'checked')+'> '+E(L.title||'(بلا عنوان)')+'</label>';
-  h+='<div style="font-size:12px;color:var(--sub);line-height:1.9">'+E(L.session||'')+(r.shell?' · 🔗 درس كراسك يوم <b>'+E(r.shell.x.date||'—')+'</b>':'')+(r.pack?' · كويز: '+r.pack.items.length+' تمرين، '+r.pack.fa.length+' نشاط حر، '+r.pack.fc.length+' بطاقة':'')+(r.fl&&(r.fl.lf||r.fl.af)?' · 🖼 ورقة '+(r.fl.lf?'الدرس':'')+(r.fl.lf&&r.fl.af?' و':'')+(r.fl.af?'النشاط':''):'')+'</div>';
+  h+='<div style="font-size:12px;color:var(--sub);line-height:1.9">'+E(L.session||'')+(r.shell?' · 🔗 درس كراسك يوم <b>'+E(r.shell.x.date||'—')+'</b>':'')+(r.pack?' · كويز: '+r.pack.items.length+' تمرين، '+r.pack.fa.length+' نشاط حر، '+r.pack.fc.length+' بطاقة':'')+(r.fl&&(r.fl.lf||r.fl.af||r.fl.kf)?' · 🖼 '+[r.fl.lf?'ورقة الدرس':'',r.fl.af?'ورقة النشاط':'',r.fl.kf?'ورقة التصحيح':''].filter(Boolean).join(' + '):'')+'</div>';
   if(r.er.length)h+='<div style="color:#DC2626;font-size:12px;line-height:1.8">⛔ '+r.er.map(E).join('<br>⛔ ')+'</div>';
   else if(!r.shell)h+='<div style="color:#B45309;font-size:12px;line-height:1.8">لا يوجد درس بهذا العنوان في كراسك. افتح «العمل اليومي» مرة (يُنشئ دروس الكراس) ثم أعد الاستيراد.</div>';
   else{var x=r.shell.x,old=qzOf(x),n=[];if(x.ctx&&x.ctx!==r.text)n.push('نص الدرس');if(x.note&&x.note!==r.act)n.push('النشاط');if(old&&old.stat==='pub')n.push('كويز منشور');
@@ -11810,7 +11810,7 @@ function render(){var st=document.getElementById('lpk_s'),box=document.getElemen
  +(mt.length?'<button class="ibtn up" style="width:100%;margin-top:6px" onclick="__rpGo()">📥 نفّذ الاستبدال</button><div id="rp_r" style="font-size:13px;margin-top:8px;line-height:1.9"></div>':'<div class="card"><p style="margin:0">لا درس مطابق للاستبدال.</p></div>');}
 function hsh(d){var h=5381,i,n=d.length;for(i=0;i<n;i+=7)h=((h<<5)+h+d.charCodeAt(i))|0;return n+'.'+(h>>>0).toString(36);}
 function prep(r){var L=r.L,s=function(k){return String(L[k]||'').trim();};
- r.fl={};[['lf','lesson'],['af','activity']].forEach(function(m){var o=L.files&&L.files[m[1]];if(o&&typeof o.data==='string'&&/^data:/.test(o.data))r.fl[m[0]]={o:o,h:hsh(o.data)};});
+ r.fl={};[['lf','lesson'],['af','activity'],['kf','key']].forEach(function(m){var o=L.files&&L.files[m[1]];if(o&&typeof o.data==='string'&&/^data:/.test(o.data))r.fl[m[0]]={o:o,h:hsh(o.data)};});
  r.text=s('text').slice(0,1500);var cl=s('activity');r.act=cl.slice(0,1500);
  r.qp=(Array.isArray(L.questions)?L.questions:[]).map(function(q){return String(q.q).slice(0,300);});
  var a=s('modelAnswer'),v=L.verification;
@@ -11822,7 +11822,7 @@ window.__rpGo=function(){if(RP.busy)return;var sel=RP.rows.filter(function(r){va
  var force=!!(document.getElementById('rp_pub')||{}).checked;RP.busy=1;out.innerHTML='⏳ جارٍ الاستبدال...';
  var did=[],same0=[],bad=[],p=Promise.resolve();
  sel.forEach(function(r){p=p.then(function(){prep(r);var id=r.shell.id,x=r.shell.x,up={},old=qzOf(x),oldPub=!!(old&&old.stat==='pub');
-  var keepVis=!x.hide&&!!(x.ctx||x.note||x.af||x.lf),fch=false;['lf','af'].forEach(function(k){var f=r.fl&&r.fl[k];if(!f)return;var om=x[k]&&RP.tl[x[k]];if(!(om&&om.hash===f.h))fch=true;});
+  var keepVis=!x.hide&&!!(x.ctx||x.note||x.af||x.lf),fch=false;['lf','af','kf'].forEach(function(k){var f=r.fl&&r.fl[k];if(!f)return;var om=x[k]&&RP.tl[x[k]];if(!(om&&om.hash===f.h))fch=true;});
   var ch=(x.ctx||'')!==r.text||(x.note||'')!==r.act||(x.ans||'')!==r.ans||!same(x.qp||[],r.qp)||(x.tnote||'')!==r.tn||!same(x.ver||null,r.ver||null)||fch;
   if(r.pack){var np=JSON.parse(JSON.stringify(r.pack));np.lesson=String(r.L.title).trim();np.stat=(force||oldPub)?'pub':'draft';if(np.stat==='pub')np.pt=Date.now();np.imp=Date.now();
    var oc=old?JSON.stringify({i:old.items,a:old.fa,c:old.fc,s:old.stat}):'',nc=JSON.stringify({i:np.items,a:np.fa,c:np.fc,s:np.stat});if(oc!==nc)ch=1;r.np=np;}
@@ -11837,7 +11837,7 @@ window.__rpGo=function(){if(RP.busy)return;var sel=RP.rows.filter(function(r){va
    else{up['kb_meta/'+id+'/qz']=null;up['kb_meta/'+id+'/fa']=null;up['kb_meta/'+id+'/fc']=null;}}
   return fdb.ref().update(up).then(function(){
    var q=Promise.resolve();
-   [['lf','الدرس'],['af','النشاط']].forEach(function(m){var f=r.fl&&r.fl[m[0]];if(!f)return;var oldf=x[m[0]],om=oldf&&RP.tl[oldf];if(om&&om.hash===f.h)return;
+   [['lf','الدرس'],['af','النشاط'],['kf','التصحيح']].forEach(function(m){var f=r.fl&&r.fl[m[0]];if(!f)return;var oldf=x[m[0]],om=oldf&&RP.tl[oldf];if(om&&om.hash===f.h)return;
     q=q.then(function(){var o=f.o,mm=/^data:([^;]+);base64,(.*)$/.exec(o.data),ff={name:String(o.name||('ملف.'+(mm[1]==='application/pdf'?'pdf':(mm[1]==='image/png'?'png':'jpg')))),type:mm[1],size:Math.floor(mm[2].length*0.75)};
      out.innerHTML='⏳ «'+E(r.L.title)+'» — ورقة '+m[1]+'...';
      return mfSave(ff,o.data,{text:'',pages:0},'todayact',r.L.subject,function(){},f.h).then(function(hid){var u2={},ttl='ورقة '+m[1]+' — '+(x.title||r.L.title);if(oldf)lwPurge(u2,oldf);
@@ -11859,8 +11859,57 @@ window.lpkPick=function(inp){var f=inp&&inp.files&&inp.files[0],self=this,args=a
   if(p&&p.format==='said-lesson-pack'&&p.version===1&&p.mode==='replace'&&Array.isArray(p.lessons)&&p.lessons.length>=1&&p.lessons.length<=60){start(p,f.name);}
   else if(prev)prev.apply(self,args);};
  r.readAsText(f,'utf-8');};
-window.__FEAT=window.__FEAT||{};window.__FEAT['v15007']=1;window.__FEAT['v15008']=1;
+window.__FEAT=window.__FEAT||{};window.__FEAT['v15007']=1;window.__FEAT['v15008']=1;window.__FEAT['v15009']=1;
 })();
+
+</script>
+<script id="v15009k">
+// 150.9 — ورقة التصحيح: التلميذ يقارن حلّه بعد أن يقول «أنهيت»، والأستاذ يملك مفتاح الإتاحة
+try{(function(){
+var E=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
+var Q=function(s){return String(s).replace(/[^\w\-]/g,'');};
+window.__KOPEN=window.__KOPEN||{};
+if(!document.getElementById('kf_css')){var st=document.createElement('style');st.id='kf_css';st.textContent=
+'.kfBox{background:#F0FDF4;border:2px solid #16A34A;border-radius:16px;padding:10px 12px;margin-top:2px}'
++'.kfH{font-weight:900;font-size:15px;color:#14532D}.kfT{font-size:13px;line-height:1.8;color:#166534;margin:4px 0 8px}'
++'.kfB{background:#16A34A;color:#fff;border:0;border-radius:12px;padding:9px 14px;font-family:inherit;font-weight:800;font-size:14px;cursor:pointer}'
++'.kfB.no{background:#fff;color:#166534;border:2px solid #16A34A}.kfB.sm{padding:6px 10px;font-size:12px}'
++'.kfF{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.kfRow{display:flex;gap:8px;flex-wrap:wrap}'
++'.kfP img{width:100%;border-radius:12px;border:1px solid #86EFAC;background:#fff}';
+document.head.appendChild(st);}
+function ask(q){return '<div class="kfBox" id="kfb_'+q+'"><div class="kfH">✅ أقارن حلّي</div><div class="kfT">هل أنهيتَ حلّ النشاط بنفسك؟ لا تفتح التصحيح قبل أن تحاول.</div><div class="kfRow"><button class="kfB" onclick="kfShow(\''+q+'\')">نعم، أنهيت ✅</button><button class="kfB no" onclick="kfCancel(\''+q+'\')">لا، سأكمل ✏️</button></div></div>';}
+function idle(q){return '<div class="kfBox" id="kfb_'+q+'"><div class="kfH">✅ أقارن حلّي</div><div class="kfT">بعد أن أنهي حلّ النشاط بنفسي أقارنه بالتصحيح وأتعلّم من أخطائي.</div><button class="kfB" onclick="kfAsk(\''+q+'\')">✅ قارن حلّك</button></div>';}
+function shown(q){return '<div class="kfBox" id="kfb_'+q+'"><div class="kfH">✅ ورقة التصحيح</div><div class="kfT">أصحّح حلّي بقلم أخضر ولا أمسح خطئي: أتعلّم منه!</div><div class="kfP" id="kfp_'+q+'">⏳</div><div class="kfF"><button class="kfB sm" onclick="pubView(\''+q+'\')">🔍 تكبير</button><button class="kfB sm" onclick="pubDl(\''+q+'\')">⬇ حفظ</button><button class="kfB sm" onclick="lsPrint(\''+q+'\')">🖨 طباعة</button><button class="kfB sm no" onclick="kfCancel(\''+q+'\')">🙈 إخفاء</button></div></div>';}
+function swap(q,h){var e=document.getElementById('kfb_'+q);if(!e)return;e.outerHTML=h;}
+function load(q){var box=document.getElementById('kfp_'+q);if(!box)return;
+ mfFileData(q).then(function(d){box.innerHTML='<img alt="" src="'+d+'">';}).catch(function(){box.innerHTML='⚠️ تعذّر فتح الورقة';});}
+window.kfAsk=function(q){swap(q,ask(q));};
+window.kfShow=function(q){window.__KOPEN[q]=1;swap(q,shown(q));load(q);};
+window.kfCancel=function(q){delete window.__KOPEN[q];swap(q,idle(q));};
+var _t=window.__lsTile;
+if(typeof _t==='function')window.__lsTile=function(fid,ttl,ico){var h=_t.apply(this,arguments);
+ try{if(ttl==='ورقة النشاط للطباعة'){var d=window.__PUBD||{},kf=null;
+  Object.keys(d).some(function(k){var x=d[k];if(x&&x.af===fid&&x.kf&&!x.knk){kf=x.kf;return true;}return false;});
+  if(kf){var q=Q(kf);if(window.__KOPEN[q]){h+=shown(q);setTimeout(function(){load(q);},80);}else h+=idle(q);}}}catch(e){}
+ return h;};
+// ---- جهة الأستاذ: خانة ورقة التصحيح في شاشة الدرس + مفتاح الإتاحة
+try{if(typeof LW_LBL==='object')LW_LBL.kf='✅ ورقة التصحيح (يراها التلميذ بعد أن يقول «أنهيت»)';}catch(e){}
+function knkCard(){var L=window.LW&&LW.cur;if(!L)return '';var open=!L.knk;
+ return '<div class="card" id="lwb_knk"><label style="display:flex;gap:8px;align-items:center;font-weight:800"><input type="checkbox" style="width:auto" '+(open?'checked ':'')+'onchange="kfToggle(this.checked)"> إتاحة ورقة التصحيح للتلاميذ</label><div style="font-size:12px;color:var(--sub);line-height:1.8;margin-top:4px">'+(L.kf?'تظهر لهم تحت ورقة النشاط بزر «قارن حلّك»، ولا تُفتح إلا بعد أن يضغطوا «أنهيت». أطفئ المفتاح إن أردت تصحيح النشاط معهم في الحصة أولًا.':'لا توجد ورقة تصحيح لهذا الدرس بعد. تدخل مع الحزمة أو ارفعها من الخانة أعلاه.')+'</div></div>';}
+window.kfToggle=function(on){var L=window.LW&&LW.cur;if(!L)return;var up={};up['tlib/'+L.id+'/knk']=on?null:1;up['kb_meta/'+L.id+'/knk']=on?null:1;
+ fdb.ref().update(up).then(function(){L.knk=on?null:1;}).catch(function(){alert('⚠️ تعذّر الحفظ');});};
+var _le=window.lwEdit;
+if(typeof _le==='function')window.lwEdit=function(id,draft){var r=_le.apply(this,arguments),n=0;
+ var iv=setInterval(function(){n++;var af=document.getElementById('lwb_af'),L=window.LW&&LW.cur;
+  if(n>60){clearInterval(iv);return;}
+  if(!af||!L||L.id!==id||document.getElementById('lwb_kf'))return;
+  clearInterval(iv);
+  var put=function(){if(document.getElementById('lwb_kf'))return;af.insertAdjacentHTML('afterend','<div id="lwb_kf">'+lwBox('kf')+'</div>'+knkCard());};
+  if(L.kf&&!(MF.d[L.kf])){fdb.ref('tlib/'+L.kf).once('value').then(function(s2){if(s2.val())MF.d[L.kf]=s2.val();put();},put);}else put();},150);
+ return r;};
+window.lwDelLesson=function(){var L=LW.cur;if(!L||!confirm('حذف هذا الدرس وكل ملفاته؟'))return;var up={};['lf','af','mf','kf'].forEach(function(k){lwPurge(up,L[k]);});lwPurge(up,L.id);if(L.nbk)up['settings/lwDel/'+L.nbk]=1;fdb.ref().update(up).then(function(){lwSubject(L.sj);}).catch(function(){alert('⚠️ تعذّر الحذف');});};
+window.__FEAT=window.__FEAT||{};window.__FEAT['v15009k']=1;
+})();}catch(e){(window.__ERRS=window.__ERRS||[]).push('v15009k: '+String((e&&e.message)||e).slice(0,120));}
 
 </script>
 </body>
