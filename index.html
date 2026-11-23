@@ -630,7 +630,7 @@ body.fab-scroll #aiFab,body.fab-scroll #fabMain,body.fab-scroll #qaFab{opacity:.
     </div>
     <div id="gbody"></div>
     <div class="gmsg" id="gm"></div>
-    <div class="gfoot">قسم السنة الثالثة · 2026 / 2027 · الإصدار 150.6</div>
+    <div class="gfoot">قسم السنة الثالثة · 2026 / 2027 · الإصدار 150.7</div>
   </div>
 </div>
 
@@ -3510,7 +3510,7 @@ var NAV_ICONS={home:'<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 
 function buildNav(role){var o=document.getElementById('bottomNav');if(o)o.remove();var items=NAVS[role];if(!items)return;var nav=document.createElement('nav');nav.id='bottomNav';nav.className=role==='student'?'nv-b':'nv-a';items.forEach(function(it){var b=document.createElement('button');b.className='nv-i';b.dataset.t=it[0];var st=it[3]?' style="background:'+it[3]+';color:'+it[4]+'"':'';b.innerHTML='<span class="nv-t"'+st+'><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+NAV_ICONS[it[2]]+'</svg></span><span class="nv-l">'+it[1]+'</span>';b.onclick=function(){if(it[0]==='more')openMore(role);else goTo(it[0]);};nav.appendChild(b);});var oldf=document.getElementById('aiFab');if(oldf)oldf.remove();if(role!=='teacher'){var fab=document.createElement('button');fab.id='aiFab';fab.setAttribute('aria-label','الأستاذ سعيد الذكي');fab.innerHTML='<span class="orb"><svg viewBox="0 0 32 32" width="30" height="30"><defs><linearGradient id="spk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#A5B4FC"/></linearGradient></defs><path fill="url(#spk)" d="M15 4c1 7 4 10 11 11-7 1-10 4-11 11-1-7-4-10-11-11 7-1 10-4 11-11z"/><path fill="#67E8F9" d="M25 3c.4 2.2 1.3 3.1 3.5 3.5-2.2.4-3.1 1.3-3.5 3.5-.4-2.2-1.3-3.1-3.5-3.5 2.2-.4 3.1-1.3 3.5-3.5z"/><circle cx="6" cy="26" r="1.6" fill="#C4B5FD"/></svg></span>';fab.title='اسألني';fab.onclick=function(){goTo('ai');aiFabListen('aiInput',aiSend);};document.body.appendChild(fab);var ot=document.getElementById('aiTip');if(ot)ot.remove();if(role==='student'){var tip=document.createElement('div');tip.id='aiTip';tip.textContent='اسألني عن درسك ✨';document.body.appendChild(tip);setTimeout(function(){tip.remove();},8500);try{aiNudge();}catch(e){}}}
 document.getElementById('app').appendChild(nav);navActive('');}
 function navActive(s){var n=document.getElementById('bottomNav');if(!n)return;[].forEach.call(n.children,function(b){b.classList.toggle('on',b.dataset.t===s);});}
-function openMore(role){var o=document.getElementById('moreSheet');if(o){o.remove();return;}var used=(NAVS[role]||[]).map(function(x){return x[0];});var src=document.querySelector('#screen-'+role+'-home .grid-menu');if(!src)return;var sh=document.createElement('div');sh.id='moreSheet';sh.onclick=function(e){if(e.target===sh)sh.remove();};var g=document.createElement('div');g.className='grid-menu';var hd=document.createElement('div');hd.className='ms-hd';hd.innerHTML='<b>المزيد</b><button type="button" class="ibtn ghost sm">→ رجوع</button>';hd.querySelector('button').onclick=function(){sh.remove();};g.appendChild(hd);[].forEach.call(src.children,function(c){var m=(c.getAttribute('onclick')||'').match(/goTo\('([^']+)'\)/);if(role==='student'&&/sendReport\(/.test(c.getAttribute('onclick')||''))return;if(m&&(used.indexOf(m[1])>-1||(role==='student'&&['ai','lessons','texts','studentNotebook','textbook','myFile','recorder','charts','rewards','voiceNotes','quizzes'].indexOf(m[1])>-1)))return;var k=c.cloneNode(true);k.addEventListener('click',function(){sh.remove();});g.appendChild(k);});sh.appendChild(g);var vv=document.createElement('div');vv.style.cssText='text-align:center;font-size:12px;color:#fff;opacity:.85;margin-top:14px';vv.textContent='الإصدار 150.6';sh.appendChild(vv);try{var miss=['picker','send','v98','hj','disp','simple','v107','v108','v110','v112','v113','v114','v115','v116','v117','v118','v119','v120','v121','v122','v123','v124','v125','v126','v127','v128','v129','v130','v131','v132','v133','v134','v135','v136','v1361','v1362','v137','v1371','v1372','v138','v1381','v1382','v1383','v1384','v1391','v13911','v1392','v1393','v1394','v13941','v1395','v13951','v1396','v13961','v1397','v1401','v1402','v1403','v1404','v1405','v1406','v1407','v1411'].filter(function(k){return !(window.__FEAT&&__FEAT[k]);}),er=(window.__ERRS||[]).slice(0,3);if(miss.length||er.length){var dg=document.createElement('div');dg.style.cssText='font-size:11px;color:#FCA5A5;max-width:92%;margin:6px auto 0;direction:ltr;text-align:left;word-break:break-all';dg.textContent='⚠️ '+(miss.length?'not loaded: '+miss.join(',')+' | ':'')+er.join(' | ');sh.appendChild(dg);}else{var ok=document.createElement('div');ok.style.cssText='font-size:11px;color:#86EFAC;text-align:center;margin-top:4px';ok.textContent='✅ كل الأجزاء تعمل';sh.appendChild(ok);}}catch(e){}document.body.appendChild(sh);}
+function openMore(role){var o=document.getElementById('moreSheet');if(o){o.remove();return;}var used=(NAVS[role]||[]).map(function(x){return x[0];});var src=document.querySelector('#screen-'+role+'-home .grid-menu');if(!src)return;var sh=document.createElement('div');sh.id='moreSheet';sh.onclick=function(e){if(e.target===sh)sh.remove();};var g=document.createElement('div');g.className='grid-menu';var hd=document.createElement('div');hd.className='ms-hd';hd.innerHTML='<b>المزيد</b><button type="button" class="ibtn ghost sm">→ رجوع</button>';hd.querySelector('button').onclick=function(){sh.remove();};g.appendChild(hd);[].forEach.call(src.children,function(c){var m=(c.getAttribute('onclick')||'').match(/goTo\('([^']+)'\)/);if(role==='student'&&/sendReport\(/.test(c.getAttribute('onclick')||''))return;if(m&&(used.indexOf(m[1])>-1||(role==='student'&&['ai','lessons','texts','studentNotebook','textbook','myFile','recorder','charts','rewards','voiceNotes','quizzes'].indexOf(m[1])>-1)))return;var k=c.cloneNode(true);k.addEventListener('click',function(){sh.remove();});g.appendChild(k);});sh.appendChild(g);var vv=document.createElement('div');vv.style.cssText='text-align:center;font-size:12px;color:#fff;opacity:.85;margin-top:14px';vv.textContent='الإصدار 150.7';sh.appendChild(vv);try{var miss=['picker','send','v98','hj','disp','simple','v107','v108','v110','v112','v113','v114','v115','v116','v117','v118','v119','v120','v121','v122','v123','v124','v125','v126','v127','v128','v129','v130','v131','v132','v133','v134','v135','v136','v1361','v1362','v137','v1371','v1372','v138','v1381','v1382','v1383','v1384','v1391','v13911','v1392','v1393','v1394','v13941','v1395','v13951','v1396','v13961','v1397','v1401','v1402','v1403','v1404','v1405','v1406','v1407','v1411'].filter(function(k){return !(window.__FEAT&&__FEAT[k]);}),er=(window.__ERRS||[]).slice(0,3);if(miss.length||er.length){var dg=document.createElement('div');dg.style.cssText='font-size:11px;color:#FCA5A5;max-width:92%;margin:6px auto 0;direction:ltr;text-align:left;word-break:break-all';dg.textContent='⚠️ '+(miss.length?'not loaded: '+miss.join(',')+' | ':'')+er.join(' | ');sh.appendChild(dg);}else{var ok=document.createElement('div');ok.style.cssText='font-size:11px;color:#86EFAC;text-align:center;margin-top:4px';ok.textContent='✅ كل الأجزاء تعمل';sh.appendChild(ok);}}catch(e){}document.body.appendChild(sh);}
 if(/[?&]invite=/.test(location.search))GATE_VIEW='r';
 var __goTo=goTo;goTo=function(s){__goTo(s);navActive(s);window.CUR_SCREEN=s;if(s==="student-home"||s==="parent-home"||s==="teacher-home"){renderToday(CURRENT_USER_TYPE);setTimeout(todayExtras,800);setTimeout(todayExtras,2200);}};
 
@@ -11761,6 +11761,94 @@ var f=function(){var fi=document.getElementById('nbj_f'),st=document.getElementB
   nbiApply(j,over).then(function(r){var m='✅ تم الاستيراد — أيام تغيّرت: '+r.days+' · خانات مملوءة: '+r.filled+' · محفوظة كما هي: '+r.kept+(r.bad?' · ⚠️ تعذّر رفع '+r.bad+' للسحابة':'');if(st)st.textContent=m;try{DN_OVL[DN.date]=undefined;}catch(e){}});};
  rd.readAsText(fl,'utf-8');};
 f.__nbi=1;window.nbjPicked=f;})();
+})();
+
+</script>
+<script id="v15007r">
+/* 150.7 — استيراد حزمة دروس «بالاستبدال» (الدرس + النشاط + الأسئلة + الإجابة + الكويز والبطاقات) بزر واحد.
+   يعمل من زرّ استيراد الدروس الموجود. يُفعَّل فقط إذا كان في الملف  "mode":"replace"  ، وإلا يعمل الزر القديم كما كان. */
+(function(){
+function nz(s){return String(s==null?'':s).replace(/[ً-ْٰـ]/g,'');}
+function tk(s){try{if(window.__tkey)return window.__tkey(s);}catch(e){}return nz(s).replace(/[^ء-ي0-9a-zA-Z]+/g,'');}
+function E(s){return (typeof esc==='function')?esc(String(s==null?'':s)):String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+var SJ={history:1,science:1,math:1,arabic:1,islamic:1,reading:1};
+var RP={rows:[],tl:{},src:'',busy:0};window.__RP=RP;
+function chk(L){var er=[],wr=[],s=function(k){return typeof L[k]==='string'?L[k].trim():'';};
+ if(!L||typeof L!=='object')return {er:['درس غير صالح'],wr:wr};
+ var t=s('title');if(!t)er.push('العنوان فارغ');else if(t.length>120)er.push('العنوان أطول من 120');
+ if(!SJ[L.subject])er.push('مادة غير مسموحة: '+(L.subject||'—'));
+ [['goal',300],['text',1500],['activity',1500],['modelAnswer',2000],['teacherNote',1000]].forEach(function(r){if(s(r[0]).length>r[1])er.push(r[0]+' أطول من '+r[1]+' ('+s(r[0]).length+')');});
+ if(/<\/?[a-z][^>]*>/i.test([t,s('text'),s('activity'),s('goal'),s('modelAnswer'),s('teacherNote')].join(' ')))er.push('وسوم HTML');
+ var qs=Array.isArray(L.questions)?L.questions:[];if(qs.length>4)er.push('أكثر من 4 أسئلة');
+ qs.forEach(function(q,i){var x=q&&q.q;if(typeof x!=='string'||!x.trim())er.push('السؤال '+(i+1)+' فارغ');else if(x.length>300)er.push('السؤال '+(i+1)+' أطول من 300');});
+ var v=L.verification;if(v!=null&&(typeof v!=='object'||['verified','partial','draft'].indexOf(v.status)<0))er.push('حقل التوثيق غير صالح');
+ if(!s('text')&&!s('activity'))er.push('لا نص ولا نشاط');
+ var qp=null;if(L.quiz){if(typeof window.qzCheck!=='function')er.push('مدقق الكويز غير متاح');else{var r=window.qzCheck(L.quiz,t);if(r.err.length)r.err.forEach(function(x){er.push('الكويز: '+x);});else{qp=r.pack;(r.warn||[]).forEach(function(w){wr.push('كويز: '+w);});}}}
+ return {er:er,wr:wr,pack:qp};}
+function match(){var sh={},k,x;
+ for(k in RP.tl){x=RP.tl[k];if(!x||!x.lsn||x.hid||x.dup||x.cat!=='todayact')continue;var kk=x.sj+'|'+tk(x.title||'');(sh[kk]=sh[kk]||[]).push({id:k,x:x});}
+ for(k in sh)sh[k].sort(function(a,b){return String(a.x.date||'').localeCompare(String(b.x.date||''))||((a.x.ord||0)-(b.x.ord||0));});
+ var by={};RP.rows.forEach(function(r){if(r.er.length)return;var key=(r.L.subject==='reading'?'arabic':r.L.subject)+'|'+tk(r.L.title);(by[key]=by[key]||[]).push(r);});
+ Object.keys(by).forEach(function(key){var rs=by[key],cs=(sh[key]||[]).slice();
+  rs.sort(function(a,b){return String(a.L.date||'').localeCompare(String(b.L.date||''))||(a.i-b.i);});
+  rs.forEach(function(r){var j=-1;if(r.L.date){for(var q=0;q<cs.length;q++)if(cs[q].x.date===r.L.date){j=q;break;}}if(j<0&&cs.length)j=0;if(j>=0){r.shell=cs[j];cs.splice(j,1);}});});}
+function same(a,b){return JSON.stringify(a==null?null:a)===JSON.stringify(b==null?null:b);}
+function qzOf(x){return x&&x.qzr?x.qzr:null;}
+function render(){var st=document.getElementById('lpk_s'),box=document.getElementById('lpk_box');if(!box)return;
+ var ok=RP.rows.filter(function(r){return !r.er.length;}),mt=ok.filter(function(r){return r.shell;});
+ st.innerHTML='📄 '+E(RP.src)+' — <b>'+RP.rows.length+'</b> درس: <span style="color:#16A34A">'+ok.length+' سليم</span>'+(RP.rows.length-ok.length?' · <span style="color:#DC2626">'+(RP.rows.length-ok.length)+' فيه خطأ (لن يُستورد)</span>':'')+' · 🔗 <b>'+mt.length+'</b> وُجد له درس في كراسك'+(ok.length-mt.length?' · <span style="color:#B45309">'+(ok.length-mt.length)+' بلا درس مقابل</span>':'');
+ box.innerHTML='<div class="card" style="border:2px solid #7C3AED"><b>🔁 وضع الاستبدال:</b><div style="font-size:12.5px;line-height:1.9;margin-top:4px">يُستبدل <b>نص الدرس والنشاط والأسئلة والإجابة النموذجية وملاحظات التحضير والتوثيق والكويز والبطاقات</b> في كل درس مطابق (العنوان والتاريخ والهدف تبقى من كراسك). ورقتا الصورة القديمتان (الدرس/النشاط) تُحذفان لأن نصهما صار قديمًا. إعادة الاستيراد بعد النجاح = «0 تغيير».</div><label style="display:flex;gap:6px;align-items:center;margin-top:8px;font-size:13px"><input type="checkbox" id="rp_pub" style="width:auto"> انشر الكويز والبطاقات للتلاميذ مباشرة (وإلا يبقى منشورًا ما كان منشورًا، والباقي مسوّدة تراجعها)</label></div>'
+ +RP.rows.map(function(r){var L=r.L,h='<div class="card"><label style="display:flex;gap:8px;align-items:center;font-weight:800"><input type="checkbox" id="rpc_'+r.i+'" style="width:auto" '+((r.er.length||!r.shell)?'disabled':'checked')+'> '+E(L.title||'(بلا عنوان)')+'</label>';
+  h+='<div style="font-size:12px;color:var(--sub);line-height:1.9">'+E(L.session||'')+(r.shell?' · 🔗 درس كراسك يوم <b>'+E(r.shell.x.date||'—')+'</b>':'')+(r.pack?' · كويز: '+r.pack.items.length+' تمرين، '+r.pack.fa.length+' نشاط حر، '+r.pack.fc.length+' بطاقة':'')+'</div>';
+  if(r.er.length)h+='<div style="color:#DC2626;font-size:12px;line-height:1.8">⛔ '+r.er.map(E).join('<br>⛔ ')+'</div>';
+  else if(!r.shell)h+='<div style="color:#B45309;font-size:12px;line-height:1.8">لا يوجد درس بهذا العنوان في كراسك. افتح «العمل اليومي» مرة (يُنشئ دروس الكراس) ثم أعد الاستيراد.</div>';
+  else{var x=r.shell.x,old=qzOf(x),n=[];if(x.ctx&&x.ctx!==r.text)n.push('نص الدرس');if(x.note&&x.note!==r.act)n.push('النشاط');if(old&&old.stat==='pub')n.push('كويز منشور');
+   h+='<div style="font-size:12px;line-height:1.9;margin-top:3px">'+((x.ctx||x.note||x.qzr)?'سيُستبدل ما عندك'+(n.length?' ('+n.join('، ')+')':' (متطابق أصلًا)'):'سيُملأ (الدرس فارغ الآن)')+'</div>';}
+  if(r.wr.length&&!r.er.length)h+='<div style="color:#92400E;font-size:12px;line-height:1.8">• '+r.wr.map(E).join('<br>• ')+'</div>';
+  return h+'</div>';}).join('')
+ +(mt.length?'<button class="ibtn up" style="width:100%;margin-top:6px" onclick="__rpGo()">📥 نفّذ الاستبدال</button><div id="rp_r" style="font-size:13px;margin-top:8px;line-height:1.9"></div>':'<div class="card"><p style="margin:0">لا درس مطابق للاستبدال.</p></div>');}
+function prep(r){var L=r.L,s=function(k){return String(L[k]||'').trim();};
+ r.text=s('text').slice(0,1500);var cl=s('activity');r.act=cl.slice(0,1500);
+ r.qp=(Array.isArray(L.questions)?L.questions:[]).map(function(q){return String(q.q).slice(0,300);});
+ var a=s('modelAnswer'),v=L.verification;
+ if(v){var src=(Array.isArray(v.sources)?v.sources:[]).slice(0,5).map(function(z){z=z||{};return String(z.doc||'').slice(0,120)+(z.page?' '+String(z.page).slice(0,40):'')+(z.note?' ('+String(z.note).slice(0,200)+')':'');}).filter(function(z){return z.trim();});
+  r.ver={status:v.status};if(v.note)r.ver.note=String(v.note).slice(0,500);if(v.checkedAt)r.ver.checkedAt=String(v.checkedAt).slice(0,10);if(src.length)r.ver.sources=(Array.isArray(v.sources)?v.sources:[]).slice(0,5).map(function(z){z=z||{};return {doc:String(z.doc||'').slice(0,120),page:String(z.page||'').slice(0,40),note:String(z.note||'').slice(0,200)};});}
+ r.ans=a.slice(0,2000);r.tn=s('teacherNote').slice(0,3000);}
+window.__rpGo=function(){if(RP.busy)return;var sel=RP.rows.filter(function(r){var c=document.getElementById('rpc_'+r.i);return c&&c.checked&&r.shell&&!r.er.length;}),out=document.getElementById('rp_r');
+ if(!sel.length){out.innerHTML='⚠️ لم تحدّد أي درس.';return;}
+ var force=!!(document.getElementById('rp_pub')||{}).checked;RP.busy=1;out.innerHTML='⏳ جارٍ الاستبدال...';
+ var did=[],same0=[],bad=[],p=Promise.resolve();
+ sel.forEach(function(r){p=p.then(function(){prep(r);var id=r.shell.id,x=r.shell.x,up={},old=qzOf(x),oldPub=!!(old&&old.stat==='pub');
+  var keepVis=!x.hide&&!!(x.ctx||x.note||x.af||x.lf);
+  var ch=(x.ctx||'')!==r.text||(x.note||'')!==r.act||(x.ans||'')!==r.ans||!same(x.qp||[],r.qp)||(x.tnote||'')!==r.tn||!same(x.ver||null,r.ver||null)||!!x.af||!!x.lf;
+  if(r.pack){var np=JSON.parse(JSON.stringify(r.pack));np.lesson=String(r.L.title).trim();np.stat=(force||oldPub)?'pub':'draft';if(np.stat==='pub')np.pt=Date.now();np.imp=Date.now();
+   var oc=old?JSON.stringify({i:old.items,a:old.fa,c:old.fc,s:old.stat}):'',nc=JSON.stringify({i:np.items,a:np.fa,c:np.fc,s:np.stat});if(oc!==nc)ch=1;r.np=np;}
+  if(!ch){same0.push(r);return;}
+  up['tlib/'+id+'/ctx']=r.text||null;up['kb_meta/'+id+'/ctx']=r.text||null;
+  up['tlib/'+id+'/note']=r.act;up['kb_meta/'+id+'/note']=r.act;
+  up['tlib/'+id+'/ans']=r.ans||null;up['tlib/'+id+'/qp']=r.qp.length?r.qp:null;up['kb_meta/'+id+'/qp']=r.qp.length?r.qp:null;
+  up['tlib/'+id+'/tnote']=r.tn||null;up['tlib/'+id+'/ver']=r.ver||null;up['tlib/'+id+'/src']='lesson-pack';
+  if(!keepVis){up['tlib/'+id+'/hide']=1;up['kb_meta/'+id+'/hide']=1;}
+  ['lf','af'].forEach(function(f){var h=x[f];if(h){up['tlib/'+h]=null;up['tlib_text/'+h]=null;up['tlib_file/'+h]=null;up['kb_meta/'+h]=null;}up['tlib/'+id+'/'+f]=null;up['kb_meta/'+id+'/'+f]=null;});
+  if(r.np){up['tlib/'+id+'/qzr']=r.np;
+   if(r.np.stat==='pub'){up['kb_meta/'+id+'/qz']=r.np.items.length?{n:r.np.items.length,items:r.np.items,t:Date.now()}:null;up['kb_meta/'+id+'/fa']=r.np.fa.length?r.np.fa:null;up['kb_meta/'+id+'/fc']=r.np.fc.length?r.np.fc:null;}
+   else{up['kb_meta/'+id+'/qz']=null;up['kb_meta/'+id+'/fa']=null;up['kb_meta/'+id+'/fc']=null;}}
+  return fdb.ref().update(up).then(function(){did.push(r);});}).catch(function(e){bad.push(r);});});
+ p.then(function(){RP.busy=0;var h='<div class="card" style="border:2px solid '+(bad.length?'#DC2626':'#16A34A')+'"><b>'+(did.length?'✅ استُبدل '+did.length+' درسًا':'لم يتغيّر شيء')+'</b>'+(same0.length?' · '+same0.length+' بلا تغيير (متطابق)':'')+(bad.length?' · <span style="color:#DC2626">⚠️ تعذّر '+bad.length+'</span>':'')+'</div>';
+  out.innerHTML=h;try{sfx('ok');}catch(e){}});};
+function start(p,name){var st=document.getElementById('lpk_s');RP.src=name;RP.rows=[];st.textContent='⏳ أطابق دروس كراسك...';
+ var go=function(){return fdb.ref('tlib').once('value').then(function(sn){RP.tl=JSON.parse(JSON.stringify(sn.val()||{}));},function(){RP.tl={};}).then(function(){
+  RP.rows=p.lessons.map(function(L,i){var c=chk(L);var r={i:i,L:L,er:c.er,wr:c.wr,pack:c.pack,shell:null};if(!r.er.length)prep(r);return r;});match();render();});};
+ try{(typeof lwImport==='function'?lwImport():Promise.resolve()).then(go,go);}catch(e){go();}}
+var prev=window.lpkPick;
+window.lpkPick=function(inp){var f=inp&&inp.files&&inp.files[0],self=this,args=arguments;if(!f){return prev?prev.apply(self,args):undefined;}
+ if(f.size>45*1048576){return prev?prev.apply(self,args):undefined;}
+ var r=new FileReader();r.onerror=function(){if(prev)prev.apply(self,args);};
+ r.onload=function(){var p=null;try{p=JSON.parse(String(r.result).replace(/^﻿/,''));}catch(e){}
+  if(p&&p.format==='said-lesson-pack'&&p.version===1&&p.mode==='replace'&&Array.isArray(p.lessons)&&p.lessons.length>=1&&p.lessons.length<=60){start(p,f.name);}
+  else if(prev)prev.apply(self,args);};
+ r.readAsText(f,'utf-8');};
+window.__FEAT=window.__FEAT||{};window.__FEAT['v15007']=1;
 })();
 
 </script>
