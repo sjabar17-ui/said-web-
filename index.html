@@ -630,7 +630,7 @@ body.fab-scroll #aiFab,body.fab-scroll #fabMain,body.fab-scroll #qaFab{opacity:.
     </div>
     <div id="gbody"></div>
     <div class="gmsg" id="gm"></div>
-    <div class="gfoot">قسم السنة الثالثة · 2026 / 2027 · الإصدار 151.26</div>
+    <div class="gfoot">قسم السنة الثالثة · 2026 / 2027 · الإصدار 151.28</div>
   </div>
 </div>
 
@@ -3510,7 +3510,7 @@ var NAV_ICONS={home:'<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 
 function buildNav(role){var o=document.getElementById('bottomNav');if(o)o.remove();var items=NAVS[role];if(!items)return;var nav=document.createElement('nav');nav.id='bottomNav';nav.className=role==='student'?'nv-b':'nv-a';items.forEach(function(it){var b=document.createElement('button');b.className='nv-i';b.dataset.t=it[0];var st=it[3]?' style="background:'+it[3]+';color:'+it[4]+'"':'';b.innerHTML='<span class="nv-t"'+st+'><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+NAV_ICONS[it[2]]+'</svg></span><span class="nv-l">'+it[1]+'</span>';b.onclick=function(){if(it[0]==='more')openMore(role);else goTo(it[0]);};nav.appendChild(b);});var oldf=document.getElementById('aiFab');if(oldf)oldf.remove();if(role!=='teacher'){var fab=document.createElement('button');fab.id='aiFab';fab.setAttribute('aria-label','الأستاذ سعيد الذكي');fab.innerHTML='<span class="orb"><svg viewBox="0 0 32 32" width="30" height="30"><defs><linearGradient id="spk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#A5B4FC"/></linearGradient></defs><path fill="url(#spk)" d="M15 4c1 7 4 10 11 11-7 1-10 4-11 11-1-7-4-10-11-11 7-1 10-4 11-11z"/><path fill="#67E8F9" d="M25 3c.4 2.2 1.3 3.1 3.5 3.5-2.2.4-3.1 1.3-3.5 3.5-.4-2.2-1.3-3.1-3.5-3.5 2.2-.4 3.1-1.3 3.5-3.5z"/><circle cx="6" cy="26" r="1.6" fill="#C4B5FD"/></svg></span>';fab.title='اسألني';fab.onclick=function(){goTo('ai');aiFabListen('aiInput',aiSend);};document.body.appendChild(fab);var ot=document.getElementById('aiTip');if(ot)ot.remove();if(role==='student'){var tip=document.createElement('div');tip.id='aiTip';tip.textContent='اسألني عن درسك ✨';document.body.appendChild(tip);setTimeout(function(){tip.remove();},8500);try{aiNudge();}catch(e){}}}
 document.getElementById('app').appendChild(nav);navActive('');}
 function navActive(s){var n=document.getElementById('bottomNav');if(!n)return;[].forEach.call(n.children,function(b){b.classList.toggle('on',b.dataset.t===s);});}
-function openMore(role){var o=document.getElementById('moreSheet');if(o){o.remove();return;}var used=(NAVS[role]||[]).map(function(x){return x[0];});var src=document.querySelector('#screen-'+role+'-home .grid-menu');if(!src)return;var sh=document.createElement('div');sh.id='moreSheet';sh.onclick=function(e){if(e.target===sh)sh.remove();};var g=document.createElement('div');g.className='grid-menu';var hd=document.createElement('div');hd.className='ms-hd';hd.innerHTML='<b>المزيد</b><button type="button" class="ibtn ghost sm">→ رجوع</button>';hd.querySelector('button').onclick=function(){sh.remove();};g.appendChild(hd);[].forEach.call(src.children,function(c){var m=(c.getAttribute('onclick')||'').match(/goTo\('([^']+)'\)/);if(role==='student'&&/sendReport\(/.test(c.getAttribute('onclick')||''))return;if(m&&(used.indexOf(m[1])>-1||(role==='student'&&['ai','lessons','texts','studentNotebook','textbook','myFile','recorder','charts','rewards','voiceNotes','quizzes'].indexOf(m[1])>-1)))return;var k=c.cloneNode(true);k.addEventListener('click',function(){sh.remove();});g.appendChild(k);});sh.appendChild(g);var vv=document.createElement('div');vv.style.cssText='text-align:center;font-size:12px;color:#fff;opacity:.85;margin-top:14px';vv.textContent='الإصدار 151.26';sh.appendChild(vv);try{var miss=['picker','send','v98','hj','disp','simple','v107','v108','v110','v112','v113','v114','v115','v116','v117','v118','v119','v120','v121','v122','v123','v124','v125','v126','v127','v128','v129','v130','v131','v132','v133','v134','v135','v136','v1361','v1362','v137','v1371','v1372','v138','v1381','v1382','v1383','v1384','v1391','v13911','v1392','v1393','v1394','v13941','v1395','v13951','v1396','v13961','v1397','v1401','v1402','v1403','v1404','v1405','v1406','v1407','v1411'].filter(function(k){return !(window.__FEAT&&__FEAT[k]);}),er=(window.__ERRS||[]).slice(0,3);if(miss.length||er.length){var dg=document.createElement('div');dg.style.cssText='font-size:11px;color:#FCA5A5;max-width:92%;margin:6px auto 0;direction:ltr;text-align:left;word-break:break-all';dg.textContent='⚠️ '+(miss.length?'not loaded: '+miss.join(',')+' | ':'')+er.join(' | ');sh.appendChild(dg);}else{var ok=document.createElement('div');ok.style.cssText='font-size:11px;color:#86EFAC;text-align:center;margin-top:4px';ok.textContent='✅ كل الأجزاء تعمل';sh.appendChild(ok);}}catch(e){}document.body.appendChild(sh);}
+function openMore(role){var o=document.getElementById('moreSheet');if(o){o.remove();return;}var used=(NAVS[role]||[]).map(function(x){return x[0];});var src=document.querySelector('#screen-'+role+'-home .grid-menu');if(!src)return;var sh=document.createElement('div');sh.id='moreSheet';sh.onclick=function(e){if(e.target===sh)sh.remove();};var g=document.createElement('div');g.className='grid-menu';var hd=document.createElement('div');hd.className='ms-hd';hd.innerHTML='<b>المزيد</b><button type="button" class="ibtn ghost sm">→ رجوع</button>';hd.querySelector('button').onclick=function(){sh.remove();};g.appendChild(hd);[].forEach.call(src.children,function(c){var m=(c.getAttribute('onclick')||'').match(/goTo\('([^']+)'\)/);if(role==='student'&&/sendReport\(/.test(c.getAttribute('onclick')||''))return;if(m&&(used.indexOf(m[1])>-1||(role==='student'&&['ai','lessons','texts','studentNotebook','textbook','myFile','recorder','charts','rewards','voiceNotes','quizzes'].indexOf(m[1])>-1)))return;var k=c.cloneNode(true);k.addEventListener('click',function(){sh.remove();});g.appendChild(k);});sh.appendChild(g);var vv=document.createElement('div');vv.style.cssText='text-align:center;font-size:12px;color:#fff;opacity:.85;margin-top:14px';vv.textContent='الإصدار 151.28';sh.appendChild(vv);try{var miss=['picker','send','v98','hj','disp','simple','v107','v108','v110','v112','v113','v114','v115','v116','v117','v118','v119','v120','v121','v122','v123','v124','v125','v126','v127','v128','v129','v130','v131','v132','v133','v134','v135','v136','v1361','v1362','v137','v1371','v1372','v138','v1381','v1382','v1383','v1384','v1391','v13911','v1392','v1393','v1394','v13941','v1395','v13951','v1396','v13961','v1397','v1401','v1402','v1403','v1404','v1405','v1406','v1407','v1411'].filter(function(k){return !(window.__FEAT&&__FEAT[k]);}),er=(window.__ERRS||[]).slice(0,3);if(miss.length||er.length){var dg=document.createElement('div');dg.style.cssText='font-size:11px;color:#FCA5A5;max-width:92%;margin:6px auto 0;direction:ltr;text-align:left;word-break:break-all';dg.textContent='⚠️ '+(miss.length?'not loaded: '+miss.join(',')+' | ':'')+er.join(' | ');sh.appendChild(dg);}else{var ok=document.createElement('div');ok.style.cssText='font-size:11px;color:#86EFAC;text-align:center;margin-top:4px';ok.textContent='✅ كل الأجزاء تعمل';sh.appendChild(ok);}}catch(e){}document.body.appendChild(sh);}
 if(/[?&]invite=/.test(location.search))GATE_VIEW='r';
 var __goTo=goTo;goTo=function(s){__goTo(s);navActive(s);window.CUR_SCREEN=s;if(s==="student-home"||s==="parent-home"||s==="teacher-home"){renderToday(CURRENT_USER_TYPE);setTimeout(todayExtras,800);setTimeout(todayExtras,2200);}};
 
@@ -10570,7 +10570,7 @@ function visitUI(){var V=ST.v,h='<style>.vsg{display:grid;grid-template-columns:
  var cw=curWk(),wb='';for(var w=cw;w>=1;w--){var a=wkSun(w),b=new Date(a.getTime());b.setDate(b.getDate()+4);wb+='<button class="pr" onclick="visitWeek('+w+')">🖨 الأسبوع '+w+' ('+hwF(dnFmt(a))+' – '+hwF(dnFmt(b))+')</button>';}
  h+='<div class="sm" style="margin-top:8px"><b>الأحسن: ملف مستقل لكل أسبوع</b> (غلاف، أيامه كلها: كراس ومذكرة وعمل اليوم، ثم شبكات تقويمه)، وملف واحد للملخصات.</div><div class="tb" style="margin:6px 0">'+wb+'</div><div class="tb"><button class="pr" onclick="visitSummary()">📑 ملف الملخصات للسنة كلها (غيابات، توزيع، بطاقات، واجبات، تقييم، مشاريع، تقرير…)</button></div><div class="sm" style="margin-top:8px">أو فترة مخصصة بالخيارات أدناه:</div>';
  h+='<div class="tb" style="margin:4px 0"><button onclick="visitRange(0)">📅 كل الأسابيع (من البداية إلى اليوم)</button><button onclick="visitRange(1)">هذا الأسبوع فقط</button></div><label class="sm">من يوم</label><input type="date" id="vs_from" value="'+E(V.from)+'" style="width:auto"> <label class="sm">إلى يوم</label><input type="date" id="vs_to" value="'+E(V.to)+'" style="width:auto">';
- h+='<div class="sm vsg" style="margin-top:8px">'+[['vs_cov','غلاف وفهرس',V.cov],['vs_att','سجل الغيابات',V.att],['vs_plan','التوزيع الأسبوعي (البرامج المقررة)',V.plan],['vs_day','صفحات الأيام (كراس + مذكرة + عمل اليوم)',V.day],['vs_wrk','صفحة أعمال التلاميذ',V.wrk],['vs_sh','صفحة «القسم الرقمي»: ما يميز عملنا (بأرقام التطبيق)',V.sh],['vs_memo','مذكرات الأستاذ لكل يوم، مأخوذة من ملفاتك المحمّلة',V.memo],['vs_pj','أوراق المشاريع («أنجز مشروعي» والتدريبات الكتابية) ومن سلّمها',V.pj],['vs_fb','توجيهات الأستاذ للتلاميذ (التغذية الراجعة وغيرها)',V.fb],['vs_works','🎨 ملفات أعمالنا بصفحات ملوّنة (معرض المشاريع + دفتر الألعاب + لوحة الخط) — تُجهَّز من «ملفات أعمالنا»',V.works]].map(function(c){return '<label class="vsl"><input type="checkbox" id="'+c[0]+'"'+(c[2]?' checked':'')+'> '+c[1]+'</label>';}).join('')+'</div>';
+ h+='<div class="sm vsg" style="margin-top:8px">'+[['vs_cov','غلاف وفهرس',V.cov],['vs_att','سجل الغيابات',V.att],['vs_plan','التوزيع الأسبوعي (البرامج المقررة)',V.plan],['vs_day','صفحات الأيام (كراس + مذكرة + عمل اليوم)',V.day],['vs_wrk','صفحة أعمال التلاميذ',V.wrk],['vs_sh','صفحة «القسم الرقمي»: ما يميز عملنا (بأرقام التطبيق)',V.sh],['vs_memo','مذكرات الأستاذ لكل يوم، مأخوذة من ملفاتك المحمّلة',V.memo],['vs_pj','أوراق المشاريع («أنجز مشروعي» والتدريبات الكتابية) ومن سلّمها',V.pj],['vs_fb','توجيهات الأستاذ للتلاميذ (التغذية الراجعة وغيرها)',V.fb],['vs_works','🎨 ملفات أعمالنا (واجهة + فهرس + معرض المشاريع + بطاقات الألعاب + لوحة رحلة الخط)',V.works],['vs_works_t','↳ مع جدول مستوى كل تلميذ في الخط (بالأسماء)',V.workst]].map(function(c){return '<label class="vsl"><input type="checkbox" id="'+c[0]+'"'+(c[2]?' checked':'')+'> '+c[1]+'</label>';}).join('')+'</div>';
  h+='<div class="sm" style="margin-top:6px"><b>أقسام من ملف الأستاذ تُضاف:</b></div><div class="sm vsg">'+[['wd','لوحة القيادة الأسبوعية'],['les','سجل الدروس المنجزة'],['grid','شبكات التقويم التكويني (تُطبع لكل أسبوع بعد أيامه)'],['rem','بطاقات التلاميذ (كلها، وعددها كبير)'],['rsum','ملخص بطاقات التلاميذ (صفحة واحدة)'],['hw','متابعة الواجبات اليومية (نسبة أيام الواجب وإنجاز القسم)'],['diff','الصعوبات وسبل علاجها'],['evl','التقييم والمعالجة وتطور التلاميذ (كل المواد)'],['reg','سجلات الأستاذ (الزيارات والتوجيهات، المجالس، التشخيصي، الملف الإداري)'],['prj','سجل المشاريع'],['few','كثيرو الغياب'],['rep','التقرير الشهري'],['chk','قائمة المتابعة الأسبوعية']].map(function(c){return '<label class="vsl"><input type="checkbox" id="vs_s_'+c[0]+'"'+(V.sec[c[0]]?' checked':'')+'> '+c[1]+'</label>';}).join('')+'</div>';
  h+='<label class="sm">كيفية التصحيح (تُكتب في صفحة أعمال التلاميذ)</label><input class="inp" id="vs_cor" value="'+E(V.cor)+'" placeholder="مثال: تصحيح جماعي ثم فردي"><button class="pr" style="width:100%;margin-top:10px" onclick="visitPrint()">🖨 جهّز الملف واطبعه</button><div class="sm" id="vs_st" style="margin-top:6px"></div></div>';
  return h;}
@@ -10604,7 +10604,7 @@ window.visitBuild=function(o){
   var A=a[0],ND=a[1],LP=a[2],H=a[3],SBM=a[4],FBD=a[5],SPR=a[6],L=a[7],MST=a[8]||[],S=studs(),out='',skipped=[],kept=[],hwAll=[],stat={};
   Object.keys(H).forEach(function(sj){Object.keys(H[sj]||{}).forEach(function(k){var h=H[sj][k];if(h&&typeof h==='object')hwAll.push({sj:sj,k:k,h:h});});});
   var pages=[];
-  if(o.cov){var CI=[];if(o.sh)CI.push('القسم الرقمي: ما يميّز عملنا');if(o.att)CI.push('سجل الغيابات (المناداة) وجدول الحضور');if(o.plan)CI.push('التوزيع الأسبوعي للمقاطع التعلمية (البرامج المقررة)');if(o.day)CI.push('لكل يوم: الكراس اليومي، ثم مذكرة الحصة، ثم عمل ذلك اليوم (الواجبات)');if(o.sec&&o.sec.grid)CI.push('شبكات التقويم التكويني في كل المواد (لكل أسبوع بعد أيامه)');if(o.wrk)CI.push('أعمال التلاميذ: الدفاتر والفروض المنزلية وكيفية التصحيح');if(o.pj)CI.push('أوراق المشاريع: «أنجز مشروعي» والتدريبات الكتابية');if(o.fb)CI.push('توجيهات الأستاذ للتلاميذ (التغذية الراجعة)');['wd','les','rem','rsum','hw','diff','evl','prj','few','rep','chk'].forEach(function(k){if(o.sec&&o.sec[k]&&TT[k])CI.push(TT[k]);});
+  if(o.cov){var CI=[];if(o.sh)CI.push('القسم الرقمي: ما يميّز عملنا');if(o.att)CI.push('سجل الغيابات (المناداة) وجدول الحضور');if(o.plan)CI.push('التوزيع الأسبوعي للمقاطع التعلمية (البرامج المقررة)');if(o.day)CI.push('لكل يوم: الكراس اليومي، ثم مذكرة الحصة، ثم عمل ذلك اليوم (الواجبات)');if(o.sec&&o.sec.grid)CI.push('شبكات التقويم التكويني في كل المواد (لكل أسبوع بعد أيامه)');if(o.wrk)CI.push('أعمال التلاميذ: الدفاتر والفروض المنزلية وكيفية التصحيح');if(o.pj)CI.push('أوراق المشاريع: «أنجز مشروعي» والتدريبات الكتابية');if(vck('vs_works'))CI.push('🎨 ملفات أعمالنا (بواجهة وفهرس خاصين): معرض المشاريع، بطاقات الألعاب الرياضتية، لوحة رحلة الخط');if(o.fb)CI.push('توجيهات الأستاذ للتلاميذ (التغذية الراجعة)');['wd','les','rem','rsum','hw','diff','evl','prj','few','rep','chk'].forEach(function(k){if(o.sec&&o.sec[k]&&TT[k])CI.push(TT[k]);});
    var fm=function(x){return x.slice(8)+'/'+x.slice(5,7)+'/'+x.slice(0,4);};
    pages.push(vPage('ملف العمل التربوي','<div class="cv"><div class="cv1">ملف العمل التربوي</div><div class="cv2">متابعة العمل التعليمي والتقويمي للقسم</div><table class="cvt"><tr><th>القسم</th><td>السنة الثالثة ابتدائي (3 ب)</td></tr><tr><th>الأستاذ</th><td>سعيد</td></tr><tr><th>المدرسة</th><td>ابن سينا — بوروبة</td></tr><tr><th>السنة الدراسية</th><td>2026/2027</td></tr><tr><th>الفترة</th><td>من '+fm(f)+' إلى '+fm(t)+'</td></tr></table><h4>محتويات الملف</h4><ol class="cvl">'+CI.map(function(x){return '<li>'+E(x)+'</li>';}).join('')+'</ol></div>'));}
   if(o.sh){var SH=window.ADM_SHEETS||[],byK={},byS={};SH.forEach(function(x){byK[x.kind]=(byK[x.kind]||0)+1;byS[x.subj]=1;});var KN={rev:'مراجعة',idj:'إدماج',tq:'تقويم',hw:'واجبات'},kt=Object.keys(byK).map(function(k){return (KN[k]||k)+': '+byK[k];}).join(' · '),fbN=0;Object.keys(FBD).forEach(function(n){fbN+=Object.keys(FBD[n]||{}).length;});
@@ -12571,7 +12571,7 @@ window.__FEAT=window.__FEAT||{};window.__FEAT['v15121c']=1;
 }catch(e){(window.__ERRS=window.__ERRS||[]).push('v15121c: '+String((e&&e.message)||e).slice(0,120));}})();
 
 </script>
-<script id="v15126w">
+<script id="v15127w">
 /* 151.22 — «ملفات أعمالنا»: معرض المشاريع، دفتر وبطاقات الألعاب الرياضتية، أوراق لغتي، لوحة رحلة الخط، شهادات وأوسمة */
 (function(){try{
 const $=i=>document.getElementById(i);
@@ -12588,15 +12588,17 @@ const shrink=(src,max,q)=>new Promise(res=>{if(!src||String(src).indexOf('data:i
 const seq=(arr,fn)=>arr.reduce((p,x,i)=>p.then(a=>fn(x,i).then(r=>{a.push(r);return a;})),Promise.resolve([]));
 /* ---- الأنماط ---- */
 const BASE=`
-.wkp{page:wkp;box-sizing:border-box;width:194mm;height:281mm;overflow:hidden;position:relative;background:#fff;color:#1F2937;font-family:Cairo,Arial,sans-serif;direction:rtl;page-break-after:always;break-after:page;margin:0 auto;font-size:10.5pt;line-height:1.7;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.wkp{page:wkp;box-sizing:border-box;width:194mm;height:278mm;overflow:hidden;position:relative;background:#fff;color:#1F2937;font-family:Cairo,Arial,sans-serif;direction:rtl;margin:0 auto;font-size:10.5pt;line-height:1.7;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.wkp+*{break-before:page}
 .wkp *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.wkp.land{page:wkl;width:281mm;height:194mm}
+.wkp.land{page:wkl;width:280mm;height:191mm}
 .wkp.s-pj{--c1:#F59E0B;--c2:#EA580C;--t:#FFF7E6;--d:#9A3412}
 .wkp.s-gm{--c1:#10B981;--c2:#0F766E;--t:#ECFDF5;--d:#065F46}
 .wkp.s-lg{--c1:#6366F1;--c2:#7C3AED;--t:#EEF2FF;--d:#4338CA}
 .wkp.s-hw{--c1:#0EA5E9;--c2:#1D4ED8;--t:#EFF8FF;--d:#1E3A8A}
 .wkp.s-ct{--c1:#D4A017;--c2:#92400E;--t:#FFFBEB;--d:#78350F}
 .wkp.s-cv{--c1:#0E7490;--c2:#155E75;--t:#ECFEFF;--d:#164E63}
+.wkhd{display:flex;justify-content:space-between;gap:4mm;font-size:7.5pt;color:#6B7280;border-bottom:.3mm solid #D1D5DB;padding:0 3mm 1mm;margin-bottom:2mm}
 .wkft{position:absolute;bottom:3mm;left:0;right:0;text-align:center;font-size:8pt;color:#6B7280}
 .wkft b{color:var(--c2)}
 .wkban{background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;padding:8mm 10mm 7mm;display:flex;align-items:center;gap:6mm;border-radius:0 0 12mm 12mm;position:relative;overflow:hidden}
@@ -12621,6 +12623,7 @@ const BASE=`
 .wkph{border:.8mm solid #fff;box-shadow:0 0 0 .5mm var(--c1);border-radius:3mm;overflow:hidden;background:#fff;height:50mm;position:relative}
 .wkph img{width:100%;height:42mm;object-fit:cover;display:block}
 .wkph .cp{position:absolute;bottom:0;left:0;right:0;height:8mm;background:var(--t);text-align:center;font-size:8.5pt;font-weight:800;line-height:8mm;color:var(--d);white-space:nowrap;overflow:hidden}
+.wkgal.sm .wkph{height:40mm}.wkgal.sm .wkph img{height:32mm}
 .wkph.em{border:.5mm dashed var(--c1);box-shadow:none;display:flex;align-items:center;justify-content:center;color:#9CA3AF;font-size:9pt;text-align:center;padding:3mm}
 .wkbar{height:5mm;border-radius:3mm;background:#E5E7EB;overflow:hidden}
 .wkbar i{display:block;height:100%;background:linear-gradient(90deg,var(--c1),var(--c2))}
@@ -12718,7 +12721,7 @@ function cssOnce(){if($('wk_css'))return;const s=document.createElement('style')
 /* ---- مساعدات التصفح والصفحات ---- */
 const ftr=(t)=>'<div class="wkft"><b>'+E(t)+'</b> · '+E(CLS())+' · '+TODAY()+'</div>';
 const CLS=()=>{try{return localStorage.getItem('wk_cls')||'القسم 3 ب';}catch(e){return 'القسم 3 ب';}};
-const page=(cls,inner,foot,land)=>'<section class="wkp '+cls+(land?' land':'')+'">'+inner+(foot?ftr(foot):'')+'</section>';
+const page=(cls,inner,foot,land)=>'<section class="wkp '+cls+(land?' land':'')+'">'+fileHd()+inner+(foot?ftr(foot):'')+'</section>';
 const ban=(ic,t,sub)=>'<div class="wkban"><div class="ic">'+ic+'</div><div><h1>'+E(t)+'</h1>'+(sub?'<small>'+E(sub)+'</small>':'')+'</div></div>';
 const cover=(cls,ic,t,sub,note)=>page(cls+' s-cv',
  '<div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20mm;background:linear-gradient(160deg,var(--t),#fff 60%)"><div style="font-size:70pt;line-height:1">'+ic+'</div><h1 style="font-size:34pt;font-weight:900;color:var(--c2);margin:6mm 0 3mm;line-height:1.3">'+E(t)+'</h1><div style="font-size:15pt;color:#374151;max-width:150mm">'+E(sub)+'</div><div class="wkseal" style="margin-top:14mm">⭐</div><div style="margin-top:8mm;font-size:12pt;color:#4B5563">'+E(CLS())+' · السنة الدراسية 2026/2027</div>'+(note?'<div style="margin-top:3mm;font-size:10pt;color:#6B7280">'+E(note)+'</div>':'')+'</div>','');
@@ -12738,14 +12741,14 @@ function pjPages(pr,D,opt){
  return seq(got,n=>{const last=by[n][by[n].length-1];return picOf(n,last.k).then(img=>({n,x:last.x,img,cnt:by[n].length}));}).then(items=>{
   const tot=ps.length||1,pct=Math.round(got.length*100/tot),avg=items.length?Math.round(items.reduce((s,z)=>s+(z.x.self&&z.x.self.t?z.x.self.y/z.x.self.t:0),0)*100/items.length):0;
   items=items.concat(extraItems(pr,D));
-  const out=[],per=9,first=items.slice(0,3),gal=ch=>'<div class="wkgal">'+ch.map(z=>z.img?'<div class="wkph"><img src="'+z.img+'" alt=""><div class="cp">'+E(capN(z))+(z.x.self&&z.x.self.t?' ⭐ '+z.x.self.y+'/'+z.x.self.t:'')+'</div></div>':'<div class="wkph em">'+E(capN(z))+'<br>سلّم (الصورة غير متاحة)</div>').join('')+'</div>';
+  const out=[],per=9,first=items.slice(0,items.length<=6?6:3),sm=items.length<=6&&items.length>3,gal=ch=>'<div class="wkgal'+(sm?' sm':'')+'">'+ch.map(z=>z.img?'<div class="wkph"><img src="'+z.img+'" alt=""><div class="cp">'+E(capN(z))+(z.x.self&&z.x.self.t?' ⭐ '+z.x.self.y+'/'+z.x.self.t:'')+'</div></div>':'<div class="wkph em">'+E(capN(z))+'<br>سلّم (الصورة غير متاحة)</div>').join('')+'</div>';
   out.push(page('s-pj',ban(pr.ico||'🌟','معرض مشروع: '+pr.title,'من «أنجز مشروعي» — كتاب اللغة العربية ص '+pr.page+' — المقطع '+pr.seg)+
    '<div class="wkb"><div class="wkkpi"><div><b>'+got.length+' / '+tot+'</b><span>سلّموا مشروعهم</span></div><div><b>'+pct+'٪</b><span>نسبة التسليم</span></div><div><b>'+avg+'٪</b><span>متوسط تقييمهم لأنفسهم</span></div></div><div class="wkbar" style="margin-top:3mm"><i style="width:'+pct+'%"></i></div>'+
    '<div class="wkh">🎯 هدفنا</div><div class="wkbox">'+E(pr.goal)+'</div>'+
    '<div class="wk2"><div><div class="wkh">🧰 احتجنا إلى</div><div class="wkbox"><ul>'+(pr.need||[]).map(x=>'<li>'+E(x)+'</li>').join('')+'</ul></div></div><div><div class="wkh">✅ قيّمنا أنفسنا</div><div class="wkbox"><ul class="wkchk">'+(pr.checks||[]).map(x=>'<li>'+E(x)+'</li>').join('')+'</ul></div></div></div>'+
    '<div class="wkh">🪜 خطواتنا</div><div class="wkst">'+(pr.steps||[]).map((q,i)=>'<span><i>'+(i+1)+'</i>'+E(q.t)+'</span>').join('')+'</div>'+
    '<div class="wkh">🖼️ معرض أعمالنا</div>'+(first.length?gal(first):'<div class="wkbox">لم يُسلَّم أي مشروع بعد. تظهر الصور هنا تلقائيًا عند تسليم التلاميذ.</div>')+(items.length&&items.length<=3?'<div style="margin-top:3mm;text-align:center;color:var(--d);font-weight:800">«بالتعاون والاجتهاد أنجزنا مشروعنا» 🌟</div>':'')+'</div>','معرض المشروع: '+pr.title));
-  for(let i=3;i<items.length;i+=per){const ch=items.slice(i,i+per);
+  for(let i=first.length;i<items.length;i+=per){const ch=items.slice(i,i+per);
    out.push(page('s-pj',ban('🖼️','معرض أعمالنا: '+pr.title,'تابع صور المشاريع')+'<div class="wkb">'+gal(ch)+(i+per>=items.length?'<div style="margin-top:5mm;text-align:center;color:var(--d);font-weight:800;font-size:12pt">«بالتعاون والاجتهاد أنجزنا مشروعنا» 🌟</div>':'')+'</div>','معرض المشروع: '+pr.title));}
   out.has=items.length;
   return out;});}
@@ -12796,6 +12799,8 @@ const CVS={ar:{t:'اللغة العربية',e:'📖',k:'كرّاس',c1:'#0D9488
  hi:{t:'التاريخ',e:'🏺',k:'كرّاس',c1:'#B45309',c2:'#78350F',tt:'#FFFBEB',d:'#78350F',bg:'#FFFBEB',dc:['🏛','📜','⏳','🗺','🏺','⚔','👑','🏰','📜','⏳','🏛','🗿','🏺','📜','⏳','🗺']},
  ar2:{t:'التربية التشكيلية',e:'🎨',k:'كرّاس',c1:'#DB2777',c2:'#831843',tt:'#FDF2F8',d:'#831843',bg:'#FDF2F8',dc:['🎨','🖌','✏','🖍','🌈','🎨','🖌','✨','🌈','🖍','✏','🎨','🖌','✨','🌈','🖍']},
  mu:{t:'التربية الموسيقية',e:'🎵',k:'كرّاس',c1:'#7C3AED',c2:'#4C1D95',tt:'#F5F3FF',d:'#4C1D95',bg:'#F5F3FF',dc:['♪','♫','♬','🎶','𝄞','♩','♪','♫','🎵','♬','♩','🎶','♪','♫','♬','♩']},
+ ap:{t:'التربية الفنية والموسيقية',e:'🎨',k:'كرّاس',c1:'#C026D3',c2:'#581C87',tt:'#FAF5FF',d:'#581C87',bg:'#FDF4FF',dc:['🎨','♪','🖌','♫','🌈','♬','✏','🎶','🖍','♩','✨','𝄞','🎨','♪','🌈','♫']},
+ pj:{t:'كرّاس المشاريع والأعمال',e:'🌟',k:'كرّاس',c1:'#EA580C',c2:'#7C2D12',tt:'#FFF7ED',d:'#7C2D12',bg:'#FFF7ED',dc:['🌟','✂','📌','🖍','💡','📖','🎁','✨','✏','🌈','🌟','✂','📌','💡','🎨','✨']},
  sc:{t:'التربية العلمية والتكنولوجية',e:'🔬',k:'كرّاس',c1:'#0891B2',c2:'#164E63',tt:'#ECFEFF',d:'#164E63',bg:'#F0FDFF',dc:['⚛','🧪','🔭','🌱','💡','🧲','🌍','⚙','🔬','🧬','☀','💧','🌱','⚛','💡','🧪'],big:1}};
 const cvF=()=>{let f={};try{f=JSON.parse(localStorage.getItem('wk_cvf')||'{}');}catch(e){}return {sch:f.sch||'ابتدائية ابن سينا — بوروبة',yr:f.yr||'2026 / 2027',cls:(f.cls&&f.cls!=='السنة الثالثة ابتدائي')?f.cls:'السنة الثالثة ـ ب ـ'};};
 const CVP={ar:'radial-gradient(circle,color-mix(in srgb,var(--c1) 18%,transparent) .9mm,transparent 1mm) 0 0/8mm 8mm',
@@ -12804,6 +12809,8 @@ const CVP={ar:'radial-gradient(circle,color-mix(in srgb,var(--c1) 18%,transparen
  hi:'repeating-linear-gradient(45deg,color-mix(in srgb,var(--c1) 15%,transparent) 0 .4mm,transparent .4mm 5mm)',
  ar2:'radial-gradient(circle,color-mix(in srgb,var(--c1) 22%,transparent) 2mm,transparent 2.1mm) 0 0/14mm 14mm,radial-gradient(circle,color-mix(in srgb,var(--c2) 14%,transparent) 1.2mm,transparent 1.3mm) 7mm 7mm/14mm 14mm',
  mu:'repeating-linear-gradient(0deg,color-mix(in srgb,var(--c1) 17%,transparent) 0 .35mm,transparent .35mm 4.2mm)',
+ ap:'radial-gradient(circle,color-mix(in srgb,var(--c1) 20%,transparent) 1.6mm,transparent 1.7mm) 0 0/12mm 12mm,repeating-linear-gradient(0deg,color-mix(in srgb,var(--c2) 12%,transparent) 0 .3mm,transparent .3mm 4.5mm)',
+ pj:'repeating-linear-gradient(135deg,color-mix(in srgb,var(--c1) 14%,transparent) 0 .5mm,transparent .5mm 6mm),radial-gradient(circle,color-mix(in srgb,var(--c1) 18%,transparent) 1mm,transparent 1.1mm) 3mm 3mm/12mm 12mm',
  sc:'radial-gradient(circle,color-mix(in srgb,var(--c1) 18%,transparent) 1mm,transparent 1.1mm) 0 0/9mm 9mm'};
 function cvCover(c,F,big,key){const sz=big?1.35:1,deco=c.dc.slice(0,10).map((g,i)=>'<span style="'+(i%2?'bottom:':'top:')+(i%2?(4+((i*13)%22)):(36+((i*17)%34)))+'%;'+(i%4<2?'right:':'left:')+(3+((i*29)%80))+'%;transform:rotate('+((i*31)%60-30)+'deg);font-size:'+Math.round((22+((i*9)%22))*sz)+'pt">'+g+'</span>').join('');
  const rib='<svg class="cvrib" viewBox="0 0 400 92" preserveAspectRatio="none"><defs><linearGradient id="g'+key+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+c.c1+'"/><stop offset="1" stop-color="'+c.c2+'"/></linearGradient></defs><polygon points="0,24 46,24 46,84 0,84 18,54" fill="'+c.c2+'"/><polygon points="400,24 354,24 354,84 400,84 382,54" fill="'+c.c2+'"/><polygon points="30,70 46,84 46,70" fill="#000" opacity=".35"/><polygon points="370,70 354,84 354,70" fill="#000" opacity=".35"/><rect x="26" y="8" width="348" height="62" rx="8" fill="'+c.c1+'" stroke="#fff" stroke-width="3"/><rect x="34" y="14" width="332" height="50" rx="5" fill="none" stroke="#fff" stroke-width="1.2" stroke-dasharray="4 3" opacity=".8"/></svg>';
@@ -12814,7 +12821,7 @@ function cvCover(c,F,big,key){const sz=big?1.35:1,deco=c.dc.slice(0,10).map((g,i
   '<div class="cvrw">'+rib+'<h1>'+E(c.t)+'</h1></div>'+
   '<div class="cvfd">'+nt('✏️','الاسم')+nt('🌟','اللقب')+'<div class="cvcls"><span>🎓</span> '+E(F.cls)+'</div></div>'+
   '<div class="cvft"><svg viewBox="0 0 400 40" preserveAspectRatio="none" class="wv"><path d="M0,8 C60,-6 120,16 200,6 C280,-4 340,16 400,4 L400,40 L0,40 Z" fill="'+c.c1+'" opacity=".4"/><path d="M0,16 C70,2 130,24 200,12 C270,0 330,24 400,10 L400,40 L0,40 Z" fill="'+c.c2+'"/></svg><div class="ftx">🏫 '+E(F.sch)+'<small>السنة الدراسية: '+E(F.yr)+'</small></div></div></div></div>';}
-function cvPages(){const F=cvF(),pr=[['ar','ma'],['is','hi'],['ar2','mu']],out=[];
+function cvPages(){const F=cvF(),pr=[['ar','ma'],['is','hi'],['ap','pj']],out=[];
  pr.forEach(p=>out.push('<section class="wkp cv">'+p.map(k=>cvCover(CVS[k],F,false,k)).join('')+'</section>'));
  out.push('<section class="wkp cv big">'+cvCover(CVS.sc,F,true,'sc')+'</section>');return out;}
 /* ---- 4) لوحة رحلة الخط ---- */
@@ -12920,18 +12927,30 @@ function mount(){const g=document.querySelector('#screen-teacher-home .grid-menu
  const ic=nb.querySelector('.ico,.icon,span,div');const tn=[].filter.call(nb.childNodes,x=>x.nodeType===3&&x.textContent.trim())[0];if(tn)tn.textContent='ملفات أعمالنا';else nb.lastChild.textContent='ملفات أعمالنا';
  b0.parentNode.insertBefore(nb,b0.nextSibling);}
 setInterval(()=>{try{if(isT())mount();}catch(e){}},1500);
-/* ---- ملف المفتش: إلحاق ملفات الأعمال ---- */
+/* ---- ملف المفتش: واجهة + فهرس + معرض المشاريع + بطاقات الألعاب + لوحة الخط (دفتر الألعاب يبقى مستقلًا) ---- */
+let INFILE=false;
+const fileHd=()=>INFILE?'<div class="wkhd"><span>الجمهورية الجزائرية الديمقراطية الشعبية — وزارة التربية الوطنية</span><span>'+E(cvF().sch)+' — '+E(CLS())+' — السنة الدراسية '+E(cvF().yr)+'</span></div>':'';
 const oVB=window.visitBuild;
 if(typeof oVB==='function')window.visitBuild=function(o){
- const on=(()=>{const e=$('vs_works');return !!(e&&e.checked);})();
- return oVB.apply(this,arguments).then(r=>{if(!on||!r)return r;cssOnce();NM='first';ST.gm.pub=1;
-  return Promise.all([loadPJ(),loadGames(),hwPages()]).then(([D,G])=>seq(getPJ(),p=>pjPages(p,D)).then(pa=>gamesPages(G,'booklet').then(gp=>hwPages().then(hp=>{
-   const pj=[].concat.apply([],pa.filter(a=>a.has)).concat(wallItems(miscItems(D),'أعمال متنوعة','🎨','أعمال أضافها الأستاذ')),pjOk=getPJ().filter((p,i)=>pa[i]&&pa[i].has);
-   const idx=page('s-cv','<div style="padding:12mm 14mm">'+ban('🎨','ملفات أعمالنا','فهرس الأعمال المرفقة بالملف')+'<div class="wkb"><div class="wkq">🌟 معرض المشاريع: '+(pjOk.map(p=>E(p.title)).join('، ')||'—')+'</div><div class="wkq">🧩 دفتر الألعاب الرياضتية ('+G.length+' لعبة)</div><div class="wkq">✒️ لوحة رحلة الخط</div></div></div>','');
-   const all=[idx].concat(pj,gp,hp);
-   const dpr=r.html+'<style>'+BASE+scopedFix()+'</style>'+all.join('');
-   return Object.assign({},r,{html:dpr,n:r.n+all.length});}))))
-  .catch(()=>r);});};
+ const on=(()=>{const e=$('vs_works');return !!(e&&e.checked);})(),withT=(()=>{const e=$('vs_works_t');return !!(e&&e.checked);})();
+ return oVB.apply(this,arguments).then(r=>{if(!on||!r)return r;cssOnce();NM='first';ST.gm.pub=1;INFILE=true;
+  return Promise.all([loadPJ(),loadGames(),hwPages()]).then(([D,G,H])=>seq(getPJ(),p=>pjPages(p,D)).then(pa=>gamesPages(G,'cards').then(cards=>{
+   const pjOk=getPJ().filter((p,i)=>pa[i]&&pa[i].has),pjP=[].concat.apply([],pa.filter(a=>a.has)).concat(wallItems(miscItems(D),'أعمال متنوعة','🎨','أعمال أضافها الأستاذ')),hwP=withT?H:[H[0]];
+   const secs=[];
+   if(pjP.length)secs.push(['🌟','معرض المشاريع','«أنجز مشروعي» — '+(pjOk.map(p=>p.title).join('، ')||'أعمال التلاميذ'),'وضعيات إدماجية: يوظّف التلميذ مكتسباته في إنتاج حقيقي ويقيّم نفسه بنفسه، ويُعرض عمله تثمينًا له.',pjP.length]);
+   if(cards.length)secs.push(['🧩','بطاقات الألعاب الرياضتية',G.length+' لعبة بثلاثة مستويات','تنمية التفكير المنطقي والمثابرة وحل المشكلات بتدرّج في الصعوبة، مع تحدٍّ للمبدعين. (دفتر الألعاب الكامل ملف مستقل).',cards.length]);
+   secs.push(['✒️','لوحة رحلة الخط','تقدّم القسم في الجلسة والسطر والشكل والتباعد والسرعة','تقويم تكويني يقارن أول جلسة بآخر جلسة ليُظهر تطوّر الخط.',hwP.length]);
+   let n=3;const idx=page('s-cv',ban('📑','فهرس ملفات أعمالنا',cvF().sch+' — '+CLS())+'<div class="wkb">'+secs.map(z=>{const r0=n;n+=z[4];return '<div class="wkq" style="display:flex;gap:4mm;align-items:center"><span style="font-size:24pt">'+z[0]+'</span><div style="flex:1"><b style="font-size:13pt;color:var(--d)">'+E(z[1])+'</b><div style="font-size:9.5pt;color:#4B5563">'+E(z[2])+'</div><div style="font-size:9.5pt;margin-top:1mm">'+E(z[3])+'</div></div><span class="wkchip">ص '+r0+(z[4]>1?'–'+(r0+z[4]-1):'')+'</span></div>';}).join('')+'<div class="wkh">📌 ملاحظات</div><div class="wkbox"><ul><li>الأسماء الأولى فقط حفاظًا على خصوصية التلاميذ.</li><li>الصور مأخوذة من تسليمات التلاميذ داخل التطبيق ومن أعمال أضافها الأستاذ.</li>'+(withT?'':'<li>جدول مستوى كل تلميذ في الخط غير مرفق (متاح عند الطلب).</li>')+'</ul></div></div>','فهرس ملفات أعمالنا');
+   const cov=cover('s-cv','🎨','ملفات أعمالنا','منتجات تلاميذ '+CLS()+' وأنشطتهم: معرض المشاريع، بطاقات الألعاب الرياضتية، لوحة رحلة الخط','إعداد الأستاذ: سعيد — '+cvF().sch+' — '+cvF().yr);
+   const all=[cov,idx].concat(pjP,cards,hwP);
+   const block='<style>'+PAGEC+BASE+scopedFix()+'</style>'+all.join('');
+   INFILE=false;
+   let html=r.html;const mk='<div class="pg ',parts=html.split(mk);
+   let at=-1;parts.forEach((x,i)=>{if(i>0&&/<div class="tt">سجل المشاريع<\/div>/.test(x))at=i;});
+   if(at<0)parts.forEach((x,i)=>{if(i>0&&/<div class="tt">أعمال التلاميذ<\/div>/.test(x)&&at<0)at=i;});
+   if(at>=0&&at+1<parts.length){parts[at]=parts[at]+block;html=parts.join(mk);}else html=html+block;
+   return Object.assign({},r,{html,n:r.n+all.length});})))
+  .catch(()=>{INFILE=false;return r;});});};
 }catch(e){try{console.error('wk',e);}catch(x){}}})();
 
 </script>
